@@ -1,0 +1,46 @@
+//
+//  Activity.swift
+//  Dookie
+//
+//  Created by Mathias Lindholm on 01.02.2017.
+//  Copyright © 2017 Mathias Lindholm. All rights reserved.
+//
+
+import Foundation
+import SwiftyJSON
+import Firebase
+import SwiftyUserDefaults
+
+struct Activity {
+    let ref: FIRDatabaseReference?
+    let key: String
+    let time: Date
+    let type: Int
+    let uid: String
+}
+
+extension Activity {
+    init?(_ snapshot: FIRDataSnapshot) {
+        self.ref = snapshot.ref
+        self.key = snapshot.key
+        self.time = snapshot.json["time"].stringValue.toDate!
+        self.type = snapshot.json["type"].intValue
+        self.uid = snapshot.json["uid"].stringValue
+    }
+
+    init(time: Date, type: Int, key: String = "") {
+        self.key = key
+        self.ref = nil
+        self.time = time
+        self.type = type
+        self.uid = Defaults[.uid]
+    }
+
+    func toAnyObject() -> Any {
+        return [
+            "time": time.toString,
+            "type": type,
+            "uid": Defaults[.uid]
+        ]
+    }
+}
