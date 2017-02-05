@@ -216,7 +216,11 @@ class TableViewController: UITableViewController {
     @IBAction func shareDogButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: Defaults[.name], message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { _ in
-            if let url = URL(string: "mailto:?subject=Join%20Dookie&body=1.%20Open%20Dookie%20App%0A2.%20Choose%20%22Join%20a%20shared%20dog%22%0A3.%20Enter%20the%20code%20below%0A%0A%3Cb%3E\(Defaults[.secret])%3C%2Fb%3E%0A%0A%F0%9F%90%B6") {
+            let subject = "Join \(Defaults[.name]) on Dookie"
+            let body = "1. Open Dookie App\n2. Choose 'Join a shared dog'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n🐶"
+            guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+                  let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+            if let url = URL(string: "mailto:?subject=\(encodedSubject)&body=\(encodedBody)") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.openURL(url)
                 }
