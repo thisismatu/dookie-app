@@ -6,51 +6,21 @@
 //  Copyright © 2017 Mathias Lindholm. All rights reserved.
 //
 
-import Foundation
-import Firebase
+import UIKit
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
-    var ref: FIRDatabaseReference!
-
-    @IBOutlet weak var newTextField: UITextField!
-    @IBOutlet weak var newButton: UIButton!
-    @IBOutlet weak var sharedTextField: UITextField!
-    @IBOutlet weak var sharedButton: UIButton!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference()
-    }
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
 
-    override func viewDidDisappear(_ animated: Bool) {
-        newTextField.text = ""
-        sharedTextField.text = ""
-    }
-
-    @IBAction func newButtonPressed(_ sender: Any) {
-        guard let name = newTextField.text else { return }
-        if !name.isEmpty {
-            ref.childByAutoId().child("dog").setValue(["name": name], withCompletionBlock: { (error, reference) in
-                if let secret = reference.parent?.key {
-                    Defaults[.secret] = secret
-                    //self.ref.child(secret).child("owners").child(Defaults[.uid]).setValue(true)
-                    self.performSegue(withIdentifier: "Login", sender: nil)
-                }
-            })
-        }
-    }
-
-    @IBAction func sharedButtonPressed(_ sender: Any) {
-        guard let secret = sharedTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
-        if !secret.isEmpty {
-            ref.child(secret).observeSingleEvent(of: .value, with: { snapshot in
-                if !snapshot.json.isEmpty {
-                    Defaults[.secret] = secret
-                    //self.ref.child(secret).child("owners").child(Defaults[.uid]).setValue(true)
-                    self.performSegue(withIdentifier: "Login", sender: nil)
-                }
-            })
+        if Defaults.hasKey(.secret) {
+            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
+                self.present(vc, animated: false, completion: nil)
+            }
         }
     }
 }

@@ -25,14 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
 
-        if Defaults.hasKey(.secret) {
-            self.storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "TableViewController") {
-                self.window?.makeKeyAndVisible()
-                self.window?.rootViewController?.present(vc, animated: true, completion: nil)
-            }
-        }
-
         return true
     }
 

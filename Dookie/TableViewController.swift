@@ -30,10 +30,7 @@ class TableViewController: UITableViewController {
             if !snapshot.exists() {
                 let alert = UIAlertController(title: "This dog doesn't exist", message: "Uh-oh, it seems that your dog has been deleted. You can recreate the dog in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
-                        Defaults.remove(.secret)
-                        Defaults.remove(.name)
-                    })
+                    self.logout()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -122,17 +119,24 @@ class TableViewController: UITableViewController {
 
     // MARK: - View controller custom methods
 
+    func logout() {
+        self.items.removeAll()
+        Defaults.remove(.secret)
+        Defaults.remove(.name)
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+
     func showEmptyState() {
         if items.count == 0 {
             self.tableView.separatorStyle = .none
             let label = UILabel()
-            label.frame.size.height = 72
+            label.frame.size.height = 48
             label.frame.size.width = tableView.frame.size.width
             label.center = tableView.center
             label.center.y = (tableView.frame.size.height/2)-label.frame.size.height
-            label.numberOfLines = 3
+            label.numberOfLines = 2
             label.textColor = UIColor.gray
-            label.text = "🐶\n\nNo activities today, maybe time for a walk?"
+            label.text = "No activities today, maybe time for a walk?"
             label.textAlignment = .center
             label.font = label.font.withSize(15)
             label.tag = 1
@@ -219,20 +223,14 @@ class TableViewController: UITableViewController {
             }
         }))
         alert.addAction(UIAlertAction(title: "Leave shared dog", style: .destructive, handler: { _ in
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
-                Defaults.remove(.secret)
-                Defaults.remove(.name)
-            })
+            self.logout()
         }))
         alert.addAction(UIAlertAction(title: "Delete shared dog", style: .destructive, handler: { _ in
             let alert = UIAlertController(title: "Delete shared dog?", message: "This cannot be undone", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
-                    Defaults.remove(.secret)
-                    Defaults.remove(.name)
-                    self.ref.removeValue()
-                })
+                self.ref.removeValue()
+                self.logout()
             }))
             self.present(alert, animated: true, completion: nil)
         }))

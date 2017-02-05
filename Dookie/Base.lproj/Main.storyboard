@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IzT-IF-xxl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c1z-tP-PHg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,7 +87,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1404" y="118.29085457271366"/>
+            <point key="canvasLocation" x="2343.1999999999998" y="118.29085457271366"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
@@ -100,108 +101,277 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="DPz-sb-Axx">
-                                <rect key="frame" x="67" y="93.5" width="240" height="313"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97w-tG-dXL">
+                                <rect key="frame" x="32" y="127.5" width="311" height="278.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VUe-Kj-m5z">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="124.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new dog" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbQ-U3-bsC">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barky" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6J-P4-wKB">
-                                                <rect key="frame" x="0.0" y="36.5" width="240" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="ezX-xE-3pf"/>
-                                                </constraints>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rI-MG-EH2">
-                                                <rect key="frame" x="0.0" y="88.5" width="240" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="31E-0B-13R"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                <state key="normal" title="Add"/>
-                                                <connections>
-                                                    <action selector="newButtonPressed:" destination="IzT-IF-xxl" eventType="touchUpInside" id="D0Z-an-e6B"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="kIR-21-Zr6"/>
-                                        </constraints>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAz-dt-psA">
-                                        <rect key="frame" x="0.0" y="148.5" width="240" height="16"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cv-hl-b7h">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ec4-yj-h7M">
-                                        <rect key="frame" x="0.0" y="188.5" width="240" height="124.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a shared dog" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="can-pd-fTX">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="-Kc7ARpM7zeYuli95KzF" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8z-IK-FQe">
-                                                <rect key="frame" x="0.0" y="36.5" width="240" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="ngF-3R-dJO"/>
-                                                </constraints>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-7j-0Fr">
-                                                <rect key="frame" x="0.0" y="88.5" width="240" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="agW-Kk-2mn"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                <state key="normal" title="Join"/>
-                                                <connections>
-                                                    <action selector="sharedButtonPressed:" destination="IzT-IF-xxl" eventType="touchUpInside" id="eaK-Iv-0Xh"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMK-ov-p8f">
+                                        <rect key="frame" x="0.0" y="32" width="311" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="gbo-Kk-m2v"/>
+                                            <constraint firstAttribute="height" id="ryT-Bl-GQo"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Dookie!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGO-bF-p9F">
+                                        <rect key="frame" x="0.0" y="40" width="311" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With Dookie you can share your dogs eating and walking habits with other family members." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-vR-bIX">
+                                        <rect key="frame" x="0.0" y="68.5" width="311" height="58"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPO-G9-jDh">
+                                        <rect key="frame" x="0.0" y="134.5" width="311" height="24"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="EIB-cr-Oe5"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-rP-qmg">
+                                        <rect key="frame" x="0.0" y="166.5" width="311" height="48"/>
+                                        <color key="backgroundColor" red="0.0" green="0.52156865600000002" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Gwz-AW-Ojc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Add a new dog">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="WoP-ZF-ygi" kind="show" id="hRl-AE-zvN"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYN-w5-ba8">
+                                        <rect key="frame" x="0.0" y="222.5" width="311" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="qH0-hc-dLb"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-D8-syY">
+                                        <rect key="frame" x="0.0" y="230.5" width="311" height="48"/>
+                                        <color key="backgroundColor" red="0.33725491169999999" green="0.57254904510000004" blue="0.1411764771" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Hgz-Rv-d8z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Join a shared dog">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="zpK-Jv-C22" kind="show" id="E7O-fd-5Ov"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DPz-sb-Axx" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.75" id="Oxl-yk-TSS"/>
-                            <constraint firstItem="DPz-sb-Axx" firstAttribute="centerX" secondItem="oLg-gt-Qd4" secondAttribute="centerX" id="eiy-ID-w0K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="97w-tG-dXL" secondAttribute="trailing" constant="16" id="T4e-wx-1Bk"/>
+                            <constraint firstItem="97w-tG-dXL" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leadingMargin" constant="16" id="Vsc-aP-zFc"/>
+                            <constraint firstItem="97w-tG-dXL" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.8" id="oPd-WQ-dXQ"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="newButton" destination="6rI-MG-EH2" id="FMd-5b-WgQ"/>
-                        <outlet property="newTextField" destination="s6J-P4-wKB" id="264-41-EjB"/>
-                        <outlet property="sharedButton" destination="fsi-7j-0Fr" id="E0e-Oj-fcs"/>
-                        <outlet property="sharedTextField" destination="x8z-IK-FQe" id="a88-FW-bdi"/>
-                        <segue destination="jLw-Kw-6sD" kind="presentation" identifier="Login" id="yPM-xB-bzw"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="kfd-SG-ok6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhE-Up-iXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-438" y="118"/>
+            <point key="canvasLocation" x="-1292" y="117.39130434782609"/>
+        </scene>
+        <!--Add a new dog-->
+        <scene sceneID="c4v-0S-rwR">
+            <objects>
+                <viewController id="WoP-ZF-ygi" customClass="AddDogViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e0M-lP-Jmm"/>
+                        <viewControllerLayoutGuide type="bottom" id="IaB-N9-uNR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dpG-Q5-yqO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VUe-Kj-m5z">
+                                <rect key="frame" x="32" y="88" width="311" height="182"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barky" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6J-P4-wKB">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="ezX-xE-3pf"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: You can share this dog to other family members in the next step." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-2F-hGv">
+                                        <rect key="frame" x="0.0" y="64" width="311" height="38"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtS-1v-oXv">
+                                        <rect key="frame" x="0.0" y="118" width="311" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="MT2-R0-Sxo"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rI-MG-EH2">
+                                        <rect key="frame" x="0.0" y="134" width="311" height="48"/>
+                                        <color key="backgroundColor" red="0.0" green="0.5215686559677124" blue="0.88627451658248901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="31E-0B-13R"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Add">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addButtonPressed:" destination="WoP-ZF-ygi" eventType="touchUpInside" id="JV2-eX-nZh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="VUe-Kj-m5z" secondAttribute="trailing" constant="16" id="KLz-j3-Rj6"/>
+                            <constraint firstItem="VUe-Kj-m5z" firstAttribute="leading" secondItem="dpG-Q5-yqO" secondAttribute="leadingMargin" constant="16" id="Vgx-cD-c2O"/>
+                            <constraint firstItem="VUe-Kj-m5z" firstAttribute="top" secondItem="e0M-lP-Jmm" secondAttribute="bottom" constant="24" id="pVw-ik-ojX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add a new dog" id="fdA-ln-3V1"/>
+                    <connections>
+                        <outlet property="textField" destination="s6J-P4-wKB" id="5mK-A3-2JW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="549-YQ-0pJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-334" y="-215"/>
+        </scene>
+        <!--Delegate View Controller-->
+        <scene sceneID="6L3-Xg-Xnf">
+            <objects>
+                <viewController id="nfk-Ji-1rI" customClass="DelegateViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="or4-KV-TS6"/>
+                        <viewControllerLayoutGuide type="bottom" id="UH2-fN-hzv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vN3-RL-HMb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="knT-q4-7eg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-335.19999999999999" y="-1336.2818590704649"/>
+        </scene>
+        <!--Join a shared dog-->
+        <scene sceneID="uEz-r1-Gmn">
+            <objects>
+                <viewController id="zpK-Jv-C22" customClass="JoinDogViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z1g-df-DGx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ya9-1f-7wk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zda-QZ-usN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ec4-yj-h7M">
+                                <rect key="frame" x="32" y="88" width="311" height="202"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="-Kc7ARpM7zeYuli95KzF" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x8z-IK-FQe">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="ngF-3R-dJO"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: The person who added the dog in the first place  can give you the dookie id. If you both have lost it, just add a new dog." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
+                                        <rect key="frame" x="0.0" y="64" width="311" height="58"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FZ-E2-lBO">
+                                        <rect key="frame" x="0.0" y="138" width="311" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="ETT-VD-ibS"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-7j-0Fr">
+                                        <rect key="frame" x="0.0" y="154" width="311" height="48"/>
+                                        <color key="backgroundColor" red="0.33725491166114807" green="0.57254904508590698" blue="0.14117647707462311" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="agW-Kk-2mn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Join">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="24"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="joinButtonPressed:" destination="zpK-Jv-C22" eventType="touchUpInside" id="xA3-Iq-2qL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ec4-yj-h7M" firstAttribute="leading" secondItem="Zda-QZ-usN" secondAttribute="leadingMargin" constant="16" id="AZi-TG-crl"/>
+                            <constraint firstItem="ec4-yj-h7M" firstAttribute="top" secondItem="z1g-df-DGx" secondAttribute="bottom" constant="24" id="c3Y-RQ-G68"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ec4-yj-h7M" secondAttribute="trailing" constant="16" id="gc4-9e-U7H"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Join a shared dog" id="zNV-bB-0n9"/>
+                    <connections>
+                        <outlet property="textField" destination="x8z-IK-FQe" id="bdj-bl-TN3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Dp-FB-zT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-346" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7qb-Tp-IGM">
             <objects>
-                <navigationController storyboardIdentifier="TableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jLw-Kw-6sD" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Table" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jLw-Kw-6sD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YMW-vd-Wyu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -218,7 +388,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBN-qr-o7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="464.80000000000001" y="118.29085457271366"/>
+            <point key="canvasLocation" x="1404" y="118.29085457271366"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RIX-I5-8Bl">
+            <objects>
+                <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="c1z-tP-PHg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMe-YW-yDb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IzT-IF-xxl" kind="relationship" relationship="rootViewController" id="MvB-1U-ZDg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nub-p4-SJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2231.1999999999998" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>
