@@ -278,23 +278,6 @@
             </objects>
             <point key="canvasLocation" x="-334" y="-215"/>
         </scene>
-        <!--Delegate View Controller-->
-        <scene sceneID="6L3-Xg-Xnf">
-            <objects>
-                <viewController id="nfk-Ji-1rI" customClass="DelegateViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="or4-KV-TS6"/>
-                        <viewControllerLayoutGuide type="bottom" id="UH2-fN-hzv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vN3-RL-HMb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="knT-q4-7eg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-335.19999999999999" y="-1336.2818590704649"/>
-        </scene>
         <!--Join a shared dog-->
         <scene sceneID="uEz-r1-Gmn">
             <objects>
