@@ -31,6 +31,7 @@ class AddDogViewController: UIViewController {
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)
+                        _ = self.navigationController?.popToRootViewController(animated: false)
                     }
                 }
             })

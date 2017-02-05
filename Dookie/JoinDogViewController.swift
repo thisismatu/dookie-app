@@ -31,6 +31,7 @@ class JoinDogViewController: UIViewController {
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)
+                        _ = self.navigationController?.popToRootViewController(animated: false)
                     }
                 } else {
                     let alert = UIAlertController(title: "Couldn't find this dog", message: "It seems that the ID you entered doesn't match any dog. Please check you pasted the whole ID or go back and create a new dog.", preferredStyle: .alert)
