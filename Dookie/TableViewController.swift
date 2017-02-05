@@ -26,10 +26,32 @@ class TableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        dogRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            if !snapshot.exists() {
+                let alert = UIAlertController(title: "This dog doesn't exist", message: "Uh-oh, it seems that your dog has been deleted. You can recreate the dog in the next view.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
+                    self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
+                        Defaults.remove(.secret)
+                        Defaults.remove(.name)
+                    })
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+
+        dogRef.observeSingleEvent(of: .value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
             self.navigationItem.title = name
             Defaults[.name] = name
+        })
+
+        activitiesRef.observe(.value, with: { snapshot in
+            for item in snapshot.json {
+                guard let date = item.1["time"].stringValue.toDate else { return }
+                if !Calendar.current.isDateInToday(date) {
+                    self.activitiesRef.child(item.0).removeValue()
+                }
+            }
         })
 
         activitiesRef.observe(.childAdded, with: { snapshot in
@@ -51,14 +73,6 @@ class TableViewController: UITableViewController {
             self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         })
 
-        activitiesRef.observe(.value, with: { snapshot in
-            for item in snapshot.json {
-                guard let date = item.1["time"].stringValue.toDate else { return }
-                if !Calendar.current.isDateInToday(date) {
-                    self.activitiesRef.child(item.0).removeValue()
-                }
-            }
-        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -196,24 +210,24 @@ class TableViewController: UITableViewController {
     }
 
     @IBAction func shareDogButton(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: Defaults[.name], message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        alert.addAction(UIAlertAction(title: "Share", style: UIAlertActionStyle.default, handler: { _ in
+        let alert = UIAlertController(title: Defaults[.name], message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { _ in
             if let url = URL(string: "mailto:?subject=Join%20Dookie&body=1.%20Open%20Dookie%20App%0A2.%20Choose%20%22Join%20a%20shared%20dog%22%0A3.%20Enter%20the%20code%20below%0A%0A%3Cb%3E\(Defaults[.secret])%3C%2Fb%3E%0A%0A%F0%9F%90%B6") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.openURL(url)
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "Leave shared dog", style: UIAlertActionStyle.destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave shared dog", style: .destructive, handler: { _ in
             self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
                 Defaults.remove(.secret)
                 Defaults.remove(.name)
             })
         }))
-        alert.addAction(UIAlertAction(title: "Delete shared dog", style: UIAlertActionStyle.destructive, handler: { _ in
-            let alert = UIAlertController(title: "Delete shared dog?", message: "This cannot be undone", preferredStyle: UIAlertControllerStyle.actionSheet)
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Delete shared dog", style: .destructive, handler: { _ in
+            let alert = UIAlertController(title: "Delete shared dog?", message: "This cannot be undone", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 self.view.window?.rootViewController?.dismiss(animated: true, completion: { _ in
                     Defaults.remove(.secret)
                     Defaults.remove(.name)
@@ -222,7 +236,7 @@ class TableViewController: UITableViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
