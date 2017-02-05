@@ -10,6 +10,8 @@ import UIKit
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var stackView: UIStackView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -22,5 +24,10 @@ class LoginViewController: UIViewController {
                 self.present(vc, animated: false, completion: nil)
             }
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.stackView.isHidden = Defaults.hasKey(.secret)
     }
 }
