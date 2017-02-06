@@ -185,11 +185,20 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
+                                <rect key="frame" x="-52.5" y="507" width="480" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="n88-Vb-pMQ"/>
+                                    <constraint firstAttribute="width" constant="480" id="ves-tA-33N"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="VLK-xw-mV7" firstAttribute="centerX" secondItem="oLg-gt-Qd4" secondAttribute="centerX" id="75L-7p-wLd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="97w-tG-dXL" secondAttribute="trailing" constant="16" id="T4e-wx-1Bk"/>
                             <constraint firstItem="97w-tG-dXL" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leadingMargin" constant="16" id="Vsc-aP-zFc"/>
+                            <constraint firstItem="mIx-A4-xTB" firstAttribute="top" secondItem="VLK-xw-mV7" secondAttribute="bottom" id="iht-if-EEG"/>
                             <constraint firstItem="97w-tG-dXL" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.8" id="oPd-WQ-dXQ"/>
                         </constraints>
                     </view>
@@ -395,4 +404,7 @@
             <point key="canvasLocation" x="-2231.1999999999998" y="117.39130434782609"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="art_landscape" width="480" height="149"/>
+    </resources>
 </document>
