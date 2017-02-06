@@ -11,6 +11,7 @@ import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var illustration: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +30,6 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.stackView.isHidden = Defaults.hasKey(.secret)
+        self.illustration.isHidden = Defaults.hasKey(.secret)
     }
 }
