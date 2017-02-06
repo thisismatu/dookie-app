@@ -96,8 +96,8 @@ class TableViewController: UITableViewController {
         cell.detailTextLabel?.text = getEmoji(item.type)
 
         if Defaults[.uid] == item.uid {
-            cell.textLabel?.textColor = .blue
-            cell.detailTextLabel?.textColor = .blue
+            cell.textLabel?.textColor = self.view.tintColor
+            cell.detailTextLabel?.textColor = self.view.tintColor
         } else {
             cell.textLabel?.textColor = .darkGray
             cell.detailTextLabel?.textColor = .darkGray
