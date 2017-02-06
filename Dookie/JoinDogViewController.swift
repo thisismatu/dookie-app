@@ -10,14 +10,29 @@ import UIKit
 import Firebase
 import SwiftyUserDefaults
 
-class JoinDogViewController: UIViewController {
+class JoinDogViewController: UIViewController, UITextFieldDelegate {
     var ref: FIRDatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
         ref = FIRDatabase.database().reference()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textField.becomeFirstResponder()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textField.resignFirstResponder()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        joinButtonPressed(self)
+        return true
     }
     
     @IBAction func joinButtonPressed(_ sender: Any) {

@@ -10,14 +10,29 @@ import UIKit
 import Firebase
 import SwiftyUserDefaults
 
-class AddDogViewController: UIViewController {
+class AddDogViewController: UIViewController, UITextFieldDelegate {
     var ref: FIRDatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
         ref = FIRDatabase.database().reference()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textField.becomeFirstResponder()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textField.resignFirstResponder()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addButtonPressed(self)
+        return true
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
