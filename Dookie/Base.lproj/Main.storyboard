@@ -53,7 +53,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem width="16" style="plain" systemItem="fixedSpace" id="ixw-NI-nQH"/>
-                        <barButtonItem title="🐶" id="Cwt-al-Drr">
+                        <barButtonItem title="🎾" id="Cwt-al-Drr">
                             <connections>
                                 <action selector="buttonWalk:" destination="Ml4-NM-IZz" id="4k4-oo-9tf"/>
                             </connections>

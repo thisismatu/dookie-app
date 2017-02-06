@@ -183,7 +183,7 @@ class TableViewController: UITableViewController {
         case 4:
             return "🍲"
         default:
-            return "🐶"
+            return "🎾"
         }
     }
 
