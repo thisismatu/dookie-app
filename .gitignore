@@ -1,9 +1,24 @@
-
-# Created by https://www.gitignore.io/api/osx,xcode,firebase,cocoapods
-
 ### Project ###
 Pods/
 GoogleService-Info.plist
+
+# Created by https://www.gitignore.io/api/osx,xcode,fastlane
+
+### fastlane ###
+# fastlane - A streamlined workflow tool for Cocoa deployment
+
+# fastlane specific
+fastlane/report.xml
+
+# deliver temporary files
+fastlane/Preview.html
+
+# snapshot generated screenshots
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
+
+# scan temporary files
+fastlane/test_output
 
 ### OSX ###
 *.DS_Store
@@ -34,28 +49,10 @@ Temporary Items
 .apdisk
 
 ### Xcode ###
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+build
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
 
-## Build generated
-build/
-DerivedData/
-
-## Various settings
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata/
-
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
-
-# End of https://www.gitignore.io/api/osx,xcode,firebase,cocoapods
+# End of https://www.gitignore.io/api/osx,xcode,fastlane
