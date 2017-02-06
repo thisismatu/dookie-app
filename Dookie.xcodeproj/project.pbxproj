@@ -119,6 +119,7 @@
 				CC95E6401E3FB28F001C93C9 /* Resources */,
 				CBE6B35E83606C104116BBBF /* [CP] Embed Pods Frameworks */,
 				AF6E4FE32BCDF4FC878027BE /* [CP] Copy Pods Resources */,
+				CC2F22F41E4897A900F4F5C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -223,6 +224,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dookie/Pods-Dookie-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CC2F22F41E4897A900F4F5C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 18b7be9fd8d6f74333326228f9b7b17beb0e6a5c 1843997cd076553a4e3df764b4d845f5f0ebee069aa40b5c31973bcde60aaefa";
 		};
 /* End PBXShellScriptBuildPhase section */
 

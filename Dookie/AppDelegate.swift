@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import SwiftyUserDefaults
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        Fabric.with([Crashlytics.self])
 
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true

@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - Firebase/Analytics (3.3.0):
     - FirebaseAnalytics (= 3.2.1)
   - Firebase/Auth (3.3.0):
@@ -36,6 +39,8 @@ PODS:
   - SwiftyUserDefaults (3.0.0)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -43,6 +48,8 @@ DEPENDENCIES:
   - SwiftyUserDefaults
 
 SPEC CHECKSUMS:
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
   FirebaseAuth: 5efddc3fae47042b73585f083f956462be4f5b8e
@@ -56,6 +63,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: f2450b7f13a56d0cf90fdf40e43565d92c9d19c5
+PODFILE CHECKSUM: c555aad563ebfaf02b867cf281147beb55e59cd0
 
 COCOAPODS: 1.2.0
