@@ -89,20 +89,9 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let item = items[indexPath.item]
-
-        cell.textLabel?.text = item.time.formatDate(.none, .short)
-        cell.detailTextLabel?.text = getEmoji(item.type)
-
-        if Defaults[.uid] == item.uid {
-            cell.textLabel?.textColor = self.view.tintColor
-            cell.detailTextLabel?.textColor = self.view.tintColor
-        } else {
-            cell.textLabel?.textColor = .darkGray
-            cell.detailTextLabel?.textColor = .darkGray
-        }
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        let item = items[indexPath.row]
+        cell.configure(item.time, item.type, item.uid, Defaults[.uid])
         return cell
     }
 
@@ -128,7 +117,6 @@ class TableViewController: UITableViewController {
 
     func showEmptyState() {
         if items.count == 0 {
-            self.tableView.separatorStyle = .none
             let label = UILabel()
             label.frame.size.height = 48
             label.frame.size.width = tableView.frame.size.width
@@ -142,7 +130,6 @@ class TableViewController: UITableViewController {
             label.tag = 1
             self.tableView.backgroundView = label
         } else {
-            self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundView = nil
         }
     }
@@ -170,21 +157,6 @@ class TableViewController: UITableViewController {
             index += 1
         }
         return -1
-    }
-
-    func getEmoji(_ item: Int) -> String {
-        switch item {
-        case 1:
-            return "💩"
-        case 2:
-            return "💧"
-        case 3:
-            return "💩💧"
-        case 4:
-            return "🍲"
-        default:
-            return "🎾"
-        }
     }
 
     // MARK: - Actions
