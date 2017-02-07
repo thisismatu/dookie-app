@@ -26,7 +26,7 @@ class TableViewCell: UITableViewCell {
         if item.uid == defaults {
             indicator.layer.borderColor = tintColor.cgColor
         } else {
-            indicator.layer.borderColor = UIColor.gray.cgColor
+            indicator.layer.borderColor = UIColor.lightGray.cgColor
         }
 
         if let topMargin = margins.first {
