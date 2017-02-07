@@ -84,6 +84,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="indicator" destination="f0q-Pn-oVr" id="WfB-Et-iab"/>
+                                    <outlet property="lineBottom" destination="Cow-LJ-rR7" id="mUa-IP-HfQ"/>
+                                    <outlet property="lineTop" destination="RWc-qF-75h" id="d6J-TJ-vzT"/>
                                     <outlet property="timeLabel" destination="P8w-ib-stA" id="9Dv-uS-Wfh"/>
                                     <outlet property="typeLabel" destination="EUr-dK-lhb" id="Tkd-fB-l2S"/>
                                 </connections>

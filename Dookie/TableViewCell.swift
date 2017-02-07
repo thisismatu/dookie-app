@@ -12,19 +12,26 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var indicator: UIView!
+    @IBOutlet weak var lineTop: NSLayoutConstraint!
+    @IBOutlet weak var lineBottom: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func configure(_ time: Date, _ type: Int, _ uid: String, _ defaults: String) {
-        timeLabel.text = time.formatDate(.none, .short)
-        typeLabel.text = type.toEmoji
+    func configure(_ activity: Activity, defaults: String, margins: [Int]? = nil) {
+        timeLabel.text = activity.time.formatDate(.none, .short)
+        typeLabel.text = activity.type.toEmoji
 
-        if uid == defaults {
+        if activity.uid == defaults {
             indicator.layer.borderColor = tintColor.cgColor
         } else {
             indicator.layer.borderColor = UIColor.gray.cgColor
+        }
+
+        if let margins = margins {
+            lineTop.constant = CGFloat(margins.first ?? 0)
+            lineBottom.constant = CGFloat(margins.last ?? 0)
         }
     }
 }

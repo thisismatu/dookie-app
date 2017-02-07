@@ -80,8 +80,17 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let item = items[indexPath.row]
-        cell.configure(item.time, item.type, item.uid, Defaults[.uid])
+        let activity = items[indexPath.row]
+
+        switch indexPath.row {
+        case 0:
+            cell.configure(activity, defaults: Defaults[.uid], margins: [32, 0])
+        case self.tableView(tableView, numberOfRowsInSection: 0) - 1:
+            cell.configure(activity, defaults: Defaults[.uid], margins: [0, 32])
+        default:
+            cell.configure(activity, defaults: Defaults[.uid])
+        }
+
         return cell
     }
 
