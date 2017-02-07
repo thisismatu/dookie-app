@@ -43,33 +43,23 @@ class TableViewController: UITableViewController {
         })
 
         activitiesRef.observe(.value, with: { snapshot in
-            for item in snapshot.json {
-                guard let date = item.1["time"].stringValue.toDate else { return }
-                if !Calendar.current.isDateInToday(date) {
-                    self.activitiesRef.child(item.0).removeValue()
+            var tmp = [Activity]()
+            for child in snapshot.children {
+                guard let object = child as? FIRDataSnapshot else { return }
+                guard let activity = Activity.init(object) else { return }
+                let isDateInToday = Calendar.current.isDateInToday(activity.time)
+
+                switch isDateInToday {
+                case true:
+                    tmp.append(activity)
+                case false:
+                    self.activitiesRef.child(activity.key).removeValue()
                 }
+
+                self.items = tmp.sorted(by: { $0.time > $1.time })
+                UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
             }
         })
-
-        activitiesRef.observe(.childAdded, with: { snapshot in
-            guard let activity = Activity.init(snapshot) else { return }
-            self.items.insert(activity, at: 0)
-            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-        })
-
-        activitiesRef.observe(.childChanged, with: { snapshot in
-            guard let activity = Activity.init(snapshot) else { return }
-            let index = self.indexOfMessage(snapshot)
-            self.items[index] = activity
-            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-        })
-
-        activitiesRef.observe(.childRemoved, with: { snapshot in
-            let index = self.indexOfMessage(snapshot)
-            self.items.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-        })
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
