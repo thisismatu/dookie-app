@@ -100,11 +100,13 @@ class TableViewController: UITableViewController {
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let activityItem = activitiesArray[indexPath.row]
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "🗑", handler: { (action, indexPath) in
+            let activityItem = self.activitiesArray[indexPath.row]
             activityItem.ref?.removeValue()
-        }
+        })
+        delete.backgroundColor = .white
+        return [delete]
     }
 
     // MARK: - View controller custom methods
