@@ -19,7 +19,7 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func configure(_ item: Activity, defaults: String, margins: [Int]? = nil) {
+    func configure(_ item: Activity, defaults: String, margins: [Int]) {
         timeLabel.text = item.time.formatDate(.none, .short)
         typeLabel.text = item.type.toEmoji
 
@@ -29,9 +29,12 @@ class TableViewCell: UITableViewCell {
             indicator.layer.borderColor = UIColor.gray.cgColor
         }
 
-        if let margins = margins {
-            lineTop.constant = CGFloat(margins.first ?? 0)
-            lineBottom.constant = CGFloat(margins.last ?? 0)
+        if let topMargin = margins.first {
+            lineTop.constant = CGFloat(topMargin)
+        }
+
+        if let bottomMargin = margins.last {
+            lineBottom.constant = CGFloat(bottomMargin)
         }
     }
 }

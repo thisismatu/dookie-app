@@ -90,7 +90,7 @@ class TableViewController: UITableViewController {
         case self.tableView(tableView, numberOfRowsInSection: 0) - 1:
             cell.configure(activityItem, defaults: Defaults[.uid], margins: [0, 32])
         default:
-            cell.configure(activityItem, defaults: Defaults[.uid])
+            cell.configure(activityItem, defaults: Defaults[.uid], margins: [0, 0])
         }
 
         return cell
