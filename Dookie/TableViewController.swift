@@ -15,7 +15,7 @@ class TableViewController: UITableViewController {
     var dogRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle?
-    var items = [Activity]()
+    var activitiesArray = [Activity]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,17 +46,17 @@ class TableViewController: UITableViewController {
             var tmp = [Activity]()
             for child in snapshot.children {
                 guard let object = child as? FIRDataSnapshot else { return }
-                guard let activity = Activity.init(object) else { return }
-                let isDateInToday = Calendar.current.isDateInToday(activity.time)
+                guard let activityItem = Activity.init(object) else { return }
+                let isDateInToday = Calendar.current.isDateInToday(activityItem.time)
 
                 switch isDateInToday {
                 case true:
-                    tmp.append(activity)
+                    tmp.append(activityItem)
                 case false:
-                    self.activitiesRef.child(activity.key).removeValue()
+                    self.activitiesRef.child(activityItem.key).removeValue()
                 }
 
-                self.items = tmp.sorted(by: { $0.time > $1.time })
+                self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
                 UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
             }
         })
@@ -75,20 +75,20 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         showEmptyState()
-        return items.count
+        return activitiesArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let activity = items[indexPath.row]
+        let activityItem = activitiesArray[indexPath.row]
 
         switch indexPath.row {
         case 0:
-            cell.configure(activity, defaults: Defaults[.uid], margins: [32, 0])
+            cell.configure(activityItem, defaults: Defaults[.uid], margins: [32, 0])
         case self.tableView(tableView, numberOfRowsInSection: 0) - 1:
-            cell.configure(activity, defaults: Defaults[.uid], margins: [0, 32])
+            cell.configure(activityItem, defaults: Defaults[.uid], margins: [0, 32])
         default:
-            cell.configure(activity, defaults: Defaults[.uid])
+            cell.configure(activityItem, defaults: Defaults[.uid])
         }
 
         return cell
@@ -100,22 +100,22 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let item = items[indexPath.item]
-            item.ref?.removeValue()
+            let activityItem = activitiesArray[indexPath.row]
+            activityItem.ref?.removeValue()
         }
     }
 
     // MARK: - View controller custom methods
 
     func logout() {
-        self.items.removeAll()
+        self.activitiesArray.removeAll()
         Defaults.remove(.secret)
         Defaults.remove(.name)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
     func showEmptyState() {
-        if items.count == 0 {
+        if activitiesArray.count == 0 {
             let label = UILabel()
             label.frame.size.height = 48
             label.frame.size.width = tableView.frame.size.width
@@ -134,7 +134,7 @@ class TableViewController: UITableViewController {
     }
 
     func shouldMerge(_ type: Int) -> Bool {
-        guard let latest = items.first else { return false }
+        guard let latest = activitiesArray.first else { return false }
         let minago = Calendar.current.dateComponents([.minute], from: latest.time, to: Date()).minute ?? 0
         if minago < 30 && (1...2 ~= latest.type) && type != latest.type {
             latest.ref?.updateChildValues([
@@ -149,8 +149,8 @@ class TableViewController: UITableViewController {
 
     func indexOfMessage(_ snapshot: FIRDataSnapshot) -> Int {
         var index = 0
-        for item in self.items {
-            if snapshot.key == item.key {
+        for activityItem in self.activitiesArray {
+            if snapshot.key == activityItem.key {
                 return index
             }
             index += 1
@@ -161,27 +161,27 @@ class TableViewController: UITableViewController {
     // MARK: - Actions
 
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
-        let activity = Activity(time: Date(), type: 5)
-        self.ref.child("activities").childByAutoId().setValue(activity.toAnyObject())
+        let activityItem = Activity(time: Date(), type: 5)
+        self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
     }
 
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
         if !shouldMerge(1) {
-            let activity = Activity(time: Date(), type: 1)
-            self.ref.child("activities").childByAutoId().setValue(activity.toAnyObject())
+            let activityItem = Activity(time: Date(), type: 1)
+            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonPee(_ sender: UIBarButtonItem) {
         if !shouldMerge(2) {
-            let activity = Activity(time: Date(), type: 2)
-            self.ref.child("activities").childByAutoId().setValue(activity.toAnyObject())
+            let activityItem = Activity(time: Date(), type: 2)
+            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonFood(_ sender: UIBarButtonItem) {
-        let activity = Activity(time: Date(), type: 4)
-        self.ref.child("activities").childByAutoId().setValue(activity.toAnyObject())
+        let activityItem = Activity(time: Date(), type: 4)
+        self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
     }
 
     @IBAction func shareDogButton(_ sender: UIBarButtonItem) {

@@ -19,11 +19,11 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func configure(_ activity: Activity, defaults: String, margins: [Int]? = nil) {
-        timeLabel.text = activity.time.formatDate(.none, .short)
-        typeLabel.text = activity.type.toEmoji
+    func configure(_ item: Activity, defaults: String, margins: [Int]? = nil) {
+        timeLabel.text = item.time.formatDate(.none, .short)
+        typeLabel.text = item.type.toEmoji
 
-        if activity.uid == defaults {
+        if item.uid == defaults {
             indicator.layer.borderColor = tintColor.cgColor
         } else {
             indicator.layer.borderColor = UIColor.gray.cgColor
