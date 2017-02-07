@@ -26,7 +26,7 @@ class TableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        ref.observeSingleEvent(of: .value, with: { snapshot in
+        ref.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
             if !snapshot.exists() {
                 let alert = UIAlertController(title: "This dog doesn't exist", message: "Uh-oh, it seems that your dog has been deleted. You can recreate the dog in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
