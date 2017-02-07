@@ -56,6 +56,7 @@ class TableViewController: UITableViewController {
                 }
             }
             self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
+            self.showEmptyState()
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
     }
@@ -72,7 +73,6 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        showEmptyState()
         return activitiesArray.count
     }
 
@@ -122,13 +122,11 @@ class TableViewController: UITableViewController {
             label.frame.size.height = 48
             label.frame.size.width = tableView.frame.size.width
             label.center = tableView.center
-            label.center.y = (tableView.frame.size.height/2)-label.frame.size.height
             label.numberOfLines = 2
-            label.textColor = UIColor.gray
+            label.textColor = .gray
             label.text = "No activities today, maybe time for a walk?"
             label.textAlignment = .center
             label.font = label.font.withSize(15)
-            label.tag = 1
             self.tableView.backgroundView = label
         } else {
             self.tableView.backgroundView = nil
