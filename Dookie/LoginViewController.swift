@@ -15,10 +15,6 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-
         if Defaults.hasKey(.secret) {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {

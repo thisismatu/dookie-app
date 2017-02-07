@@ -32,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let blue = UIColor(red: 0.12, green: 0.53, blue: 0.90, alpha: 1.0)
         self.window?.tintColor = blue
         UINavigationBar.appearance().tintColor = blue
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().isTranslucent = false
+        UIToolbar.appearance().setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+        UIToolbar.appearance().setShadowImage(UIImage(), forToolbarPosition: .any)
+        UIToolbar.appearance().isTranslucent = false
         UITabBar.appearance().tintColor = blue
 
         return true
