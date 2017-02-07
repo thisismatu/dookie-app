@@ -48,17 +48,15 @@ class TableViewController: UITableViewController {
                 guard let object = child as? FIRDataSnapshot else { return }
                 guard let activityItem = Activity.init(object) else { return }
                 let isDateInToday = Calendar.current.isDateInToday(activityItem.time)
-
                 switch isDateInToday {
                 case true:
                     tmp.append(activityItem)
                 case false:
                     self.activitiesRef.child(activityItem.key).removeValue()
                 }
-
-                self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
-                UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
             }
+            self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
     }
 
