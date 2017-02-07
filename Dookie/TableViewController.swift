@@ -84,7 +84,11 @@ class TableViewController: UITableViewController {
 
         switch indexPath.row {
         case 0:
-            cell.configure(activityItem, defaults: Defaults[.uid], margins: [32, 0])
+            if self.activitiesArray.count == 1 {
+                cell.configure(activityItem, defaults: Defaults[.uid], margins: [32, 32])
+            } else {
+                cell.configure(activityItem, defaults: Defaults[.uid], margins: [32, 0])
+            }
         case self.tableView(tableView, numberOfRowsInSection: 0) - 1:
             cell.configure(activityItem, defaults: Defaults[.uid], margins: [0, 32])
         default:
