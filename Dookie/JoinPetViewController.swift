@@ -19,10 +19,12 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textField.delegate = self
         ref = FIRDatabase.database().reference()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.checkPasteboard), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        checkPasteboard()
         textField.becomeFirstResponder()
     }
 
@@ -34,7 +36,16 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         joinButtonPressed(self)
         return true
     }
-    
+
+    func checkPasteboard() {
+        let allowed = CharacterSet(charactersIn: "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz")
+        if let pasteboard =  UIPasteboard.general.string {
+            if pasteboard.rangeOfCharacter(from: allowed.inverted) == nil && pasteboard.characters.count == 20 {
+                textField.text = pasteboard
+            }
+        }
+    }
+
     @IBAction func joinButtonPressed(_ sender: Any) {
         guard let secret = textField.text?.trimmingCharacters(in: .whitespaces) else { return }
 
@@ -49,7 +60,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
                         _ = self.navigationController?.popToRootViewController(animated: false)
                     }
                 } else {
-                    let alert = UIAlertController(title: "Couldn't find this pet", message: "It seems that the ID you entered doesn't match any pet. Please check you pasted the whole ID or go back and create a new pet.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Couldn't find this pet", message: "The ID you entered doesn't match any existing pet. Please check that you've pasted the whole ID.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
