@@ -24,7 +24,10 @@ lane :beta do
 
   # build your iOS app
   gym(
+    workspace: "Dookie.xcworkspace",
     scheme: "Dookie",
+    clean: true,
+    output_directory: "build",
     export_method: "development"
   )
 
@@ -33,7 +36,7 @@ lane :beta do
     api_token: "18b7be9fd8d6f74333326228f9b7b17beb0e6a5c",
     build_secret: "1843997cd076553a4e3df764b4d845f5f0ebee069aa40b5c31973bcde60aaefa",
     groups: "testers-1",
-    notes: changelog_from_git_commits("• %s"),
+    notes: changelog_from_git_commits(pretty: "• %s"),
     notifications: true
   )
 
