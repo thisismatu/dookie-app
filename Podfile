@@ -13,5 +13,6 @@ target 'Dookie' do
   pod 'SwiftyUserDefaults'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Emoji-swift'
 
 end

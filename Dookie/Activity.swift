@@ -15,7 +15,7 @@ struct Activity {
     let ref: FIRDatabaseReference?
     let key: String
     let time: Date
-    let type: Int
+    let type: String
     let uid: String
 }
 
@@ -24,11 +24,11 @@ extension Activity {
         self.ref = snapshot.ref
         self.key = snapshot.key
         self.time = snapshot.json["time"].stringValue.toDate!
-        self.type = snapshot.json["type"].intValue
+        self.type = snapshot.json["type"].stringValue
         self.uid = snapshot.json["uid"].stringValue
     }
 
-    init(time: Date, type: Int, key: String = "") {
+    init(time: Date, type: String, key: String = "") {
         self.key = key
         self.ref = nil
         self.time = time

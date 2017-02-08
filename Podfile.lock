@@ -1,6 +1,7 @@
 PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
+  - Emoji-swift (0.0.6)
   - Fabric (1.6.11)
   - Firebase/Analytics (3.3.0):
     - FirebaseAnalytics (= 3.2.1)
@@ -40,6 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - Crashlytics
+  - Emoji-swift
   - Fabric
   - Firebase/Auth
   - Firebase/Core
@@ -49,6 +51,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Emoji-swift: dd719961cdaab20adb5b61a78f67662da244643d
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
@@ -63,6 +66,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: c555aad563ebfaf02b867cf281147beb55e59cd0
+PODFILE CHECKSUM: f9fe989c4fa8856e96ac3570990f8ae23b8b0f60
 
 COCOAPODS: 1.2.0

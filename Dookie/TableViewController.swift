@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
     var activitiesRef: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle?
     var activitiesArray = [Activity]()
+    var allowedToMerge = [":droplet:", ":shit:"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,12 +136,12 @@ class TableViewController: UITableViewController {
         }
     }
 
-    func shouldMerge(_ type: Int) -> Bool {
+    func shouldMerge(_ newType: String) -> Bool {
         guard let latest = activitiesArray.first else { return false }
         let minago = Calendar.current.dateComponents([.minute], from: latest.time, to: Date()).minute ?? 0
-        if minago < 30 && (1...2 ~= latest.type) && type != latest.type {
+        if minago < 15 {
             latest.ref?.updateChildValues([
-                "type": 3,
+                "type": latest.type + newType,
                 "time": Date().toString
             ])
             return true
@@ -163,27 +164,35 @@ class TableViewController: UITableViewController {
     // MARK: - Actions
 
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
-        let activityItem = Activity(time: Date(), type: 5)
-        self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+        let type = ":tennis:"
+        if !shouldMerge(type) {
+            let activityItem = Activity(time: Date(), type: type)
+            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+        }
     }
 
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
-        if !shouldMerge(1) {
-            let activityItem = Activity(time: Date(), type: 1)
+        let type = ":shit:"
+        if !shouldMerge(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonPee(_ sender: UIBarButtonItem) {
-        if !shouldMerge(2) {
-            let activityItem = Activity(time: Date(), type: 2)
+        let type = ":droplet:"
+        if !shouldMerge(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonFood(_ sender: UIBarButtonItem) {
-        let activityItem = Activity(time: Date(), type: 4)
-        self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+        let type = ":stew:"
+        if !shouldMerge(type) {
+            let activityItem = Activity(time: Date(), type: type)
+            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+        }
     }
 
     @IBAction func shareDogButton(_ sender: UIBarButtonItem) {
@@ -193,7 +202,7 @@ class TableViewController: UITableViewController {
         }))
         alert.addAction(UIAlertAction(title: "Invite others", style: .default, handler: { _ in
             let subject = "Join \(Defaults[.name]) on Dookie"
-            let body = "0. Get the app at https://dookie.me/\n1. Open Dookie App\n2. Choose 'Join a shared dog'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n🐶"
+            let body = "0. Get the app at https://dookie.me/\n1. Open Dookie App\n2. Choose 'Join a shared dog'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n\u{1f436}"
             guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
                   let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
             if let url = URL(string: "mailto:?subject=\(encodedSubject)&body=\(encodedBody)") {
