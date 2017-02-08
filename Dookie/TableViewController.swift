@@ -209,7 +209,7 @@ class TableViewController: UITableViewController {
         }))
         alert.addAction(UIAlertAction(title: "Invite others", style: .default, handler: { _ in
             let subject = "Join \(Defaults[.name]) on Dookie"
-            let body = "0. Get the app at https://dookie.me/\n1. Open Dookie App\n2. Choose 'Join a shared pet'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n\u{1f436}"
+            let body = "You have been invited to join \(Defaults[.name]) on Dookie. Dookie is a simple way to share your pet's eating and walking habits with other family members. If you don't have the app, you can get it at <a href='https://dookie.me'>dookie.me</a>.\n\nTo join \(Defaults[.name]) on Dookie, follow these easy steps:\n<ol><li>Open the Dookie app</li><li>Choose <b>Join a shared pet</b></li><li>Enter the code below in the thext filed</li></ol>\n<b>\(Defaults[.secret])</b>\n<span style='color:grey'>Tip: remember to copy the whole pet ID (including the dashes)</span>\n\nHappy tracking!\n\n\u{1f436}"
             guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
                   let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
             if let url = URL(string: "mailto:?subject=\(encodedSubject)&body=\(encodedBody)") {
