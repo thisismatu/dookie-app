@@ -22,7 +22,7 @@ class TableViewCell: UITableViewCell {
 
     func configure(_ item: Activity, defaults: String, margins: [Int]) {
         timeLabel.text = item.time.formatDate(.none, .short)
-        typeLabel.text = item.type.emojiUnescapedString
+        typeLabel.text = item.type.joined().emojiUnescapedString
 
         if item.uid == defaults {
             indicator.layer.borderColor = tintColor.cgColor

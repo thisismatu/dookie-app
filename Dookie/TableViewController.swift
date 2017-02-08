@@ -139,9 +139,16 @@ class TableViewController: UITableViewController {
     func shouldMerge(_ newType: String) -> Bool {
         guard let latest = activitiesArray.first else { return false }
         let minago = Calendar.current.dateComponents([.minute], from: latest.time, to: Date()).minute ?? 0
-        if minago < 15 {
+
+        var tmp = latest.type
+        tmp.append(newType)
+        let listSet = Set(allowedToMerge)
+        let findListSet = Set(tmp)
+        let allElemsContained = findListSet.isSubset(of: listSet)
+
+        if minago < 15 && allElemsContained {
             latest.ref?.updateChildValues([
-                "type": latest.type + newType,
+                "type": tmp,
                 "time": Date().toString
             ])
             return true
@@ -166,7 +173,7 @@ class TableViewController: UITableViewController {
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
         let type = ":tennis:"
         if !shouldMerge(type) {
-            let activityItem = Activity(time: Date(), type: type)
+            let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
@@ -174,7 +181,7 @@ class TableViewController: UITableViewController {
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
         let type = ":shit:"
         if !shouldMerge(type) {
-            let activityItem = Activity(time: Date(), type: type)
+            let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
@@ -182,7 +189,7 @@ class TableViewController: UITableViewController {
     @IBAction func buttonPee(_ sender: UIBarButtonItem) {
         let type = ":droplet:"
         if !shouldMerge(type) {
-            let activityItem = Activity(time: Date(), type: type)
+            let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
@@ -190,7 +197,7 @@ class TableViewController: UITableViewController {
     @IBAction func buttonFood(_ sender: UIBarButtonItem) {
         let type = ":stew:"
         if !shouldMerge(type) {
-            let activityItem = Activity(time: Date(), type: type)
+            let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
