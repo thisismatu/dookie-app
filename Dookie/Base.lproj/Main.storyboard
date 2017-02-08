@@ -34,19 +34,19 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="siX-To-5MB">
-                                            <rect key="frame" x="65.5" y="21.5" width="244" height="20.5"/>
+                                            <rect key="frame" x="41.5" y="21.5" width="292" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8w-ib-stA">
-                                                    <rect key="frame" x="0.0" y="1.5" width="96" height="18"/>
+                                                    <rect key="frame" x="0.0" y="1.5" width="120" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="96" id="cH6-ag-bsa"/>
+                                                        <constraint firstAttribute="width" constant="120" id="cH6-ag-bsa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSC-1I-OWz" userLabel="Outer">
-                                                    <rect key="frame" x="112" y="0.5" width="20" height="20"/>
+                                                    <rect key="frame" x="136" y="0.5" width="20" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Pn-oVr">
                                                             <rect key="frame" x="1.5" y="2" width="16" height="16"/>
@@ -75,9 +75,9 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUr-dK-lhb">
-                                                    <rect key="frame" x="148" y="0.0" width="96" height="20.5"/>
+                                                    <rect key="frame" x="172" y="0.0" width="120" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="96" id="Qxg-gB-ClJ"/>
+                                                        <constraint firstAttribute="width" constant="120" id="Qxg-gB-ClJ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
