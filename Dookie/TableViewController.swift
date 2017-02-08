@@ -37,7 +37,7 @@ class TableViewController: UITableViewController {
             }
         })
 
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
+        petRef.observe(.value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
             self.navigationItem.title = name
             Defaults[.name] = name
