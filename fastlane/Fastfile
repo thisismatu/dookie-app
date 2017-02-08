@@ -40,10 +40,10 @@ lane :beta do
     notifications: true
   )
 
+  # clean up folder
+  clean_build_artifacts
+
   # version controll
   commit_version_bump message: "Increase build number"
   add_git_tag
-
-  # clean up folder
-  clean_build_artifacts
 end
