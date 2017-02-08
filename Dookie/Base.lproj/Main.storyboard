@@ -136,7 +136,7 @@
                         <barButtonItem width="16" style="plain" systemItem="fixedSpace" id="lj0-0U-kr2"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="GB2-aL-LfZ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="CN4-zD-zac">
+                        <barButtonItem key="leftBarButtonItem" image="ic_settings" id="CN4-zD-zac">
                             <connections>
                                 <action selector="sharePetButton:" destination="Ml4-NM-IZz" id="Ure-AT-6b1"/>
                             </connections>
@@ -465,5 +465,6 @@
     </scenes>
     <resources>
         <image name="art_landscape" width="480" height="149"/>
+        <image name="ic_settings" width="24" height="24"/>
     </resources>
 </document>
