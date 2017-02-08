@@ -34,7 +34,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="siX-To-5MB">
-                                            <rect key="frame" x="67.5" y="21.5" width="240" height="20.5"/>
+                                            <rect key="frame" x="65.5" y="21.5" width="244" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8w-ib-stA">
                                                     <rect key="frame" x="0.0" y="1.5" width="96" height="18"/>
@@ -45,25 +45,37 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Pn-oVr">
-                                                    <rect key="frame" x="112" y="2.5" width="16" height="16"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSC-1I-OWz" userLabel="Outer">
+                                                    <rect key="frame" x="112" y="0.5" width="20" height="20"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Pn-oVr">
+                                                            <rect key="frame" x="1.5" y="2" width="16" height="16"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="16" id="bxl-2q-Nd8"/>
+                                                                <constraint firstAttribute="height" constant="16" id="orB-mU-Vlw"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <integer key="value" value="2"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="16" id="bxl-2q-Nd8"/>
-                                                        <constraint firstAttribute="height" constant="16" id="orB-mU-Vlw"/>
+                                                        <constraint firstItem="f0q-Pn-oVr" firstAttribute="centerY" secondItem="bSC-1I-OWz" secondAttribute="centerY" id="6U2-Js-ZKu"/>
+                                                        <constraint firstItem="f0q-Pn-oVr" firstAttribute="centerX" secondItem="bSC-1I-OWz" secondAttribute="centerX" id="M6U-5I-dZl"/>
+                                                        <constraint firstAttribute="width" constant="20" id="RHo-WY-Yl3"/>
+                                                        <constraint firstAttribute="height" constant="20" id="uy3-ZR-gTm"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <integer key="value" value="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUr-dK-lhb">
-                                                    <rect key="frame" x="144" y="0.0" width="96" height="20.5"/>
+                                                    <rect key="frame" x="148" y="0.0" width="96" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="96" id="Qxg-gB-ClJ"/>
                                                     </constraints>
