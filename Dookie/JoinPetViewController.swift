@@ -1,5 +1,5 @@
 //
-//  AddDogViewController.swift
+//  JoinPetViewController.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 05.02.2017.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftyUserDefaults
 
-class AddDogViewController: UIViewController, UITextFieldDelegate {
+class JoinPetViewController: UIViewController, UITextFieldDelegate {
     var ref: FIRDatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
@@ -31,23 +31,27 @@ class AddDogViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        addButtonPressed(self)
+        joinButtonPressed(self)
         return true
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        guard let name = textField.text?.trimmingCharacters(in: .whitespaces) else { return }
+    @IBAction func joinButtonPressed(_ sender: Any) {
+        guard let secret = textField.text?.trimmingCharacters(in: .whitespaces) else { return }
 
-        switch !name.isEmpty {
+        switch !secret.isEmpty {
         case true:
-            ref.childByAutoId().child("dog").setValue(["name": name], withCompletionBlock: { (error, reference) in
-                if let secret = reference.parent?.key {
+            ref.child(secret).observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.exists() {
                     Defaults[.secret] = secret
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)
                         _ = self.navigationController?.popToRootViewController(animated: false)
                     }
+                } else {
+                    let alert = UIAlertController(title: "Couldn't find this pet", message: "It seems that the ID you entered doesn't match any pet. Please check you pasted the whole ID or go back and create a new pet.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             })
         case false: return

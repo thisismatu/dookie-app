@@ -12,7 +12,7 @@ import SwiftyUserDefaults
 
 class TableViewController: UITableViewController {
     var ref: FIRDatabaseReference!
-    var dogRef: FIRDatabaseReference!
+    var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
     var refHandle: FIRDatabaseHandle?
     var activitiesArray = [Activity]()
@@ -21,7 +21,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
-        dogRef = ref.child("dog")
+        petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         self.navigationItem.title = Defaults[.name]
     }
@@ -29,7 +29,7 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         ref.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
             if !snapshot.exists() {
-                let alert = UIAlertController(title: "This dog doesn't exist", message: "Uh-oh, it seems that your dog has been deleted. You can recreate the dog in the next view.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
                     self.logout()
                 }))
@@ -37,7 +37,7 @@ class TableViewController: UITableViewController {
             }
         })
 
-        dogRef.observeSingleEvent(of: .value, with: { snapshot in
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
             self.navigationItem.title = name
             Defaults[.name] = name
@@ -64,7 +64,7 @@ class TableViewController: UITableViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         activitiesRef.removeAllObservers()
-        dogRef.removeAllObservers()
+        petRef.removeAllObservers()
     }
 
     // MARK: - Table view data source
@@ -202,14 +202,14 @@ class TableViewController: UITableViewController {
         }
     }
 
-    @IBAction func shareDogButton(_ sender: UIBarButtonItem) {
+    @IBAction func sharePetButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: Defaults[.name], message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Copy ID", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Copy pet ID", style: .default, handler: { _ in
             UIPasteboard.general.string = Defaults[.secret]
         }))
         alert.addAction(UIAlertAction(title: "Invite others", style: .default, handler: { _ in
             let subject = "Join \(Defaults[.name]) on Dookie"
-            let body = "0. Get the app at https://dookie.me/\n1. Open Dookie App\n2. Choose 'Join a shared dog'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n\u{1f436}"
+            let body = "0. Get the app at https://dookie.me/\n1. Open Dookie App\n2. Choose 'Join a shared pet'\n3. Enter the code below\n\n<b>\(Defaults[.secret])</b>\n\n\u{1f436}"
             guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
                   let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
             if let url = URL(string: "mailto:?subject=\(encodedSubject)&body=\(encodedBody)") {
@@ -218,11 +218,11 @@ class TableViewController: UITableViewController {
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "Leave shared dog", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave shared pet", style: .destructive, handler: { _ in
             self.logout()
         }))
-        alert.addAction(UIAlertAction(title: "Delete shared dog", style: .destructive, handler: { _ in
-            let alert = UIAlertController(title: "Delete shared dog?", message: "This cannot be undone", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete shared pet", style: .destructive, handler: { _ in
+            let alert = UIAlertController(title: "Delete shared pet?", message: "This cannot be undone", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 self.ref.removeValue()

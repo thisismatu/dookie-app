@@ -138,7 +138,7 @@
                     <navigationItem key="navigationItem" id="GB2-aL-LfZ">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="CN4-zD-zac">
                             <connections>
-                                <action selector="shareDogButton:" destination="Ml4-NM-IZz" id="Ure-AT-6b1"/>
+                                <action selector="sharePetButton:" destination="Ml4-NM-IZz" id="Ure-AT-6b1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -181,7 +181,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With Dookie you can share your dogs eating and walking habits with other family members." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-vR-bIX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With Dookie you can share your pet's eating and walking habits with other family members." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-vR-bIX">
                                         <rect key="frame" x="0.0" y="68.5" width="311" height="58"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +201,7 @@
                                             <constraint firstAttribute="height" constant="48" id="Gwz-AW-Ojc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <state key="normal" title="Add a new dog">
+                                        <state key="normal" title="Add a new pet">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -228,7 +228,7 @@
                                             <constraint firstAttribute="height" constant="48" id="Hgz-Rv-d8z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <state key="normal" title="Join a shared dog">
+                                        <state key="normal" title="Join a shared pet">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -270,10 +270,10 @@
             </objects>
             <point key="canvasLocation" x="-1292" y="117.39130434782609"/>
         </scene>
-        <!--Add a new dog-->
+        <!--Add a new pet-->
         <scene sceneID="c4v-0S-rwR">
             <objects>
-                <viewController id="WoP-ZF-ygi" customClass="AddDogViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WoP-ZF-ygi" customClass="AddPetViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e0M-lP-Jmm"/>
                         <viewControllerLayoutGuide type="bottom" id="IaB-N9-uNR"/>
@@ -285,7 +285,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VUe-Kj-m5z">
                                 <rect key="frame" x="32" y="88" width="311" height="182"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barky" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6J-P4-wKB">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your pet's name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6J-P4-wKB">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="ezX-xE-3pf"/>
@@ -294,7 +294,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: You can share this dog to other family members in the next step." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-2F-hGv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: You can share this pet to other family members in the next step." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-2F-hGv">
                                         <rect key="frame" x="0.0" y="64" width="311" height="38"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -337,7 +337,7 @@
                             <constraint firstItem="VUe-Kj-m5z" firstAttribute="top" secondItem="e0M-lP-Jmm" secondAttribute="bottom" constant="24" id="pVw-ik-ojX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add a new dog" id="fdA-ln-3V1"/>
+                    <navigationItem key="navigationItem" title="Add a new pet" id="fdA-ln-3V1"/>
                     <connections>
                         <outlet property="textField" destination="s6J-P4-wKB" id="5mK-A3-2JW"/>
                     </connections>
@@ -346,10 +346,10 @@
             </objects>
             <point key="canvasLocation" x="-334" y="-215"/>
         </scene>
-        <!--Join a shared dog-->
+        <!--Join a shared pet-->
         <scene sceneID="uEz-r1-Gmn">
             <objects>
-                <viewController id="zpK-Jv-C22" customClass="JoinDogViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zpK-Jv-C22" customClass="JoinPetViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z1g-df-DGx"/>
                         <viewControllerLayoutGuide type="bottom" id="Ya9-1f-7wk"/>
@@ -361,7 +361,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ec4-yj-h7M">
                                 <rect key="frame" x="32" y="88" width="311" height="202"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="-Kc7ARpM7zeYuli95KzF" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x8z-IK-FQe">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="The pet's ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x8z-IK-FQe">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="ngF-3R-dJO"/>
@@ -370,7 +370,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: The person who added the dog in the first place  can give you the dookie id. If you both have lost it, just add a new dog." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: The person who added the pet in the first place  can give you the pet ID. If you both have lost it, just add a new pet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
                                         <rect key="frame" x="0.0" y="64" width="311" height="58"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,7 +413,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ec4-yj-h7M" secondAttribute="trailing" constant="16" id="gc4-9e-U7H"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Join a shared dog" id="zNV-bB-0n9"/>
+                    <navigationItem key="navigationItem" title="Join a shared pet" id="zNV-bB-0n9"/>
                     <connections>
                         <outlet property="textField" destination="x8z-IK-FQe" id="bdj-bl-TN3"/>
                     </connections>
