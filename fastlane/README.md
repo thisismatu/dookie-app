@@ -33,6 +33,11 @@ xcode-select --install
 fastlane beta
 ```
 
+### dryrun
+```
+fastlane dryrun
+```
+
 
 ----
 
