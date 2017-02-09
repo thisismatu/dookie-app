@@ -146,7 +146,7 @@ class TableViewController: UITableViewController {
         let findListSet = Set(tmp)
         let allElemsContained = findListSet.isSubset(of: listSet)
 
-        if minago < 15 && allElemsContained {
+        if minago < 20 && allElemsContained {
             latest.ref?.updateChildValues([
                 "type": tmp,
                 "time": Date().toString
