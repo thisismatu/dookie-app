@@ -170,6 +170,8 @@ class TableViewController: UITableViewController {
 
     // MARK: - Actions
 
+    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
+
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
         let type = ":tennis:"
         if !shouldMerge(type) {

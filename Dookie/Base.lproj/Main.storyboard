@@ -136,9 +136,9 @@
                         <barButtonItem width="16" style="plain" systemItem="fixedSpace" id="lj0-0U-kr2"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="GB2-aL-LfZ">
-                        <barButtonItem key="leftBarButtonItem" image="ic_settings" id="CN4-zD-zac">
+                        <barButtonItem key="leftBarButtonItem" title="🛠" id="CN4-zD-zac">
                             <connections>
-                                <action selector="sharePetButton:" destination="Ml4-NM-IZz" id="Ure-AT-6b1"/>
+                                <segue destination="vnO-34-KrE" kind="presentation" id="IT4-gF-huK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -146,6 +146,206 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2343.1999999999998" y="118.29085457271366"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="QIA-6r-8ms">
+            <objects>
+                <tableViewController id="od9-gT-aQJ" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gs9-Ug-M3p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="a5j-zx-33u">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="cnB-tb-be0" style="IBUITableViewCellStyleDefault" id="XD9-Su-Q7E">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XD9-Su-Q7E" id="7sI-g3-eAI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📎    Copy Pet ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="cnB-tb-be0">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="d8E-mS-JyU" style="IBUITableViewCellStyleDefault" id="Zd2-e0-49C">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="✉️    Invite Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="d8E-mS-JyU">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="g8O-qf-ScJ" style="IBUITableViewCellStyleDefault" id="4dA-Eq-pxT">
+                                        <rect key="frame" x="0.0" y="123" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4dA-Eq-pxT" id="7Za-y2-2an">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text=" ✏️   Rename PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="g8O-qf-ScJ">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="lcf-bL-jLE" kind="show" id="1yU-lM-mSH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="y8Y-zB-V6T">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="kit-xZ-7ij" style="IBUITableViewCellStyleDefault" id="BcY-Ft-ZzN">
+                                        <rect key="frame" x="0.0" y="203" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="❤️    Rate Dookie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="kit-xZ-7ij">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Kiw-4d-iSt" style="IBUITableViewCellStyleDefault" id="MUf-nh-rzA">
+                                        <rect key="frame" x="0.0" y="247" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📬    Send Feedaback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="Kiw-4d-iSt">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="MxR-zg-MzE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Byc-Ar-OqY" style="IBUITableViewCellStyleDefault" id="nPC-8F-SII">
+                                        <rect key="frame" x="0.0" y="327" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nPC-8F-SII" id="l9i-Ug-srV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="🚪    Leave PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="Byc-Ar-OqY">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="8Cw-Ul-atN" style="IBUITableViewCellStyleDefault" id="q13-QG-JZT">
+                                        <rect key="frame" x="0.0" y="371" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q13-QG-JZT" id="M8q-2f-CQx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="🗑    Delete PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="8Cw-Ul-atN">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="od9-gT-aQJ" id="JPH-8E-LTa"/>
+                            <outlet property="delegate" destination="od9-gT-aQJ" id="LZ6-Jd-NJ3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="Xyj-3h-wSh">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="O01-GO-NAz">
+                            <connections>
+                                <segue destination="2xk-gL-ukx" kind="unwind" unwindAction="unwindToHome:" id="00e-3T-KiP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k9L-OY-7Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2xk-gL-ukx" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4704.8000000000002" y="117.39130434782609"/>
+        </scene>
+        <!--Rename-->
+        <scene sceneID="ubi-Re-wTf">
+            <objects>
+                <viewController id="lcf-bL-jLE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TAs-F4-swV"/>
+                        <viewControllerLayoutGuide type="bottom" id="aAd-Ac-iNS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ulI-gL-JHq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="PETNAME" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j7P-6b-ww8">
+                                <rect key="frame" x="24" y="88" width="327" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="aWG-XB-juF"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="j7P-6b-ww8" secondAttribute="trailing" constant="8" id="A2K-5D-E9l"/>
+                            <constraint firstItem="j7P-6b-ww8" firstAttribute="leading" secondItem="ulI-gL-JHq" secondAttribute="leadingMargin" constant="8" id="RkO-xg-8xt"/>
+                            <constraint firstItem="j7P-6b-ww8" firstAttribute="top" secondItem="TAs-F4-swV" secondAttribute="bottom" constant="24" id="rLe-Di-fXP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Rename" id="UFU-yl-0af">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Ls0-XI-17H"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kLg-ru-gWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5583.1999999999998" y="117.39130434782609"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
@@ -462,9 +662,26 @@
             </objects>
             <point key="canvasLocation" x="-2231.1999999999998" y="117.39130434782609"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tGy-0q-u4r">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vnO-34-KrE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PC8-VB-SDP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="od9-gT-aQJ" kind="relationship" relationship="rootViewController" id="1dc-a3-vJ0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zFQ-3h-TPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3765.5999999999999" y="117.39130434782609"/>
+        </scene>
     </scenes>
     <resources>
         <image name="art_landscape" width="480" height="149"/>
-        <image name="ic_settings" width="24" height="24"/>
     </resources>
 </document>
