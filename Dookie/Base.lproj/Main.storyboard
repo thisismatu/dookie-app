@@ -160,7 +160,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97w-tG-dXL">
-                                <rect key="frame" x="32" y="127.5" width="311" height="278.5"/>
+                                <rect key="frame" x="32" y="111" width="311" height="278.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cv-hl-b7h">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="24"/>
@@ -257,7 +257,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="97w-tG-dXL" secondAttribute="trailing" constant="16" id="T4e-wx-1Bk"/>
                             <constraint firstItem="97w-tG-dXL" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leadingMargin" constant="16" id="Vsc-aP-zFc"/>
                             <constraint firstItem="mIx-A4-xTB" firstAttribute="top" secondItem="VLK-xw-mV7" secondAttribute="bottom" id="iht-if-EEG"/>
-                            <constraint firstItem="97w-tG-dXL" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.8" id="oPd-WQ-dXQ"/>
+                            <constraint firstItem="97w-tG-dXL" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.75" id="oPd-WQ-dXQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kfd-SG-ok6"/>
