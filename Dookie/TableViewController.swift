@@ -14,7 +14,7 @@ class TableViewController: UITableViewController {
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
-    var refHandle: FIRDatabaseHandle?
+    var connectedRef: FIRDatabaseReference!
     var activitiesArray = [Activity]()
     var allowedToMerge = [":droplet:", ":shit:"]
 
@@ -23,10 +23,13 @@ class TableViewController: UITableViewController {
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
+        connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         self.navigationItem.title = Defaults[.name]
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         ref.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
             if !snapshot.exists() {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
@@ -60,11 +63,25 @@ class TableViewController: UITableViewController {
             self.showEmptyState()
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
+
+        let deadline = DispatchTime.now()+5
+        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+            self.connectedRef.observe(.value, with: { snapshot in
+                guard let connected = snapshot.value as? Bool, connected else {
+                    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+                    self.navigationItem.prompt = "You're offline"
+                    return
+                }
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+                self.navigationItem.prompt = nil
+            })
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
+        connectedRef.removeAllObservers()
     }
 
     // MARK: - Table view data source
