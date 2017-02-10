@@ -60,7 +60,7 @@ class TableViewController: UITableViewController {
                 }
             }
             self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
-            self.showEmptyState()
+            self.showEmptyState(self.activitiesArray.isEmpty)
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
 
@@ -136,8 +136,8 @@ class TableViewController: UITableViewController {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
-    func showEmptyState() {
-        if activitiesArray.count == 0 {
+    func showEmptyState(_ show: Bool) {
+        if show {
             let label = UILabel()
             label.frame.size.height = 48
             label.frame.size.width = tableView.frame.size.width
