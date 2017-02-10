@@ -187,7 +187,16 @@ class TableViewController: UITableViewController {
 
     // MARK: - Actions
 
-    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
+    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
+        guard let id = segue.identifier else { return }
+        switch id {
+        case "logout":
+            print(id)
+        case "delete":
+            print(id)
+        default: return
+        }
+    }
 
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
         let type = ":tennis:"
