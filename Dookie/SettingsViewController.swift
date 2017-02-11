@@ -31,13 +31,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var petIdLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
         textField.text = Defaults[.name]
-        versionLabel.text = getVersionNumber()
+        petIdLabel.text = Defaults[.secret]
         logoutButton.setTitle("Leave \(Defaults[.name])", for: .normal)
-        deleteButton.setTitle("Delete \(Defaults[.name])?", for: .normal)
+        deleteButton.setTitle("Delete \(Defaults[.name])", for: .normal)
+        versionLabel.text = getVersionNumber()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,16 +61,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         switch cell {
         case petIdCell:
             copyPetId()
-            print(Defaults[.secret])
         case inviteCell:
             openUrl(inviteUrl)
-            print(inviteUrl)
         case rateCell:
             openUrl(appstoreUrl)
-            print(appstoreUrl)
         case feedbackCell:
             openUrl(feedbackUrl)
-            print(feedbackUrl)
         default: break
         }
 
@@ -92,7 +90,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     }
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Leave \(Defaults[.name])", message: "This cannot be undone", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Leave \(Defaults[.name])?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Leave", style: .default, handler: { _ in
             self.appDelegate?.leavePet()

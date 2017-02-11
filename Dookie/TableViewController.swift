@@ -11,6 +11,7 @@ import Firebase
 import SwiftyUserDefaults
 
 class TableViewController: UITableViewController {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
@@ -30,11 +31,11 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        ref.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
+        ref.queryLimited(toFirst: 1).observe(.value, with: { snapshot in
             if !snapshot.exists() {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.logout()
+                    self.appDelegate?.leavePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -82,6 +83,7 @@ class TableViewController: UITableViewController {
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
         connectedRef.removeAllObservers()
+        ref.removeAllObservers()
     }
 
     // MARK: - Table view data source
@@ -128,13 +130,6 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - View controller custom methods
-
-    func logout() {
-        self.activitiesArray.removeAll()
-        Defaults.remove(.secret)
-        Defaults.remove(.name)
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
 
     func showEmptyState(_ show: Bool) {
         if show {
@@ -219,37 +214,5 @@ class TableViewController: UITableViewController {
             let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
-    }
-
-    @IBAction func sharePetButton(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: Defaults[.name], message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Copy pet ID", style: .default, handler: { _ in
-            UIPasteboard.general.string = Defaults[.secret]
-        }))
-        alert.addAction(UIAlertAction(title: "Invite others", style: .default, handler: { _ in
-            let subject = "Join \(Defaults[.name]) on Dookie"
-            let body = "You have been invited to join \(Defaults[.name]) on Dookie. Dookie is a simple way to share your pet's eating and walking habits with other family members. If you don't have the app, you can get it at <a href='https://dookie.me'>dookie.me</a>.\n\nTo join \(Defaults[.name]) on Dookie, follow these easy steps:\n<ol><li>Open the Dookie app</li><li>Choose <b>Join a shared pet</b></li><li>Enter the code below in the thext filed</li></ol>\n<b>\(Defaults[.secret])</b>\n<span style='color:grey'>Tip: remember to copy the whole pet ID (including the dashes)</span>\n\nHappy tracking!\n\n\u{1f436}"
-            guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-                  let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-            if let url = URL(string: "mailto:?subject=\(encodedSubject)&body=\(encodedBody)") {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.openURL(url)
-                }
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Leave shared pet", style: .destructive, handler: { _ in
-            self.logout()
-        }))
-        alert.addAction(UIAlertAction(title: "Delete shared pet", style: .destructive, handler: { _ in
-            let alert = UIAlertController(title: "Delete shared pet?", message: "This cannot be undone", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                self.ref.removeValue()
-                self.logout()
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
 }
