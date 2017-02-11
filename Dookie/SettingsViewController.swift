@@ -21,24 +21,18 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         return "mailto:?subject=\(encodedSubject)&body=\(encodedBody)"
     }
 
-
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var petIdCell: UITableViewCell!
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var petIdLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
-        textField.text = Defaults[.name]
-        petIdLabel.text = Defaults[.secret]
-        logoutButton.setTitle("Leave \(Defaults[.name])", for: .normal)
-        deleteButton.setTitle("Delete \(Defaults[.name])", for: .normal)
+        setButtonTitles()
         versionLabel.text = getVersionNumber()
     }
 
@@ -46,19 +40,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        textField.resignFirstResponder()
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         switch cell {
+        case renameCell:
+            showRenamePet()
         case petIdCell:
             copyPetId()
         case inviteCell:
@@ -87,6 +74,30 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
+    }
+
+    func setButtonTitles() {
+        renameCell.textLabel?.text = "\u{0270f}    Rename \(Defaults[.name])"
+        logoutButton.setTitle("Leave \(Defaults[.name])", for: .normal)
+        deleteButton.setTitle("Delete \(Defaults[.name])", for: .normal)
+    }
+
+    func showRenamePet() {
+        let alert = UIAlertController(title: "Rename \(Defaults[.name])", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+            let textField = alert.textFields![0] as UITextField
+            if let name = textField.text, !name.isEmpty {
+                print(name)
+                //Defaults[.name] = textField.text
+            }
+        }))
+        alert.addTextField { (textField) in
+            textField.placeholder = "Pet's Name"
+            textField.textAlignment = .center
+            textField.text = Defaults[.name]
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
