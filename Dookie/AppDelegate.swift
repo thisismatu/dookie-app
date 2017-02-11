@@ -65,6 +65,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func leavePet() {
+        let root = self.window?.rootViewController as! UINavigationController
+        if let vc = root.topViewController as? TableViewController {
+            vc.activitiesArray.removeAll()
+            vc.tableView.reloadData()
+        }
 
+        Defaults.remove(.secret)
+        Defaults.remove(.name)
+
+        self.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    func deletePet() {
+        FIRDatabase.database().reference(withPath: Defaults[.secret]).removeValue()
+        leavePet()
+    }
 }
 

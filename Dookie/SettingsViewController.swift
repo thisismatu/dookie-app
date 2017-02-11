@@ -10,6 +10,7 @@ import UIKit
 import SwiftyUserDefaults
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     let feedbackUrl = "mailto:mathias.lindholm@gmail.com?subject=Dookie%20Feedback"
     var inviteUrl: String {
@@ -35,7 +36,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         textField.delegate = self
         textField.text = Defaults[.name]
         versionLabel.text = getVersionNumber()
-        petIdLabel.text = Defaults[.secret]
+        logoutButton.setTitle("Leave \(Defaults[.name])", for: .normal)
+        deleteButton.setTitle("Delete \(Defaults[.name])?", for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,11 +92,19 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     }
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "logout", sender: self)
-        print("Logout")
+        let alert = UIAlertController(title: "Leave \(Defaults[.name])", message: "This cannot be undone", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Leave", style: .default, handler: { _ in
+            self.appDelegate?.leavePet()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "delete", sender: self)
-        print("Delete")
+        let alert = UIAlertController(title: "Delete \(Defaults[.name])?", message: "This action cannot be undone", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.appDelegate?.deletePet()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
