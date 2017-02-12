@@ -127,13 +127,14 @@ class TableViewController: UITableViewController {
         }
         delete.backgroundColor = .white
 
-        let edit = UITableViewRowAction(style: .normal, title: "✏️") { (action, indexPath) in
+        let edit = UITableViewRowAction(style: .normal, title: "🕒") { (action, indexPath) in
             let activityItem = self.activitiesArray[indexPath.row]
             let alert = UIAlertController(title: "Change time", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
             let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
             let picker: UIDatePicker = UIDatePicker(frame: frame)
             picker.datePickerMode = .time
             picker.date = activityItem.time
+            picker.maximumDate = Date()
             alert.view.addSubview(picker)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
