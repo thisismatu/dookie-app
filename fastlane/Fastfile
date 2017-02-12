@@ -20,42 +20,58 @@ default_platform :ios
 # info which you can add here later
 
 lane :beta do
-  # check that repo is clean
-  ensure_git_status_clean
+    # check that repo is clean
+    ensure_git_status_clean
 
-  # increment build number
-  increment_build_number
+    # increment build number
+    increment_build_number
 
-  # build your iOS app
-  gym(
+    # build your iOS app
+    gym(
     workspace: "Dookie.xcworkspace",
     scheme: "Dookie",
     clean: true,
     output_directory: "build",
     export_method: "development"
-  )
+    )
 
-  # upload to Beta by Crashlytics
-  crashlytics(
+    # upload to Beta by Crashlytics
+    crashlytics(
     api_token: "18b7be9fd8d6f74333326228f9b7b17beb0e6a5c",
     build_secret: "1843997cd076553a4e3df764b4d845f5f0ebee069aa40b5c31973bcde60aaefa",
     groups: "testers-1",
     notes: changelog_from_git_commits(pretty: "• %s"),
     notifications: true
-  )
+    )
 
-  # clean up folder
-  clean_build_artifacts
+    # clean up folder
+    clean_build_artifacts
 
-  # version controll
-  commit_version_bump message: "Increase build number"
-  add_git_tag
+    # version controll
+    commit_version_bump
+    add_git_tag
 end
 
 lane :dryrun do
-  # us this lane for testing purposes
-  # ensure_git_status_clean
-  increment_build_number
-  changelog_from_git_commits(pretty: "• %s")
-  add_git_tag
+    # check that repo is clean
+    ensure_git_status_clean
+
+    # increment build number
+    increment_build_number
+
+    # build your iOS app
+    gym(
+      workspace: "Dookie.xcworkspace",
+      scheme: "Dookie",
+      clean: true,
+      output_directory: "build",
+      export_method: "development"
+    )
+
+    # clean up folder
+    clean_build_artifacts
+
+    # version controll
+    commit_version_bump
+    add_git_tag
 end
