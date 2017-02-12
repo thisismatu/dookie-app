@@ -51,8 +51,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        petRef.removeAllObservers()
         ref.removeAllObservers()
+        petRef.removeAllObservers()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -121,12 +121,31 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "🗑", handler: { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive, title: "🗑") { (action, indexPath) in
             let activityItem = self.activitiesArray[indexPath.row]
             activityItem.ref?.removeValue()
-        })
+        }
         delete.backgroundColor = .white
-        return [delete]
+
+        let edit = UITableViewRowAction(style: .normal, title: "✏️") { (action, indexPath) in
+            let activityItem = self.activitiesArray[indexPath.row]
+            let alert = UIAlertController(title: "Change time", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+            let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
+            let picker: UIDatePicker = UIDatePicker(frame: frame)
+            picker.datePickerMode = .time
+            picker.date = activityItem.time
+            alert.view.addSubview(picker)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+                activityItem.ref?.updateChildValues(["time": picker.date.toString])
+            }))
+            self.present(alert, animated: true, completion: { _ in
+                self.tableView.setEditing(false, animated: true)
+            })
+        }
+        edit.backgroundColor = .clear
+
+        return [delete, edit]
     }
 
     // MARK: - View controller custom methods
