@@ -8,9 +8,12 @@
 
 import UIKit
 import SwiftyUserDefaults
+import Firebase
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    var ref: FIRDatabaseReference!
+    var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     let feedbackUrl = "mailto:mathias.lindholm@gmail.com?subject=Dookie%20Feedback"
     var inviteUrl: String {
@@ -32,12 +35,24 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setButtonTitles()
+        ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
+        petRef = ref.child("pet")
+        setButtonTitles(Defaults[.name])
         versionLabel.text = getVersionNumber()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        petRef.observe(.value, with: { snapshot in
+            let name = snapshot.json["name"].stringValue
+            self.setButtonTitles(name)
+            Defaults[.name] = name
+        })
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        petRef.removeAllObservers()
+        ref.removeAllObservers()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -76,10 +91,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
-    func setButtonTitles() {
-        renameCell.textLabel?.text = "\u{0270f}    Rename \(Defaults[.name])"
-        logoutButton.setTitle("Leave \(Defaults[.name])", for: .normal)
-        deleteButton.setTitle("Delete \(Defaults[.name])", for: .normal)
+    func setButtonTitles(_ name: String) {
+        renameCell.textLabel?.text = "\u{0270f}    Rename \(name)"
+        logoutButton.setTitle("Leave \(name)", for: .normal)
+        deleteButton.setTitle("Delete \(name)", for: .normal)
     }
 
     func showRenamePet() {
@@ -87,8 +102,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             let textField = alert.textFields![0] as UITextField
             if let name = textField.text, !name.isEmpty {
-                print(name)
-                //Defaults[.name] = textField.text
+                self.petRef.updateChildValues(["name": name])
             }
         }))
         alert.addTextField { (textField) in
