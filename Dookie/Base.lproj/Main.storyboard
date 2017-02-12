@@ -172,7 +172,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="E41-mE-52r">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="112"/>
                                             <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64a-Wg-xlT">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64a-Wg-xlT" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                                                     <color key="backgroundColor" red="0.85098040103912354" green="0.85098040103912354" blue="0.85098040103912354" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -183,15 +183,15 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="24"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="24"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="logoutButtonPressed:" destination="od9-gT-aQJ" eventType="touchUpInside" id="Eri-MV-FdZ"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSw-RU-f2j">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSw-RU-f2j" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="64" width="343" height="48"/>
                                                     <color key="backgroundColor" red="0.87450981140136719" green="0.12156862765550613" blue="0.13725490868091583" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -202,8 +202,8 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="24"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="24"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -259,11 +259,11 @@
                                         <rect key="frame" x="0.0" y="16" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="✏️    Rename DOGNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dd2-zS-ccy">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -276,11 +276,11 @@
                                         <rect key="frame" x="0.0" y="64" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="19q-x5-0jC" id="Htl-zb-9LT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📎    Copy Pet ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6T3-eg-RIP">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -293,11 +293,11 @@
                                         <rect key="frame" x="0.0" y="112" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="✉️    Invite Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="d8E-mS-JyU">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -310,11 +310,11 @@
                                         <rect key="frame" x="0.0" y="160" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="❤️    Rate Dookie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="kit-xZ-7ij">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -327,11 +327,11 @@
                                         <rect key="frame" x="0.0" y="208" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📬    Send Feedaback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="Kiw-4d-iSt">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -418,7 +418,7 @@
                                             <constraint firstAttribute="height" constant="24" id="EIB-cr-Oe5"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-rP-qmg">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-rP-qmg" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="146.5" width="311" height="48"/>
                                         <color key="backgroundColor" red="0.0" green="0.52156865600000002" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -429,10 +429,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="24"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="24"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="WoP-ZF-ygi" kind="show" id="hRl-AE-zvN"/>
@@ -445,7 +444,7 @@
                                             <constraint firstAttribute="height" id="qH0-hc-dLb"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-D8-syY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-D8-syY" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="210.5" width="311" height="48"/>
                                         <color key="backgroundColor" red="0.33725491169999999" green="0.57254904510000004" blue="0.1411764771" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -456,9 +455,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="24"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="24"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -531,7 +529,7 @@
                                             <constraint firstAttribute="height" id="MT2-R0-Sxo"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rI-MG-EH2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rI-MG-EH2" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="134" width="311" height="48"/>
                                         <color key="backgroundColor" red="0.0" green="0.5215686559677124" blue="0.88627451658248901" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -542,10 +540,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="24"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="24"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addButtonPressed:" destination="WoP-ZF-ygi" eventType="touchUpInside" id="JV2-eX-nZh"/>
@@ -607,7 +604,7 @@
                                             <constraint firstAttribute="height" id="ETT-VD-ibS"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-7j-0Fr">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-7j-0Fr" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="154" width="311" height="48"/>
                                         <color key="backgroundColor" red="0.33725491166114807" green="0.57254904508590698" blue="0.14117647707462311" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -618,9 +615,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="24"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="24"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
