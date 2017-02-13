@@ -10,19 +10,22 @@ import UIKit
 import Emoji
 
 class TableViewCell: UITableViewCell {
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var indicator: UIView!
-    @IBOutlet weak var lineTop: NSLayoutConstraint!
-    @IBOutlet weak var lineBottom: NSLayoutConstraint!
+    @IBOutlet weak var lineTop: UIView!
+    @IBOutlet weak var lineBottom: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func configure(_ item: Activity, defaults: String, margins: [Int]) {
+    func configure(_ item: Activity, defaults: String, hideTop: Bool, hideBottom: Bool) {
         timeLabel.text = item.time.formatDate(.none, .short)
         typeLabel.text = item.type.joined().emojiUnescapedString
+        lineTop.isHidden = hideTop
+        lineBottom.isHidden = hideBottom
 
         if item.uid == defaults {
             indicator.layer.borderColor = tintColor.cgColor
@@ -30,12 +33,10 @@ class TableViewCell: UITableViewCell {
             indicator.layer.borderColor = UIColor.lightGray.cgColor
         }
 
-        if let topMargin = margins.first {
-            lineTop.constant = CGFloat(topMargin)
-        }
-
-        if let bottomMargin = margins.last {
-            lineBottom.constant = CGFloat(bottomMargin)
+        if item.time.hoursAgo > 16 {
+            stackView.alpha = 0.5
+        } else {
+            stackView.alpha = 1.0
         }
     }
 }

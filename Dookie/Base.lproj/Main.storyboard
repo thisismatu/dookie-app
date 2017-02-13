@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c1z-tP-PHg">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c1z-tP-PHg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,14 +27,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99h-lh-XgG">
-                                            <rect key="frame" x="186.5" y="0.0" width="2" height="63.5"/>
+                                            <rect key="frame" x="186.5" y="0.0" width="2" height="22"/>
                                             <color key="backgroundColor" red="0.91764706373214722" green="0.91764706373214722" blue="0.91764706373214722" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="2" id="hsW-Q3-GGz"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smB-S5-6c1">
+                                            <rect key="frame" x="186.5" y="42" width="2" height="22"/>
+                                            <color key="backgroundColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="2" id="PGl-Ti-pqa"/>
+                                            </constraints>
+                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="siX-To-5MB">
-                                            <rect key="frame" x="41.5" y="21.5" width="292" height="20.5"/>
+                                            <rect key="frame" x="43.5" y="21.5" width="288" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8w-ib-stA">
                                                     <rect key="frame" x="0.0" y="1.5" width="120" height="18"/>
@@ -45,37 +52,27 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSC-1I-OWz" userLabel="Outer">
-                                                    <rect key="frame" x="136" y="0.5" width="20" height="20"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Pn-oVr">
-                                                            <rect key="frame" x="1.5" y="2" width="16" height="16"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="16" id="bxl-2q-Nd8"/>
-                                                                <constraint firstAttribute="height" constant="16" id="orB-mU-Vlw"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <integer key="value" value="2"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="8"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
-                                                    </subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-Pn-oVr" customClass="RoundBorderView" customModule="Dookie" customModuleProvider="target">
+                                                    <rect key="frame" x="136" y="2.5" width="16" height="16"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="f0q-Pn-oVr" firstAttribute="centerY" secondItem="bSC-1I-OWz" secondAttribute="centerY" id="6U2-Js-ZKu"/>
-                                                        <constraint firstItem="f0q-Pn-oVr" firstAttribute="centerX" secondItem="bSC-1I-OWz" secondAttribute="centerX" id="M6U-5I-dZl"/>
-                                                        <constraint firstAttribute="width" constant="20" id="RHo-WY-Yl3"/>
-                                                        <constraint firstAttribute="height" constant="20" id="uy3-ZR-gTm"/>
+                                                        <constraint firstAttribute="width" constant="16" id="bxl-2q-Nd8"/>
+                                                        <constraint firstAttribute="height" constant="16" id="orB-mU-Vlw"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUr-dK-lhb">
-                                                    <rect key="frame" x="172" y="0.0" width="120" height="20.5"/>
+                                                    <rect key="frame" x="168" y="0.0" width="120" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="Qxg-gB-ClJ"/>
                                                     </constraints>
@@ -87,17 +84,21 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="99h-lh-XgG" secondAttribute="bottom" id="Cow-LJ-rR7"/>
                                         <constraint firstItem="siX-To-5MB" firstAttribute="centerY" secondItem="mKy-ci-06l" secondAttribute="centerY" id="DTq-D8-MUk"/>
                                         <constraint firstItem="siX-To-5MB" firstAttribute="centerX" secondItem="mKy-ci-06l" secondAttribute="centerX" id="Ed5-vC-hZ2"/>
-                                        <constraint firstItem="99h-lh-XgG" firstAttribute="top" secondItem="mKy-ci-06l" secondAttribute="top" id="RWc-qF-75h"/>
-                                        <constraint firstItem="99h-lh-XgG" firstAttribute="centerX" secondItem="mKy-ci-06l" secondAttribute="centerX" id="cyk-90-Yt3"/>
+                                        <constraint firstAttribute="bottom" secondItem="smB-S5-6c1" secondAttribute="bottom" id="RKX-Fd-9uh"/>
+                                        <constraint firstItem="f0q-Pn-oVr" firstAttribute="top" secondItem="99h-lh-XgG" secondAttribute="bottom" constant="2" id="YfW-D5-hBd"/>
+                                        <constraint firstItem="smB-S5-6c1" firstAttribute="centerX" secondItem="mKy-ci-06l" secondAttribute="centerX" id="dWj-qX-KE6"/>
+                                        <constraint firstItem="smB-S5-6c1" firstAttribute="top" secondItem="f0q-Pn-oVr" secondAttribute="bottom" constant="2" id="fld-t3-bjg"/>
+                                        <constraint firstItem="99h-lh-XgG" firstAttribute="centerX" secondItem="mKy-ci-06l" secondAttribute="centerX" id="tbf-eX-tke"/>
+                                        <constraint firstItem="99h-lh-XgG" firstAttribute="top" secondItem="mKy-ci-06l" secondAttribute="top" id="wa7-Wm-n00"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="indicator" destination="f0q-Pn-oVr" id="WfB-Et-iab"/>
-                                    <outlet property="lineBottom" destination="Cow-LJ-rR7" id="mUa-IP-HfQ"/>
-                                    <outlet property="lineTop" destination="RWc-qF-75h" id="d6J-TJ-vzT"/>
+                                    <outlet property="lineBottom" destination="smB-S5-6c1" id="NiZ-Ib-kd0"/>
+                                    <outlet property="lineTop" destination="99h-lh-XgG" id="gCF-gM-VKV"/>
+                                    <outlet property="stackView" destination="siX-To-5MB" id="uPV-sZ-uC9"/>
                                     <outlet property="timeLabel" destination="P8w-ib-stA" id="9Dv-uS-Wfh"/>
                                     <outlet property="typeLabel" destination="EUr-dK-lhb" id="Tkd-fB-l2S"/>
                                 </connections>

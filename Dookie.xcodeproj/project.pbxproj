@@ -11,7 +11,7 @@
 		ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */; };
 		CC2078C31E490C2B004E2030 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2078C21E490C2B004E2030 /* TableViewCell.swift */; };
 		CC7E38981E4E6412001B6027 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7E38971E4E6412001B6027 /* SettingsViewController.swift */; };
-		CC90EB781E50D4A900B167E9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90EB771E50D4A900B167E9 /* RoundedButton.swift */; };
+		CC90EB781E50D4A900B167E9 /* RoundedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90EB771E50D4A900B167E9 /* RoundedViews.swift */; };
 		CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */; };
 		CC9501021E47A10200C87CCB /* JoinPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9501011E47A10200C87CCB /* JoinPetViewController.swift */; };
 		CC95E6461E3FB28F001C93C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95E6451E3FB28F001C93C9 /* AppDelegate.swift */; };
@@ -31,7 +31,7 @@
 		C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.debug.xcconfig"; sourceTree = "<group>"; };
 		CC2078C21E490C2B004E2030 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CC7E38971E4E6412001B6027 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		CC90EB771E50D4A900B167E9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		CC90EB771E50D4A900B167E9 /* RoundedViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedViews.swift; sourceTree = "<group>"; };
 		CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
 		CC9501011E47A10200C87CCB /* JoinPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPetViewController.swift; sourceTree = "<group>"; };
 		CC95E6421E3FB28F001C93C9 /* Dookie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dookie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +102,7 @@
 				CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */,
 				CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */,
 				CC9501011E47A10200C87CCB /* JoinPetViewController.swift */,
-				CC90EB771E50D4A900B167E9 /* RoundedButton.swift */,
+				CC90EB771E50D4A900B167E9 /* RoundedViews.swift */,
 				4A3E32751E427670004FA9BD /* Activity.swift */,
 				CC7E38971E4E6412001B6027 /* SettingsViewController.swift */,
 				CCB4E4E21E460BA500E5E74B /* Extensions.swift */,
@@ -255,7 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB4E4E31E460BA500E5E74B /* Extensions.swift in Sources */,
-				CC90EB781E50D4A900B167E9 /* RoundedButton.swift in Sources */,
+				CC90EB781E50D4A900B167E9 /* RoundedViews.swift in Sources */,
 				CC2078C31E490C2B004E2030 /* TableViewCell.swift in Sources */,
 				CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */,
 				CC9501021E47A10200C87CCB /* JoinPetViewController.swift in Sources */,
