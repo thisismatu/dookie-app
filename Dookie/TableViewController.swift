@@ -31,20 +31,18 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        ref.queryLimited(toFirst: 1).observe(.value, with: { snapshot in
-            if !snapshot.exists() {
+        petRef.observe(.value, with: { snapshot in
+            if snapshot.exists() {
+                let name = snapshot.json["name"].stringValue
+                self.navigationItem.title = name
+                Defaults[.name] = name
+            } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
                     self.appDelegate?.leavePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
-        })
-
-        petRef.observe(.value, with: { snapshot in
-            let name = snapshot.json["name"].stringValue
-            self.navigationItem.title = name
-            Defaults[.name] = name
         })
 
         activitiesRef.observe(.value, with: { snapshot in
@@ -78,9 +76,9 @@ class TableViewController: UITableViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        connectedRef.removeAllObservers()
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
-        connectedRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
