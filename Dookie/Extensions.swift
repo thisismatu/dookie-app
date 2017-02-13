@@ -26,6 +26,12 @@ extension Date {
         formatter.timeStyle = time
         return formatter.string(from: self)
     }
+
+    public var hoursAgo: Int {
+        guard let minutesAgo = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute else { return 0 }
+        let hoursAgo = minutesAgo / 60
+        return hoursAgo
+    }
 }
 
 extension String {

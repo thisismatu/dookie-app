@@ -52,11 +52,9 @@ class TableViewController: UITableViewController {
             for child in snapshot.children {
                 guard let object = child as? FIRDataSnapshot else { return }
                 guard let activityItem = Activity.init(object) else { return }
-                let isDateInToday = Calendar.current.isDateInToday(activityItem.time)
-                switch isDateInToday {
-                case true:
+                if activityItem.time.hoursAgo < 24 {
                     tmp.append(activityItem)
-                case false:
+                } else {
                     self.activitiesRef.child(activityItem.key).removeValue()
                 }
             }
