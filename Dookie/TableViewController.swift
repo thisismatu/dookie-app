@@ -54,7 +54,7 @@ class TableViewController: UITableViewController {
                 guard let activityItem = Activity.init(object) else { return }
                 if Calendar.current.isDateInToday(activityItem.time) {
                     today.append(activityItem)
-                } else if Calendar.current.isDateInYesterday(activityItem.time) && activityItem.time.hoursAgo < 24 {
+                } else if Calendar.current.isDateInYesterday(activityItem.time) && activityItem.time.minutesAgo < 1440 {
                     yesterday.append(activityItem)
                 } else {
                     self.activitiesRef.child(activityItem.key).removeValue()
@@ -105,10 +105,10 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Yesterday"
+        switch section {
+        case 1: return "Yesterday"
+        default: return nil
         }
-        return nil
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -194,19 +194,14 @@ class TableViewController: UITableViewController {
 
     func shouldMerge(_ newType: String) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
-        let minago = Calendar.current.dateComponents([.minute], from: latest.time, to: Date()).minute ?? 0
-
         var tmp = latest.type
         tmp.append(newType)
         let listSet = Set(allowedToMerge)
         let findListSet = Set(tmp)
         let allElemsContained = findListSet.isSubset(of: listSet)
 
-        if minago < 20 && allElemsContained {
-            latest.ref?.updateChildValues([
-                "type": tmp,
-                "time": Date().toString
-            ])
+        if latest.time.minutesAgo < 20 && allElemsContained {
+            latest.ref?.updateChildValues(["type": tmp, "time": Date().toString])
             return true
         } else {
             return false
