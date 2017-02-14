@@ -25,6 +25,7 @@ class TableViewController: UITableViewController {
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.removeOldActivities), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.navigationItem.title = Defaults[.name]
     }
 
@@ -169,6 +170,12 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - View controller custom methods
+
+    func removeOldActivities() {
+        _ = activitiesArray.flatMap({ $0.filter { $0.time.minutesAgo > 1440 } }).map {
+            self.activitiesRef.child($0.key).removeValue()
+        }
+    }
 
     func showEmptyState(_ show: Bool) {
         if show {
