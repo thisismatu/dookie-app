@@ -25,7 +25,7 @@ class TableViewController: UITableViewController {
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        NotificationCenter.default.addObserver(self, selector: #selector(self.removeOldActivities), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.activitiesToRemove), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.navigationItem.title = Defaults[.name]
     }
 
@@ -50,19 +50,21 @@ class TableViewController: UITableViewController {
             var tmp = [[Activity]]()
 
             guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
-            let all = snapshots.flatMap({ Activity.init($0) })
-            let today = all.filter({ Calendar.current.isDateInToday($0.time) }).sorted {
-                $0.time > $1.time
-            }
-            let yesterday = all.filter({ Calendar.current.isDateInYesterday($0.time) }).sorted {
-                $0.time > $1.time
-            }
-            _ = all.filter({ $0.time.minutesAgo > 1440 }).map {
-                self.activitiesRef.child($0.key).removeValue()
-            }
+            let all = snapshots.flatMap { Activity.init($0) }
+            let today = all
+                .filter { Calendar.current.isDateInToday($0.time) }
+                .sorted { $0.time > $1.time }
+            let yesterday = all
+                .filter { Calendar.current.isDateInYesterday($0.time) }
+                .sorted { $0.time > $1.time }
+            self.removeOldActivities(from: all)
 
-            if !today.isEmpty { tmp.append(today) }
-            if !yesterday.isEmpty { tmp.append(yesterday) }
+            if !today.isEmpty {
+                tmp.append(today)
+            }
+            if !yesterday.isEmpty {
+                tmp.append(yesterday)
+            }
 
             self.activitiesArray = tmp
             self.showEmptyState(self.activitiesArray.isEmpty)
@@ -171,10 +173,15 @@ class TableViewController: UITableViewController {
 
     // MARK: - View controller custom methods
 
-    func removeOldActivities() {
-        _ = activitiesArray.flatMap({ $0.filter { $0.time.minutesAgo > 1440 } }).map {
-            self.activitiesRef.child($0.key).removeValue()
-        }
+    func activitiesToRemove() {
+        let all = activitiesArray.flatMap { $0 }
+        removeOldActivities(from: all)
+    }
+
+    func removeOldActivities(from array: [Activity]) {
+        _ = array
+            .filter { $0.time.minutesAgo > 1440 }
+            .map { self.activitiesRef.child($0.key).removeValue() }
     }
 
     func showEmptyState(_ show: Bool) {
