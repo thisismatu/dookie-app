@@ -33,7 +33,7 @@ class TableViewCell: UITableViewCell {
             indicator.layer.borderColor = UIColor.lightGray.cgColor
         }
 
-        if item.time.hoursAgo > 16 {
+        if Calendar.current.isDateInYesterday(item.time) {
             stackView.alpha = 0.5
         } else {
             stackView.alpha = 1.0

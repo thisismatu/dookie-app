@@ -16,7 +16,7 @@ class TableViewController: UITableViewController {
     var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
     var connectedRef: FIRDatabaseReference!
-    var activitiesArray = [Activity]()
+    var activitiesArray = [[Activity]]()
     var allowedToMerge = [":droplet:", ":shit:"]
 
     override func viewDidLoad() {
@@ -46,17 +46,29 @@ class TableViewController: UITableViewController {
         })
 
         activitiesRef.observe(.value, with: { snapshot in
-            var tmp = [Activity]()
+            var tmp = [[Activity]]()
+            var today = [Activity]()
+            var yesterday = [Activity]()
             for child in snapshot.children {
                 guard let object = child as? FIRDataSnapshot else { return }
                 guard let activityItem = Activity.init(object) else { return }
-                if activityItem.time.hoursAgo < 24 {
-                    tmp.append(activityItem)
+                if Calendar.current.isDateInToday(activityItem.time) {
+                    today.append(activityItem)
+                } else if Calendar.current.isDateInYesterday(activityItem.time) && activityItem.time.hoursAgo < 24 {
+                    yesterday.append(activityItem)
                 } else {
                     self.activitiesRef.child(activityItem.key).removeValue()
                 }
             }
-            self.activitiesArray = tmp.sorted(by: { $0.time > $1.time })
+            if !today.isEmpty {
+                today.sort(by: { $0.time > $1.time })
+                tmp.append(today)
+            }
+            if !yesterday.isEmpty {
+                yesterday.sort(by: { $0.time > $1.time })
+                tmp.append(yesterday)
+            }
+            self.activitiesArray = tmp
             self.showEmptyState(self.activitiesArray.isEmpty)
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
@@ -85,25 +97,41 @@ class TableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return activitiesArray.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activitiesArray.count
+        return activitiesArray[section].count
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Yesterday"
+        }
+        return nil
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.contentView.backgroundColor = .white
+        header.textLabel?.textColor = .lightGray
+        header.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        header.textLabel?.frame = header.frame
+        header.textLabel?.textAlignment = .center
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let activityItem = activitiesArray[indexPath.row]
+        let activityItem = activitiesArray[indexPath.section][indexPath.row]
 
         switch indexPath.row {
         case 0:
-            if self.activitiesArray.count == 1 {
+            if self.activitiesArray[indexPath.section].count == 1 {
                 cell.configure(activityItem, defaults: Defaults[.uid], hideTop: true, hideBottom: true)
             } else {
                 cell.configure(activityItem, defaults: Defaults[.uid], hideTop: true, hideBottom: false)
             }
-        case self.tableView(tableView, numberOfRowsInSection: 0) - 1:
+        case self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1:
             cell.configure(activityItem, defaults: Defaults[.uid], hideTop: false, hideBottom: true)
         default:
             cell.configure(activityItem, defaults: Defaults[.uid], hideTop: false, hideBottom: false)
@@ -118,13 +146,13 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "🗑") { (action, indexPath) in
-            let activityItem = self.activitiesArray[indexPath.row]
+            let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
             activityItem.ref?.removeValue()
         }
         delete.backgroundColor = .white
 
         let edit = UITableViewRowAction(style: .normal, title: "🕒") { (action, indexPath) in
-            let activityItem = self.activitiesArray[indexPath.row]
+            let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
             let alert = UIAlertController(title: "Change time", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
             let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
             let picker: UIDatePicker = UIDatePicker(frame: frame)
@@ -165,7 +193,7 @@ class TableViewController: UITableViewController {
     }
 
     func shouldMerge(_ newType: String) -> Bool {
-        guard let latest = activitiesArray.first else { return false }
+        guard let latest = activitiesArray.first?.first else { return false }
         let minago = Calendar.current.dateComponents([.minute], from: latest.time, to: Date()).minute ?? 0
 
         var tmp = latest.type
@@ -183,17 +211,6 @@ class TableViewController: UITableViewController {
         } else {
             return false
         }
-    }
-
-    func indexOfMessage(_ snapshot: FIRDataSnapshot) -> Int {
-        var index = 0
-        for activityItem in self.activitiesArray {
-            if snapshot.key == activityItem.key {
-                return index
-            }
-            index += 1
-        }
-        return -1
     }
 
     // MARK: - Actions
