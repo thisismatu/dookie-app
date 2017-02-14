@@ -21,9 +21,10 @@ struct Activity {
 
 extension Activity {
     init?(_ snapshot: FIRDataSnapshot) {
+        guard let date = snapshot.json["time"].stringValue.toDate else { return nil }
         self.ref = snapshot.ref
         self.key = snapshot.key
-        self.time = snapshot.json["time"].stringValue.toDate!
+        self.time = date
         self.type = snapshot.json["type"].arrayValue.map { $0.string ?? "" }
         self.uid = snapshot.json["uid"].stringValue
     }

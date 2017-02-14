@@ -47,27 +47,22 @@ class TableViewController: UITableViewController {
 
         activitiesRef.observe(.value, with: { snapshot in
             var tmp = [[Activity]]()
-            var today = [Activity]()
-            var yesterday = [Activity]()
-            for child in snapshot.children {
-                guard let object = child as? FIRDataSnapshot else { return }
-                guard let activityItem = Activity.init(object) else { return }
-                if Calendar.current.isDateInToday(activityItem.time) {
-                    today.append(activityItem)
-                } else if Calendar.current.isDateInYesterday(activityItem.time) && activityItem.time.minutesAgo < 1440 {
-                    yesterday.append(activityItem)
-                } else {
-                    self.activitiesRef.child(activityItem.key).removeValue()
-                }
+
+            guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
+            let all = snapshots.flatMap({ Activity.init($0) })
+            let today = all.filter({ Calendar.current.isDateInToday($0.time) }).sorted {
+                $0.time > $1.time
             }
-            if !today.isEmpty {
-                today.sort(by: { $0.time > $1.time })
-                tmp.append(today)
+            let yesterday = all.filter({ Calendar.current.isDateInYesterday($0.time) }).sorted {
+                $0.time > $1.time
             }
-            if !yesterday.isEmpty {
-                yesterday.sort(by: { $0.time > $1.time })
-                tmp.append(yesterday)
+            _ = all.filter({ $0.time.minutesAgo > 1440 }).map {
+                self.activitiesRef.child($0.key).removeValue()
             }
+
+            if !today.isEmpty { tmp.append(today) }
+            if !yesterday.isEmpty { tmp.append(yesterday) }
+
             self.activitiesArray = tmp
             self.showEmptyState(self.activitiesArray.isEmpty)
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
