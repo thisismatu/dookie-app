@@ -51,13 +51,13 @@ class TableViewController: UITableViewController {
 
             guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
             let all = snapshots.flatMap { Activity.init($0) }
-            let today = all
+            let new = self.removeOldActivities(from: all)
+            let today = new
                 .filter { Calendar.current.isDateInToday($0.time) }
                 .sorted { $0.time > $1.time }
-            let yesterday = all
+            let yesterday = new
                 .filter { Calendar.current.isDateInYesterday($0.time) }
                 .sorted { $0.time > $1.time }
-            self.removeOldActivities(from: all)
 
             if !today.isEmpty {
                 tmp.append(today)
@@ -175,13 +175,16 @@ class TableViewController: UITableViewController {
 
     func activitiesToRemove() {
         let all = activitiesArray.flatMap { $0 }
-        removeOldActivities(from: all)
+        _ = removeOldActivities(from: all)
     }
 
-    func removeOldActivities(from array: [Activity]) {
+    func removeOldActivities(from array: [Activity]) -> [Activity] {
         _ = array
             .filter { $0.time.minutesAgo > 1440 }
             .map { self.activitiesRef.child($0.key).removeValue() }
+        let new = array
+            .filter { $0.time.minutesAgo < 1440 }
+        return new
     }
 
     func showEmptyState(_ show: Bool) {
