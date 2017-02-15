@@ -59,13 +59,8 @@ class TableViewController: UITableViewController {
                 .filter { Calendar.current.isDateInYesterday($0.time) }
                 .sorted { $0.time > $1.time }
 
-            if !today.isEmpty {
-                tmp.append(today)
-            }
-            if !yesterday.isEmpty {
-                tmp.append(yesterday)
-            }
-
+            tmp.append(today)
+            tmp.append(yesterday)
             self.activitiesArray = tmp
             self.showEmptyState(self.activitiesArray.isEmpty)
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
@@ -104,7 +99,12 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 1: return "Yesterday"
+        case 0:
+            guard !activitiesArray[section].isEmpty else { return nil }
+            return "Today"
+        case 1:
+            guard !activitiesArray[section].isEmpty else { return nil }
+            return "Yesterday"
         default: return nil
         }
     }
