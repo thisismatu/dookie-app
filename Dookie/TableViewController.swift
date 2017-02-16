@@ -72,7 +72,10 @@ class TableViewController: UITableViewController {
             tmp.append(today)
             tmp.append(yesterday)
             self.activitiesArray = tmp
-            self.showEmptyState(self.activitiesArray.isEmpty)
+
+            let both = today.isEmpty && yesterday.isEmpty ? true : false
+            self.showEmptyState(both)
+
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
     }
