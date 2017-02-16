@@ -50,28 +50,9 @@ lane :beta do
     # version controll
     commit_version_bump
     add_git_tag
+    push_to_git_remote
 end
 
 lane :dryrun do
-    # check that repo is clean
-    ensure_git_status_clean
-
-    # increment build number
-    increment_build_number
-
-    # build your iOS app
-    gym(
-      workspace: "Dookie.xcworkspace",
-      scheme: "Dookie",
-      clean: true,
-      output_directory: "build",
-      export_method: "development"
-    )
-
-    # clean up folder
-    clean_build_artifacts
-
-    # version controll
-    commit_version_bump
-    add_git_tag
+    push_to_git_remote
 end
