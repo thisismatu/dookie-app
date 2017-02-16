@@ -27,11 +27,20 @@ class TableViewController: UITableViewController {
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.navigationItem.title = Defaults[.name]
-        showOfflineStatus()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        self.connectedRef.observe(.value, with: { snapshot in
+            switch snapshot.json {
+            case 0:
+                self.showOfflineStatus(true)
+            case 1:
+                self.showOfflineStatus(false)
+            default: return
+            }
+        })
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() {
@@ -65,19 +74,6 @@ class TableViewController: UITableViewController {
             self.activitiesArray = tmp
             self.showEmptyState(self.activitiesArray.isEmpty)
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
-        })
-
-        let deadline = DispatchTime.now()+5
-        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
-            self.connectedRef.observe(.value, with: { snapshot in
-                guard let connected = snapshot.value as? Bool, connected else {
-                    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
-                    self.navigationItem.prompt = "You're offline"
-                    return
-                }
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-                self.navigationItem.prompt = nil
-            })
         })
     }
 
@@ -177,7 +173,6 @@ class TableViewController: UITableViewController {
     func didBecomeActive() {
         let all = activitiesArray.flatMap { $0 }
         _ = removeOldActivities(from: all)
-        showOfflineStatus()
     }
 
     func removeOldActivities(from array: [Activity]) -> [Activity] {
@@ -189,19 +184,15 @@ class TableViewController: UITableViewController {
         return new
     }
 
-    func showOfflineStatus() {
-        let deadline = DispatchTime.now()+5
-        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
-            self.connectedRef.observe(.value, with: { snapshot in
-                guard let connected = snapshot.value as? Bool, connected else {
-                    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
-                    self.navigationItem.prompt = "You're offline"
-                    return
-                }
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-                self.navigationItem.prompt = nil
-            })
-        })
+    func showOfflineStatus(_ show: Bool) {
+        if show {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+            self.navigationItem.prompt = "You're offline"
+            return
+        } else {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+            self.navigationItem.prompt = nil
+        }
     }
 
     func showEmptyState(_ show: Bool) {
