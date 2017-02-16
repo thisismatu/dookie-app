@@ -25,8 +25,9 @@ class TableViewController: UITableViewController {
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        NotificationCenter.default.addObserver(self, selector: #selector(self.activitiesToRemove), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.navigationItem.title = Defaults[.name]
+        showOfflineStatus()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -173,9 +174,10 @@ class TableViewController: UITableViewController {
 
     // MARK: - View controller custom methods
 
-    func activitiesToRemove() {
+    func didBecomeActive() {
         let all = activitiesArray.flatMap { $0 }
         _ = removeOldActivities(from: all)
+        showOfflineStatus()
     }
 
     func removeOldActivities(from array: [Activity]) -> [Activity] {
@@ -185,6 +187,21 @@ class TableViewController: UITableViewController {
         let new = array
             .filter { $0.time.minutesAgo < 1440 }
         return new
+    }
+
+    func showOfflineStatus() {
+        let deadline = DispatchTime.now()+5
+        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+            self.connectedRef.observe(.value, with: { snapshot in
+                guard let connected = snapshot.value as? Bool, connected else {
+                    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+                    self.navigationItem.prompt = "You're offline"
+                    return
+                }
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+                self.navigationItem.prompt = nil
+            })
+        })
     }
 
     func showEmptyState(_ show: Bool) {
