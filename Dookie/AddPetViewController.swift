@@ -40,7 +40,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
         switch !name.isEmpty {
         case true:
-            ref.childByAutoId().child("pet").setValue(["name": name, "exists": true], withCompletionBlock: { (error, reference) in
+            ref.childByAutoId().child("pet").setValue(["name": name], withCompletionBlock: { (error, reference) in
                 if let secret = reference.parent?.key {
                     Defaults[.secret] = secret
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
