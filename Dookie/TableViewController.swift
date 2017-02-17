@@ -35,11 +35,14 @@ class TableViewController: UITableViewController {
         self.connectedRef.observe(.value, with: { snapshot in
             switch snapshot.json {
             case 0:
-                self.showConnectionStatus(0)
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+                self.navigationItem.prompt = "You're offline"
             case 1:
-                self.showConnectionStatus(1)
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+                self.navigationItem.prompt = nil
             default:
-                self.showConnectionStatus(2)
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+                self.navigationItem.prompt = "Connecting…"
             }
         })
 
@@ -186,20 +189,6 @@ class TableViewController: UITableViewController {
         let new = array
             .filter { $0.time.minutesAgo < 1440 }
         return new
-    }
-
-    func showConnectionStatus(_ status: Int) {
-        switch status {
-        case 0:
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
-            self.navigationItem.prompt = "You're offline"
-        case 1:
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-            self.navigationItem.prompt = nil
-        default:
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-            self.navigationItem.prompt = "Connecting…"
-        }
     }
 
     func showEmptyState(_ show: Bool) {
