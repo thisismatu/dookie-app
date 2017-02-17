@@ -82,6 +82,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 
     func copyPetId() {
         UIPasteboard.general.string = Defaults[.secret]
+        let alert = UIAlertController(title: "✔️\n\nCopied", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true) {
+            let deadline = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
 
     func openUrl(_ urlString: String) {
