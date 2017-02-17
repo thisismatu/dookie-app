@@ -129,7 +129,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func logoutButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Leave \(Defaults[.name])?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Leave", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave", style: .destructive, handler: { _ in
             self.appDelegate?.leavePet()
         }))
         self.present(alert, animated: true, completion: nil)
