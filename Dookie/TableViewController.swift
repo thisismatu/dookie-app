@@ -175,14 +175,14 @@ class TableViewController: UITableViewController {
         return [delete, edit]
     }
 
-    // MARK: - View controller custom methods
+    // MARK: - View controller private methods
 
-    func didBecomeActive() {
+    @objc private func didBecomeActive() {
         let all = activitiesArray.flatMap { $0 }
         _ = removeOldActivities(from: all)
     }
 
-    func removeOldActivities(from array: [Activity]) -> [Activity] {
+    private func removeOldActivities(from array: [Activity]) -> [Activity] {
         _ = array
             .filter { $0.time.minutesAgo > 1440 }
             .map { self.activitiesRef.child($0.key).removeValue() }
@@ -191,7 +191,7 @@ class TableViewController: UITableViewController {
         return new
     }
 
-    func showEmptyState(_ show: Bool) {
+    private func showEmptyState(_ show: Bool) {
         if show {
             let label = UILabel()
             label.frame.size.height = 48
@@ -208,7 +208,7 @@ class TableViewController: UITableViewController {
         }
     }
 
-    func shouldMerge(_ newType: String) -> Bool {
+    private func shouldMerge(_ newType: String) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
         var tmp = latest.type
         tmp.append(newType)

@@ -34,6 +34,8 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         addButtonPressed(self)
         return true
     }
+
+    // MARK: - Actions
     
     @IBAction func addButtonPressed(_ sender: Any) {
         guard let name = textField.text?.trimmingCharacters(in: .whitespaces) else { return }

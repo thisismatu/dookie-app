@@ -75,12 +75,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func getVersionNumber() -> String {
-        guard let number = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return "" }
-        return "Dookie v \(number)"
+    // MARK: - View controller private methods
+
+    private func getVersionNumber() -> String {
+        guard let number = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+              let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String  else { return "" }
+        return "Dookie v\(number) (\(build))"
     }
 
-    func copyPetId() {
+    private func copyPetId() {
         UIPasteboard.general.string = Defaults[.secret]
         let alert = UIAlertController(title: "✔️\n\nCopied", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true) {
@@ -91,20 +94,20 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
-    func openUrl(_ urlString: String) {
+    private func openUrl(_ urlString: String) {
         guard let url = URL(string: urlString) else { return }
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
     }
 
-    func setButtonTitles(_ name: String) {
+    private func setButtonTitles(_ name: String) {
         renameCell.textLabel?.text = "\u{0270f}    Rename \(name)"
         logoutButton.setTitle("Leave \(name)", for: .normal)
         deleteButton.setTitle("Delete \(name)", for: .normal)
     }
 
-    func showRenamePet() {
+    private func showRenamePet() {
         let alert = UIAlertController(title: "Rename \(Defaults[.name])", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             let textField = alert.textFields![0] as UITextField
@@ -120,6 +123,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+
+    // MARK: - Actions
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Leave \(Defaults[.name])?", message: nil, preferredStyle: .actionSheet)

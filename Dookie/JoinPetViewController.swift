@@ -37,7 +37,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    func checkPasteboard() {
+    @objc private func checkPasteboard() {
         let allowed = CharacterSet(charactersIn: "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz")
         if let pasteboard =  UIPasteboard.general.string {
             if pasteboard.rangeOfCharacter(from: allowed.inverted) == nil && pasteboard.characters.count == 20 {
