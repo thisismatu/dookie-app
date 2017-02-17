@@ -35,10 +35,11 @@ class TableViewController: UITableViewController {
         self.connectedRef.observe(.value, with: { snapshot in
             switch snapshot.json {
             case 0:
-                self.showOfflineStatus(true)
+                self.showConnectionStatus(0)
             case 1:
-                self.showOfflineStatus(false)
-            default: return
+                self.showConnectionStatus(1)
+            default:
+                self.showConnectionStatus(2)
             }
         })
 
@@ -187,14 +188,17 @@ class TableViewController: UITableViewController {
         return new
     }
 
-    func showOfflineStatus(_ show: Bool) {
-        if show {
+    func showConnectionStatus(_ status: Int) {
+        switch status {
+        case 0:
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
             self.navigationItem.prompt = "You're offline"
-            return
-        } else {
+        case 1:
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
             self.navigationItem.prompt = nil
+        default:
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+            self.navigationItem.prompt = "Connecting…"
         }
     }
 
