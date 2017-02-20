@@ -164,7 +164,7 @@ class TableViewController: UITableViewController {
             alert.view.addSubview(picker)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-                if !self.mergeWithPrevious(activityItem, for: indexPath) {
+                if !self.mergeWithNearby(activityItem, for: indexPath, at: picker.date) {
                     activityItem.ref?.updateChildValues(["time": picker.date.toString])
                 }
             }))
@@ -210,13 +210,10 @@ class TableViewController: UITableViewController {
         }
     }
 
-    private func mergeWithFirst(_ newType: String) -> Bool {
+    private func mergeWithLatest(_ newType: [String]) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
-        var tmp = latest.type
-        tmp.append(newType)
-        let listSet = Set(allowedToMerge)
-        let findListSet = Set(tmp)
-        let allElemsContained = findListSet.isSubset(of: listSet)
+        let tmp = latest.type + newType
+        let allElemsContained = Set(tmp).isSubset(of: Set(allowedToMerge))
 
         if latest.time.minutesAgo < 30 && allElemsContained {
             latest.ref?.updateChildValues(["type": tmp, "time": Date().toString])
@@ -226,23 +223,16 @@ class TableViewController: UITableViewController {
         }
     }
 
-    private func mergeWithPrevious(_ current: Activity, for indexPath: IndexPath) -> Bool {
-        let last = tableView.numberOfRows(inSection: indexPath.section)-1
-        if indexPath.row != last {
-            let prev = activitiesArray[indexPath.section][indexPath.row+1]
-            var tmp = prev.type
-            tmp.append(contentsOf: current.type)
-            let listSet = Set(allowedToMerge)
-            let findListSet = Set(tmp)
-            let allElemsContained = findListSet.isSubset(of: listSet)
+    private func mergeWithNearby(_ current: Activity, for indexPath: IndexPath, at date: Date) -> Bool {
+        let nearby = activitiesArray[indexPath.section]
+            .filter { $0.key != current.key }
+            .filter { date.minutesAgo-30...date.minutesAgo+30 ~= $0.time.minutesAgo }
+            .filter { Set($0.type + current.type).isSubset(of: Set(allowedToMerge)) }
 
-            if prev.time.minutesAgo - current.time.minutesAgo < 30 && allElemsContained {
-                prev.ref?.updateChildValues(["type": tmp])
-                current.ref?.removeValue()
-                return true
-            } else {
-                return false
-            }
+        if let first = nearby.first {
+            first.ref?.updateChildValues(["type": first.type + current.type ])
+            current.ref?.removeValue()
+            return true
         } else {
             return false
         }
@@ -253,33 +243,33 @@ class TableViewController: UITableViewController {
     @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
 
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
-        let type = ":tennis:"
-        if !mergeWithFirst(type) {
-            let activityItem = Activity(time: Date(), type: [type])
+        let type = [":tennis:"]
+        if !mergeWithLatest(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
-        let type = ":shit:"
-        if !mergeWithFirst(type) {
-            let activityItem = Activity(time: Date(), type: [type])
+        let type = [":shit:"]
+        if !mergeWithLatest(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonPee(_ sender: UIBarButtonItem) {
-        let type = ":droplet:"
-        if !mergeWithFirst(type) {
-            let activityItem = Activity(time: Date(), type: [type])
+        let type = [":droplet:"]
+        if !mergeWithLatest(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
     @IBAction func buttonFood(_ sender: UIBarButtonItem) {
-        let type = ":stew:"
-        if !mergeWithFirst(type) {
-            let activityItem = Activity(time: Date(), type: [type])
+        let type = [":stew:"]
+        if !mergeWithLatest(type) {
+            let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
