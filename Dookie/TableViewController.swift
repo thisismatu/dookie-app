@@ -164,7 +164,9 @@ class TableViewController: UITableViewController {
             alert.view.addSubview(picker)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-                activityItem.ref?.updateChildValues(["time": picker.date.toString])
+                if !self.mergeWithPrevious(activityItem, for: indexPath) {
+                    activityItem.ref?.updateChildValues(["time": picker.date.toString])
+                }
             }))
             self.present(alert, animated: true, completion: { _ in
                 self.tableView.setEditing(false, animated: true)
@@ -208,7 +210,7 @@ class TableViewController: UITableViewController {
         }
     }
 
-    private func shouldMerge(_ newType: String) -> Bool {
+    private func mergeWithFirst(_ newType: String) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
         var tmp = latest.type
         tmp.append(newType)
@@ -224,13 +226,35 @@ class TableViewController: UITableViewController {
         }
     }
 
+    private func mergeWithPrevious(_ current: Activity, for indexPath: IndexPath) -> Bool {
+        let last = tableView.numberOfRows(inSection: indexPath.section)-1
+        if indexPath.row != last {
+            let prev = activitiesArray[indexPath.section][indexPath.row+1]
+            var tmp = prev.type
+            tmp.append(contentsOf: current.type)
+            let listSet = Set(allowedToMerge)
+            let findListSet = Set(tmp)
+            let allElemsContained = findListSet.isSubset(of: listSet)
+
+            if prev.time.minutesAgo < 30 && allElemsContained {
+                prev.ref?.updateChildValues(["type": tmp, "time": Date().toString])
+                current.ref?.removeValue()
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
     // MARK: - Actions
 
     @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
 
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
         let type = ":tennis:"
-        if !shouldMerge(type) {
+        if !mergeWithFirst(type) {
             let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
@@ -238,7 +262,7 @@ class TableViewController: UITableViewController {
 
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
         let type = ":shit:"
-        if !shouldMerge(type) {
+        if !mergeWithFirst(type) {
             let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
@@ -246,7 +270,7 @@ class TableViewController: UITableViewController {
 
     @IBAction func buttonPee(_ sender: UIBarButtonItem) {
         let type = ":droplet:"
-        if !shouldMerge(type) {
+        if !mergeWithFirst(type) {
             let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
@@ -254,7 +278,7 @@ class TableViewController: UITableViewController {
 
     @IBAction func buttonFood(_ sender: UIBarButtonItem) {
         let type = ":stew:"
-        if !shouldMerge(type) {
+        if !mergeWithFirst(type) {
             let activityItem = Activity(time: Date(), type: [type])
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
         }
