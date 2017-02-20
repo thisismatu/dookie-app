@@ -236,8 +236,8 @@ class TableViewController: UITableViewController {
             let findListSet = Set(tmp)
             let allElemsContained = findListSet.isSubset(of: listSet)
 
-            if prev.time.minutesAgo < 30 && allElemsContained {
-                prev.ref?.updateChildValues(["type": tmp, "time": Date().toString])
+            if prev.time.minutesAgo - current.time.minutesAgo < 30 && allElemsContained {
+                prev.ref?.updateChildValues(["type": tmp])
                 current.ref?.removeValue()
                 return true
             } else {
