@@ -38,11 +38,9 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc private func checkPasteboard() {
-        let allowed = CharacterSet(charactersIn: "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz")
-        if let pasteboard =  UIPasteboard.general.string {
-            if pasteboard.rangeOfCharacter(from: allowed.inverted) == nil && pasteboard.characters.count == 20 {
-                textField.text = pasteboard
-            }
+        guard let pasteboard = UIPasteboard.general.string else { return }
+        if pasteboard.isFirebaseUID {
+            textField.text = pasteboard
         }
     }
 
@@ -60,7 +58,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
                         _ = self.navigationController?.popToRootViewController(animated: false)
                     }
                 } else {
-                    let alert = UIAlertController(title: "Couldn't find this pet", message: "The ID you entered doesn't match any existing pet. Please check that you've pasted the whole ID.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Couldn't find this pet", message: "The ID you entered doesn't match any existing pet. Please check that you've entered the whole ID.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
