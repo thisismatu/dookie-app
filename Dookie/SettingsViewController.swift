@@ -22,15 +22,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
-    @IBOutlet weak var logoutButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var leaveCell: UITableViewCell!
+    @IBOutlet weak var deleteCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
-        setButtonTitles(Defaults[.name])
+        setCellTitles(Defaults[.name])
         versionLabel.text = getVersionNumber()
     }
 
@@ -38,7 +38,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewWillAppear(animated)
         petRef.observe(.value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
-            self.setButtonTitles(name)
+            self.setCellTitles(name)
             Defaults[.name] = name
         })
     }
@@ -62,6 +62,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             openUrl(appstoreUrl)
         case feedbackCell:
             sendFeedbackEmail()
+        case leaveCell:
+            leavePet()
+        case deleteCell:
+            deletePet()
         default: break
         }
 
@@ -134,10 +138,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         }
     }
 
-    private func setButtonTitles(_ name: String) {
-        renameCell.textLabel?.text = "\u{0270f}    Rename \(name)"
-        logoutButton.setTitle("Leave \(name)", for: .normal)
-        deleteButton.setTitle("Delete \(name)", for: .normal)
+    private func setCellTitles(_ name: String) {
+        renameCell.textLabel?.text = "✏️    Rename \(name)"
+        leaveCell.textLabel?.text = "🚪    Leave \(name)"
+        deleteCell.textLabel?.text = "🗑    Delete \(name)"
     }
 
     private func showRenamePet() {
@@ -157,9 +161,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.present(alert, animated: true, completion: nil)
     }
 
-    // MARK: - Actions
-
-    @IBAction func logoutButtonPressed(_ sender: Any) {
+    private func leavePet() {
         let alert = UIAlertController(title: "Leave \(Defaults[.name])?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Leave", style: .destructive, handler: { _ in
@@ -167,7 +169,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    @IBAction func deleteButtonPressed(_ sender: Any) {
+
+    private func deletePet() {
         let alert = UIAlertController(title: "Delete \(Defaults[.name])?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
