@@ -9,20 +9,13 @@
 import UIKit
 import SwiftyUserDefaults
 import Firebase
+import MessageUI
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
-    let feedbackUrl = "mailto:mathias.lindholm@gmail.com?subject=Dookie%20Feedback"
-    var inviteUrl: String {
-        let subject = "Join \(Defaults[.name]) on Dookie"
-        let body = "Dookie is the easiest way to keep track of your pet's eating and walking habits. Get a clear overview of what's happened and if you need to take your pet for a walk. Get the app at <a href='https://dookie.me'>dookie.me</a>.\n\n\n<a href='dookie://\(Defaults[.secret])' style='background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 10px 20px; text-decoration: none; border-radius: 9999px;'>Join \(Defaults[.name]) on Dookie</a>\n\n\n<span style='color: grey'>If the link isn't working, copy the Pet ID for manual entry: <strong>\(Defaults[.secret])</strong></span>\n\nHappy tracking!\n\n\u{1f436}"
-        guard let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return "" }
-        return "mailto:?subject=\(encodedSubject)&body=\(encodedBody)"
-    }
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var petIdCell: UITableViewCell!
@@ -64,18 +57,58 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         case petIdCell:
             copyPetId()
         case inviteCell:
-            openUrl(inviteUrl)
+            sendInviteEmail()
         case rateCell:
             openUrl(appstoreUrl)
         case feedbackCell:
-            openUrl(feedbackUrl)
+            sendFeedbackEmail()
         default: break
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    // MARK: - MFMailComposeViewController delegate
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+
     // MARK: - View controller private methods
+
+    private func sendFeedbackEmail() {
+        let subject: String = "Dookie Feedback"
+        let recipient: [String] = ["mathias.lindholm@gmail.com"]
+        configureEmail(subject, body: "", recipients: recipient, html: false)
+    }
+
+    private func sendInviteEmail() {
+        let subject: String = "Join \(Defaults[.name]) on Dookie 🐶"
+        let bodyArray: [String] = [
+            "<p>Hello,</p>",
+            "<p>I'd like you to join \(Defaults[.name]) on <a href='https://dookie.me'>Dookie</a>.</p>",
+            "<a href='dookie://\(Defaults[.secret])' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(Defaults[.name]) on Dookie</a>",
+            "<p>Dookie is the easiest way to keep track of your pet's eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
+            "<p>Happy tracking!</p>",
+            "<p>🐶</p>",
+            "<p style='color: #999999;'>If the link isn't working, copy this code for manual entry: <strong>\(Defaults[.secret])</strong></p>"
+        ]
+        configureEmail(subject, body: bodyArray.joined(), recipients: [], html: true)
+    }
+
+    private func configureEmail(_ subject: String, body: String, recipients: [String], html: Bool) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(recipients)
+            mail.setSubject(subject)
+            mail.setMessageBody(body, isHTML: html)
+            present(mail, animated: true)
+        } else {
+            print("Mail services are not available")
+            return
+        }
+    }
 
     private func getVersionNumber() -> String {
         guard let number = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
