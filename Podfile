@@ -12,7 +12,7 @@ target 'Dookie' do
   pod 'SwiftyJSON'
   pod 'SwiftyUserDefaults'
   pod 'Fabric'
-  pod 'Crashlytics'
+  pod 'Crashlytics', '~>  3.8'
   pod 'Emoji-swift'
 
 end
