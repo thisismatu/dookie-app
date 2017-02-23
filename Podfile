@@ -11,8 +11,6 @@ target 'Dookie' do
   pod 'Firebase/Auth'
   pod 'SwiftyJSON'
   pod 'SwiftyUserDefaults'
-  pod 'Fabric'
-  pod 'Crashlytics', '~>  3.8'
   pod 'Emoji-swift'
 
 end

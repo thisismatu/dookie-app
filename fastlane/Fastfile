@@ -6,53 +6,13 @@
 # Change the syntax highlighting to Ruby
 # All lines starting with a # are ignored when running `fastlane`
 
-# If you want to automatically update fastlane if a new version is available:
-# update_fastlane
-
-# This is the minimum version number required.
-# Update this, if you use features of a newer version
 fastlane_version "2.14.2"
-
 default_platform :ios
+skip_docs
 
 # Fastfile actions accept additional configuration, but
 # don't worry, fastlane will prompt you for required
 # info which you can add here later
-
-lane :beta_crashlytics do
-    # check that repo is clean
-    ensure_git_status_clean
-
-    # increment build number
-    increment_build_number
-
-    # build your iOS app
-    gym(
-        clean: true,
-        export_method: "development",
-        output_directory: "build",
-        scheme: "Dookie",
-        silent: true,
-        workspace: "Dookie.xcworkspace"
-    )
-
-    # upload to Beta by Crashlytics
-    crashlytics(
-        api_token: "18b7be9fd8d6f74333326228f9b7b17beb0e6a5c",
-        build_secret: "1843997cd076553a4e3df764b4d845f5f0ebee069aa40b5c31973bcde60aaefa",
-        groups: "testers-1",
-        notes: changelog_from_git_commits(pretty: "• %s"),
-        notifications: true
-    )
-
-    # clean up folder
-    clean_build_artifacts
-
-    # version controll
-    commit_version_bump
-    add_git_tag
-    push_to_git_remote
-end
 
 lane :beta do
     # check that repo is clean
