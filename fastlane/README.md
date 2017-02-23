@@ -33,9 +33,9 @@ xcode-select --install
 fastlane beta
 ```
 
-### dryrun
+### tf
 ```
-fastlane dryrun
+fastlane tf
 ```
 
 
