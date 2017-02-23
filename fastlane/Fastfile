@@ -19,7 +19,7 @@ default_platform :ios
 # don't worry, fastlane will prompt you for required
 # info which you can add here later
 
-lane :beta do
+lane :beta_crashlytics do
     # check that repo is clean
     ensure_git_status_clean
 
@@ -54,7 +54,7 @@ lane :beta do
     push_to_git_remote
 end
 
-lane :tf do
+lane :beta do
     # check that repo is clean
     ensure_git_status_clean
 
