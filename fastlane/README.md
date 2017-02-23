@@ -28,14 +28,14 @@ xcode-select --install
 </tr>
 </table>
 # Available Actions
+### beta_crashlytics
+```
+fastlane beta_crashlytics
+```
+
 ### beta
 ```
 fastlane beta
-```
-
-### tf
-```
-fastlane tf
 ```
 
 
