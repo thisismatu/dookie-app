@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  ActivityTableViewCell.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 06.02.2017.
@@ -9,7 +9,7 @@
 import UIKit
 import Emoji
 
-class TableViewCell: UITableViewCell {
+class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!

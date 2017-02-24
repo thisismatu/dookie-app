@@ -15,7 +15,7 @@
 		4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */; };
 		4A3E32761E427670004FA9BD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E32751E427670004FA9BD /* Activity.swift */; };
 		ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */; };
-		CC2078C31E490C2B004E2030 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2078C21E490C2B004E2030 /* TableViewCell.swift */; };
+		CC2078C31E490C2B004E2030 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */; };
 		CC7E38981E4E6412001B6027 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7E38971E4E6412001B6027 /* SettingsViewController.swift */; };
 		CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */; };
 		CC9501021E47A10200C87CCB /* JoinPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9501011E47A10200C87CCB /* JoinPetViewController.swift */; };
@@ -39,7 +39,7 @@
 		4A3E32751E427670004FA9BD /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.debug.xcconfig"; sourceTree = "<group>"; };
-		CC2078C21E490C2B004E2030 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		CC7E38971E4E6412001B6027 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
 		CC9501011E47A10200C87CCB /* JoinPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPetViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		4A0AB1DD1E5365FC009F4F18 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CC2078C21E490C2B004E2030 /* TableViewCell.swift */,
+				CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */,
 				4A0AB1E21E5366C6009F4F18 /* RoundButton.swift */,
 				4A0AB1E41E5366D8009F4F18 /* RoundBorderView.swift */,
 				CC95E6491E3FB28F001C93C9 /* Main.storyboard */,
@@ -295,7 +295,7 @@
 				4A0AB1EB1E5367A2009F4F18 /* FirebaseExtension.swift in Sources */,
 				4A0AB1E71E536746009F4F18 /* DateExtension.swift in Sources */,
 				4A0AB1E51E5366D8009F4F18 /* RoundBorderView.swift in Sources */,
-				CC2078C31E490C2B004E2030 /* TableViewCell.swift in Sources */,
+				CC2078C31E490C2B004E2030 /* ActivityTableViewCell.swift in Sources */,
 				CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */,
 				4A0AB1E31E5366C6009F4F18 /* RoundButton.swift in Sources */,
 				CC9501021E47A10200C87CCB /* JoinPetViewController.swift in Sources */,
