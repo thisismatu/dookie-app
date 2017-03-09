@@ -11,11 +11,12 @@ import SwiftyUserDefaults
 import Firebase
 import MessageUI
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
+    let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -24,11 +25,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var petIdButton: UIButton!
+    @IBOutlet weak var petImage: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
+
+        imagePicker.delegate = self
 
         if let nav = navigationController {
             let height = nav.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
@@ -86,6 +90,20 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         dismiss(animated: true, completion: nil)
     }
 
+    // MARK: - UIImagePickerControllerDelegate Methods
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            petImage.contentMode = .scaleAspectFill
+            petImage.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
     // MARK: - Actions
 
     @IBAction func leaveButtonPressed(_ sender: UIBarButtonItem) {
@@ -95,6 +113,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBAction func petIdButtonPressed(_ sender: UIButton) {
         self.copyPetId()
     }
+
+    @IBAction func petImagePressed(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+
     // MARK: - View controller private methods
 
     private func sendFeedbackEmail() {
