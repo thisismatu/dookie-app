@@ -30,7 +30,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
-        setCellTitles(Defaults[.name])
         versionLabel.text = getVersionNumber()
     }
 
@@ -38,7 +37,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewWillAppear(animated)
         petRef.observe(.value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
-            self.setCellTitles(name)
             Defaults[.name] = name
         })
     }
@@ -46,6 +44,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     override func viewWillDisappear(_ animated: Bool) {
         ref.removeAllObservers()
         petRef.removeAllObservers()
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        header.textLabel?.text = header.textLabel?.text?.capitalized
+        header.textLabel?.frame = header.frame
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -136,12 +141,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
-    }
-
-    private func setCellTitles(_ name: String) {
-        renameCell.textLabel?.text = "✏️    Rename \(name)"
-        leaveCell.textLabel?.text = "🚪    Leave \(name)"
-        deleteCell.textLabel?.text = "🗑    Delete \(name)"
     }
 
     private func showRenamePet() {
