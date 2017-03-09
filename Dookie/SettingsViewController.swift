@@ -22,8 +22,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
-    @IBOutlet weak var leaveCell: UITableViewCell!
-    @IBOutlet weak var deleteCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
@@ -67,10 +65,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             openUrl(appstoreUrl)
         case feedbackCell:
             sendFeedbackEmail()
-        case leaveCell:
-            leavePet()
-        case deleteCell:
-            deletePet()
         default: break
         }
 
@@ -81,6 +75,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - Actions
+
+    @IBAction func leaveButtonPressed(_ sender: UIBarButtonItem) {
+        self.leavePet()
     }
 
     // MARK: - View controller private methods
@@ -161,10 +161,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePet() {
-        let alert = UIAlertController(title: "Leave \(Defaults[.name])?", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Leave", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave \(Defaults[.name])", style: .default, handler: { _ in
             self.appDelegate?.leavePet()
+        }))
+        alert.addAction(UIAlertAction(title: "Delete \(Defaults[.name])", style: .destructive, handler: { _ in
+            self.deletePet()
         }))
         self.present(alert, animated: true, completion: nil)
     }
