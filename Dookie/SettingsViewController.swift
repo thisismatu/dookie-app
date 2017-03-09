@@ -29,6 +29,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
+
+        if let nav = navigationController {
+            let height = nav.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
+            tableView.contentInset = UIEdgeInsetsMake(-height,0,0,0)
+            nav.navigationBar.isTranslucent = true
+        }
+
         petNameLabel.text = Defaults[.name]
         petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
