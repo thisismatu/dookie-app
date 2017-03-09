@@ -196,11 +196,11 @@
                                         <rect key="frame" x="0.0" y="16" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="✏️    Rename PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dd2-zS-ccy">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -213,11 +213,11 @@
                                         <rect key="frame" x="0.0" y="64" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="19q-x5-0jC" id="Htl-zb-9LT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📎    Copy Pet ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6T3-eg-RIP">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -230,11 +230,11 @@
                                         <rect key="frame" x="0.0" y="112" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="✉️    Invite Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="d8E-mS-JyU">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -247,11 +247,11 @@
                                         <rect key="frame" x="0.0" y="160" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="❤️    Rate Dookie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="kit-xZ-7ij">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -264,11 +264,11 @@
                                         <rect key="frame" x="0.0" y="208" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="📬    Send Feedaback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="Kiw-4d-iSt">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -281,11 +281,11 @@
                                         <rect key="frame" x="0.0" y="256" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uq3-SA-591" id="txO-o9-1Lp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="🚪    Leave PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="Ctt-Qq-QSR">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -298,11 +298,11 @@
                                         <rect key="frame" x="0.0" y="304" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fce-vG-CmV" id="fKs-kZ-NWd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="🗑    Delete PETNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="b3v-MZ-UXp">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="47"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -391,7 +391,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-rP-qmg" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="166.5" width="311" height="48"/>
-                                        <color key="backgroundColor" red="0.0" green="0.52156865600000002" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.11764705882352941" green="0.53333333333333333" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Gwz-AW-Ojc"/>
                                         </constraints>
@@ -417,7 +417,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-D8-syY" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="230.5" width="311" height="48"/>
-                                        <color key="backgroundColor" red="0.33725491169999999" green="0.57254904510000004" blue="0.1411764771" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.48627450980392156" green="0.70196078431372544" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Hgz-Rv-d8z"/>
                                         </constraints>
@@ -436,21 +436,19 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
-                                <rect key="frame" x="-52.5" y="507" width="480" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="n88-Vb-pMQ"/>
-                                    <constraint firstAttribute="width" constant="480" id="ves-tA-33N"/>
-                                </constraints>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
+                                <rect key="frame" x="0.0" y="533.5" width="375" height="133.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VLK-xw-mV7" firstAttribute="centerX" secondItem="oLg-gt-Qd4" secondAttribute="centerX" id="75L-7p-wLd"/>
+                            <constraint firstAttribute="trailing" secondItem="VLK-xw-mV7" secondAttribute="trailing" id="FW1-uh-pKv"/>
+                            <constraint firstItem="VLK-xw-mV7" firstAttribute="height" secondItem="oLg-gt-Qd4" secondAttribute="height" multiplier="0.2" id="Sfh-la-l8I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="97w-tG-dXL" secondAttribute="trailing" constant="16" id="T4e-wx-1Bk"/>
                             <constraint firstItem="97w-tG-dXL" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leadingMargin" constant="16" id="Vsc-aP-zFc"/>
                             <constraint firstItem="mIx-A4-xTB" firstAttribute="top" secondItem="VLK-xw-mV7" secondAttribute="bottom" id="iht-if-EEG"/>
                             <constraint firstItem="97w-tG-dXL" firstAttribute="centerY" secondItem="oLg-gt-Qd4" secondAttribute="centerY" multiplier="0.75" id="oPd-WQ-dXQ"/>
+                            <constraint firstItem="VLK-xw-mV7" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leading" id="yCI-aM-WHn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kfd-SG-ok6"/>
@@ -502,7 +500,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rI-MG-EH2" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="134" width="311" height="48"/>
-                                        <color key="backgroundColor" red="0.0" green="0.5215686559677124" blue="0.88627451658248901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.11764705882352941" green="0.53333333333333333" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="31E-0B-13R"/>
                                         </constraints>
@@ -562,7 +560,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The person who added the pet in the first place can give you the Pet ID. If you both have lost it, just add a new pet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The person who created the pet can give you the Pet ID. If you both have lost it, just add a new pet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
                                         <rect key="frame" x="0.0" y="64" width="311" height="58"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -577,7 +575,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-7j-0Fr" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="154" width="311" height="48"/>
-                                        <color key="backgroundColor" red="0.33725491166114807" green="0.57254904508590698" blue="0.14117647707462311" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.48627450980392156" green="0.70196078431372544" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="agW-Kk-2mn"/>
                                         </constraints>
@@ -673,7 +671,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="art_landscape" width="480" height="149"/>
+        <image name="art_landscape" width="600" height="160"/>
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_cog" width="24" height="24"/>
     </resources>

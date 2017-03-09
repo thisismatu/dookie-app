@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "art_landscape.png",
+      "filename" : "art_landscape@1x.png",
       "scale" : "1x"
     },
     {
