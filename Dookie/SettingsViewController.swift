@@ -18,16 +18,19 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
 
     @IBOutlet weak var renameCell: UITableViewCell!
-    @IBOutlet weak var petIdCell: UITableViewCell!
-    @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
+    @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var petNameLabel: UILabel!
+    @IBOutlet weak var petIdButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
+        petNameLabel.text = Defaults[.name]
+        petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
     }
 
@@ -35,6 +38,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewWillAppear(animated)
         petRef.observe(.value, with: { snapshot in
             let name = snapshot.json["name"].stringValue
+            self.petNameLabel.text = name
             Defaults[.name] = name
         })
     }
@@ -57,8 +61,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         switch cell {
         case renameCell:
             showRenamePet()
-        case petIdCell:
-            copyPetId()
         case inviteCell:
             sendInviteEmail()
         case rateCell:
@@ -83,6 +85,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.leavePet()
     }
 
+    @IBAction func petIdButtonPressed(_ sender: UIButton) {
+        self.copyPetId()
+    }
     // MARK: - View controller private methods
 
     private func sendFeedbackEmail() {
@@ -127,7 +132,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     private func copyPetId() {
         UIPasteboard.general.string = Defaults[.secret]
-        let alert = UIAlertController(title: "✔️\n\nCopied", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "✔️\n\nPet ID Copied", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true) {
             let deadline = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
