@@ -19,6 +19,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     let emojiView = ISEmojiView()
+    private let tableHeaderHeight: CGFloat = 200.0
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -28,17 +29,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var petIdButton: UIButton!
     @IBOutlet weak var petEmojiTextField: UITextField!
+    @IBOutlet weak var headerView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
-
-        if let nav = navigationController {
-            let height = nav.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
-            tableView.contentInset = UIEdgeInsetsMake(-height,0,0,0)
-            nav.navigationBar.isTranslucent = true
-        }
 
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .groupTableViewBackground
@@ -49,6 +45,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         petNameLabel.text = Defaults[.name]
         petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
+
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
+        tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
+        navigationController?.navigationBar.isTranslucent = true
+
+        updateHeaderView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +70,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         ref.removeAllObservers()
         petRef.removeAllObservers()
     }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateHeaderView()
+    }
+
+    // MARK: - Table view
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
@@ -125,6 +136,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     // MARK: - View controller private methods
+
+    private func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
+        if tableView.contentOffset.y < -tableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+    }
 
     private func sendFeedbackEmail() {
         let subject: String = "Dookie Feedback"

@@ -91,7 +91,7 @@ class TableViewController: UITableViewController {
         ref.removeAllObservers()
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table view
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return activitiesArray.count
