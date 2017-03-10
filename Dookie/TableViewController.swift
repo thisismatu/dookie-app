@@ -35,7 +35,7 @@ class TableViewController: UITableViewController {
         self.connectedRef.observe(.value, with: { snapshot in
             switch snapshot.json {
             case 0:
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.dookieGray]
                 self.navigationItem.prompt = "You're offline"
             case 1:
                 self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]

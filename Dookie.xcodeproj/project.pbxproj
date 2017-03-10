@@ -15,6 +15,7 @@
 		4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */; };
 		4A3E32761E427670004FA9BD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E32751E427670004FA9BD /* Activity.swift */; };
 		ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */; };
+		CC1085CC1E732F3600C4008B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1085CB1E732F3600C4008B /* UIColorExtension.swift */; };
 		CC2078C31E490C2B004E2030 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */; };
 		CC7E38981E4E6412001B6027 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7E38971E4E6412001B6027 /* SettingsViewController.swift */; };
 		CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */; };
@@ -39,6 +40,7 @@
 		4A3E32751E427670004FA9BD /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.debug.xcconfig"; sourceTree = "<group>"; };
+		CC1085CB1E732F3600C4008B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		CC7E38971E4E6412001B6027 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CC9500FF1E47A0F200C87CCB /* AddPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */,
+				CC1085CB1E732F3600C4008B /* UIColorExtension.swift */,
 				4A0AB1EA1E5367A2009F4F18 /* FirebaseExtension.swift */,
 				4A0AB1E81E536775009F4F18 /* StringExtension.swift */,
 				4A0AB1E61E536746009F4F18 /* DateExtension.swift */,
@@ -294,6 +297,7 @@
 			files = (
 				4A0AB1EB1E5367A2009F4F18 /* FirebaseExtension.swift in Sources */,
 				4A0AB1E71E536746009F4F18 /* DateExtension.swift in Sources */,
+				CC1085CC1E732F3600C4008B /* UIColorExtension.swift in Sources */,
 				4A0AB1E51E5366D8009F4F18 /* RoundBorderView.swift in Sources */,
 				CC2078C31E490C2B004E2030 /* ActivityTableViewCell.swift in Sources */,
 				CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */,

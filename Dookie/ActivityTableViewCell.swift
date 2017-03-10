@@ -28,9 +28,9 @@ class ActivityTableViewCell: UITableViewCell {
         lineBottom.isHidden = hideBottom
 
         if item.uid == defaults {
-            indicator.layer.borderColor = tintColor.cgColor
+            indicator.layer.borderColor = UIColor.dookieBlue.cgColor
         } else {
-            indicator.layer.borderColor = UIColor.lightGray.cgColor
+            indicator.layer.borderColor = UIColor.dookieLightGray.cgColor
         }
 
         if Calendar.current.isDateInYesterday(item.time) {

@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
 
-        self.window?.tintColor = UIColor(red: 0.12, green: 0.53, blue: 0.90, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = .lightGray
+        self.window?.tintColor = .dookieBlue
+        UINavigationBar.appearance().tintColor = .dookieGray
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().isTranslucent = false
