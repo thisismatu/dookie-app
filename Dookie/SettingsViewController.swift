@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     let emojiView = ISEmojiView()
-    private let tableHeaderHeight: CGFloat = 160.0
+    var tableHeaderHeight: CGFloat = 224.0
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -30,6 +30,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var petIdButton: UIButton!
     @IBOutlet weak var petEmojiTextField: UITextField!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var leaveButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .groupTableViewBackground
 
+        closeButton.setImage(closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
+        leaveButton.setImage(leaveButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
+
         petEmojiTextField.delegate = self
         petEmojiTextField.inputView = emojiView
         petEmojiTextField.text = Defaults[.emoji].emojiUnescapedString
@@ -46,12 +51,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
 
+        tableHeaderHeight = view.frame.height/3
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
         tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
-        navigationController?.navigationBar.isTranslucent = true
 
         updateHeaderView()
     }
@@ -127,11 +132,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     // MARK: - Actions
 
-    @IBAction func leaveButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func leaveButtonPressed(_ sender: Any) {
         self.leavePet()
     }
 
-    @IBAction func petIdButtonPressed(_ sender: UIButton) {
+    @IBAction func petIdButtonPressed(_ sender: Any) {
         self.copyPetId()
     }
 
