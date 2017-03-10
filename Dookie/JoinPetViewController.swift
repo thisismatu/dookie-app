@@ -20,16 +20,13 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
         ref = FIRDatabase.database().reference()
         NotificationCenter.default.addObserver(self, selector: #selector(self.checkPasteboard), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkPasteboard()
         textField.becomeFirstResponder()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        textField.resignFirstResponder()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

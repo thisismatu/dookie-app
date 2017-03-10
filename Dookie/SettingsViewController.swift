@@ -58,6 +58,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
 
+        self.hideKeyboardWhenTappedAround()
         updateHeaderView()
     }
 

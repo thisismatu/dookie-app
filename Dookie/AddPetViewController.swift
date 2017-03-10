@@ -19,15 +19,12 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textField.delegate = self
         ref = FIRDatabase.database().reference()
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField.becomeFirstResponder()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        textField.resignFirstResponder()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
