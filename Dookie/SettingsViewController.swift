@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     let emojiView = ISEmojiView()
-    private let tableHeaderHeight: CGFloat = 200.0
+    private let tableHeaderHeight: CGFloat = 160.0
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
