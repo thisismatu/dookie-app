@@ -158,6 +158,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="224"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape_gray" translatesAutoresizingMaskIntoConstraints="NO" id="CAl-br-rJ4">
+                                    <rect key="frame" x="52" y="-80" width="271" height="80"/>
+                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rcs-04-7cy">
                                     <rect key="frame" x="24" y="52.5" width="327" height="130.5"/>
                                     <subviews>
@@ -259,8 +262,11 @@
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="nd8-JA-7qp" secondAttribute="trailing" constant="4" id="2EB-U7-l5S"/>
+                                <constraint firstItem="CAl-br-rJ4" firstAttribute="bottom" secondItem="NPl-oD-Fch" secondAttribute="top" id="9NP-mn-cLS"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="rcs-04-7cy" secondAttribute="trailing" constant="16" id="FBi-Fb-Ycx"/>
                                 <constraint firstItem="rcs-04-7cy" firstAttribute="centerY" secondItem="NPl-oD-Fch" secondAttribute="centerY" multiplier="1.05" id="G6G-UH-0XT"/>
+                                <constraint firstItem="nd8-JA-7qp" firstAttribute="leading" secondItem="CAl-br-rJ4" secondAttribute="trailing" id="RwL-g5-KNp"/>
+                                <constraint firstItem="CAl-br-rJ4" firstAttribute="leading" secondItem="FB0-f4-gmd" secondAttribute="trailing" id="Slt-lL-l53"/>
                                 <constraint firstItem="FB0-f4-gmd" firstAttribute="leading" secondItem="NPl-oD-Fch" secondAttribute="leading" constant="4" id="YCM-Y3-2ri"/>
                                 <constraint firstItem="rcs-04-7cy" firstAttribute="leading" secondItem="NPl-oD-Fch" secondAttribute="leadingMargin" constant="16" id="dZ1-HE-cF7"/>
                                 <constraint firstItem="nd8-JA-7qp" firstAttribute="top" secondItem="NPl-oD-Fch" secondAttribute="top" constant="17" id="jMs-gM-7ei"/>
@@ -462,6 +468,7 @@
                         <outlet property="feedbackCell" destination="MUf-nh-rzA" id="dPh-ml-OxC"/>
                         <outlet property="headerView" destination="NPl-oD-Fch" id="v9b-aG-Soi"/>
                         <outlet property="headerViewStack" destination="rcs-04-7cy" id="LOd-ut-qIl"/>
+                        <outlet property="illustrationConstraint" destination="9NP-mn-cLS" id="jgL-tg-DGy"/>
                         <outlet property="inviteCell" destination="Zd2-e0-49C" id="OPv-iQ-ndc"/>
                         <outlet property="leaveButton" destination="nd8-JA-7qp" id="w5T-rW-azr"/>
                         <outlet property="petEmojiTextField" destination="rPj-KO-G1g" id="nyW-a0-09P"/>
@@ -794,6 +801,7 @@
     </scenes>
     <resources>
         <image name="art_landscape" width="600" height="160"/>
+        <image name="art_landscape_gray" width="600" height="80"/>
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_cog" width="24" height="24"/>
         <image name="ic_power" width="24" height="24"/>

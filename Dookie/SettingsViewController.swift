@@ -33,6 +33,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var headerViewStack: UIStackView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var illustrationConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,12 +159,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     private func updateHeaderView() {
         let offset = tableView.contentOffset.y
+        let multiplier = (-offset - tableHeaderHeight - 80) * 0.5
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
         headerRect.origin.y = offset
-        headerRect.size.height = -offset
+        headerRect.size.height = -offset > 64 ? -offset: 64
         headerView.frame = headerRect
+        illustrationConstraint.constant = multiplier < 80 ? multiplier : 80
 
-        if 80...tableHeaderHeight ~= -offset {
+        if 0...tableHeaderHeight ~= -offset {
             headerViewStack.transform = CGAffineTransform(scaleX: -offset/tableHeaderHeight, y: -offset/tableHeaderHeight)
         }
     }
