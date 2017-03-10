@@ -33,6 +33,7 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
+  - ISEmojiView (0.0.4)
   - SwiftyJSON (3.1.4)
   - SwiftyUserDefaults (3.0.0)
 
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - ISEmojiView
   - SwiftyJSON
   - SwiftyUserDefaults
 
@@ -54,9 +56,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  ISEmojiView: 04bea1836abeb628af1d2ae2b5617fd4dfa813ec
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: 4d4eabc8572f3a3e6d1136f391328fc5e425bb90
+PODFILE CHECKSUM: 8ea5ea0d0c17e90c2b557f3137508869b6ef48c7
 
 COCOAPODS: 1.2.0

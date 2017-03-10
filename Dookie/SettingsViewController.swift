@@ -10,13 +10,15 @@ import UIKit
 import SwiftyUserDefaults
 import Firebase
 import MessageUI
+import Emoji
+import ISEmojiView
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, ISEmojiViewDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
-    let imagePicker = UIImagePickerController()
+    let emojiView = ISEmojiView()
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -25,14 +27,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var petIdButton: UIButton!
-    @IBOutlet weak var petImage: UIImageView!
+    @IBOutlet weak var petEmojiTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
-
-        imagePicker.delegate = self
 
         if let nav = navigationController {
             let height = nav.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
@@ -40,6 +40,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             nav.navigationBar.isTranslucent = true
         }
 
+        emojiView.delegate = self
+        emojiView.collectionView.backgroundColor = .groupTableViewBackground
+
+        petEmojiTextField.delegate = self
+        petEmojiTextField.inputView = emojiView
+        petEmojiTextField.text = Defaults[.emoji].emojiUnescapedString
         petNameLabel.text = Defaults[.name]
         petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
@@ -48,9 +54,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         petRef.observe(.value, with: { snapshot in
-            let name = snapshot.json["name"].stringValue
-            self.petNameLabel.text = name
-            Defaults[.name] = name
+            Defaults[.name] = snapshot.json["name"].stringValue
+            Defaults[.emoji] = snapshot.json["emoji"].stringValue
+            self.petNameLabel.text = Defaults[.name]
+            self.petEmojiTextField.text = Defaults[.emoji].emojiUnescapedString
         })
     }
 
@@ -84,23 +91,26 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    // MARK: - UITextField & ISEmojiView delegate
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        emojiView.collectionView.scrollToItem(at: IndexPath(item: 0, section: 1), at: .left, animated: false)
+    }
+
+    func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
+        petEmojiTextField.text = ""
+        petEmojiTextField.insertText(emoji)
+        petEmojiTextField.resignFirstResponder()
+        petRef.updateChildValues(["emoji": emoji.emojiEscapedString])
+    }
+
+    func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
+        petEmojiTextField.deleteBackward()
+    }
+
     // MARK: - MFMailComposeViewController delegate
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true, completion: nil)
-    }
-
-    // MARK: - UIImagePickerControllerDelegate Methods
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            petImage.contentMode = .scaleAspectFill
-            petImage.image = pickedImage
-        }
-        dismiss(animated: true, completion: nil)
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
 
@@ -112,12 +122,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     @IBAction func petIdButtonPressed(_ sender: UIButton) {
         self.copyPetId()
-    }
-
-    @IBAction func petImagePressed(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
     }
 
     // MARK: - View controller private methods

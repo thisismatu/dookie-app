@@ -12,5 +12,6 @@ target 'Dookie' do
   pod 'SwiftyJSON'
   pod 'SwiftyUserDefaults'
   pod 'Emoji-swift'
+  pod 'ISEmojiView'
 
 end

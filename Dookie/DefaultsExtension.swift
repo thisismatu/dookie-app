@@ -12,5 +12,6 @@ import SwiftyUserDefaults
 extension DefaultsKeys {
     static let uid = DefaultsKey<String>("uid")
     static let name = DefaultsKey<String>("name")
+    static let emoji = DefaultsKey<String>("emoji")
     static let secret = DefaultsKey<String>("secret")
 }
