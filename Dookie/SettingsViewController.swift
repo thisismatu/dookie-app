@@ -30,6 +30,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var petIdButton: UIButton!
     @IBOutlet weak var petEmojiTextField: UITextField!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var headerViewStack: UIStackView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
 
@@ -156,11 +157,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     // MARK: - View controller private methods
 
     private func updateHeaderView() {
-        print(-tableView.contentOffset.y)
+        let offset = tableView.contentOffset.y
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
-        headerRect.origin.y = tableView.contentOffset.y
-        headerRect.size.height = -tableView.contentOffset.y
+        headerRect.origin.y = offset
+        headerRect.size.height = -offset
         headerView.frame = headerRect
+
+        if 80...tableHeaderHeight ~= -offset {
+            headerViewStack.transform = CGAffineTransform(scaleX: -offset/tableHeaderHeight, y: -offset/tableHeaderHeight)
+        }
     }
 
     private func sendFeedbackEmail() {

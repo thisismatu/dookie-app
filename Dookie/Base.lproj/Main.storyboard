@@ -461,6 +461,7 @@
                         <outlet property="closeButton" destination="FB0-f4-gmd" id="fhG-Xt-Nak"/>
                         <outlet property="feedbackCell" destination="MUf-nh-rzA" id="dPh-ml-OxC"/>
                         <outlet property="headerView" destination="NPl-oD-Fch" id="v9b-aG-Soi"/>
+                        <outlet property="headerViewStack" destination="rcs-04-7cy" id="LOd-ut-qIl"/>
                         <outlet property="inviteCell" destination="Zd2-e0-49C" id="OPv-iQ-ndc"/>
                         <outlet property="leaveButton" destination="nd8-JA-7qp" id="w5T-rW-azr"/>
                         <outlet property="petEmojiTextField" destination="rPj-KO-G1g" id="nyW-a0-09P"/>
