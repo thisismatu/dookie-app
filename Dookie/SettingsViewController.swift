@@ -57,8 +57,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         tableView.addSubview(headerView)
         tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
-
-        self.hideKeyboardWhenTappedAround()
         updateHeaderView()
     }
 
@@ -112,6 +110,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         emojiView.collectionView.scrollToItem(at: IndexPath(item: 0, section: 1), at: .left, animated: false)
+        closeButton.isUserInteractionEnabled = false
+        leaveButton.isUserInteractionEnabled = false
+        petIdButton.isUserInteractionEnabled = false
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        closeButton.isUserInteractionEnabled = true
+        leaveButton.isUserInteractionEnabled = true
+        petIdButton.isUserInteractionEnabled = true
     }
 
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
@@ -141,14 +148,18 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.copyPetId()
     }
 
+    @IBAction func headerViewTapped(_ sender: Any) {
+        petEmojiTextField.resignFirstResponder()
+    }
+
+
     // MARK: - View controller private methods
 
     private func updateHeaderView() {
+        print(-tableView.contentOffset.y)
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
-        if tableView.contentOffset.y < -tableHeaderHeight {
-            headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y
-        }
+        headerRect.origin.y = tableView.contentOffset.y
+        headerRect.size.height = -tableView.contentOffset.y
         headerView.frame = headerRect
     }
 

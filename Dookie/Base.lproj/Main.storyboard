@@ -150,7 +150,7 @@
         <scene sceneID="QIA-6r-8ms">
             <objects>
                 <tableViewController id="od9-gT-aQJ" customClass="SettingsViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gs9-Ug-M3p">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="none" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gs9-Ug-M3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -256,6 +256,7 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="nd8-JA-7qp" secondAttribute="trailing" constant="4" id="2EB-U7-l5S"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="rcs-04-7cy" secondAttribute="trailing" constant="16" id="FBi-Fb-Ycx"/>
@@ -265,6 +266,9 @@
                                 <constraint firstItem="nd8-JA-7qp" firstAttribute="top" secondItem="NPl-oD-Fch" secondAttribute="top" constant="17" id="jMs-gM-7ei"/>
                                 <constraint firstItem="FB0-f4-gmd" firstAttribute="top" secondItem="NPl-oD-Fch" secondAttribute="top" constant="17" id="uSq-8l-kBi"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="wTk-CY-inP" appends="YES" id="jHd-dm-FDZ"/>
+                            </connections>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZYM-O2-8ve">
                             <rect key="frame" x="0.0" y="547" width="375" height="80"/>
@@ -469,6 +473,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9L-OY-7Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2xk-gL-ukx" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="wTk-CY-inP">
+                    <connections>
+                        <action selector="headerViewTapped:" destination="od9-gT-aQJ" id="9X0-ib-yF3"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3247" y="117"/>
         </scene>
