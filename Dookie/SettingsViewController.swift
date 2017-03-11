@@ -21,7 +21,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var tableHeaderHeight: CGFloat = 240.0
     var lastContentOffset: CGFloat = 0
 
-    @IBOutlet weak var renameCell: UITableViewCell!
+    @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
     @IBOutlet weak var rateCell: UITableViewCell!
@@ -82,8 +82,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         switch cell {
-        case renameCell:
-            showRenamePet()
         case inviteCell:
             sendInviteEmail()
         case rateCell:
@@ -103,6 +101,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     // MARK: - Actions
+
+    @IBAction func unwindToSettings(_ segue: UIStoryboardSegue) {}
 
     @IBAction func leaveButtonPressed(_ sender: Any) {
         self.leavePet()
@@ -189,23 +189,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
-    }
-
-    private func showRenamePet() {
-        let alert = UIAlertController(title: "Rename \(Defaults[.name])", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-            let textField = alert.textFields![0] as UITextField
-            if let name = textField.text, !name.isEmpty {
-                self.petRef.updateChildValues(["name": name])
-            }
-        }))
-        alert.addTextField { (textField) in
-            textField.placeholder = "Pet's Name"
-            textField.textAlignment = .center
-            textField.text = Defaults[.name]
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
 
     private func leavePet() {
