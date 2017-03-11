@@ -13,47 +13,35 @@ import MessageUI
 import Emoji
 import ISEmojiView
 
-class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, ISEmojiViewDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
-    let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
-    let emojiView = ISEmojiView()
-    var tableHeaderHeight: CGFloat = 224.0
+    var tableHeaderHeight: CGFloat = 240.0
+    var lastContentOffset: CGFloat = 0
 
     @IBOutlet weak var renameCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var petEmojiButton: UIButton!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var petIdButton: UIButton!
-    @IBOutlet weak var petEmojiTextField: UITextField!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var headerViewStack: UIStackView!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var leaveButton: UIButton!
-    @IBOutlet weak var illustrationConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
 
-        emojiView.delegate = self
-        emojiView.collectionView.backgroundColor = .groupTableViewBackground
-
-        closeButton.setImage(closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
-        leaveButton.setImage(leaveButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
-
-        petEmojiTextField.delegate = self
-        petEmojiTextField.inputView = emojiView
-        petEmojiTextField.text = Defaults[.emoji].emojiUnescapedString
+        petEmojiButton.setTitle(Defaults[.emoji].emojiUnescapedString, for: .normal)
         petNameLabel.text = Defaults[.name]
         petIdButton.setTitle(Defaults[.secret], for: .normal)
         versionLabel.text = getVersionNumber()
 
-        tableHeaderHeight = view.frame.height/3
+        tableHeaderHeight = view.frame.width/2
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
@@ -68,7 +56,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             Defaults[.name] = snapshot.json["name"].stringValue
             Defaults[.emoji] = snapshot.json["emoji"].stringValue
             self.petNameLabel.text = Defaults[.name]
-            self.petEmojiTextField.text = Defaults[.emoji].emojiUnescapedString
+            self.petEmojiButton.setTitle(Defaults[.emoji].emojiUnescapedString, for: .normal)
         })
     }
 
@@ -108,32 +96,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: - UITextField & ISEmojiView delegate
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        emojiView.collectionView.scrollToItem(at: IndexPath(item: 0, section: 1), at: .left, animated: false)
-        closeButton.isUserInteractionEnabled = false
-        leaveButton.isUserInteractionEnabled = false
-        petIdButton.isUserInteractionEnabled = false
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        closeButton.isUserInteractionEnabled = true
-        leaveButton.isUserInteractionEnabled = true
-        petIdButton.isUserInteractionEnabled = true
-    }
-
-    func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
-        petEmojiTextField.text = ""
-        petEmojiTextField.insertText(emoji)
-        petEmojiTextField.resignFirstResponder()
-        petRef.updateChildValues(["emoji": emoji.emojiEscapedString])
-    }
-
-    func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
-        petEmojiTextField.deleteBackward()
-    }
-
     // MARK: - MFMailComposeViewController delegate
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -150,25 +112,25 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.copyPetId()
     }
 
-    @IBAction func headerViewTapped(_ sender: Any) {
-        petEmojiTextField.resignFirstResponder()
-    }
-
-
     // MARK: - View controller private methods
 
     private func updateHeaderView() {
         let offset = tableView.contentOffset.y
-        let multiplier = (-offset - tableHeaderHeight - 80) * 0.5
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
-        headerRect.origin.y = offset
-        headerRect.size.height = -offset > 64 ? -offset: 64
-        headerView.frame = headerRect
-        illustrationConstraint.constant = multiplier < 80 ? multiplier : 80
 
-        if 0...tableHeaderHeight ~= -offset {
-            headerViewStack.transform = CGAffineTransform(scaleX: -offset/tableHeaderHeight, y: -offset/tableHeaderHeight)
+        if offset <= -tableHeaderHeight {
+            headerRect.origin.y = offset
+            headerRect.size.height = -offset > 64 ? -offset: 64
         }
+
+        if offset < 0 && lastContentOffset > offset {
+            navigationController?.navigationBar.isTranslucent = true
+        } else if offset > -64 {
+            navigationController?.navigationBar.isTranslucent = false
+        }
+
+        headerView.frame = headerRect
+        lastContentOffset = offset
     }
 
     private func sendFeedbackEmail() {
