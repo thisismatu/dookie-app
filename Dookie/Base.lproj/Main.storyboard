@@ -159,13 +159,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rcs-04-7cy">
-                                    <rect key="frame" x="24" y="40" width="327" height="130.5"/>
+                                    <rect key="frame" x="24" y="10" width="327" height="130.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-gl-sJQ" customClass="RoundBorderView" customModule="Dookie" customModuleProvider="target">
                                             <rect key="frame" x="127.5" y="0.0" width="72" height="72"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAv-zd-tIF" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
-                                                    <rect key="frame" x="3.5" y="4" width="64" height="64"/>
+                                                    <rect key="frame" x="3.5" y="4.5" width="64" height="64"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="xml-qL-0xw"/>
@@ -226,8 +226,9 @@
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="trailingMargin" secondItem="rcs-04-7cy" secondAttribute="trailing" constant="16" id="FBi-Fb-Ycx"/>
-                                <constraint firstItem="rcs-04-7cy" firstAttribute="centerY" secondItem="NPl-oD-Fch" secondAttribute="centerY" multiplier="1.05" id="G6G-UH-0XT"/>
+                                <constraint firstItem="rcs-04-7cy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NPl-oD-Fch" secondAttribute="top" id="bdM-Mu-ALB"/>
                                 <constraint firstItem="rcs-04-7cy" firstAttribute="leading" secondItem="NPl-oD-Fch" secondAttribute="leadingMargin" constant="16" id="dZ1-HE-cF7"/>
+                                <constraint firstItem="rcs-04-7cy" firstAttribute="centerY" secondItem="NPl-oD-Fch" secondAttribute="centerY" multiplier="0.75" priority="750" id="efp-FJ-Qfp"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZYM-O2-8ve">

@@ -23,6 +23,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = nil
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
 
@@ -36,16 +37,26 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiTextField.text = Defaults[.emoji].emojiUnescapedString
         nameTextField.delegate = self
         nameTextField.text = Defaults[.name]
+
         validateInputs()
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         emojiTextField.becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         ref.removeAllObservers()
         petRef.removeAllObservers()
+    }
+
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        UIView.animate(withDuration: 0.1, animations: {
+            self.navigationController?.navigationBar.barTintColor = .groupTableViewBackground
+            self.navigationController?.navigationBar.layoutIfNeeded()
+        })
     }
 
     // MARK: - UITextField & ISEmojiView delegate

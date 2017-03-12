@@ -19,7 +19,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     var tableHeaderHeight: CGFloat = 240.0
-    var lastContentOffset: CGFloat = 0
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -33,6 +32,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = .groupTableViewBackground
         ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
         petRef = ref.child("pet")
 
@@ -118,19 +118,23 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         let offset = tableView.contentOffset.y
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
 
-        if offset <= -tableHeaderHeight {
+        switch offset {
+        case _ where offset <= -tableHeaderHeight:
             headerRect.origin.y = offset
-            headerRect.size.height = -offset > 64 ? -offset: 64
-        }
-
-        if offset < 0 && lastContentOffset > offset {
-            navigationController?.navigationBar.isTranslucent = true
-        } else if offset > -64 {
-            navigationController?.navigationBar.isTranslucent = false
+            headerRect.size.height = -offset
+        case _ where offset <= 0:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.navigationController?.navigationBar.barTintColor = .groupTableViewBackground
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            })
+        default:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.navigationController?.navigationBar.barTintColor = .white
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            })
         }
 
         headerView.frame = headerRect
-        lastContentOffset = offset
     }
 
     private func sendFeedbackEmail() {
