@@ -453,7 +453,7 @@
         <!--Edit-->
         <scene sceneID="I1a-5J-r0L">
             <objects>
-                <tableViewController id="oRQ-vR-fE4" customClass="EditPetTableViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oRQ-vR-fE4" customClass="EditPetViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="hJ7-aj-4HY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

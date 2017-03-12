@@ -1,5 +1,5 @@
 //
-//  EditPetTableViewController.swift
+//  EditPetViewController.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 11.03.2017.
@@ -12,7 +12,7 @@ import Firebase
 import Emoji
 import ISEmojiView
 
-class EditPetTableViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
+class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     let emojiView = ISEmojiView()
