@@ -105,7 +105,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBAction func unwindToSettings(_ segue: UIStoryboardSegue) {}
 
     @IBAction func leaveButtonPressed(_ sender: Any) {
-        self.leavePet()
+        self.leavePetPrompt()
     }
 
     @IBAction func petIdButtonPressed(_ sender: Any) {
@@ -195,19 +195,19 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         }
     }
 
-    private func leavePet() {
+    private func leavePetPrompt() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Leave \(Defaults[.name])", style: .default, handler: { _ in
-            self.appDelegate?.leavePet()
+            self.appDelegate?.leavePet(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Delete \(Defaults[.name])", style: .destructive, handler: { _ in
-            self.deletePet()
+            self.deletePetPrompt()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
-    private func deletePet() {
+    private func deletePetPrompt() {
         let alert = UIAlertController(title: "Delete \(Defaults[.name])?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in

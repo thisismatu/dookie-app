@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func leavePet() {
+    func leavePet(animated: Bool) {
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {
             vc.activitiesArray.removeAll()
@@ -78,13 +78,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Defaults.remove(.secret)
         Defaults.remove(.name)
+        Defaults.remove(.emoji)
 
-        self.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        self.window?.rootViewController?.dismiss(animated: animated, completion: nil)
     }
 
     func deletePet() {
         FIRDatabase.database().reference(withPath: Defaults[.secret]).removeValue()
-        leavePet()
+        leavePet(animated: true)
     }
 }
 

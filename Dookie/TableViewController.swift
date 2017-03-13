@@ -54,7 +54,7 @@ class TableViewController: UITableViewController {
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.appDelegate?.leavePet()
+                    self.appDelegate?.leavePet(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
