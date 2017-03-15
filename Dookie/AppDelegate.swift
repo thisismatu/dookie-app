@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//
+//        Defaults.remove(.name)
+//        Defaults.remove(.emoji)
+//        Defaults.remove(.secret)
+//        Defaults.remove(.currentPet)
+//        Defaults.remove(.allPets)
 
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
@@ -41,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
-                Defaults[.secret] = host
+                PetManager.shared.addPet(id: host, name: "", emoji: "")
             }
         }
         return false
@@ -75,16 +81,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             vc.activitiesArray.removeAll()
             vc.tableView.reloadData()
         }
-
-        Defaults.remove(.secret)
-        Defaults.remove(.name)
-        Defaults.remove(.emoji)
-
-        self.window?.rootViewController?.dismiss(animated: animated, completion: nil)
+        
+        self.window?.rootViewController?.dismiss(animated: animated, completion: { _ in
+            PetManager.shared.removePet(PetManager.shared.current.id)
+            print(Defaults[.currentPet], Defaults[.allPets])
+        })
     }
 
     func deletePet() {
-        FIRDatabase.database().reference(withPath: Defaults[.secret]).removeValue()
+        FIRDatabase.database().reference(withPath: PetManager.shared.current.id).removeValue()
         leavePet(animated: true)
     }
 }

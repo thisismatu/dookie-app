@@ -21,12 +21,12 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.stackView.isHidden = Defaults.hasKey(.secret)
-        self.illustration.isHidden = Defaults.hasKey(.secret)
+        self.stackView.isHidden = false
+        self.illustration.isHidden = false
     }
 
     @objc private func shouldPresentTable() {
-        if Defaults.hasKey(.secret) {
+        if !PetManager.shared.current.id.isEmpty {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                 self.present(vc, animated: false, completion: nil)

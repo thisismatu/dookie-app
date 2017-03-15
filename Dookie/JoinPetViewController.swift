@@ -42,13 +42,13 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func joinButtonPressed(_ sender: Any) {
-        guard let secret = textField.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let id = textField.text?.trimmingCharacters(in: .whitespaces) else { return }
 
-        switch !secret.isEmpty {
+        switch !id.isEmpty {
         case true:
-            ref.child(secret).observeSingleEvent(of: .value, with: { snapshot in
+            ref.child(id).child("pet").observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
-                    Defaults[.secret] = secret
+                    PetManager.shared.addPet(id: id, name: snapshot.json["name"].stringValue, emoji: snapshot.json["emoji"].stringValue)
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)

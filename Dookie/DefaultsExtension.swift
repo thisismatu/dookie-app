@@ -14,4 +14,6 @@ extension DefaultsKeys {
     static let name = DefaultsKey<String>("name")
     static let emoji = DefaultsKey<String>("emoji")
     static let secret = DefaultsKey<String>("secret")
+    static let currentPet = DefaultsKey<[String: Any]>("currentPet")
+    static let allPets = DefaultsKey<[Any]>("allPets")
 }

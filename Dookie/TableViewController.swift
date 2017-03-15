@@ -21,12 +21,12 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference(withPath: Defaults[.secret])
+        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        self.navigationItem.title = Defaults[.name]
+        self.navigationItem.title = PetManager.shared.current.name
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +46,10 @@ class TableViewController: UITableViewController {
             }
         })
 
-        petRef.observe(.value, with: { snapshot in
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
-                let name = snapshot.json["name"].stringValue
-                self.navigationItem.title = name
-                Defaults[.name] = name
+                PetManager.shared.addPet(snapshot)
+                self.navigationItem.title = PetManager.shared.current.name
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
