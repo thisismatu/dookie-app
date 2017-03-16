@@ -23,7 +23,7 @@ class ActivityTableViewCell: UITableViewCell {
 
     func configure(_ item: Activity, defaults: String, hideTop: Bool, hideBottom: Bool) {
         timeLabel.text = item.time.formatDate(.none, .short)
-        typeLabel.text = item.type.joined().emojiUnescapedString
+        typeLabel.text = item.type.joined().replacingOccurrences(of: "shit", with: "poop").emojiUnescapedString
         lineTop.isHidden = hideTop
         lineBottom.isHidden = hideBottom
 

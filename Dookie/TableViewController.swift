@@ -17,7 +17,7 @@ class TableViewController: UITableViewController {
     var activitiesRef: FIRDatabaseReference!
     var connectedRef: FIRDatabaseReference!
     var activitiesArray = [[Activity]]()
-    var allowedToMerge = [":droplet:", ":shit:"]
+    var allowedToMerge = [":droplet:", ":poop:"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,7 +250,7 @@ class TableViewController: UITableViewController {
     }
 
     @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
-        let type = [":shit:"]
+        let type = [":poop:"]
         if !mergeWithLatest(type) {
             let activityItem = Activity(time: Date(), type: type)
             self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
