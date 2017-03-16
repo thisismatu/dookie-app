@@ -46,7 +46,8 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         petRef.removeAllObservers()
         ref.removeAllObservers()
     }

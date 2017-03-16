@@ -27,6 +27,11 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ref.removeAllObservers()
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         addButtonPressed(self)
         return true
@@ -43,9 +48,8 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
                 if let id = reference.parent?.key {
                     Defaults[.pet] = Pet.init(id, name, "")
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
-                        self.present(vc, animated: true, completion: nil)
-                        _ = self.navigationController?.popToRootViewController(animated: false)
+                    if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") as? TableViewController {
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
             })

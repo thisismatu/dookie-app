@@ -28,9 +28,11 @@ class LoginViewController: UIViewController {
     @objc private func shouldPresentTable() {
         if Defaults.hasKey(.pet) {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
-                self.present(vc, animated: false, completion: nil)
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") as? TableViewController {
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
+
+    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {}
 }

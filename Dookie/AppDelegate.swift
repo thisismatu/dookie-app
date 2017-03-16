@@ -76,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             vc.activitiesArray.removeAll()
             vc.tableView.reloadData()
         }
-        root.dismiss(animated: animated, completion: nil)
     }
 
     func deletePet() {

@@ -29,6 +29,11 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ref.removeAllObservers()
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         joinButtonPressed(self)
         return true
@@ -50,9 +55,8 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
                 if snapshot.exists() {
                     Defaults[.pet] = Pet.init(id, snapshot)
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
-                        self.present(vc, animated: true, completion: nil)
-                        _ = self.navigationController?.popToRootViewController(animated: false)
+                    if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") as? TableViewController {
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
                     let alert = UIAlertController(title: "Couldn't find this pet", message: "The ID you entered doesn't match any existing pet. Please check that you've entered the whole ID.", preferredStyle: .alert)

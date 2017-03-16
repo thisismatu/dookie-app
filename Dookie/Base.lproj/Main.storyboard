@@ -13,7 +13,7 @@
         <!--Table View Controller-->
         <scene sceneID="hn7-uX-W5x">
             <objects>
-                <tableViewController id="Ml4-NM-IZz" customClass="TableViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="Table" storyboardIdentifier="Table" id="Ml4-NM-IZz" customClass="TableViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="i9Z-6R-MYQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,8 +141,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="I6X-zI-Pid" kind="unwind" identifier="leavePet" unwindAction="unwindToLogin:" id="LNt-hs-ShM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="I6X-zI-Pid" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2343.1999999999998" y="118.29085457271366"/>
         </scene>
@@ -232,7 +236,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZYM-O2-8ve">
-                            <rect key="frame" x="0.0" y="521.5" width="375" height="80"/>
+                            <rect key="frame" x="0.0" y="523" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Q25-Fn-hh5">
@@ -263,7 +267,7 @@
                             <tableViewSection headerTitle="General" id="y8Y-zB-V6T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CaE-6S-No5">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="256" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -302,7 +306,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Zd2-e0-49C">
-                                        <rect key="frame" x="0.0" y="303.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="304" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -342,7 +346,7 @@
                             <tableViewSection headerTitle="Feedback" id="2Dq-hc-HbI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="MUf-nh-rzA">
-                                        <rect key="frame" x="0.0" y="407.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="409" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -378,7 +382,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="BcY-Ft-ZzN">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="457" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -444,6 +448,7 @@
                         <outlet property="petNameLabel" destination="w6z-vt-XIv" id="y2T-qt-xsp"/>
                         <outlet property="rateCell" destination="BcY-Ft-ZzN" id="sfa-7n-8y5"/>
                         <outlet property="versionLabel" destination="Unu-gP-IlS" id="odd-y3-hfg"/>
+                        <segue destination="2xk-gL-ukx" kind="unwind" identifier="leavePet" unwindAction="unwindToLogin:" id="EQG-og-4PR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9L-OY-7Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -477,7 +482,7 @@
                                         <rect key="frame" x="0.0" y="32" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ndT-eg-cV5" id="lZI-LM-MK5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-hn-qWZ">
@@ -510,7 +515,7 @@
                                         <rect key="frame" x="0.0" y="96" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="mmE-b0-P4e" id="0kI-sZ-TZE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5W-Hq-rnI">
@@ -569,7 +574,7 @@
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
             <objects>
-                <viewController id="IzT-IF-xxl" customClass="LoginViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="Login" storyboardIdentifier="Login" id="IzT-IF-xxl" customClass="LoginViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ieY-wv-Fie"/>
                         <viewControllerLayoutGuide type="bottom" id="mIx-A4-xTB"/>
@@ -838,7 +843,7 @@
         <!--Navigation Controller-->
         <scene sceneID="7qb-Tp-IGM">
             <objects>
-                <navigationController storyboardIdentifier="Table" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jLw-Kw-6sD" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jLw-Kw-6sD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YMW-vd-Wyu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -860,7 +865,7 @@
         <!--Navigation Controller-->
         <scene sceneID="RIX-I5-8Bl">
             <objects>
-                <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="c1z-tP-PHg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c1z-tP-PHg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMe-YW-yDb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

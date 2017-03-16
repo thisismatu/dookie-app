@@ -53,6 +53,7 @@ class TableViewController: UITableViewController {
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
+                    self.performSegue(withIdentifier: "leavePet", sender: self)
                     self.appDelegate?.leavePet(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -83,7 +84,8 @@ class TableViewController: UITableViewController {
         })
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         connectedRef.removeAllObservers()
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
