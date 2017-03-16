@@ -50,7 +50,6 @@ class TableViewController: UITableViewController {
             if snapshot.exists() && Defaults.hasKey(.pet) {
                 Defaults[.pet] = Pet.init(Defaults[.pet].id, snapshot)
                 self.navigationItem.title = Defaults[.pet].name
-                print("Table", Defaults[.pet], Defaults.hasKey(.pet))
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in

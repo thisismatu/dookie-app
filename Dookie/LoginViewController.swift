@@ -23,7 +23,6 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         self.stackView.isHidden = Defaults.hasKey(.pet)
         self.illustration.isHidden = Defaults.hasKey(.pet)
-        print("Login", Defaults[.pet], Defaults.hasKey(.pet))
     }
 
     @objc private func shouldPresentTable() {

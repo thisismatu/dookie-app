@@ -98,10 +98,6 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     private func validateInputs() {
         let name = nameTextField.text ?? ""
         let emoji = emojiTextField.text ?? ""
-        if !name.isEmpty && !emoji.isEmpty {
-            saveButton.isEnabled = true
-        } else {
-            saveButton.isEnabled = false
-        }
+        saveButton.isEnabled = !name.isEmpty && !emoji.isEmpty
     }
 }

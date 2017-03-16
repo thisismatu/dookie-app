@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("Start", Defaults[.pet], Defaults.hasKey(.pet))
-
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
@@ -72,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func leavePet(animated: Bool) {
         Defaults.remove(.pet)
-        print("Appdelegate", Defaults[.pet], Defaults.hasKey(.pet))
 
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {
