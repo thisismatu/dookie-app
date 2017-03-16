@@ -48,7 +48,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             ref.child(id).child("pet").observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
-                    PetManager.shared.addPet(id: id, name: snapshot.json["name"].stringValue, emoji: snapshot.json["emoji"].stringValue)
+                    Defaults[.pets] = Pets.init(id, snapshot)
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)

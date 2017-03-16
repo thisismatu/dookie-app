@@ -41,7 +41,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             ref.childByAutoId().child("pet").setValue(["name": name], withCompletionBlock: { (error, reference) in
                 if let id = reference.parent?.key {
-                    PetManager.shared.addPet(id: id, name: name, emoji: "")
+                    Defaults[.pets] = Pets.init(id, name, "")
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                     if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                         self.present(vc, animated: true, completion: nil)

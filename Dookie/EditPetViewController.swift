@@ -1,4 +1,4 @@
-//
+    //
 //  EditPetViewController.swift
 //  Dookie
 //
@@ -24,7 +24,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
-        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
+        ref = FIRDatabase.database().reference(withPath: Defaults[.pets].id)
         petRef = ref.child("pet")
 
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -34,9 +34,9 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiView.collectionView.backgroundColor = .white
         emojiTextField.delegate = self
         emojiTextField.inputView = emojiView
-        emojiTextField.text = PetManager.shared.current.emoji.emojiUnescapedString
+        emojiTextField.text = Defaults[.pets].emoji.emojiUnescapedString
         nameTextField.delegate = self
-        nameTextField.text = PetManager.shared.current.name
+        nameTextField.text = Defaults[.pets].name
 
         validateInputs()
     }
@@ -47,8 +47,8 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        ref.removeAllObservers()
         petRef.removeAllObservers()
+        ref.removeAllObservers()
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -89,7 +89,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         guard let name = nameTextField.text,
             let emoji = emojiTextField.text?.emojiEscapedString else { return }
         self.petRef.updateChildValues(["name": name, "emoji": emoji]) { (error, reference) in
-            self.performSegue(withIdentifier: "editPet", sender: self)
+            self.performSegue(withIdentifier: "editPetDetails", sender: self)
         }
     }
 

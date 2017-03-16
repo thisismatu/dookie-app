@@ -16,12 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//
-//        Defaults.remove(.name)
-//        Defaults.remove(.emoji)
-//        Defaults.remove(.secret)
-//        Defaults.remove(.currentPet)
-//        Defaults.remove(.allPets)
+        print("Start", Defaults[.pets], Defaults.hasKey(.pets))
 
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
@@ -47,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
-                PetManager.shared.addPet(id: host, name: "", emoji: "")
+                Defaults[.pets] = Pets.init(host, "", "")
             }
         }
         return false
@@ -76,20 +71,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func leavePet(animated: Bool) {
+        Defaults.remove(.pets)
+
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {
             vc.activitiesArray.removeAll()
             vc.tableView.reloadData()
         }
-        
-        self.window?.rootViewController?.dismiss(animated: animated, completion: { _ in
-            PetManager.shared.removePet(PetManager.shared.current.id)
-            print(Defaults[.currentPet], Defaults[.allPets])
+
+        root.popToRootViewController(animated: animated)
+        root.dismiss(animated: animated, completion: { _ in
+            Defaults.remove(.pets)
+            print("Appdelegate", Defaults[.pets], Defaults.hasKey(.pets))
         })
     }
 
     func deletePet() {
-        FIRDatabase.database().reference(withPath: PetManager.shared.current.id).removeValue()
+        FIRDatabase.database().reference(withPath: Defaults[.pets].id).removeValue()
         leavePet(animated: true)
     }
 }
