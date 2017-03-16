@@ -10,16 +10,13 @@ import Foundation
 import SwiftyUserDefaults
 
 extension UserDefaults {
-    subscript(key: DefaultsKey<Pets>) -> Pets {
-        get { return unarchive(key) ?? Pets("","","") }
+    subscript(key: DefaultsKey<Pet>) -> Pet {
+        get { return unarchive(key) ?? Pet("","","") }
         set { archive(key, newValue) }
     }
 }
 
 extension DefaultsKeys {
     static let uid = DefaultsKey<String>("uid")
-    static let name = DefaultsKey<String>("name")
-    static let emoji = DefaultsKey<String>("emoji")
-    static let secret = DefaultsKey<String>("secret")
-    static let pets = DefaultsKey<Pets>("pets")
+    static let pet = DefaultsKey<Pet>("pet")
 }

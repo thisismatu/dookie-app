@@ -28,7 +28,7 @@
 		CC95E6501E3FB28F001C93C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC95E64E1E3FB28F001C93C9 /* LaunchScreen.storyboard */; };
 		CC95E6581E3FB434001C93C9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC95E6571E3FB434001C93C9 /* TableViewController.swift */; };
 		CCA7ABA01E4623DB00F8BEAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */; };
-		CCAFFA701E79C1EC005EE8A3 /* PetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAFFA6F1E79C1EC005EE8A3 /* PetManager.swift */; };
+		CCAFFA701E79C1EC005EE8A3 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */; };
 		CCB4E4E11E45BCFB00E5E74B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,7 @@
 		CC95E6511E3FB28F001C93C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC95E6571E3FB434001C93C9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CCAFFA6F1E79C1EC005EE8A3 /* PetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetManager.swift; sourceTree = "<group>"; };
+		CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				CC95E6451E3FB28F001C93C9 /* AppDelegate.swift */,
-				CCAFFA6F1E79C1EC005EE8A3 /* PetManager.swift */,
 				CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */,
 				CC95E6511E3FB28F001C93C9 /* Info.plist */,
 			);
@@ -114,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3E32751E427670004FA9BD /* Activity.swift */,
+				CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 				CC95E6461E3FB28F001C93C9 /* AppDelegate.swift in Sources */,
 				4A0AB1E91E536775009F4F18 /* StringExtension.swift in Sources */,
 				CC7E38981E4E6412001B6027 /* SettingsViewController.swift in Sources */,
-				CCAFFA701E79C1EC005EE8A3 /* PetManager.swift in Sources */,
+				CCAFFA701E79C1EC005EE8A3 /* Pet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

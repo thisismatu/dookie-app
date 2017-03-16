@@ -1,5 +1,5 @@
 //
-//  PetManager.swift
+//  Pet.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 15.03.2017.
@@ -11,7 +11,7 @@ import SwiftyJSON
 import Firebase
 import SwiftyUserDefaults
 
-class Pets: NSObject, NSCoding {
+class Pet: NSObject, NSCoding {
     let id: String
     var name: String
     var emoji: String
@@ -39,13 +39,5 @@ class Pets: NSObject, NSCoding {
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.emoji, forKey: "emoji")
-    }
-}
-
-class PetManager {
-    static let shared = PetManager()
-
-    func remove() {
-        Defaults.remove(.pets)
     }
 }

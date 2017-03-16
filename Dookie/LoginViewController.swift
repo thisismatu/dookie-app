@@ -21,13 +21,13 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.stackView.isHidden = Defaults.hasKey(.pets)
-        self.illustration.isHidden = Defaults.hasKey(.pets)
-        print("Login", Defaults[.pets], Defaults.hasKey(.pets))
+        self.stackView.isHidden = Defaults.hasKey(.pet)
+        self.illustration.isHidden = Defaults.hasKey(.pet)
+        print("Login", Defaults[.pet], Defaults.hasKey(.pet))
     }
 
     @objc private func shouldPresentTable() {
-        if Defaults.hasKey(.pets) {
+        if Defaults.hasKey(.pet) {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") {
                 self.present(vc, animated: false, completion: nil)

@@ -24,7 +24,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
-        ref = FIRDatabase.database().reference(withPath: Defaults[.pets].id)
+        ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
         petRef = ref.child("pet")
 
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -34,9 +34,9 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiView.collectionView.backgroundColor = .white
         emojiTextField.delegate = self
         emojiTextField.inputView = emojiView
-        emojiTextField.text = Defaults[.pets].emoji.emojiUnescapedString
+        emojiTextField.text = Defaults[.pet].emoji.emojiUnescapedString
         nameTextField.delegate = self
-        nameTextField.text = Defaults[.pets].name
+        nameTextField.text = Defaults[.pet].name
 
         validateInputs()
     }

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("Start", Defaults[.pets], Defaults.hasKey(.pets))
+        print("Start", Defaults[.pet], Defaults.hasKey(.pet))
 
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
-                Defaults[.pets] = Pets.init(host, "", "")
+                Defaults[.pet] = Pet.init(host, "", "")
             }
         }
         return false
@@ -71,23 +71,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func leavePet(animated: Bool) {
-        Defaults.remove(.pets)
+        Defaults.remove(.pet)
+        print("Appdelegate", Defaults[.pet], Defaults.hasKey(.pet))
 
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {
             vc.activitiesArray.removeAll()
             vc.tableView.reloadData()
         }
-
-        root.popToRootViewController(animated: animated)
-        root.dismiss(animated: animated, completion: { _ in
-            Defaults.remove(.pets)
-            print("Appdelegate", Defaults[.pets], Defaults.hasKey(.pets))
-        })
+        root.dismiss(animated: animated, completion: nil)
     }
 
     func deletePet() {
-        FIRDatabase.database().reference(withPath: Defaults[.pets].id).removeValue()
+        FIRDatabase.database().reference(withPath: Defaults[.pet].id).removeValue()
         leavePet(animated: true)
     }
 }
