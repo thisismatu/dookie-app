@@ -15,8 +15,6 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.shouldPresentTable), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        shouldPresentTable()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -25,14 +23,17 @@ class LoginViewController: UIViewController {
         self.illustration.isHidden = Defaults.hasKey(.pet)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.shouldPresentTable), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        shouldPresentTable()
+    }
+
     @objc private func shouldPresentTable() {
         if Defaults.hasKey(.pet) {
-            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") as? TableViewController {
-                self.navigationController?.pushViewController(vc, animated: true)
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
+                self.present(vc, animated: false, completion: nil)
             }
         }
     }
-
-    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {}
 }

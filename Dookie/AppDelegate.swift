@@ -69,13 +69,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func leavePet(animated: Bool) {
-        Defaults.remove(.pet)
+        PetManager.shared.removePet(Defaults[.pet])
 
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {
             vc.activitiesArray.removeAll()
             vc.tableView.reloadData()
         }
+
+        root.popToRootViewController(animated: false)
+        root.dismiss(animated: animated, completion: nil)
     }
 
     func deletePet() {

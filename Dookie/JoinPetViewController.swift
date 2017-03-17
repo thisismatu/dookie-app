@@ -53,10 +53,10 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             ref.child(id).child("pet").observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
-                    Defaults[.pet] = Pet.init(id, snapshot)
-                    let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    if let vc = storyboard?.instantiateViewController(withIdentifier: "Table") as? TableViewController {
-                        self.navigationController?.pushViewController(vc, animated: true)
+                    let pet = Pet.init(id, snapshot)
+                    PetManager.shared.addPet(pet)
+                    if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
+                        self.present(vc, animated: true, completion: nil)
                     }
                 } else {
                     let alert = UIAlertController(title: "Couldn't find this pet", message: "The ID you entered doesn't match any existing pet. Please check that you've entered the whole ID.", preferredStyle: .alert)
