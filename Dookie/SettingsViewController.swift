@@ -36,7 +36,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
         petRef = ref.child("pet")
 
-        petEmojiButton.setTitle(Defaults[.pet].emoji.emojiUnescapedString, for: .normal)
+        petEmojiButton.setTitle(petEmoji(), for: .normal)
         petNameLabel.text = Defaults[.pet].name
         petIdButton.setTitle(Defaults[.pet].id, for: .normal)
         versionLabel.text = getVersionNumber()
@@ -57,7 +57,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
                 let pet = Pet.init(Defaults[.pet].id, snapshot)
                 PetManager.shared.addPet(pet)
                 self.petNameLabel.text = Defaults[.pet].name
-                self.petEmojiButton.setTitle(Defaults[.pet].emoji.emojiUnescapedString, for: .normal)
+                self.petEmojiButton.setTitle(self.petEmoji(), for: .normal)
             }
         })
     }
@@ -116,6 +116,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     // MARK: - View controller private methods
+
+    private func petEmoji() -> String {
+        if Defaults[.pet].emoji.emojiUnescapedString.isEmpty {
+            return "+"
+        } else {
+            return Defaults[.pet].emoji.emojiUnescapedString
+        }
+    }
 
     private func updateHeaderView() {
         let offset = tableView.contentOffset.y
