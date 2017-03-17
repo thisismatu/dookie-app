@@ -49,7 +49,11 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
                     let pet = Pet.init(id, name, "")
                     PetManager.shared.addPet(pet)
                     if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
-                        self.present(vc, animated: true, completion: nil)
+                        if let nav = self.navigationController {
+                            self.present(vc, animated: true, completion: nil)
+                            nav.popViewController(animated: false)
+                            Defaults.remove(.login)
+                        }
                     }
                 }
             })

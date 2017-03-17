@@ -59,18 +59,13 @@ class PetManager {
         if Defaults[.petArray].count > 1 {
             if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
                 Defaults[.petArray].remove(at: index)
-            }
-            if let nextPet = Defaults[.petArray].first {
-                Defaults[.pet] = nextPet
+                if let nextPet = Defaults[.petArray].first {
+                    Defaults[.pet] = nextPet
+                }
             }
         } else {
             Defaults.remove(.pet)
             Defaults.remove(.petArray)
         }
-
-        if let i = Defaults[.petArray].index(where: { $0.id == pet.id }) {
-            Defaults[.petArray].remove(at: i)
-        }
-        Defaults.remove(.pet)
     }
 }

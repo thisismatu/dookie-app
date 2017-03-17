@@ -243,6 +243,25 @@ class TableViewController: UITableViewController {
 
     @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
 
+    @IBAction func switchButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
+        let filteredPets = Defaults[.petArray].filter { $0.id != Defaults[.pet].id }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
+            Defaults[.login] = true
+            self.dismiss(animated: true, completion: nil)
+        }))
+
+        for pet in filteredPets {
+            alert.addAction(UIAlertAction(title: pet.name, style: .default, handler: { _ in
+                Defaults[.pet] = pet
+                self.dismiss(animated: false, completion: nil)
+            }))
+        }
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
     @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
         let type = [":tennis:"]
         if !mergeWithLatest(type) {

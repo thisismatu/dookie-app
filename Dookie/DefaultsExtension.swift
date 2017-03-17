@@ -24,4 +24,5 @@ extension DefaultsKeys {
     static let uid = DefaultsKey<String>("uid")
     static let pet = DefaultsKey<Pet>("pet")
     static let petArray = DefaultsKey<[Pet]>("petArray")
+    static let login = DefaultsKey<Bool>("login")
 }

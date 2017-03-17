@@ -140,6 +140,11 @@
                                 <segue destination="GU5-Yz-aDf" kind="presentation" id="hV9-TA-AKZ"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Switch" id="utZ-Ri-dur">
+                            <connections>
+                                <action selector="switchButtonPressed:" destination="Ml4-NM-IZz" id="pRT-iy-RJC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -665,7 +670,13 @@
                             <constraint firstItem="VLK-xw-mV7" firstAttribute="leading" secondItem="oLg-gt-Qd4" secondAttribute="leading" id="yCI-aM-WHn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kfd-SG-ok6"/>
+                    <navigationItem key="navigationItem" id="kfd-SG-ok6">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="F4N-pv-77X">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="IzT-IF-xxl" id="t0d-QL-0en"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="illustration" destination="VLK-xw-mV7" id="iJj-Bp-fPr"/>
                         <outlet property="stackView" destination="97w-tG-dXL" id="Yoh-sL-CTE"/>
