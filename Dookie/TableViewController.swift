@@ -46,7 +46,7 @@ class TableViewController: UITableViewController {
             }
         })
 
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
+        petRef.observe(.value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
                 let pet = Pet.init(Defaults[.pet].id, snapshot)
                 PetManager.shared.addPet(pet)

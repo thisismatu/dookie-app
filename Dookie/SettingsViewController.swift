@@ -52,7 +52,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
+        petRef.observe(.value, with: { snapshot in
             if Defaults.hasKey(.pet) {
                 let pet = Pet.init(Defaults[.pet].id, snapshot)
                 PetManager.shared.addPet(pet)
