@@ -14,9 +14,14 @@ extension UserDefaults {
         get { return unarchive(key) ?? Pet("","","") }
         set { archive(key, newValue) }
     }
+    subscript(key: DefaultsKey<[Pet]>) -> [Pet] {
+        get { return unarchive(key) ?? [] }
+        set { archive(key, newValue) }
+    }
 }
 
 extension DefaultsKeys {
     static let uid = DefaultsKey<String>("uid")
     static let pet = DefaultsKey<Pet>("pet")
+    static let petArray = DefaultsKey<[Pet]>("petArray")
 }

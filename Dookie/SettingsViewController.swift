@@ -54,7 +54,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewWillAppear(animated)
         petRef.observeSingleEvent(of: .value, with: { snapshot in
             if Defaults.hasKey(.pet) {
-                Defaults[.pet] = Pet.init(Defaults[.pet].id, snapshot)
+                let pet = Pet.init(Defaults[.pet].id, snapshot)
+                PetManager.shared.addPet(pet)
                 self.petNameLabel.text = Defaults[.pet].name
                 self.petEmojiButton.setTitle(Defaults[.pet].emoji.emojiUnescapedString, for: .normal)
             }
@@ -201,7 +202,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Leave \(Defaults[.pet].name)", style: .default, handler: { _ in
-            self.performSegue(withIdentifier: "leavePet", sender: self)
             self.appDelegate?.leavePet(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Delete \(Defaults[.pet].name)", style: .destructive, handler: { _ in
@@ -214,7 +214,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         let alert = UIAlertController(title: "Delete \(Defaults[.pet].name)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.performSegue(withIdentifier: "leavePet", sender: self)
             self.appDelegate?.deletePet()
         }))
         self.present(alert, animated: true, completion: nil)

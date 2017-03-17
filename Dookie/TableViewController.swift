@@ -48,12 +48,12 @@ class TableViewController: UITableViewController {
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
-                Defaults[.pet] = Pet.init(Defaults[.pet].id, snapshot)
+                let pet = Pet.init(Defaults[.pet].id, snapshot)
+                PetManager.shared.addPet(pet)
                 self.navigationItem.title = Defaults[.pet].name
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.performSegue(withIdentifier: "leavePet", sender: self)
                     self.appDelegate?.leavePet(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -247,7 +247,7 @@ class TableViewController: UITableViewController {
         let type = [":tennis:"]
         if !mergeWithLatest(type) {
             let activityItem = Activity(time: Date(), type: type)
-            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
@@ -255,7 +255,7 @@ class TableViewController: UITableViewController {
         let type = [":poop:"]
         if !mergeWithLatest(type) {
             let activityItem = Activity(time: Date(), type: type)
-            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
@@ -263,7 +263,7 @@ class TableViewController: UITableViewController {
         let type = [":droplet:"]
         if !mergeWithLatest(type) {
             let activityItem = Activity(time: Date(), type: type)
-            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 
@@ -271,7 +271,7 @@ class TableViewController: UITableViewController {
         let type = [":stew:"]
         if !mergeWithLatest(type) {
             let activityItem = Activity(time: Date(), type: type)
-            self.ref.child("activities").childByAutoId().setValue(activityItem.toAnyObject())
+            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
 }

@@ -40,7 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
-                Defaults[.pet] = Pet.init(host, "", "")
+                let pet = Pet.init(host, "", "")
+                PetManager.shared.addPet(pet)
             }
         }
         return false

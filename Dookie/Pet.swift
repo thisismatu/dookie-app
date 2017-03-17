@@ -41,3 +41,36 @@ class Pet: NSObject, NSCoding {
         aCoder.encode(self.emoji, forKey: "emoji")
     }
 }
+
+class PetManager {
+    static let shared = PetManager()
+
+    func addPet(_ pet: Pet) {
+        if let i = Defaults[.petArray].index(where: { $0.id == pet.id }) {
+            Defaults[.petArray][i] = pet
+        } else {
+            Defaults[.petArray].append(pet)
+        }
+        Defaults[.pet] = pet
+        print(Defaults[.pet], Defaults[.petArray])
+    }
+
+    func removePet(_ pet: Pet) {
+        if Defaults[.petArray].count > 1 {
+            if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
+                Defaults[.petArray].remove(at: index)
+            }
+            if let nextPet = Defaults[.petArray].first {
+                Defaults[.pet] = nextPet
+            }
+        } else {
+            Defaults.remove(.pet)
+            Defaults.remove(.petArray)
+        }
+
+        if let i = Defaults[.petArray].index(where: { $0.id == pet.id }) {
+            Defaults[.petArray].remove(at: i)
+        }
+        Defaults.remove(.pet)
+    }
+}
