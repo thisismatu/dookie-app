@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
                 let pet = Pet.init(host, "", "")
-                PetManager.shared.addPet(pet)
+                PetManager.shared.add(pet)
             }
         }
         return false
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func leavePet(animated: Bool) {
-        PetManager.shared.removePet(Defaults[.pet])
+        PetManager.shared.remove(Defaults[.pet])
 
         let root = self.window?.rootViewController as! UINavigationController
         if let vc = root.topViewController as? TableViewController {

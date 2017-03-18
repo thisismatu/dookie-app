@@ -49,7 +49,7 @@ class TableViewController: UITableViewController {
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
                 let pet = Pet.init(Defaults[.pet].id, snapshot)
-                PetManager.shared.addPet(pet)
+                PetManager.shared.add(pet)
                 self.navigationItem.title = Defaults[.pet].name
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
@@ -248,14 +248,15 @@ class TableViewController: UITableViewController {
         let filteredPets = Defaults[.petArray].filter { $0.id != Defaults[.pet].id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
-            Defaults[.login] = true
             self.dismiss(animated: true, completion: nil)
+            Defaults.remove(.pet)
         }))
 
         for pet in filteredPets {
-            alert.addAction(UIAlertAction(title: pet.name, style: .default, handler: { _ in
-                Defaults[.pet] = pet
+            let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
+            alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
                 self.dismiss(animated: false, completion: nil)
+                PetManager.shared.add(pet)
             }))
         }
 

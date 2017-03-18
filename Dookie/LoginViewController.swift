@@ -10,10 +10,9 @@ import UIKit
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
-    var asd: UIView!
-
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +20,7 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showHideContents()
+        showHideContent()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -29,30 +28,28 @@ class LoginViewController: UIViewController {
         presentTable()
     }
 
-    private func presentTable(animated: Bool? = false) {
-        if Defaults.hasKey(.pet) && !Defaults.hasKey(.login) {
+    private func presentTable(animated: Bool = false) {
+        if Defaults.hasKey(.pet) {
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
-                self.present(vc, animated: false, completion: nil)
-                Defaults.remove(.login)
+                self.present(vc, animated: animated, completion: nil)
             }
         }
     }
 
-    private func showHideContents() {
-        if Defaults.hasKey(.pet) && Defaults.hasKey(.login) {
-            self.stackView.isHidden = false
-            self.illustration.isHidden = false
-        } else if Defaults.hasKey(.pet) && !Defaults.hasKey(.login) {
-            self.stackView.isHidden = true
-            self.illustration.isHidden = true
+    private func showHideContent() {
+        stackView.isHidden = Defaults.hasKey(.pet)
+        illustration.isHidden = Defaults.hasKey(.pet)
+        if Defaults.hasKey(.petArray) {
+            cancelButton.isEnabled = true
+            cancelButton.tintColor = .dookieGray
         } else {
-            self.stackView.isHidden = false
-            self.illustration.isHidden = false
+            cancelButton.isEnabled = false
+            cancelButton.tintColor = .clear
         }
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        Defaults.remove(.login)
+        PetManager.shared.restore()
         presentTable(animated: true)
     }
 }

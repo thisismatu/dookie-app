@@ -15,6 +15,7 @@ class Pet: NSObject, NSCoding {
     let id: String
     var name: String
     var emoji: String
+    var current = true
 
     init(_ id: String, _ name: String, _ emoji: String) {
         self.id = id
@@ -45,27 +46,32 @@ class Pet: NSObject, NSCoding {
 class PetManager {
     static let shared = PetManager()
 
-    func addPet(_ pet: Pet) {
-        if let i = Defaults[.petArray].index(where: { $0.id == pet.id }) {
-            Defaults[.petArray][i] = pet
+    func add(_ pet: Pet) {
+        Defaults[.pet] = pet
+        _ = Defaults[.petArray].map { $0.current = false }
+        if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
+            Defaults[.petArray][index] = pet
         } else {
             Defaults[.petArray].append(pet)
         }
-        Defaults[.pet] = pet
-        print(Defaults[.pet], Defaults[.petArray])
     }
 
-    func removePet(_ pet: Pet) {
+    func remove(_ pet: Pet) {
         if Defaults[.petArray].count > 1 {
             if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
                 Defaults[.petArray].remove(at: index)
-                if let nextPet = Defaults[.petArray].first {
-                    Defaults[.pet] = nextPet
-                }
+                Defaults[.pet] = Defaults[.petArray][0]
+                Defaults[.pet].current = true
             }
         } else {
             Defaults.remove(.pet)
             Defaults.remove(.petArray)
+        }
+    }
+
+    func restore() {
+        if let current = Defaults[.petArray].filter({ $0.current == true }).first {
+            self.add(current)
         }
     }
 }

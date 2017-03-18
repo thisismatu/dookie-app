@@ -140,7 +140,7 @@
                                 <segue destination="GU5-Yz-aDf" kind="presentation" id="hV9-TA-AKZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Switch" id="utZ-Ri-dur">
+                        <barButtonItem key="rightBarButtonItem" image="ic_shuffle" id="utZ-Ri-dur">
                             <connections>
                                 <action selector="switchButtonPressed:" destination="Ml4-NM-IZz" id="pRT-iy-RJC"/>
                             </connections>
@@ -149,7 +149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2343.1999999999998" y="118.29085457271366"/>
+            <point key="canvasLocation" x="2217" y="117"/>
         </scene>
         <!--Settings-->
         <scene sceneID="QIA-6r-8ms">
@@ -237,7 +237,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZYM-O2-8ve">
-                            <rect key="frame" x="0.0" y="521.5" width="375" height="80"/>
+                            <rect key="frame" x="0.0" y="523" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Q25-Fn-hh5">
@@ -268,7 +268,7 @@
                             <tableViewSection headerTitle="General" id="y8Y-zB-V6T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CaE-6S-No5">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="256" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -307,7 +307,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Zd2-e0-49C">
-                                        <rect key="frame" x="0.0" y="303.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="304" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -347,7 +347,7 @@
                             <tableViewSection headerTitle="Feedback" id="2Dq-hc-HbI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="MUf-nh-rzA">
-                                        <rect key="frame" x="0.0" y="407.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="409" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -383,7 +383,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="BcY-Ft-ZzN">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="457" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -454,7 +454,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9L-OY-7Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2xk-gL-ukx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4184.8000000000002" y="116.49175412293854"/>
+            <point key="canvasLocation" x="3978" y="117"/>
         </scene>
         <!--Edit-->
         <scene sceneID="I1a-5J-r0L">
@@ -559,7 +559,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51I-uq-nAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wv5-yc-r73" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5188" y="118"/>
+            <point key="canvasLocation" x="4849" y="116"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
@@ -671,13 +671,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kfd-SG-ok6">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="F4N-pv-77X">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="ic_close" id="F4N-pv-77X">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="IzT-IF-xxl" id="t0d-QL-0en"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="F4N-pv-77X" id="qZy-l5-ftl"/>
                         <outlet property="illustration" destination="VLK-xw-mV7" id="iJj-Bp-fPr"/>
                         <outlet property="stackView" destination="97w-tG-dXL" id="Yoh-sL-CTE"/>
                     </connections>
@@ -759,7 +760,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="549-YQ-0pJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-334" y="-215"/>
+            <point key="canvasLocation" x="-338" y="-275"/>
         </scene>
         <!--Join a shared pet-->
         <scene sceneID="uEz-r1-Gmn">
@@ -834,7 +835,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dp-FB-zT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="451"/>
+            <point key="canvasLocation" x="-339" y="510"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7qb-Tp-IGM">
@@ -856,7 +857,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBN-qr-o7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1404" y="118.29085457271366"/>
+            <point key="canvasLocation" x="1367" y="118"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RIX-I5-8Bl">
@@ -892,7 +893,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZL-AV-4xg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3245.5999999999999" y="116.49175412293854"/>
+            <point key="canvasLocation" x="3089" y="116"/>
         </scene>
     </scenes>
     <resources>
@@ -900,6 +901,7 @@
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_cog" width="24" height="24"/>
         <image name="ic_ellipsis" width="24" height="24"/>
+        <image name="ic_shuffle" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jKj-mt-dtt"/>
