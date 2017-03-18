@@ -60,6 +60,7 @@
 		CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCD12DA51E7D8F7000691BE5 /* Dookie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dookie.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +81,7 @@
 				CC95E6451E3FB28F001C93C9 /* AppDelegate.swift */,
 				CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */,
 				CC95E6511E3FB28F001C93C9 /* Info.plist */,
+				CCD12DA51E7D8F7000691BE5 /* Dookie.entitlements */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -216,6 +218,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7Q878QDTU9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
