@@ -10,6 +10,8 @@ import UIKit
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
+    var shouldAnimate = false
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -25,10 +27,10 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presentTable()
+        presentTable(animated: shouldAnimate)
     }
 
-    private func presentTable(animated: Bool = false) {
+    private func presentTable(animated: Bool) {
         if Defaults.hasKey(.pet) {
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
                 self.present(vc, animated: animated, completion: nil)
@@ -39,12 +41,18 @@ class LoginViewController: UIViewController {
     private func showHideContent() {
         stackView.isHidden = Defaults.hasKey(.pet)
         illustration.isHidden = Defaults.hasKey(.pet)
-        if Defaults.hasKey(.petArray) {
+        if Defaults.hasKey(.petArray) && !Defaults.hasKey(.pet)  {
             cancelButton.isEnabled = true
             cancelButton.tintColor = .dookieGray
         } else {
             cancelButton.isEnabled = false
             cancelButton.tintColor = .clear
+        }
+    }
+
+    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
+        if segue.identifier == "addJoinPet" || segue.identifier == "switchPet" {
+            shouldAnimate = true
         }
     }
 

@@ -54,7 +54,7 @@ class TableViewController: UITableViewController {
             } else {
                 let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.appDelegate?.leavePet(animated: true)
+                    self.appDelegate?.leavePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -248,14 +248,14 @@ class TableViewController: UITableViewController {
         let filteredPets = Defaults[.petArray].filter { $0.id != Defaults[.pet].id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
-            self.dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "backToLogin", sender: self)
             Defaults.remove(.pet)
         }))
 
         for pet in filteredPets {
             let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
             alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                self.dismiss(animated: false, completion: nil)
+                self.performSegue(withIdentifier: "switchPet", sender: self)
                 PetManager.shared.add(pet)
             }))
         }

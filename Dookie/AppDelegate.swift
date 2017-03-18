@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func leavePet(animated: Bool) {
+    func leavePet() {
         PetManager.shared.remove(Defaults[.pet])
 
         let root = self.window?.rootViewController as! UINavigationController
@@ -78,13 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             vc.tableView.reloadData()
         }
 
-        root.popToRootViewController(animated: false)
-        root.dismiss(animated: animated, completion: nil)
+        root.dismiss(animated: true, completion: nil)
     }
 
     func deletePet() {
         FIRDatabase.database().reference(withPath: Defaults[.pet].id).removeValue()
-        leavePet(animated: true)
+        leavePet()
     }
 }
 

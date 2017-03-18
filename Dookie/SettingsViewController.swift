@@ -210,7 +210,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Leave \(Defaults[.pet].name)", style: .default, handler: { _ in
-            self.appDelegate?.leavePet(animated: true)
+            self.appDelegate?.leavePet()
         }))
         alert.addAction(UIAlertAction(title: "Delete \(Defaults[.pet].name)", style: .destructive, handler: { _ in
             self.deletePetPrompt()

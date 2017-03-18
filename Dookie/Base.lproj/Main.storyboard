@@ -146,8 +146,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="gZT-At-y7i" kind="unwind" identifier="switchPet" unwindAction="unwindToLogin:" id="6mE-Aj-yZz"/>
+                        <segue destination="gZT-At-y7i" kind="unwind" identifier="backToLogin" unwindAction="unwindToLogin:" id="lVw-mX-pif"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gZT-At-y7i" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2217" y="117"/>
         </scene>
@@ -756,9 +761,11 @@
                     <navigationItem key="navigationItem" title="Add a new pet" id="fdA-ln-3V1"/>
                     <connections>
                         <outlet property="textField" destination="s6J-P4-wKB" id="5mK-A3-2JW"/>
+                        <segue destination="w9s-sl-zxK" kind="unwind" identifier="addJoinPet" unwindAction="unwindToLogin:" id="id2-Uf-ewR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="549-YQ-0pJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="w9s-sl-zxK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-338" y="-275"/>
         </scene>
@@ -831,9 +838,11 @@
                     <navigationItem key="navigationItem" title="Join a shared pet" id="zNV-bB-0n9"/>
                     <connections>
                         <outlet property="textField" destination="x8z-IK-FQe" id="bdj-bl-TN3"/>
+                        <segue destination="Bzd-V4-I30" kind="unwind" identifier="addJoinPet" unwindAction="unwindToLogin:" id="mo2-22-rOu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dp-FB-zT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Bzd-V4-I30" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-339" y="510"/>
         </scene>
