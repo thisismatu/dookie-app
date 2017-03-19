@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let host = url.host else { return false }
             if host.isFirebaseUID {
+                if let root = self.window?.rootViewController as? UINavigationController {
+                    root.dismiss(animated: true, completion: nil)
+                }
                 let pet = Pet.init(host, "", "")
                 PetManager.shared.add(pet)
             }
@@ -86,13 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func leavePet() {
         PetManager.shared.remove(Defaults[.pet])
 
-        let root = self.window?.rootViewController as! UINavigationController
-        if let vc = root.topViewController as? TableViewController {
-            vc.activitiesArray.removeAll()
-            vc.tableView.reloadData()
+        if let root = self.window?.rootViewController as? UINavigationController {
+            if let vc = root.topViewController as? TableViewController {
+                vc.activitiesArray.removeAll()
+                vc.tableView.reloadData()
+            }
+            root.dismiss(animated: true, completion: nil)
         }
-
-        root.dismiss(animated: true, completion: nil)
     }
 
     func deletePet() {
