@@ -14,6 +14,7 @@
 		4A0AB1EB1E5367A2009F4F18 /* FirebaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EA1E5367A2009F4F18 /* FirebaseExtension.swift */; };
 		4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */; };
 		4A3E32761E427670004FA9BD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E32751E427670004FA9BD /* Activity.swift */; };
+		ABE5B49E13B33818A945C46D /* Pods_DookieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C29859A667E96F4FE15CAD /* Pods_DookieUITests.framework */; };
 		ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */; };
 		CC1085CC1E732F3600C4008B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1085CB1E732F3600C4008B /* UIColorExtension.swift */; };
 		CC1085CE1E733A5900C4008B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1085CD1E733A5900C4008B /* UIViewControllerExtension.swift */; };
@@ -30,7 +31,19 @@
 		CCA7ABA01E4623DB00F8BEAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */; };
 		CCAFFA701E79C1EC005EE8A3 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */; };
 		CCB4E4E11E45BCFB00E5E74B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */; };
+		CCCD89411E80037C00E7EF82 /* DookieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCD89401E80037C00E7EF82 /* DookieUITests.swift */; };
+		CCCD89491E8003DB00E7EF82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCD89481E8003DB00E7EF82 /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CCCD89431E80037C00E7EF82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC95E63A1E3FB28F001C93C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC95E6411E3FB28F001C93C9;
+			remoteInfo = Dookie;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1FD81076FCA7DF3731E080BF /* Pods-Dookie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.release.xcconfig"; sourceTree = "<group>"; };
@@ -41,8 +54,11 @@
 		4A0AB1EA1E5367A2009F4F18 /* FirebaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseExtension.swift; sourceTree = "<group>"; };
 		4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsExtension.swift; sourceTree = "<group>"; };
 		4A3E32751E427670004FA9BD /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		789222E42E158CE8F08C1BF8 /* Pods-DookieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DookieUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DookieUITests/Pods-DookieUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98663DCF4002E1CDF844474D /* Pods-DookieUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DookieUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DookieUITests/Pods-DookieUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.debug.xcconfig"; sourceTree = "<group>"; };
+		C2C29859A667E96F4FE15CAD /* Pods_DookieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DookieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC1085CB1E732F3600C4008B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		CC1085CD1E733A5900C4008B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		CC1085CF1E74995B00C4008B /* EditPetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPetViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +76,10 @@
 		CCA7AB9F1E4623DB00F8BEAF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCAFFA6F1E79C1EC005EE8A3 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		CCB4E4E01E45BCFB00E5E74B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCCD893E1E80037C00E7EF82 /* DookieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DookieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCCD89401E80037C00E7EF82 /* DookieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DookieUITests.swift; sourceTree = "<group>"; };
+		CCCD89421E80037C00E7EF82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCCD89481E8003DB00E7EF82 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		CCD12DA51E7D8F7000691BE5 /* Dookie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dookie.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +89,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCCD893B1E80037C00E7EF82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABE5B49E13B33818A945C46D /* Pods_DookieUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +166,8 @@
 			children = (
 				C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */,
 				1FD81076FCA7DF3731E080BF /* Pods-Dookie.release.xcconfig */,
+				789222E42E158CE8F08C1BF8 /* Pods-DookieUITests.debug.xcconfig */,
+				98663DCF4002E1CDF844474D /* Pods-DookieUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -146,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */,
+				C2C29859A667E96F4FE15CAD /* Pods_DookieUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95E6441E3FB28F001C93C9 /* Dookie */,
+				CCCD893F1E80037C00E7EF82 /* DookieUITests */,
 				CC95E6431E3FB28F001C93C9 /* Products */,
 				975689BDA593939CC1FD5522 /* Pods */,
 				B2C075FC5BFEE9151A77D9ED /* Frameworks */,
@@ -164,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				CC95E6421E3FB28F001C93C9 /* Dookie.app */,
+				CCCD893E1E80037C00E7EF82 /* DookieUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +212,16 @@
 				CC95E64C1E3FB28F001C93C9 /* Assets.xcassets */,
 			);
 			path = Dookie;
+			sourceTree = "<group>";
+		};
+		CCCD893F1E80037C00E7EF82 /* DookieUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CCCD89481E8003DB00E7EF82 /* SnapshotHelper.swift */,
+				CCCD89401E80037C00E7EF82 /* DookieUITests.swift */,
+				CCCD89421E80037C00E7EF82 /* Info.plist */,
+			);
+			path = DookieUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +247,27 @@
 			productReference = CC95E6421E3FB28F001C93C9 /* Dookie.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CCCD893D1E80037C00E7EF82 /* DookieUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCCD89471E80037C00E7EF82 /* Build configuration list for PBXNativeTarget "DookieUITests" */;
+			buildPhases = (
+				BA2FEAB2848B9104A0892687 /* [CP] Check Pods Manifest.lock */,
+				CCCD893A1E80037C00E7EF82 /* Sources */,
+				CCCD893B1E80037C00E7EF82 /* Frameworks */,
+				CCCD893C1E80037C00E7EF82 /* Resources */,
+				47AB813A7DD61FCFB50B3A17 /* [CP] Embed Pods Frameworks */,
+				97818B0CB4209D3BB7A9600E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCCD89441E80037C00E7EF82 /* PBXTargetDependency */,
+			);
+			name = DookieUITests;
+			productName = DookieUITests;
+			productReference = CCCD893E1E80037C00E7EF82 /* DookieUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -224,6 +288,12 @@
 							};
 						};
 					};
+					CCCD893D1E80037C00E7EF82 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7Q878QDTU9;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CC95E6411E3FB28F001C93C9;
+					};
 				};
 			};
 			buildConfigurationList = CC95E63D1E3FB28F001C93C9 /* Build configuration list for PBXProject "Dookie" */;
@@ -240,6 +310,7 @@
 			projectRoot = "";
 			targets = (
 				CC95E6411E3FB28F001C93C9 /* Dookie */,
+				CCCD893D1E80037C00E7EF82 /* DookieUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -256,9 +327,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CCCD893C1E80037C00E7EF82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		47AB813A7DD61FCFB50B3A17 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DookieUITests/Pods-DookieUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4BD0652E560BCE7AD7A1B7D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -274,6 +367,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		97818B0CB4209D3BB7A9600E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DookieUITests/Pods-DookieUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AF6E4FE32BCDF4FC878027BE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,6 +395,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dookie/Pods-Dookie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA2FEAB2848B9104A0892687 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CBE6B35E83606C104116BBBF /* [CP] Embed Pods Frameworks */ = {
@@ -332,7 +455,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CCCD893A1E80037C00E7EF82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCCD89411E80037C00E7EF82 /* DookieUITests.swift in Sources */,
+				CCCD89491E8003DB00E7EF82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CCCD89441E80037C00E7EF82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC95E6411E3FB28F001C93C9 /* Dookie */;
+			targetProxy = CCCD89431E80037C00E7EF82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CC95E6491E3FB28F001C93C9 /* Main.storyboard */ = {
@@ -494,6 +634,34 @@
 			};
 			name = Release;
 		};
+		CCCD89451E80037C00E7EF82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 789222E42E158CE8F08C1BF8 /* Pods-DookieUITests.debug.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 7Q878QDTU9;
+				INFOPLIST_FILE = DookieUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ml.DookieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Dookie;
+			};
+			name = Debug;
+		};
+		CCCD89461E80037C00E7EF82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98663DCF4002E1CDF844474D /* Pods-DookieUITests.release.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 7Q878QDTU9;
+				INFOPLIST_FILE = DookieUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ml.DookieUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Dookie;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -514,6 +682,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CCCD89471E80037C00E7EF82 /* Build configuration list for PBXNativeTarget "DookieUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCCD89451E80037C00E7EF82 /* Debug */,
+				CCCD89461E80037C00E7EF82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

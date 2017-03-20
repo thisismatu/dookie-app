@@ -1,0 +1,7 @@
+workspace "Dookie.xcworkspace"
+output_directory "./fastlane/screenshots"
+clear_previous_screenshots true
+stop_after_first_error true
+devices(["iPhone 7"])
+languages(["en-US"])
+scheme "Dookie"
