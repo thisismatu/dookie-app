@@ -27,7 +27,7 @@ class ActivityTableViewCell: UITableViewCell {
         lineTop.isHidden = hideTop
         lineBottom.isHidden = hideBottom
 
-        if item.uid == defaults {
+        if item.uid == defaults || item.uid.isEmpty {
             indicator.layer.borderColor = UIColor.dookieBlue.cgColor
         } else {
             indicator.layer.borderColor = UIColor.dookieLightGray.cgColor
