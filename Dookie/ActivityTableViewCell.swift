@@ -8,6 +8,7 @@
 
 import UIKit
 import Emoji
+import SwiftyUserDefaults
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
@@ -27,7 +28,7 @@ class ActivityTableViewCell: UITableViewCell {
         lineTop.isHidden = hideTop
         lineBottom.isHidden = hideBottom
 
-        if item.uid == defaults || item.uid.isEmpty {
+        if item.uid == defaults || Defaults.hasKey("FASTLANE_SNAPSHOT") && item.uid.isEmpty {
             indicator.layer.borderColor = UIColor.dookieBlue.cgColor
         } else {
             indicator.layer.borderColor = UIColor.dookieLightGray.cgColor
