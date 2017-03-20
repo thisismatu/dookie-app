@@ -24,6 +24,7 @@ class DookieUITests: XCTestCase {
 
     func testScreenshots() {
         let app = XCUIApplication()
+        sleep(5)
         snapshot("01LoginScreen")
         app.buttons["Join a shared pet"].tap()
         app.buttons["Join"].tap()
