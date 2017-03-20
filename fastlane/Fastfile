@@ -47,6 +47,11 @@ lane :beta do
 end
 
 lane :screenshots do
+    # put mock data in place
+    Dir.chdir("../../dookie-server") do
+        sh './screenshot.fish'
+    end
+
     # take screenshots
     snapshot(
         workspace: "Dookie.xcworkspace",
@@ -60,7 +65,10 @@ lane :screenshots do
         languages: ["en-GB"]
     )
 
-    #frame them
+    # delete random FIRDataSnapshot image
+    Dir.glob('screenshots/*/*FIRDataSnapshot*').each { |file| File.delete(file)}
+
+    # frame screenshots
     frameit(
         white: true,
         path: './fastlane/screenshots/'
