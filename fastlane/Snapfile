@@ -2,6 +2,7 @@ workspace "Dookie.xcworkspace"
 output_directory "./fastlane/screenshots"
 clear_previous_screenshots true
 stop_after_first_error true
+number_of_retries 1
 devices([
     "iPhone 7",
     "iPhone 7 Plus"

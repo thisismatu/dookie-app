@@ -9,9 +9,13 @@
 import XCTest
 
 class DookieUITests: XCTestCase {
+    var userDefaults: UserDefaults?
+    let userDefaultsSuiteName = "TestDefaults"
 
     override func setUp() {
         super.setUp()
+        UserDefaults().removePersistentDomain(forName: userDefaultsSuiteName)
+        userDefaults = UserDefaults(suiteName: userDefaultsSuiteName)
         UIPasteboard.general.string = "-KdbklMPTqReQ-OFr-v7"
         let app = XCUIApplication()
         setupSnapshot(app)
