@@ -1,0 +1,14 @@
+{
+  "device_frame_version": "latest",
+  "default": {
+    "title": {
+      "font": "./fonts/SF-UI-Display-Bold.otf",
+      "color": "#111111"
+    },
+    "background": "./background.png",
+    "padding": 52,
+    "show_complete_frame": false,
+    "stack_title" : false
+  },
+  "data": []
+}

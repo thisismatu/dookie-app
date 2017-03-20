@@ -46,21 +46,23 @@ lane :beta do
     push_to_git_remote
 end
 
-lane :screenshot do
+lane :screenshots do
+    # take screenshots
     snapshot(
-          workspace: "Dookie.xcworkspace",
-          scheme: "Dookie",
-          stop_after_first_error: true,
-          clear_previous_screenshots: true,
-          number_of_retries: 1,
-          devices: [
+        workspace: "Dookie.xcworkspace",
+        scheme: "Dookie",
+        stop_after_first_error: true,
+        clear_previous_screenshots: true,
+        devices: [
             "iPhone 7",
             "iPhone 7 Plus"
-          ],
-          languages: ["en-GB"]
-        )
-        frameit(
-          white: true,
-          path: './fastlane/screenshots/'
-        )
+        ],
+        languages: ["en-GB"]
+    )
+
+    #frame them
+    frameit(
+        white: true,
+        path: './fastlane/screenshots/'
+    )
 end
