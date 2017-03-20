@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func migrateUserDefaults() {
-        if !Defaults.hasKey(.didMigrate) {
+        if !Defaults.hasKey(.didMigrate) && Defaults.hasKey(.secret) {
             let pet = Pet.init(Defaults[.secret], Defaults[.name], Defaults[.emoji])
             PetManager.shared.add(pet)
             Defaults.remove(.secret)
