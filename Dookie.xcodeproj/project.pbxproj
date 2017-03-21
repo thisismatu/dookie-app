@@ -15,6 +15,7 @@
 		4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */; };
 		4A3E32761E427670004FA9BD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E32751E427670004FA9BD /* Activity.swift */; };
 		4A986D011E81CD0100F4695C /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A986D001E81CD0100F4695C /* PremiumViewController.swift */; };
+		4ABADE171E81D66E001017D8 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABADE161E81D66E001017D8 /* Confetti.swift */; };
 		ADBB2FEF3273C81288812CF6 /* Pods_Dookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */; };
 		CC1085CC1E732F3600C4008B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1085CB1E732F3600C4008B /* UIColorExtension.swift */; };
 		CC1085CE1E733A5900C4008B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1085CD1E733A5900C4008B /* UIViewControllerExtension.swift */; };
@@ -55,6 +56,7 @@
 		4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsExtension.swift; sourceTree = "<group>"; };
 		4A3E32751E427670004FA9BD /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		4A986D001E81CD0100F4695C /* PremiumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
+		4ABADE161E81D66E001017D8 /* Confetti.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		7FFE64DC7AE9B752F6BE9728 /* Pods_Dookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C202C7BD1F5990F1D4472DED /* Pods-Dookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dookie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dookie/Pods-Dookie.debug.xcconfig"; sourceTree = "<group>"; };
 		C2C29859A667E96F4FE15CAD /* Pods_DookieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DookieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */,
+				4ABADE161E81D66E001017D8 /* Confetti.swift */,
 				4A0AB1E21E5366C6009F4F18 /* RoundButton.swift */,
 				4A0AB1E41E5366D8009F4F18 /* RoundBorderView.swift */,
 				CC95E6491E3FB28F001C93C9 /* Main.storyboard */,
@@ -392,6 +395,7 @@
 				CC9501001E47A0F200C87CCB /* AddPetViewController.swift in Sources */,
 				CC1085D01E74995B00C4008B /* EditPetViewController.swift in Sources */,
 				4A0AB1E31E5366C6009F4F18 /* RoundButton.swift in Sources */,
+				4ABADE171E81D66E001017D8 /* Confetti.swift in Sources */,
 				CC9501021E47A10200C87CCB /* JoinPetViewController.swift in Sources */,
 				CC95E6581E3FB434001C93C9 /* TableViewController.swift in Sources */,
 				4A3E32761E427670004FA9BD /* Activity.swift in Sources */,

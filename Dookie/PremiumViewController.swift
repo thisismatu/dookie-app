@@ -9,11 +9,18 @@
 import UIKit
 
 class PremiumViewController: UIViewController {
+    var confettiView: SAConfettiView!
+    var isRainingConfetti = false
+
     @IBOutlet weak var buyButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
+
+        confettiView = SAConfettiView(frame: self.view.bounds)
+        view.addSubview(confettiView)
+        view.sendSubview(toBack: confettiView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +36,17 @@ class PremiumViewController: UIViewController {
         })
     }
 
+    private func confettiRain() {
+        if (isRainingConfetti) {
+            confettiView.stopConfetti()
+        } else {
+            confettiView.startConfetti()
+        }
+        isRainingConfetti = !isRainingConfetti
+    }
+
     @IBAction func buyButtonPressed(_ sender: Any) {
+        self.confettiRain()
         UIView.animate(withDuration: 0.2, animations: {
             self.buyButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             self.buyButton.setTitle("Thanks, you're awesome!", for: .normal)
