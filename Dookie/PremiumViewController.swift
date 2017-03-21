@@ -36,26 +36,20 @@ class PremiumViewController: UIViewController {
         })
     }
 
-    private func confettiRain() {
-        if (isRainingConfetti) {
-            confettiView.stopConfetti()
-        } else {
-            confettiView.startConfetti()
-        }
-        isRainingConfetti = !isRainingConfetti
-    }
-
     @IBAction func buyButtonPressed(_ sender: Any) {
-        self.confettiRain()
+        confettiView.startConfetti()
         UIView.animate(withDuration: 0.2, animations: {
             self.buyButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             self.buyButton.setTitle("Thanks, you're awesome!", for: .normal)
         }, completion: { _ in
             UIView.animate(withDuration: 0.2, animations: {
                 self.buyButton.transform = CGAffineTransform.identity
+            }, completion: { _ in
+                self.confettiView.stopConfetti()
             })
         })
     }
+
     /*
     // MARK: - Navigation
 
@@ -65,5 +59,4 @@ class PremiumViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
