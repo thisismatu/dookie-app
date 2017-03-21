@@ -41,6 +41,11 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         validateInputs()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = nil
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         emojiTextField.becomeFirstResponder()
