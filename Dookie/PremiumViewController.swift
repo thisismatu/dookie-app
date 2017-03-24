@@ -21,7 +21,8 @@ class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
-        self.premiumUnlockedStackView.isHidden = true
+        premiumUnlockedStackView.spacing = 0.0
+        premiumUnlockedStackView.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,13 +44,17 @@ class PremiumViewController: UIViewController {
         let alert = UIAlertController(title: "Confirm Your In-App Purchase", message: "This is just a test", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+            self.unlockPremiumStackView.spacing = 0.0
             self.unlockPremiumStackView.isHidden = true
-            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut, animations: {
-                self.premiumUnlockedStackView.isHidden = false
+            self.premiumUnlockedStackView.alpha = 0.0
+            self.premiumUnlockedStackView.spacing = 16.0
+            self.premiumUnlockedStackView.isHidden = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.premiumUnlockedStackView.alpha = 1.0
             }, completion: { _ in
                 self.confettiView.startConfetti()
-                let now = DispatchTime.now() + 0.6
-                DispatchQueue.main.asyncAfter(deadline: now) {
+                let deadline = DispatchTime.now() + 0.5
+                DispatchQueue.main.asyncAfter(deadline: deadline) {
                     self.confettiView.stopConfetti()
                 }
             })
