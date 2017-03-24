@@ -11,12 +11,17 @@ import UIKit
 class PremiumViewController: UIViewController {
     var isRainingConfetti = false
 
-    @IBOutlet weak var confettiView: SAConfettiView!
+    @IBOutlet weak var unlockPremiumStackView: UIStackView!
+    @IBOutlet weak var premiumUnlockedStackView: UIStackView!
     @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var subscriptionButton: UIButton!
+    @IBOutlet weak var confettiView: SAConfettiView!
+    @IBOutlet weak var restoreButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
+        self.premiumUnlockedStackView.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,18 +37,31 @@ class PremiumViewController: UIViewController {
         })
     }
 
+    // MARK: - Actions
+
     @IBAction func buyButtonPressed(_ sender: Any) {
-        confettiView.startConfetti()
-        UIView.animate(withDuration: 0.2, animations: {
-            self.buyButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            self.buyButton.setTitle("Thanks, you're awesome!", for: .normal)
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.buyButton.transform = CGAffineTransform.identity
+        let alert = UIAlertController(title: "Confirm Your In-App Purchase", message: "This is just a test", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+            self.unlockPremiumStackView.isHidden = true
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut, animations: {
+                self.premiumUnlockedStackView.isHidden = false
             }, completion: { _ in
-                self.confettiView.stopConfetti()
+                self.confettiView.startConfetti()
+                let now = DispatchTime.now() + 0.6
+                DispatchQueue.main.asyncAfter(deadline: now) {
+                    self.confettiView.stopConfetti()
+                }
             })
-        })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    @IBAction func subscriptionButtonPressed(_ sender: Any) {
+        guard let url = URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions") else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
+        }
     }
 
     /*
