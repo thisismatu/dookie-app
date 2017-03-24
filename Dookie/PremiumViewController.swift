@@ -9,18 +9,14 @@
 import UIKit
 
 class PremiumViewController: UIViewController {
-    var confettiView: SAConfettiView!
     var isRainingConfetti = false
 
+    @IBOutlet weak var confettiView: SAConfettiView!
     @IBOutlet weak var buyButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
-
-        confettiView = SAConfettiView(frame: self.view.bounds)
-        view.addSubview(confettiView)
-        view.sendSubview(toBack: confettiView)
     }
 
     override func viewWillAppear(_ animated: Bool) {

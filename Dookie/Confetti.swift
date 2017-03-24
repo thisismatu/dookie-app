@@ -41,7 +41,7 @@ class SAConfettiView: UIView {
                   UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
                   UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
                   UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
-        intensity = 0.5
+        intensity = 0.6
         type = .confetti
         active = false
     }
@@ -68,11 +68,6 @@ class SAConfettiView: UIView {
         active = false
     }
 
-    func imageForType(_ type: ConfettiType) -> UIImage? {
-        let img = UIImage(named: "confetti")
-        return img
-    }
-
     func confettiWithColor(_ color: UIColor) -> CAEmitterCell {
         let confetti = CAEmitterCell()
         confetti.birthRate = 6.0 * intensity
@@ -87,7 +82,7 @@ class SAConfettiView: UIView {
         confetti.spinRange = CGFloat(4.0 * intensity)
         confetti.scaleRange = CGFloat(intensity)
         confetti.scaleSpeed = CGFloat(-0.1 * intensity)
-        confetti.contents = imageForType(type)!.cgImage
+        confetti.contents = UIImage(named: "confetti")?.cgImage
         return confetti
     }
     
