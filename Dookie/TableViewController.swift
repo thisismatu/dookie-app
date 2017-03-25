@@ -52,7 +52,7 @@ class TableViewController: UITableViewController {
                 PetManager.shared.add(pet)
                 self.navigationItem.title = Defaults[.pet].name
             } else {
-                let alert = UIAlertController(title: "This pet doesn't exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
                     self.appDelegate?.leavePet()
                 }))
@@ -201,8 +201,8 @@ class TableViewController: UITableViewController {
             label.frame.size.width = tableView.frame.size.width
             label.center = tableView.center
             label.numberOfLines = 2
-            label.textColor = .gray
-            label.text = "No activities today, maybe time for a walk?"
+            label.textColor = .dookieLightGray
+            label.text = "No activities today, time for a walk?"
             label.textAlignment = .center
             label.font = label.font.withSize(15)
             self.tableView.backgroundView = label

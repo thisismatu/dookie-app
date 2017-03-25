@@ -155,15 +155,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func sendInviteEmail() {
-        let subject: String = "Join \(Defaults[.pet].name) on Dookie 🐶"
+        let subject: String = "Join \(Defaults[.pet].name) on Dookie \(Defaults[.pet].emoji)"
         let bodyArray: [String] = [
             "<p>Hello,</p>",
-            "<p>I'd like you to join \(Defaults[.pet].name) on <a href='https://dookie.me'>Dookie</a>.</p>",
+            "<p>I’d like you to join \(Defaults[.pet].name) on <a href='https://dookie.me'>Dookie</a>.</p>",
             "<a href='dookie://\(Defaults[.pet].id)' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(Defaults[.pet].name) on Dookie</a>",
-            "<p>Dookie is the easiest way to keep track of your pet's eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
+            "<p>Dookie is the easiest way to keep track of your pet’s eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
             "<p>Happy tracking!</p>",
             "<p>🐶</p>",
-            "<p style='color: #999999;'>If the link isn't working, copy this code for manual entry: <strong>\(Defaults[.pet].id)</strong></p>"
+            "<p style='color: #999999;'>If the link isn’t working, copy this code for manual entry: <strong>\(Defaults[.pet].id)</strong></p>"
         ]
         configureEmail(subject, body: bodyArray.joined(), recipients: [], html: true)
     }
