@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SwiftyUserDefaults
+import Emoji
 
 class TableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -27,6 +28,7 @@ class TableViewController: UITableViewController {
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.navigationItem.title = Defaults[.pet].name
+        setupToolbar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -211,6 +213,24 @@ class TableViewController: UITableViewController {
         }
     }
 
+    private func setupToolbar() {
+        let emojis = [":tennis:", ":poop:", ":droplet:", ":stew:"]
+        var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        for item in emojis {
+            items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
+            items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        }
+        self.setToolbarItems(items, animated: true)
+    }
+
+    @objc private func barButtonPressed(_ item: UIBarButtonItem) {
+        guard let type = item.title?.emojiEscapedString else { return }
+        if !mergeWithLatest([type]) {
+            let activityItem = Activity(time: Date(), type: [type])
+            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
+        }
+    }
+
     private func mergeWithLatest(_ newType: [String]) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
         let tmp = latest.type + newType
@@ -261,37 +281,5 @@ class TableViewController: UITableViewController {
         }
 
         self.present(alert, animated: true, completion: nil)
-    }
-
-    @IBAction func buttonWalk(_ sender: UIBarButtonItem) {
-        let type = [":tennis:"]
-        if !mergeWithLatest(type) {
-            let activityItem = Activity(time: Date(), type: type)
-            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
-        }
-    }
-
-    @IBAction func buttonPoop(_ sender: UIBarButtonItem) {
-        let type = [":poop:"]
-        if !mergeWithLatest(type) {
-            let activityItem = Activity(time: Date(), type: type)
-            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
-        }
-    }
-
-    @IBAction func buttonPee(_ sender: UIBarButtonItem) {
-        let type = [":droplet:"]
-        if !mergeWithLatest(type) {
-            let activityItem = Activity(time: Date(), type: type)
-            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
-        }
-    }
-
-    @IBAction func buttonFood(_ sender: UIBarButtonItem) {
-        let type = [":stew:"]
-        if !mergeWithLatest(type) {
-            let activityItem = Activity(time: Date(), type: type)
-            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
-        }
     }
 }
