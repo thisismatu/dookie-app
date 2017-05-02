@@ -44,7 +44,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
         switch !name.isEmpty {
         case true:
-            ref.childByAutoId().child("pet").setValue(["name": name], withCompletionBlock: { (error, reference) in
+            ref.childByAutoId().child("pet").setValue(["name": name, "buttons": [":stew:", ":droplet:", ":poop:"]], withCompletionBlock: { (error, reference) in
                 guard let id = reference.parent?.key else { return }
                 let pet = Pet.init(id, name)
                 PetManager.shared.add(pet)
