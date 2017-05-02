@@ -25,7 +25,7 @@ extension Activity {
         self.ref = snapshot.ref
         self.key = snapshot.key
         self.time = date
-        self.type = snapshot.json["type"].arrayValue.map { $0.string ?? "" }
+        self.type = snapshot.json["type"].arrayValue.map { $0.stringValue }
         self.uid = snapshot.json["uid"].stringValue
     }
 
