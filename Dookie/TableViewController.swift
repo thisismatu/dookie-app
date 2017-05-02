@@ -27,7 +27,7 @@ class TableViewController: UITableViewController {
         activitiesRef = ref.child("activities")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        self.navigationItem.title = Defaults[.pet].name
+        navigationItem.title = Defaults[.pet].name
         setupToolbar()
     }
 
@@ -53,6 +53,7 @@ class TableViewController: UITableViewController {
                 let pet = Pet.init(Defaults[.pet].id, snapshot)
                 PetManager.shared.add(pet)
                 self.navigationItem.title = Defaults[.pet].name
+                self.setupToolbar()
             } else {
                 let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
@@ -214,9 +215,8 @@ class TableViewController: UITableViewController {
     }
 
     private func setupToolbar() {
-        let emojis = [":tennis:", ":poop:", ":droplet:", ":stew:"]
         var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
-        for item in emojis {
+        for item in Defaults[.pet].buttons {
             items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }

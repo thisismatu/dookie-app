@@ -46,7 +46,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             ref.childByAutoId().child("pet").setValue(["name": name], withCompletionBlock: { (error, reference) in
                 guard let id = reference.parent?.key else { return }
-                let pet = Pet.init(id, name, "")
+                let pet = Pet.init(id, name)
                 PetManager.shared.add(pet)
                 self.performSegue(withIdentifier: "addJoinPet", sender: self)
             })

@@ -40,12 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.scheme == "dookie" {
-            guard let host = url.host else { return false }
-            if host.isFirebaseUID {
+            guard let id = url.host else { return false }
+            if id.isFirebaseUID {
                 if let root = self.window?.rootViewController as? UINavigationController {
                     root.dismiss(animated: true, completion: nil)
                 }
-                let pet = Pet.init(host, "", "")
+                let pet = Pet.init(id)
                 PetManager.shared.add(pet)
             }
         }

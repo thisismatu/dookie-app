@@ -11,7 +11,7 @@ import SwiftyUserDefaults
 
 extension UserDefaults {
     subscript(key: DefaultsKey<Pet>) -> Pet {
-        get { return unarchive(key) ?? Pet("","","") }
+        get { return unarchive(key) ?? Pet("","","", []) }
         set { archive(key, newValue) }
     }
     subscript(key: DefaultsKey<[Pet]>) -> [Pet] {

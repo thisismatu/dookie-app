@@ -15,31 +15,36 @@ class Pet: NSObject, NSCoding {
     let id: String
     var name: String
     var emoji: String
+    var buttons: [String]
     var current = true
 
-    init(_ id: String, _ name: String, _ emoji: String) {
+    init(_ id: String, _ name: String = "", _ emoji: String = "", _ buttons: [String] = [":stew:", ":droplet:", ":poop:"]) {
         self.id = id
         self.name = name
         self.emoji = emoji
+        self.buttons = buttons
     }
 
     init(_ id: String, _ snapshot: FIRDataSnapshot) {
         self.id = id
         self.name = snapshot.json["name"].stringValue
         self.emoji = snapshot.json["emoji"].stringValue
+        self.buttons = snapshot.json["buttons"].arrayValue.map { $0.stringValue }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         guard let id = aDecoder.decodeObject(forKey: "id") as? String,
             let name = aDecoder.decodeObject(forKey: "name") as? String,
-            let emoji = aDecoder.decodeObject(forKey: "emoji") as? String else { return nil }
-        self.init(id, name, emoji)
+            let emoji = aDecoder.decodeObject(forKey: "emoji") as? String,
+            let buttons = aDecoder.decodeObject(forKey: "buttons") as? [String] else { return nil }
+        self.init(id, name, emoji, buttons)
     }
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.emoji, forKey: "emoji")
+        aCoder.encode(self.buttons, forKey: "buttons")
     }
 }
 
