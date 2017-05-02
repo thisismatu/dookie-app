@@ -18,16 +18,16 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
-    var tableHeaderHeight: CGFloat = 240.0
+    var tableHeaderHeight: CGFloat = 200.0
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
+    @IBOutlet weak var shareCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var petEmojiButton: UIButton!
     @IBOutlet weak var petNameLabel: UILabel!
-    @IBOutlet weak var petIdButton: UIButton!
     @IBOutlet weak var headerView: UIView!
 
     override func viewDidLoad() {
@@ -38,7 +38,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
         petEmojiButton.setTitle(petEmoji(), for: .normal)
         petNameLabel.text = Defaults[.pet].name
-        petIdButton.setTitle(Defaults[.pet].id, for: .normal)
         versionLabel.text = getVersionNumber()
 
         tableHeaderHeight = view.frame.width/2
@@ -87,6 +86,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         switch cell {
         case inviteCell:
             sendInviteEmail()
+        case shareCell:
+            copyShareURL()
         case rateCell:
             openUrl(appstoreUrl)
         case feedbackCell:
@@ -109,10 +110,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     @IBAction func leaveButtonPressed(_ sender: Any) {
         self.leavePetPrompt()
-    }
-
-    @IBAction func petIdButtonPressed(_ sender: Any) {
-        self.copyPetId()
     }
 
     // MARK: - View controller private methods
@@ -188,9 +185,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         return "Dookie v\(number) (\(build))"
     }
 
-    private func copyPetId() {
-        UIPasteboard.general.string = Defaults[.pet].id
-        let alert = UIAlertController(title: "✔️\n\nPet ID Copied", message: nil, preferredStyle: .alert)
+    private func copyShareURL() {
+        UIPasteboard.general.string = "dookie://" + Defaults[.pet].id
+        let alert = UIAlertController(title: "✔️\n\nShare URL Copied", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true) {
             let deadline = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
