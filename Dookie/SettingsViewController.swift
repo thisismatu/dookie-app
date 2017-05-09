@@ -187,7 +187,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     private func copyShareURL() {
         UIPasteboard.general.string = "dookie://" + Defaults[.pet].id
-        let alert = UIAlertController(title: "✔️\n\nShare URL Copied", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: ":heavy_check_mark:".emojiUnescapedString + "\n\nShare URL Copied", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true) {
             let deadline = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: deadline, execute: {

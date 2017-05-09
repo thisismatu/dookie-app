@@ -134,13 +134,13 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "🗑") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive, title: ":wastebasket:".emojiUnescapedString) { (action, indexPath) in
             let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
             activityItem.ref?.removeValue()
         }
         delete.backgroundColor = .white
 
-        let edit = UITableViewRowAction(style: .normal, title: "🕒") { (action, indexPath) in
+        let edit = UITableViewRowAction(style: .normal, title: ":clock3:".emojiUnescapedString) { (action, indexPath) in
             let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
             let alert = UIAlertController(title: "Change time", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
             let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
