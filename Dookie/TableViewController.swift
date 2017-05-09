@@ -27,6 +27,7 @@ class TableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         navigationItem.title = Defaults[.pet].name
         setupToolbar()
+        didBecomeActive()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,24 +49,18 @@ class TableViewController: UITableViewController {
         })
 
         activitiesRef.observe(.value, with: { snapshot in
-            var tmp = [[Activity]]()
-
             guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
             let all = snapshots.flatMap { Activity.init($0) }
-            let new = self.removeOldActivities(from: all)
-            let today = new
+            let today = all
                 .filter { Calendar.current.isDateInToday($0.time) }
                 .sorted { $0.time > $1.time }
-            let yesterday = new
+            let yesterday = all
                 .filter { Calendar.current.isDateInYesterday($0.time) }
                 .sorted { $0.time > $1.time }
+            self.activitiesArray = [today, yesterday]
 
-            tmp.append(today)
-            tmp.append(yesterday)
-            self.activitiesArray = tmp
-
-            let both = today.isEmpty && yesterday.isEmpty ? true : false
-            self.showEmptyState(both)
+            let bothArrays = today.isEmpty && yesterday.isEmpty
+            self.showEmptyState(bothArrays)
 
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
