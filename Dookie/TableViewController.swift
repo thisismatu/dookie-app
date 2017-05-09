@@ -16,7 +16,6 @@ class TableViewController: UITableViewController {
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
-    var connectedRef: FIRDatabaseReference!
     var activitiesArray = [[Activity]]()
     var allowedToMerge = [":droplet:", ":poop:"]
 
@@ -25,7 +24,6 @@ class TableViewController: UITableViewController {
         ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
-        connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         navigationItem.title = Defaults[.pet].name
         setupToolbar()
@@ -33,20 +31,6 @@ class TableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.connectedRef.observe(.value, with: { snapshot in
-            switch snapshot.json {
-            case 0:
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.dookieGray]
-                self.navigationItem.prompt = "You're offline"
-            case 1:
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-                self.navigationItem.prompt = nil
-            default:
-                self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-                self.navigationItem.prompt = "Connecting…"
-            }
-        })
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
@@ -89,7 +73,6 @@ class TableViewController: UITableViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        connectedRef.removeAllObservers()
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
