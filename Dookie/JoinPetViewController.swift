@@ -53,7 +53,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             ref.child(id).child("pet").observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
-                    let pet = Pet.init(id, snapshot)
+                    guard let pet = Pet.init(snapshot) else { return }
                     PetManager.shared.add(pet)
                     self.performSegue(withIdentifier: "addJoinPet", sender: self)
                 } else {

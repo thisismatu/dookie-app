@@ -35,7 +35,7 @@ class TableViewController: UITableViewController {
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
-                let pet = Pet.init(Defaults[.pet].id, snapshot)
+                guard let pet = Pet.init(snapshot) else { return }
                 PetManager.shared.add(pet)
                 self.navigationItem.title = Defaults[.pet].name
                 self.setupToolbar()

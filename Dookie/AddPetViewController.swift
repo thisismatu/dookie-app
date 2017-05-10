@@ -44,11 +44,17 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
         switch !name.isEmpty {
         case true:
-            ref.childByAutoId().child("pet").setValue(["name": name, "buttons": [":stew:", ":droplet:", ":poop:"]], withCompletionBlock: { (error, reference) in
-                guard let id = reference.parent?.key else { return }
-                let pet = Pet.init(id, name)
-                PetManager.shared.add(pet)
-                self.performSegue(withIdentifier: "addJoinPet", sender: self)
+            ref.childByAutoId().child("pet").setValue([
+                "name": name,
+                "emoji": "",
+                "buttons": [":stew:", ":droplet:", ":poop:"],
+                "merge": [":droplet:", ":poop:"]
+                ], withCompletionBlock: { (error, reference) in
+                    reference.observeSingleEvent(of: .value, with: { snapshot in
+                        guard let pet = Pet.init(snapshot) else { return }
+                        PetManager.shared.add(pet)
+                        self.performSegue(withIdentifier: "addJoinPet", sender: self)
+                    })
             })
         case false: return
         }

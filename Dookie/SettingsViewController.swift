@@ -53,7 +53,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         super.viewWillAppear(animated)
         petRef.observe(.value, with: { snapshot in
             if Defaults.hasKey(.pet) {
-                let pet = Pet.init(Defaults[.pet].id, snapshot)
+                guard let pet = Pet.init(snapshot) else { return }
                 PetManager.shared.add(pet)
                 self.petNameLabel.text = Defaults[.pet].name
                 self.petEmojiButton.setTitle(self.petEmoji(), for: .normal)
