@@ -787,7 +787,7 @@ Track up to 5 custom emojis and choose which of them can merge
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
             <objects>
-                <viewController restorationIdentifier="Login" storyboardIdentifier="Login" id="IzT-IF-xxl" customClass="LoginViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IzT-IF-xxl" customClass="LoginViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ieY-wv-Fie"/>
                         <viewControllerLayoutGuide type="bottom" id="mIx-A4-xTB"/>
@@ -1089,7 +1089,7 @@ Track up to 5 custom emojis and choose which of them can merge
         <!--Navigation Controller-->
         <scene sceneID="RIX-I5-8Bl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c1z-tP-PHg" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="Login" storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="c1z-tP-PHg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMe-YW-yDb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

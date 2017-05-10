@@ -42,8 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
             if id.isFirebaseUID {
-                if let root = self.window?.rootViewController as? UINavigationController {
-                    root.dismiss(animated: true, completion: nil)
+                storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let root = self.storyboard?.instantiateViewController(withIdentifier: "Login")
+                if let window = self.window {
+                    window.rootViewController = root
                 }
                 let pet = Pet.init(id)
                 PetManager.shared.add(pet)
