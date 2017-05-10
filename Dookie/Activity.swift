@@ -29,8 +29,8 @@ extension Activity {
         self.uid = snapshot.json["uid"].stringValue
     }
 
-    init(time: Date, type: [String], key: String = "") {
-        self.key = key
+    init(time: Date, type: [String]) {
+        self.key = ""
         self.ref = nil
         self.time = time
         self.type = type
