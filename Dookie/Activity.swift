@@ -13,33 +13,30 @@ import SwiftyUserDefaults
 
 struct Activity {
     let ref: FIRDatabaseReference?
-    let key: String
-    let time: Date
+    let date: Date
     let type: [String]
     let uid: String
 }
 
 extension Activity {
     init?(_ snapshot: FIRDataSnapshot) {
-        guard let date = snapshot.json["time"].stringValue.toDate else { return nil }
+        guard let date = snapshot.json["date"].stringValue.toDate else { return nil }
         self.ref = snapshot.ref
-        self.key = snapshot.key
-        self.time = date
+        self.date = date
         self.type = snapshot.json["type"].arrayValue.map { $0.stringValue }
         self.uid = snapshot.json["uid"].stringValue
     }
 
-    init(time: Date, type: [String]) {
-        self.key = ""
+    init(date: Date, type: [String]) {
         self.ref = nil
-        self.time = time
+        self.date = date
         self.type = type
         self.uid = Defaults[.uid]
     }
 
     func toAnyObject() -> Any {
         return [
-            "time": time.toString,
+            "date": date.toString,
             "type": type,
             "uid": Defaults[.uid]
         ]

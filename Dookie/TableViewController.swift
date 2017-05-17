@@ -52,11 +52,11 @@ class TableViewController: UITableViewController {
             guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
             let all = snapshots.flatMap { Activity.init($0) }
             let today = all
-                .filter { Calendar.current.isDateInToday($0.time) }
-                .sorted { $0.time > $1.time }
+                .filter { Calendar.current.isDateInToday($0.date) }
+                .sorted { $0.date > $1.date }
             let yesterday = all
-                .filter { Calendar.current.isDateInYesterday($0.time) }
-                .sorted { $0.time > $1.time }
+                .filter { Calendar.current.isDateInYesterday($0.date) }
+                .sorted { $0.date > $1.date }
             self.activitiesArray = [today, yesterday]
 
             let bothArrays = today.isEmpty && yesterday.isEmpty
@@ -141,13 +141,13 @@ class TableViewController: UITableViewController {
             let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
             let picker: UIDatePicker = UIDatePicker(frame: frame)
             picker.datePickerMode = .time
-            picker.date = activityItem.time
+            picker.date = activityItem.date
             picker.maximumDate = Date()
             alert.view.addSubview(picker)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
                 if !self.mergeWithNearby(activityItem, for: indexPath, at: picker.date) {
-                    activityItem.ref?.updateChildValues(["time": picker.date.toString])
+                    activityItem.ref?.updateChildValues(["date": picker.date.toString])
                 }
             }))
             self.present(alert, animated: true, completion: { _ in
@@ -168,10 +168,10 @@ class TableViewController: UITableViewController {
 
     private func removeOldActivities(from array: [Activity]) -> [Activity] {
         _ = array
-            .filter { $0.time.minutesAgo > 1440 }
-            .map { self.activitiesRef.child($0.key).removeValue() }
+            .filter { $0.date.minutesAgo > 1440 }
+            .map { $0.ref?.removeValue() }
         let new = array
-            .filter { $0.time.minutesAgo < 1440 }
+            .filter { $0.date.minutesAgo < 1440 }
         return new
     }
 
@@ -204,7 +204,7 @@ class TableViewController: UITableViewController {
     @objc private func barButtonPressed(_ item: UIBarButtonItem) {
         guard let type = item.title?.emojiEscapedString else { return }
         if !mergeWithLatest([type]) {
-            let activityItem = Activity(time: Date(), type: [type])
+            let activityItem = Activity(date: Date(), type: [type])
             self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
         }
     }
@@ -214,8 +214,8 @@ class TableViewController: UITableViewController {
         let tmp = latest.type + newType
         let allElemsContained = Set(tmp).isSubset(of: Set(allowedToMerge))
 
-        if latest.time.minutesAgo < 30 && allElemsContained {
-            latest.ref?.updateChildValues(["type": tmp, "time": Date().toString])
+        if latest.date.minutesAgo < 30 && allElemsContained {
+            latest.ref?.updateChildValues(["type": tmp, "date": Date().toString])
             return true
         } else {
             return false
@@ -224,8 +224,8 @@ class TableViewController: UITableViewController {
 
     private func mergeWithNearby(_ current: Activity, for indexPath: IndexPath, at date: Date) -> Bool {
         let nearby = activitiesArray[indexPath.section]
-            .filter { $0.key != current.key }
-            .filter { date.minutesAgo-30...date.minutesAgo+30 ~= $0.time.minutesAgo }
+            .filter { $0.ref != current.ref }
+            .filter { date.minutesAgo-30...date.minutesAgo+30 ~= $0.date.minutesAgo }
             .filter { Set($0.type + current.type).isSubset(of: Set(allowedToMerge)) }
 
         if let first = nearby.first {

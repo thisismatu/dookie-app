@@ -23,7 +23,7 @@ class ActivityTableViewCell: UITableViewCell {
     }
 
     func configure(_ item: Activity, defaults: String, hideTop: Bool, hideBottom: Bool) {
-        timeLabel.text = item.time.formatDate(.none, .short)
+        timeLabel.text = item.date.formatDate(.none, .short)
         typeLabel.text = item.type.joined().replacingOccurrences(of: "shit", with: "poop").emojiUnescapedString
         lineTop.isHidden = hideTop
         lineBottom.isHidden = hideBottom
@@ -34,7 +34,7 @@ class ActivityTableViewCell: UITableViewCell {
             indicator.layer.borderColor = UIColor.dookieLightGray.cgColor
         }
 
-        if Calendar.current.isDateInYesterday(item.time) {
+        if Calendar.current.isDateInYesterday(item.date) {
             stackView.alpha = 0.5
         } else {
             stackView.alpha = 1.0
