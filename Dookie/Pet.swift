@@ -13,6 +13,7 @@ import SwiftyUserDefaults
 
 class Pet: NSObject, NSCoding {
     let id: String
+    let ref: FIRDatabaseReference?
     var name: String
     var emoji: String
     var buttons: [String]
@@ -22,6 +23,7 @@ class Pet: NSObject, NSCoding {
     init?(_ snapshot: FIRDataSnapshot) {
         guard let id = snapshot.ref.parent?.key else { return nil }
         self.id = id
+        self.ref = snapshot.ref
         self.name = snapshot.json["name"].stringValue
         self.emoji = snapshot.json["emoji"].stringValue
         self.buttons = snapshot.json["buttons"].arrayValue.map { $0.stringValue }
@@ -30,6 +32,7 @@ class Pet: NSObject, NSCoding {
 
     init(_ id: String, _ name: String = "", _ emoji: String = "", _ buttons: [String] = [":stew:", ":droplet:", ":poop:"], _ merge: [String] = [":droplet:", ":poop:"]) {
         self.id = id
+        self.ref = nil
         self.name = name
         self.emoji = emoji
         self.buttons = buttons
