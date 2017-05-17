@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
     var ref: FIRDatabaseReference!
     var petRef: FIRDatabaseReference!
     var activitiesRef: FIRDatabaseReference!
+    var currentUserRef: FIRDatabaseReference!
     var activitiesArray = [[Activity]]()
     var allowedToMerge = [":droplet:", ":poop:"]
 
@@ -24,11 +25,17 @@ class TableViewController: UITableViewController {
         ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
+        currentUserRef = ref.child("online/" + Defaults[.uid])
         navigationItem.title = Defaults[.pet].name
         setupToolbar()    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        currentUserRef.observe(.value, with: { connected in
+            connected.ref.setValue(true)
+        })
+        currentUserRef.onDisconnectRemoveValue()
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() && Defaults.hasKey(.pet) {
@@ -65,6 +72,7 @@ class TableViewController: UITableViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        currentUserRef.removeAllObservers()
         activitiesRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
