@@ -24,11 +24,8 @@ class TableViewController: UITableViewController {
         ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         navigationItem.title = Defaults[.pet].name
-        setupToolbar()
-        didBecomeActive()
-    }
+        setupToolbar()    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -160,20 +157,6 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - View controller private methods
-
-    @objc private func didBecomeActive() {
-        let all = activitiesArray.flatMap { $0 }
-        _ = removeOldActivities(from: all)
-    }
-
-    private func removeOldActivities(from array: [Activity]) -> [Activity] {
-        _ = array
-            .filter { $0.date.minutesAgo > 1440 }
-            .map { $0.ref?.removeValue() }
-        let new = array
-            .filter { $0.date.minutesAgo < 1440 }
-        return new
-    }
 
     private func showEmptyState(_ show: Bool) {
         if show {
