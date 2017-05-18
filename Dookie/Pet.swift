@@ -54,10 +54,10 @@ class Pet: NSObject, NSCoding {
 
     func toAnyObject() -> Any {
         return [
-            "name": name,
-            "emoji": emoji,
-            "buttons": buttons,
-            "merge": merge
+            "name": self.name,
+            "emoji": self.emoji,
+            "buttons": self.buttons,
+            "merge": self.merge
         ]
     }
 }

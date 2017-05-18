@@ -19,7 +19,6 @@ class TableViewController: UITableViewController {
     var onlineRef: FIRDatabaseReference!
     var connectedRef: FIRDatabaseReference!
     var activitiesArray = [[Activity]]()
-    var allowedToMerge = [":droplet:", ":poop:"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,7 +208,7 @@ class TableViewController: UITableViewController {
     private func mergeWithLatest(_ newType: [String]) -> Bool {
         guard let latest = activitiesArray.first?.first else { return false }
         let tmp = latest.type + newType
-        let allElemsContained = Set(tmp).isSubset(of: Set(allowedToMerge))
+        let allElemsContained = Set(tmp).isSubset(of: Set(PetManager.shared.current.merge))
 
         if latest.date.minutesAgo < 30 && allElemsContained {
             latest.ref?.updateChildValues(["type": tmp, "date": Date().toString])
@@ -223,7 +222,7 @@ class TableViewController: UITableViewController {
         let nearby = activitiesArray[indexPath.section]
             .filter { $0.ref != current.ref }
             .filter { date.minutesAgo-30...date.minutesAgo+30 ~= $0.date.minutesAgo }
-            .filter { Set($0.type + current.type).isSubset(of: Set(allowedToMerge)) }
+            .filter { Set($0.type + current.type).isSubset(of: Set(PetManager.shared.current.merge)) }
 
         if let first = nearby.first {
             first.ref?.updateChildValues(["type": first.type + current.type ])

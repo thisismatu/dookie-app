@@ -36,9 +36,9 @@ extension Activity {
 
     func toAnyObject() -> Any {
         return [
-            "date": date.toString,
-            "type": type,
-            "uid": uid
+            "date": self.date.toString,
+            "type": self.type,
+            "uid": self.uid
         ]
     }
 }
