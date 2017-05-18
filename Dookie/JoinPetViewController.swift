@@ -55,7 +55,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
                 if snapshot.exists() {
                     guard let pet = Pet.init(snapshot) else { return }
                     PetManager.shared.add(pet)
-                    self.performSegue(withIdentifier: "addJoinPet", sender: self)
+                    self.performSegue(withIdentifier: "joinPet", sender: self)
                 } else {
                     let alert = UIAlertController(title: "Couldn’t find this pet", message: "The Pet ID you entered doesn't match any existing pet. Please check that you’ve entered the whole ID.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))

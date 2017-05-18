@@ -10,8 +10,6 @@ import UIKit
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
-    var shouldAnimate = false
-
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -22,25 +20,10 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showHideContent()
+        showHideCancelButton()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presentTable(animated: shouldAnimate)
-    }
-
-    private func presentTable(animated: Bool) {
-        if Defaults.hasKey(.pet) {
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Table") {
-                self.present(vc, animated: animated, completion: nil)
-            }
-        }
-    }
-
-    private func showHideContent() {
-        stackView.isHidden = Defaults.hasKey(.pet)
-        illustration.isHidden = Defaults.hasKey(.pet)
+    private func showHideCancelButton() {
         if Defaults.hasKey(.petArray) && !Defaults.hasKey(.pet)  {
             cancelButton.isEnabled = true
             cancelButton.tintColor = .dookieGray
@@ -50,14 +33,8 @@ class LoginViewController: UIViewController {
         }
     }
 
-    @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
-        if segue.identifier == "addJoinPet" || segue.identifier == "switchPet" {
-            shouldAnimate = true
-        }
-    }
-
     @IBAction func cancelButtonPressed(_ sender: Any) {
         PetManager.shared.restore()
-        presentTable(animated: true)
+        self.performSegue(withIdentifier: "restorePet", sender: self)
     }
 }

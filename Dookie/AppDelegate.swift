@@ -40,13 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
             if id.isFirebaseUID {
-                storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let root = self.storyboard?.instantiateViewController(withIdentifier: "Login")
-                if let window = self.window {
-                    window.rootViewController = root
-                }
                 let pet = Pet.init(id)
                 PetManager.shared.add(pet)
+                showHomeScreen()
             }
         }
         return false
@@ -74,22 +70,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
     func leavePet() {
-        PetManager.shared.remove(Defaults[.pet])
-
-        if let root = self.window?.rootViewController as? UINavigationController {
-            if let vc = root.topViewController as? TableViewController {
-                vc.activitiesArray.removeAll()
-                vc.tableView.reloadData()
-            }
-            root.dismiss(animated: true, completion: nil)
-        }
+        PetManager.shared.remove()
+        showHomeScreen()
     }
 
     func deletePet() {
-        FIRDatabase.database().reference(withPath: Defaults[.pet].id).removeValue()
-        leavePet()
+        PetManager.shared.delete()
+        showHomeScreen()
+    }
+
+    private func showHomeScreen() {
+        storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc: HomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "Home") as! HomeViewController
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 }
 

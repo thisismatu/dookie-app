@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c1z-tP-PHg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -121,8 +121,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="gZT-At-y7i" kind="unwind" identifier="switchPet" unwindAction="unwindToLogin:" id="6mE-Aj-yZz"/>
-                        <segue destination="gZT-At-y7i" kind="unwind" identifier="backToLogin" unwindAction="unwindToLogin:" id="lVw-mX-pif"/>
+                        <segue destination="gZT-At-y7i" kind="unwind" identifier="switchPet" unwindAction="unwindToHome:" id="HGK-nE-e61"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJu-SF-y6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -509,7 +508,7 @@
                         <barButtonItem key="backBarButtonItem" title="Settings" id="cow-X0-Dfs"/>
                         <barButtonItem key="leftBarButtonItem" image="ic_close" id="9oj-vT-rh1">
                             <connections>
-                                <segue destination="2xk-gL-ukx" kind="unwind" unwindAction="unwindToHome:" id="y9x-c0-T9H"/>
+                                <segue destination="2xk-gL-ukx" kind="unwind" unwindAction="unwindToTable:" id="y9x-c0-T9H"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_ellipsis" id="RUB-jK-hCO">
@@ -776,7 +775,7 @@ Track up to 5 custom emojis and choose which of them can merge
                         <outlet property="emojiTextField" destination="RtG-TP-xrf" id="mnr-Uz-gmK"/>
                         <outlet property="nameTextField" destination="xNo-tJ-FYc" id="FMC-p9-WeD"/>
                         <outlet property="saveButton" destination="vqX-pa-z1S" id="TkT-2d-BGR"/>
-                        <segue destination="wv5-yc-r73" kind="unwind" identifier="editPetDetails" unwindAction="unwindToSettings:" id="77z-Gj-tKw"/>
+                        <segue destination="wv5-yc-r73" kind="unwind" identifier="editPet" unwindAction="unwindToSettings:" id="77z-Gj-tKw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51I-uq-nAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -796,7 +795,7 @@ Track up to 5 custom emojis and choose which of them can merge
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97w-tG-dXL">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97w-tG-dXL">
                                 <rect key="frame" x="32" y="111.5" width="311" height="278.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cv-hl-b7h">
@@ -878,7 +877,7 @@ Track up to 5 custom emojis and choose which of them can merge
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
                                 <rect key="frame" x="0.0" y="534" width="375" height="133"/>
                             </imageView>
                         </subviews>
@@ -904,9 +903,11 @@ Track up to 5 custom emojis and choose which of them can merge
                         <outlet property="cancelButton" destination="F4N-pv-77X" id="qZy-l5-ftl"/>
                         <outlet property="illustration" destination="VLK-xw-mV7" id="iJj-Bp-fPr"/>
                         <outlet property="stackView" destination="97w-tG-dXL" id="Yoh-sL-CTE"/>
+                        <segue destination="Abm-h7-lFo" kind="unwind" identifier="restorePet" unwindAction="unwindToHome:" id="1XQ-fb-vBp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhE-Up-iXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Abm-h7-lFo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1292" y="117.39130434782609"/>
         </scene>
@@ -979,7 +980,7 @@ Track up to 5 custom emojis and choose which of them can merge
                     <navigationItem key="navigationItem" title="Add a new pet" id="fdA-ln-3V1"/>
                     <connections>
                         <outlet property="textField" destination="s6J-P4-wKB" id="5mK-A3-2JW"/>
-                        <segue destination="w9s-sl-zxK" kind="unwind" identifier="addJoinPet" unwindAction="unwindToLogin:" id="id2-Uf-ewR"/>
+                        <segue destination="w9s-sl-zxK" kind="unwind" identifier="addPet" unwindAction="unwindToHome:" id="id2-Uf-ewR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="549-YQ-0pJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1056,7 +1057,7 @@ Track up to 5 custom emojis and choose which of them can merge
                     <navigationItem key="navigationItem" title="Join a shared pet" id="zNV-bB-0n9"/>
                     <connections>
                         <outlet property="textField" destination="x8z-IK-FQe" id="bdj-bl-TN3"/>
-                        <segue destination="Bzd-V4-I30" kind="unwind" identifier="addJoinPet" unwindAction="unwindToLogin:" id="mo2-22-rOu"/>
+                        <segue destination="Bzd-V4-I30" kind="unwind" identifier="joinPet" unwindAction="unwindToHome:" id="mo2-22-rOu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dp-FB-zT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1085,6 +1086,24 @@ Track up to 5 custom emojis and choose which of them can merge
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBN-qr-o7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1367" y="118"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="nFd-Yh-9JH">
+            <objects>
+                <viewController restorationIdentifier="Home" storyboardIdentifier="Home" id="Pvh-Uh-ho4" customClass="HomeViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3af-Sv-rtH"/>
+                        <viewControllerLayoutGuide type="bottom" id="3EM-35-gl5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="noh-p4-x7O">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fh7-xO-Mul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3778" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RIX-I5-8Bl">

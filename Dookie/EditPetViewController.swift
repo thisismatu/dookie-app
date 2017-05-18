@@ -95,7 +95,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         guard let name = nameTextField.text,
             let emoji = emojiTextField.text?.emojiEscapedString else { return }
         self.petRef.updateChildValues(["name": name, "emoji": emoji]) { (error, reference) in
-            self.performSegue(withIdentifier: "editPetDetails", sender: self)
+            self.performSegue(withIdentifier: "editPet", sender: self)
         }
     }
 

@@ -235,22 +235,22 @@ class TableViewController: UITableViewController {
 
     // MARK: - Actions
 
-    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {}
+    @IBAction func unwindToTable(_ segue: UIStoryboardSegue) {}
 
     @IBAction func switchButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
         let filteredPets = Defaults[.petArray].filter { $0.id != Defaults[.pet].id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
-            self.performSegue(withIdentifier: "backToLogin", sender: self)
             Defaults.remove(.pet)
+            self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
         for pet in filteredPets {
             let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
             alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                self.performSegue(withIdentifier: "switchPet", sender: self)
                 PetManager.shared.add(pet)
+                self.performSegue(withIdentifier: "switchPet", sender: self)
             }))
         }
 
