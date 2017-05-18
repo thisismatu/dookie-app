@@ -27,14 +27,14 @@ extension Activity {
         self.uid = snapshot.json["uid"].stringValue
     }
 
-    init(date: Date, type: [String]) {
-        self.ref = nil
+    init(ref: FIRDatabaseReference? = nil, date: Date, type: [String]) {
+        self.ref = ref
         self.date = date
         self.type = type
         self.uid = Defaults[.uid]
     }
 
-    func toAnyObject() -> Any {
+    func toAnyObject() -> [AnyHashable: Any] {
         return [
             "date": self.date.toString,
             "type": self.type,

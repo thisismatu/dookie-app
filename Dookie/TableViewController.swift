@@ -146,18 +146,19 @@ class TableViewController: UITableViewController {
         delete.backgroundColor = .white
 
         let edit = UITableViewRowAction(style: .normal, title: ":clock3:".emojiUnescapedString) { (action, indexPath) in
-            let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
+            let activity = self.activitiesArray[indexPath.section][indexPath.row]
             let alert = UIAlertController(title: "Change time", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
             let frame = CGRect(x: 10, y: 55, width: 250, height: 160)
             let picker: UIDatePicker = UIDatePicker(frame: frame)
             picker.datePickerMode = .time
-            picker.date = activityItem.date
+            picker.date = activity.date
             picker.maximumDate = Date()
             alert.view.addSubview(picker)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-                if !self.mergeWithNearby(activityItem, for: indexPath, at: picker.date) {
-                    activityItem.ref?.updateChildValues(["date": picker.date.toString])
+                let item = Activity.init(ref: activity.ref, date: picker.date, type: activity.type)
+                if !self.mergeActivity(item) {
+                    activity.ref?.updateChildValues(item.toAnyObject())
                 }
             }))
             self.present(alert, animated: true, completion: { _ in
@@ -199,38 +200,34 @@ class TableViewController: UITableViewController {
 
     @objc private func barButtonPressed(_ item: UIBarButtonItem) {
         guard let type = item.title?.emojiEscapedString else { return }
-        if !mergeWithLatest([type]) {
-            let activityItem = Activity(date: Date(), type: [type])
-            self.activitiesRef.childByAutoId().setValue(activityItem.toAnyObject())
+        let item = Activity.init(date: Date(), type: [type])
+        if !mergeActivity(item) {
+            self.activitiesRef.childByAutoId().setValue(item.toAnyObject())
         }
     }
 
-    private func mergeWithLatest(_ newType: [String]) -> Bool {
-        guard let latest = activitiesArray.first?.first else { return false }
-        let tmp = latest.type + newType
-        let allElemsContained = Set(tmp).isSubset(of: Set(PetManager.shared.current.merge))
+    private func mergeActivity(_ activity: Activity) -> Bool {
+        guard let today = activitiesArray.first else { return false }
+        let nearby = today
+            .filter { $0.ref != activity.ref }
+            .filter { activity.date.secondsAgo-1800...activity.date.secondsAgo+1800 ~= $0.date.secondsAgo }
 
-        if latest.date.minutesAgo < 30 && allElemsContained {
-            latest.ref?.updateChildValues(["type": tmp, "date": Date().toString])
-            return true
-        } else {
-            return false
+        var firstTwo = [Activity]()
+        if let above = nearby.filter({ $0.date.secondsAgo <= activity.date.secondsAgo}).last {
+            firstTwo.append(above)
         }
-    }
-
-    private func mergeWithNearby(_ current: Activity, for indexPath: IndexPath, at date: Date) -> Bool {
-        let nearby = activitiesArray[indexPath.section]
-            .filter { $0.ref != current.ref }
-            .filter { date.minutesAgo-30...date.minutesAgo+30 ~= $0.date.minutesAgo }
-            .filter { Set($0.type + current.type).isSubset(of: Set(PetManager.shared.current.merge)) }
-
-        if let first = nearby.first {
-            first.ref?.updateChildValues(["type": first.type + current.type ])
-            current.ref?.removeValue()
-            return true
-        } else {
-            return false
+        if let below = nearby.filter({ $0.date.secondsAgo >= activity.date.secondsAgo}).first {
+            firstTwo.append(below)
         }
+
+        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(PetManager.shared.current.merge)) }) {
+            let new = Activity.init(date: activity.date, type: first.type + activity.type)
+            first.ref?.updateChildValues(new.toAnyObject())
+            activity.ref?.removeValue()
+            return true
+        }
+
+        return false
     }
 
     // MARK: - Actions

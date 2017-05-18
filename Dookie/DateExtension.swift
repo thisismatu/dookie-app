@@ -16,9 +16,9 @@ extension Date {
         return formatter.string(from: self)
     }
 
-    public var minutesAgo: Int {
-        guard let minute = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute else { return 0 }
-        return minute
+    public var secondsAgo: Int {
+        guard let second = Calendar.current.dateComponents([.second], from: self, to: Date()).second else { return 0 }
+        return second
     }
 
     func formatDate(_ date: DateFormatter.Style, _ time: DateFormatter.Style) -> String {
