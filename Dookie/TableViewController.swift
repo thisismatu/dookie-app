@@ -23,13 +23,14 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
+        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         onlineRef = ref.child("online")
         connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        navigationItem.title = Defaults[.pet].name
-        setupToolbar()    }
+        navigationItem.title = PetManager.shared.current.name
+        setupToolbar()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,12 +46,12 @@ class TableViewController: UITableViewController {
             if snapshot.exists() && Defaults.hasKey(.pet) {
                 guard let pet = Pet.init(snapshot) else { return }
                 PetManager.shared.add(pet)
-                self.navigationItem.title = Defaults[.pet].name
+                self.navigationItem.title = PetManager.shared.current.name
                 self.setupToolbar()
             } else {
                 let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.appDelegate?.leavePet()
+                    self.appDelegate?.deletePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -190,7 +191,7 @@ class TableViewController: UITableViewController {
 
     private func setupToolbar() {
         var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
-        for item in Defaults[.pet].buttons {
+        for item in PetManager.shared.current.buttons {
             items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
@@ -239,7 +240,7 @@ class TableViewController: UITableViewController {
 
     @IBAction func switchButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
-        let filteredPets = Defaults[.petArray].filter { $0.id != Defaults[.pet].id }
+        let filteredPets = Defaults[.petArray].filter { $0.id != PetManager.shared.current.id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
             Defaults.remove(.pet)

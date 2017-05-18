@@ -64,7 +64,7 @@ class Pet: NSObject, NSCoding {
 
 class PetManager {
     static let shared = PetManager()
-    var current: Pet?
+    public private(set) var current = Pet()
 
     func add(_ pet: Pet) {
         var array = Defaults[.petArray]
@@ -89,7 +89,7 @@ class PetManager {
         } else {
             Defaults.remove(.petArray)
             Defaults.remove(.pet)
-            self.current = nil
+            self.current = Pet()
         }
     }
 
@@ -100,8 +100,6 @@ class PetManager {
     }
 
     func restore() {
-        if let current = current {
-            self.add(current)
-        }
+        self.add(current)
     }
 }
