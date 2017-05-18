@@ -64,7 +64,7 @@ class Pet: NSObject, NSCoding {
 
 class PetManager {
     static let shared = PetManager()
-    public private(set) var current = Pet()
+    public private(set) var current = Defaults[.pet]
 
     func add(_ pet: Pet) {
         var array = Defaults[.petArray]
