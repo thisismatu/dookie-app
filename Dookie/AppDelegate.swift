@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        migrateUserDefaults()
-
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
@@ -76,17 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    private func migrateUserDefaults() {
-        if !Defaults.hasKey(.didMigrate) && Defaults.hasKey(.secret) {
-            let pet = Pet.init(Defaults[.secret], Defaults[.name], Defaults[.emoji])
-            PetManager.shared.add(pet)
-            Defaults.remove(.secret)
-            Defaults.remove(.name)
-            Defaults.remove(.emoji)
-            Defaults[.didMigrate] = true
-            print("Migration successfull!")
-        }
-    }
 
     func leavePet() {
         PetManager.shared.remove(Defaults[.pet])
