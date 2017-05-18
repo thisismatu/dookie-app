@@ -38,7 +38,7 @@ extension Activity {
         return [
             "date": date.toString,
             "type": type,
-            "uid": Defaults[.uid]
+            "uid": uid
         ]
     }
 }
