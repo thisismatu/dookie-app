@@ -27,7 +27,7 @@ class Pet: NSObject, NSCoding {
         self.merge = snapshot.json["merge"].arrayValue.map { $0.stringValue }
     }
 
-    init(_ id: String, _ name: String = "", _ emoji: String = "", _ buttons: [String] = [":stew:", ":droplet:", ":poop:"], _ merge: [String] = [":droplet:", ":poop:"]) {
+    init(id: String = "", name: String = "", emoji: String = "", buttons: [String] = [":stew:", ":droplet:", ":poop:"], merge: [String] = [":droplet:", ":poop:"]) {
         self.id = id
         self.name = name
         self.emoji = emoji
@@ -41,7 +41,7 @@ class Pet: NSObject, NSCoding {
             let emoji = aDecoder.decodeObject(forKey: "emoji") as? String,
             let buttons = aDecoder.decodeObject(forKey: "buttons") as? [String],
             let merge = aDecoder.decodeObject(forKey: "merge") as? [String] else { return nil }
-        self.init(id, name, emoji, buttons, merge)
+        self.init(id: id, name: name, emoji: emoji, buttons: buttons, merge: merge)
     }
 
     func encode(with aCoder: NSCoder) {
@@ -50,6 +50,15 @@ class Pet: NSObject, NSCoding {
         aCoder.encode(self.emoji, forKey: "emoji")
         aCoder.encode(self.buttons, forKey: "buttons")
         aCoder.encode(self.merge, forKey: "merge")
+    }
+
+    func toAnyObject() -> Any {
+        return [
+            "name": name,
+            "emoji": emoji,
+            "buttons": buttons,
+            "merge": merge
+        ]
     }
 }
 
