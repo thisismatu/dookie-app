@@ -17,7 +17,6 @@ class Pet: NSObject, NSCoding {
     var emoji: String
     var buttons: [String]
     var merge: [String]
-    var current = true
 
     init?(_ snapshot: FIRDataSnapshot) {
         guard let id = snapshot.ref.parent?.key else { return nil }
@@ -56,32 +55,43 @@ class Pet: NSObject, NSCoding {
 
 class PetManager {
     static let shared = PetManager()
+    var current: Pet?
 
     func add(_ pet: Pet) {
-        Defaults[.pet] = pet
-        _ = Defaults[.petArray].map { $0.current = false }
-        if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
-            Defaults[.petArray][index] = pet
+        var array = Defaults[.petArray]
+        if let i = array.index(where: { $0.id == pet.id }) {
+            array[i] = pet
         } else {
-            Defaults[.petArray].append(pet)
+            array.append(pet)
+        }
+        Defaults[.petArray] = array
+        Defaults[.pet] = pet
+        self.current = pet
+    }
+
+    func remove() {
+        let pet = Defaults[.pet]
+        var array = Defaults[.petArray]
+        if let i = array.index(where: { $0.id == pet.id }), array.count > 1 {
+            array.remove(at: i)
+            Defaults[.petArray] = array
+            Defaults[.pet] = array[0]
+            self.current = array[0]
+        } else {
+            Defaults.remove(.petArray)
+            Defaults.remove(.pet)
+            self.current = nil
         }
     }
 
-    func remove(_ pet: Pet) {
-        if Defaults[.petArray].count > 1 {
-            if let index = Defaults[.petArray].index(where: { $0.id == pet.id }) {
-                Defaults[.petArray].remove(at: index)
-                Defaults[.pet] = Defaults[.petArray][0]
-                Defaults[.pet].current = true
-            }
-        } else {
-            Defaults.remove(.pet)
-            Defaults.remove(.petArray)
-        }
+    func delete() {
+        let petRef = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
+        petRef.removeValue()
+        self.remove()
     }
 
     func restore() {
-        if let current = Defaults[.petArray].filter({ $0.current == true }).first {
+        if let current = current {
             self.add(current)
         }
     }
