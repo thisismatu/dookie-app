@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func deletePet() {
-        Defaults[.pet].ref?.removeValue()
+        FIRDatabase.database().reference(withPath: Defaults[.pet].id).removeValue()
         leavePet()
     }
 }
