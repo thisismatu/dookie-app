@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
-        FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
+        FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+        Auth.auth().signInAnonymously(completion: { (user, error) in
             if let user = user {
                 Defaults[.uid] = user.uid
             }

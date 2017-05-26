@@ -16,8 +16,8 @@ import ISEmojiView
 class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
-    var ref: FIRDatabaseReference!
-    var petRef: FIRDatabaseReference!
+    var ref: DatabaseReference!
+    var petRef: DatabaseReference!
     var tableHeaderHeight: CGFloat = 200.0
 
     @IBOutlet weak var editCell: UITableViewCell!
@@ -33,7 +33,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = .groupTableViewBackground
-        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
+        ref = Database.database().reference(withPath: PetManager.shared.current.id)
         petRef = ref.child("pet")
 
         petEmojiButton.setTitle(petEmoji(), for: .normal)

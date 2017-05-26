@@ -11,14 +11,14 @@ import Firebase
 import SwiftyUserDefaults
 
 class JoinPetViewController: UIViewController, UITextFieldDelegate {
-    var ref: FIRDatabaseReference!
+    var ref: DatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
-        ref = FIRDatabase.database().reference()
+        ref = Database.database().reference()
         NotificationCenter.default.addObserver(self, selector: #selector(self.checkPasteboard), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.hideKeyboardWhenTappedAround()
     }

@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import SwiftyJSON
 
-extension FIRDataSnapshot {
+extension DataSnapshot {
     var json : JSON {
         return JSON(self.value ?? "")
     }

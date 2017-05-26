@@ -12,14 +12,14 @@ import Firebase
 import SwiftyUserDefaults
 
 struct Activity {
-    let ref: FIRDatabaseReference?
+    let ref: DatabaseReference?
     let date: Date
     let type: [String]
     let uid: String
 }
 
 extension Activity {
-    init?(_ snapshot: FIRDataSnapshot) {
+    init?(_ snapshot: DataSnapshot) {
         guard let date = snapshot.json["date"].stringValue.toDate else { return nil }
         self.ref = snapshot.ref
         self.date = date
@@ -27,7 +27,7 @@ extension Activity {
         self.uid = snapshot.json["uid"].stringValue
     }
 
-    init(ref: FIRDatabaseReference? = nil, date: Date, type: [String]) {
+    init(ref: DatabaseReference? = nil, date: Date, type: [String]) {
         self.ref = ref
         self.date = date
         self.type = type

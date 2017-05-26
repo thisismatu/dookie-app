@@ -11,14 +11,14 @@ import Firebase
 import SwiftyUserDefaults
 
 class AddPetViewController: UIViewController, UITextFieldDelegate {
-    var ref: FIRDatabaseReference!
+    var ref: DatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
-        ref = FIRDatabase.database().reference()
+        ref = Database.database().reference()
         self.hideKeyboardWhenTappedAround()
     }
 

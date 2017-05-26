@@ -13,20 +13,20 @@ import Emoji
 
 class TableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    var ref: FIRDatabaseReference!
-    var petRef: FIRDatabaseReference!
-    var activitiesRef: FIRDatabaseReference!
-    var onlineRef: FIRDatabaseReference!
-    var connectedRef: FIRDatabaseReference!
+    var ref: DatabaseReference!
+    var petRef: DatabaseReference!
+    var activitiesRef: DatabaseReference!
+    var onlineRef: DatabaseReference!
+    var connectedRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
+        ref = Database.database().reference(withPath: PetManager.shared.current.id)
         petRef = ref.child("pet")
         activitiesRef = ref.child("activities")
         onlineRef = ref.child("online")
-        connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        connectedRef = Database.database().reference(withPath: ".info/connected")
         navigationItem.title = PetManager.shared.current.name
         setupToolbar()
     }
@@ -57,7 +57,7 @@ class TableViewController: UITableViewController {
         })
 
         activitiesRef.observe(.value, with: { snapshot in
-            guard let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] else { return }
+            guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else { return }
             let all = snapshots.flatMap { Activity.init($0) }
             let today = all
                 .filter { Calendar.current.isDateInToday($0.date) }

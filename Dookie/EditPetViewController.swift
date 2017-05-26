@@ -14,8 +14,8 @@ import ISEmojiView
 
 class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
     let emojiView = ISEmojiView()
-    var ref: FIRDatabaseReference!
-    var petRef: FIRDatabaseReference!
+    var ref: DatabaseReference!
+    var petRef: DatabaseReference!
 
     @IBOutlet weak var emojiTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -24,7 +24,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = nil
-        ref = FIRDatabase.database().reference(withPath: PetManager.shared.current.id)
+        ref = Database.database().reference(withPath: PetManager.shared.current.id)
         petRef = ref.child("pet")
 
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)

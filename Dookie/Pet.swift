@@ -18,7 +18,7 @@ class Pet: NSObject, NSCoding {
     var buttons: [String]
     var merge: [String]
 
-    init?(_ snapshot: FIRDataSnapshot) {
+    init?(_ snapshot: DataSnapshot) {
         guard let id = snapshot.ref.parent?.key else { return nil }
         self.id = id
         self.name = snapshot.json["name"].stringValue
@@ -94,7 +94,7 @@ class PetManager {
     }
 
     func delete() {
-        let petRef = FIRDatabase.database().reference(withPath: Defaults[.pet].id)
+        let petRef = Database.database().reference(withPath: Defaults[.pet].id)
         petRef.removeValue()
         self.remove()
     }
