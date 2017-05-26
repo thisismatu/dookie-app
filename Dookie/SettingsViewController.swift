@@ -149,7 +149,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func sendInviteEmail() {
-        let subject: String = "Join \(PetManager.shared.current.name) on Dookie \(PetManager.shared.current.emoji)"
+        let subject: String = "Join \(PetManager.shared.current.name) on Dookie \(PetManager.shared.current.emoji.emojiUnescapedString)"
         let bodyArray: [String] = [
             "<p>Hello,</p>",
             "<p>I’d like you to join \(PetManager.shared.current.name) on <a href='https://dookie.me'>Dookie</a>.</p>",
