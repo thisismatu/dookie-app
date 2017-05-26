@@ -22,10 +22,6 @@ extension UserDefaults {
 
 extension DefaultsKeys {
     static let uid = DefaultsKey<String>("uid")
-    static let name = DefaultsKey<String>("name")
-    static let emoji = DefaultsKey<String>("emoji")
-    static let secret = DefaultsKey<String>("secret")
-    static let didMigrate = DefaultsKey<Bool>("didMigrate")
     static let pet = DefaultsKey<Pet>("pet")
     static let petArray = DefaultsKey<[Pet]>("petArray")
 }
