@@ -15,60 +15,74 @@ class TableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
-    var activitiesRef: DatabaseReference!
-    var onlineRef: DatabaseReference!
+    var userRef: DatabaseReference!
     var connectedRef: DatabaseReference!
+    var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
+    var petsArray = [PetNew]()
+    var currentPet: PetNew!
+    var currentUser: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference(withPath: PetManager.shared.current.id)
-        petRef = ref.child("pet")
+        ref = Database.database().reference()
+        petRef = ref.child("pets/" + Defaults[.pid])
+        userRef = ref.child("users/" + Defaults[.uid])
         activitiesRef = ref.child("activities")
-        onlineRef = ref.child("online")
         connectedRef = Database.database().reference(withPath: ".info/connected")
-        navigationItem.title = PetManager.shared.current.name
-        setupToolbar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         connectedRef.observe(.value, with: { snapshot in
-            guard let connected = snapshot.value as? Bool, connected else { return }
-            let con = self.onlineRef.child(Defaults[.uid])
-            con.setValue(true)
-            con.onDisconnectRemoveValue()
+            // Do something when connected?
+        })
+
+        userRef.observe(.value, with: { snapshot in
+            guard let user = User.init(snapshot) else { return }
+            self.currentUser = user
+            self.petsArray.removeAll()
+            for item in user.pets.keys {
+                self.ref.child("pets/" + item).observeSingleEvent(of: .value, with: { snapshot in
+                    guard let pet = PetNew.init(snapshot) else { return }
+                    self.petsArray.append(pet)
+                })
+            }
         })
 
         petRef.observe(.value, with: { snapshot in
-            if snapshot.exists() && Defaults.hasKey(.pet) {
-                guard let pet = Pet.init(snapshot) else { return }
-                PetManager.shared.add(pet)
-                self.navigationItem.title = PetManager.shared.current.name
+            if snapshot.exists() {
+                guard let pet = PetNew.init(snapshot) else { return }
+                pet.ref?.setValue(pet.toAnyObject())
+                self.currentPet = pet
+                self.navigationItem.title = pet.name
                 self.setupToolbar()
             } else {
                 let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.appDelegate?.deletePet()
+                    self.petRef.removeValue()
+                    self.userRef.child("pets/" + self.currentPet.id).removeValue()
+                    if let nextPet = self.currentUser.pets.first(where: { $0.key != self.currentPet.id }) {
+                        self.userRef.child("pets/" + nextPet.key).setValue(true)
+                    }
+                    self.appDelegate?.leavePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
         })
 
-        activitiesRef.observe(.value, with: { snapshot in
+        activitiesRef.queryOrdered(byChild: "pet").queryEqual(toValue: Defaults[.pid]).observe(.value, with: { snapshot in
             guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else { return }
-            let all = snapshots.flatMap { Activity.init($0) }
-            let today = all
-                .filter { Calendar.current.isDateInToday($0.date) }
+            let all = snapshots
+                .flatMap { Activity.init($0) }
                 .sorted { $0.date > $1.date }
-            let yesterday = all
-                .filter { Calendar.current.isDateInYesterday($0.date) }
-                .sorted { $0.date > $1.date }
+            let today = all.filter { Calendar.current.isDateInToday($0.date) }
+            let yesterday = all.filter { Calendar.current.isDateInYesterday($0.date) }
             self.activitiesArray = [today, yesterday]
 
-            let bothArrays = today.isEmpty && yesterday.isEmpty
-            self.showEmptyState(bothArrays)
+            let areBothEmpty = today.isEmpty && yesterday.isEmpty
+            self.showEmptyState(areBothEmpty)
 
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
@@ -76,9 +90,9 @@ class TableViewController: UITableViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        connectedRef.removeAllObservers()
-        onlineRef.removeAllObservers()
         activitiesRef.removeAllObservers()
+        connectedRef.removeAllObservers()
+        userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
     }
@@ -116,19 +130,19 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivityTableViewCell
-        let activityItem = activitiesArray[indexPath.section][indexPath.row]
+        let activity = activitiesArray[indexPath.section][indexPath.row]
 
         switch indexPath.row {
         case 0:
             if self.activitiesArray[indexPath.section].count == 1 {
-                cell.configure(activityItem, defaults: Defaults[.uid], hideTop: true, hideBottom: true)
+                cell.configure(activity, defaults: Defaults[.uid], hideTop: true, hideBottom: true)
             } else {
-                cell.configure(activityItem, defaults: Defaults[.uid], hideTop: true, hideBottom: false)
+                cell.configure(activity, defaults: Defaults[.uid], hideTop: true, hideBottom: false)
             }
         case self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1:
-            cell.configure(activityItem, defaults: Defaults[.uid], hideTop: false, hideBottom: true)
+            cell.configure(activity, defaults: Defaults[.uid], hideTop: false, hideBottom: true)
         default:
-            cell.configure(activityItem, defaults: Defaults[.uid], hideTop: false, hideBottom: false)
+            cell.configure(activity, defaults: Defaults[.uid], hideTop: false, hideBottom: false)
         }
 
         return cell
@@ -140,8 +154,8 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: ":wastebasket:".emojiUnescapedString) { (action, indexPath) in
-            let activityItem = self.activitiesArray[indexPath.section][indexPath.row]
-            activityItem.ref?.removeValue()
+            let activity = self.activitiesArray[indexPath.section][indexPath.row]
+            activity.ref?.removeValue()
         }
         delete.backgroundColor = .white
 
@@ -191,7 +205,7 @@ class TableViewController: UITableViewController {
 
     private func setupToolbar() {
         var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
-        for item in PetManager.shared.current.buttons {
+        for item in self.currentPet.buttons {
             items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
@@ -220,7 +234,7 @@ class TableViewController: UITableViewController {
             firstTwo.append(below)
         }
 
-        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(PetManager.shared.current.merge)) }) {
+        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(self.currentPet.merge)) }) {
             let new = Activity.init(date: activity.date, type: first.type + activity.type)
             first.ref?.updateChildValues(new.toAnyObject())
             activity.ref?.removeValue()
@@ -236,17 +250,17 @@ class TableViewController: UITableViewController {
 
     @IBAction func switchButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
-        let filteredPets = Defaults[.petArray].filter { $0.id != PetManager.shared.current.id }
+        let filteredPets = petsArray.filter { $0.id != currentPet.id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
-            Defaults.remove(.pet)
+            self.userRef.child("pets").updateChildValues([self.currentPet.id: false])
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
         for pet in filteredPets {
             let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
             alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                PetManager.shared.add(pet)
+                self.userRef.child("pets").updateChildValues([self.currentPet.id: false, pet.id: true])
                 self.performSegue(withIdentifier: "switchPet", sender: self)
             }))
         }

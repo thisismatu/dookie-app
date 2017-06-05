@@ -23,9 +23,10 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
+        petRef = ref.child("pets/" + Defaults[.pid])
+
         navigationController?.navigationBar.barTintColor = nil
-        ref = Database.database().reference(withPath: PetManager.shared.current.id)
-        petRef = ref.child("pet")
 
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         emojiTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -34,9 +35,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiView.collectionView.backgroundColor = .white
         emojiTextField.delegate = self
         emojiTextField.inputView = emojiView
-        emojiTextField.text = PetManager.shared.current.emoji.emojiUnescapedString
         nameTextField.delegate = self
-        nameTextField.text = PetManager.shared.current.name
 
         validateInputs()
     }
@@ -44,6 +43,11 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = nil
+        petRef.observe(.value, with: { snapshot in
+            guard let pet = PetNew.init(snapshot) else { return }
+            self.emojiTextField.text = pet.emoji.emojiUnescapedString
+            self.nameTextField.text = pet.name
+        })
     }
 
     override func viewDidAppear(_ animated: Bool) {

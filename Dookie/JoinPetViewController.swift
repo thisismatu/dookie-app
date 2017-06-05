@@ -12,13 +12,17 @@ import SwiftyUserDefaults
 
 class JoinPetViewController: UIViewController, UITextFieldDelegate {
     var ref: DatabaseReference!
+    var petRef: DatabaseReference!
+    var userRef: DatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
         ref = Database.database().reference()
+        petRef = ref.child("pets")
+        userRef = ref.child("users/" + Defaults[.uid])
+        textField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.checkPasteboard), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.hideKeyboardWhenTappedAround()
     }
@@ -31,6 +35,8 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
+        petRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
@@ -51,10 +57,10 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
 
         switch !id.isEmpty {
         case true:
-            ref.child(id).child("pet").observeSingleEvent(of: .value, with: { snapshot in
+            petRef.child(id).observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.exists() {
-                    guard let pet = Pet.init(snapshot) else { return }
-                    PetManager.shared.add(pet)
+                    self.petRef.child(id + "/users/" + Defaults[.uid]).setValue(true)
+                    self.userRef.child("pets/" + id).setValue(true)
                     self.performSegue(withIdentifier: "joinPet", sender: self)
                 } else {
                     let alert = UIAlertController(title: "Couldn’t find this pet", message: "The Pet ID you entered doesn't match any existing pet. Please check that you’ve entered the whole ID.", preferredStyle: .alert)

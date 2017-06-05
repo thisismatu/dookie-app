@@ -7,34 +7,44 @@
 //
 
 import UIKit
+import Firebase
 import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
+    var ref: DatabaseReference!
+    var userRef: DatabaseReference!
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
+        userRef = ref.child("users/" + Defaults[.uid])
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showHideCancelButton()
+        userRef.child("pets").observeSingleEvent(of: .value, with: { snapshot in
+            if snapshot.exists() {
+                self.cancelButton.isEnabled = true
+                self.cancelButton.tintColor = .dookieGray
+            } else {
+                self.cancelButton.isEnabled = false
+                self.cancelButton.tintColor = .clear
+            }
+        })
     }
 
-    private func showHideCancelButton() {
-        if Defaults.hasKey(.petArray) && !Defaults.hasKey(.pet)  {
-            cancelButton.isEnabled = true
-            cancelButton.tintColor = .dookieGray
-        } else {
-            cancelButton.isEnabled = false
-            cancelButton.tintColor = .clear
-        }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
+        ref.removeAllObservers()
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        PetManager.shared.restore()
+        self.userRef.child("pets/" + Defaults[.pid]).setValue(true)
         self.performSegue(withIdentifier: "restorePet", sender: self)
     }
 }

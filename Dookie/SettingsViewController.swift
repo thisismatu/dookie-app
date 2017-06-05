@@ -14,11 +14,13 @@ import Emoji
 import ISEmojiView
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     let appstoreUrl = "itms://itunes.apple.com/us/app/simplepin/xxxx"
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
+    var userRef: DatabaseReference!
     var tableHeaderHeight: CGFloat = 200.0
+    var currentPet: PetNew!
+    var currentUser: User!
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -32,12 +34,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = .groupTableViewBackground
-        ref = Database.database().reference(withPath: PetManager.shared.current.id)
-        petRef = ref.child("pet")
+        ref = Database.database().reference()
+        petRef = ref.child("pets/" + Defaults[.pid])
+        userRef = ref.child("users/" + Defaults[.uid])
 
-        petEmojiButton.setTitle(petEmoji(), for: .normal)
-        petNameLabel.text = PetManager.shared.current.name
+        navigationController?.navigationBar.barTintColor = .groupTableViewBackground
         versionLabel.text = getVersionNumber()
 
         tableHeaderHeight = view.frame.width/2
@@ -51,16 +52,24 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        userRef.observe(.value, with: { snapshot in
+            guard let user = User.init(snapshot) else { return }
+            self.currentUser = user
+        })
+
         petRef.observe(.value, with: { snapshot in
-            guard let pet = Pet.init(snapshot) else { return }
-            PetManager.shared.add(pet)
-            self.petNameLabel.text = PetManager.shared.current.name
-            self.petEmojiButton.setTitle(self.petEmoji(), for: .normal)
+            guard let pet = PetNew.init(snapshot) else { return }
+            let emoji = pet.emoji.emojiUnescapedString
+            self.currentPet = pet
+            self.petNameLabel.text = pet.name
+            self.petEmojiButton.setTitle(emoji.isEmpty ? "+" : emoji, for: .normal)
         })
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
     }
@@ -112,13 +121,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     // MARK: - View controller private methods
 
-    private func petEmoji() -> String {
-        if PetManager.shared.current.emoji.emojiUnescapedString.isEmpty {
-            return "+"
-        }
-        return PetManager.shared.current.emoji.emojiUnescapedString
-    }
-
     private func updateHeaderView() {
         let offset = tableView.contentOffset.y
         var headerRect = CGRect(x: 0, y: -tableHeaderHeight, width: tableView.bounds.width, height: tableHeaderHeight)
@@ -149,15 +151,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func sendInviteEmail() {
-        let subject: String = "Join \(PetManager.shared.current.name) on Dookie \(PetManager.shared.current.emoji.emojiUnescapedString)"
+        let subject: String = "Join \(currentPet.name) on Dookie \(currentPet.emoji.emojiUnescapedString)"
         let bodyArray: [String] = [
             "<p>Hello,</p>",
-            "<p>I’d like you to join \(PetManager.shared.current.name) on <a href='https://dookie.me'>Dookie</a>.</p>",
-            "<a href='dookie://\(PetManager.shared.current.id)' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(PetManager.shared.current.name) on Dookie</a>",
+            "<p>I’d like you to join \(currentPet.name) on <a href='https://dookie.me'>Dookie</a>.</p>",
+            "<a href='dookie://\(currentPet.id)' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(currentPet.name) on Dookie</a>",
             "<p>Dookie is the easiest way to keep track of your pet’s eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
             "<p>Happy tracking!</p>",
             "<p>🐶</p>",
-            "<p style='color: #999999;'>If the link isn’t working, copy this code for manual entry: <strong>\(PetManager.shared.current.id)</strong></p>"
+            "<p style='color: #999999;'>If the link isn’t working, copy this code for manual entry: <strong>\(currentPet.id)</strong></p>"
         ]
         configureEmail(subject, body: bodyArray.joined(), recipients: [], html: true)
     }
@@ -183,7 +185,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func copyShareURL() {
-        UIPasteboard.general.string = "dookie://" + PetManager.shared.current.id
+        UIPasteboard.general.string = "dookie://" + currentPet.id
         let alert = UIAlertController(title: ":heavy_check_mark:".emojiUnescapedString + "\n\nShare URL Copied", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true) {
             let deadline = DispatchTime.now() + 1
@@ -203,20 +205,30 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     private func leavePetPrompt() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Leave \(PetManager.shared.current.name)", style: .default, handler: { _ in
-            self.appDelegate?.leavePet()
+        alert.addAction(UIAlertAction(title: "Leave \(currentPet.name)", style: .default, handler: { _ in
+            self.petRef.child("users/" + self.currentUser.id).removeValue()
+            self.userRef.child("pets/" + self.currentPet.id).removeValue()
+            if let nextPet = self.currentUser.pets.first(where: { $0.key != self.currentPet.id }) {
+                self.userRef.child("pets/" + nextPet.key).setValue(true)
+            }
+            self.performSegue(withIdentifier: "leavePet", sender: self)
         }))
-        alert.addAction(UIAlertAction(title: "Delete \(PetManager.shared.current.name)", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Delete \(currentPet.name)", style: .destructive, handler: { _ in
             self.deletePetPrompt()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
     private func deletePetPrompt() {
-        let alert = UIAlertController(title: "Delete \(PetManager.shared.current.name)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete \(currentPet.name)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.appDelegate?.deletePet()
+            self.petRef.removeValue()
+            self.userRef.child("pets/" + self.currentPet.id).removeValue()
+            if let nextPet = self.currentUser.pets.first(where: { $0.key != self.currentPet.id }) {
+                self.userRef.child("pets/" + nextPet.key).setValue(true)
+            }
+            self.performSegue(withIdentifier: "leavePet", sender: self)
         }))
         self.present(alert, animated: true, completion: nil)
     }

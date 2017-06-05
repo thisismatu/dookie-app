@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
             if id.isFirebaseUID {
-                let pet = Pet.init(id: id)
-                PetManager.shared.add(pet)
+                let ref = Database.database().reference()
+                ref.child("users/" + Defaults[.uid] + "/pets/" + id).setValue(true)
+                ref.child("pets/" + id + "/users/" + Defaults[.uid]).setValue(true)
                 showHomeScreen()
             }
         }
@@ -71,12 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func leavePet() {
-        PetManager.shared.remove()
-        showHomeScreen()
-    }
-
-    func deletePet() {
-        PetManager.shared.delete()
         showHomeScreen()
     }
 
