@@ -16,6 +16,7 @@ struct Activity {
     let date: Date
     let type: [String]
     let uid: String
+    let pet: String
 }
 
 extension Activity {
@@ -25,6 +26,7 @@ extension Activity {
         self.date = date
         self.type = snapshot.json["type"].arrayValue.map { $0.stringValue }
         self.uid = snapshot.json["uid"].stringValue
+        self.pet = snapshot.json["pet"].stringValue
     }
 
     init(ref: DatabaseReference? = nil, date: Date, type: [String]) {
@@ -32,13 +34,15 @@ extension Activity {
         self.date = date
         self.type = type
         self.uid = Defaults[.uid]
+        self.pet = Defaults[.pid]
     }
 
     func toAnyObject() -> [AnyHashable: Any] {
         return [
             "date": self.date.toString,
             "type": self.type,
-            "uid": self.uid
+            "uid": self.uid,
+            "pet": self.pet
         ]
     }
 }

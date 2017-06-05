@@ -11,6 +11,48 @@ import SwiftyJSON
 import Firebase
 import SwiftyUserDefaults
 
+struct PetNew {
+    let ref: DatabaseReference?
+    let id: String
+    var name: String
+    var emoji: String
+    var buttons: [String]
+    var merge: [String]
+    var users: [String: Bool]
+
+    init?(_ snapshot: DataSnapshot) {
+        guard let dict = snapshot.json["users"].dictionaryObject as? [String: Bool] else { return nil }
+        self.ref = snapshot.ref
+        self.id = snapshot.ref.key
+        self.name = snapshot.json["name"].stringValue
+        self.emoji = snapshot.json["emoji"].stringValue
+        self.buttons = snapshot.json["buttons"].arrayValue.map { $0.stringValue }
+        self.merge = snapshot.json["merge"].arrayValue.map { $0.stringValue }
+        self.users = dict
+    }
+
+    init(_ name: String) {
+        self.ref = nil
+        self.id = ""
+        self.name = name
+        self.emoji = ""
+        self.buttons = [":stew:", ":droplet:", ":poop:"]
+        self.merge = [":droplet:", ":poop:"]
+        self.users = [Defaults[.uid]: true]
+    }
+
+    func toAnyObject() -> [AnyHashable: Any] {
+        return [
+            "id": self.id,
+            "name": self.name,
+            "emoji": self.emoji,
+            "buttons": self.buttons,
+            "merge": self.merge,
+            "users": self.users
+        ]
+    }
+}
+
 class Pet: NSObject, NSCoding {
     let id: String
     var name: String
@@ -19,8 +61,7 @@ class Pet: NSObject, NSCoding {
     var merge: [String]
 
     init?(_ snapshot: DataSnapshot) {
-        guard let id = snapshot.ref.parent?.key else { return nil }
-        self.id = id
+        self.id = snapshot.ref.key
         self.name = snapshot.json["name"].stringValue
         self.emoji = snapshot.json["emoji"].stringValue
         self.buttons = snapshot.json["buttons"].arrayValue.map { $0.stringValue }
