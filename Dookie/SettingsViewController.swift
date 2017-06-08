@@ -59,7 +59,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         })
 
         petRef.observe(.value, with: { snapshot in
-            guard let pet = PetNew.init(snapshot) else { return }
+            guard let pet = Pet.init(snapshot) else { return }
             Defaults[.name] = pet.name
             Defaults[.emoji] = pet.emoji
             Defaults[.buttons] = pet.buttons

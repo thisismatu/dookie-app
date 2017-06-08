@@ -11,7 +11,7 @@ import SwiftyJSON
 import Firebase
 import SwiftyUserDefaults
 
-struct PetNew {
+struct Pet {
     let ref: DatabaseReference?
     let pid: String
     var name: String
@@ -20,7 +20,7 @@ struct PetNew {
     var merge: [String]
 }
 
-extension PetNew {
+extension Pet {
     init?(_ snapshot: DataSnapshot) {
         self.ref = snapshot.ref
         self.pid = snapshot.ref.key

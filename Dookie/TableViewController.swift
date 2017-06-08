@@ -19,7 +19,7 @@ class TableViewController: UITableViewController {
     var connectedRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
-    var petsArray = [PetNew]()
+    var petsArray = [Pet]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class TableViewController: UITableViewController {
 //            self.petsArray.removeAll()
 //            for item in user.pets.keys {
 //                self.ref.child("pets/" + item).observeSingleEvent(of: .value, with: { snapshot in
-//                    guard let pet = PetNew.init(snapshot) else { return }
+//                    guard let pet = Pet.init(snapshot) else { return }
 //                    self.petsArray.append(pet)
 //                })
 //            }
@@ -59,7 +59,7 @@ class TableViewController: UITableViewController {
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() {
-                guard let pet = PetNew.init(snapshot) else { return }
+                guard let pet = Pet.init(snapshot) else { return }
                 Defaults[.name] = pet.pid
                 Defaults[.name] = pet.name
                 Defaults[.emoji] = pet.emoji

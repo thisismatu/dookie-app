@@ -54,7 +54,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         switch !name.isEmpty {
         case true:
             let key = petRef.childByAutoId().key
-            let pet = PetNew.init(name, key)
+            let pet = Pet.init(name, key)
             let user = User.init()
             let userPet = UserPet.init(key)
             petRef.child(key).updateChildValues(pet.toAnyObject())
