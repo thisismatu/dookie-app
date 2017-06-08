@@ -40,11 +40,9 @@ class HomeViewController: UIViewController {
         let userPetsRef = self.ref.child("userPets/" + Defaults[.uid])
         userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let dict = snapshot.value as? [String: Bool] else { return self.showNext("Login") }
-            print("dict:", dict)
             Defaults[.pets] = dict
             if let result = dict.first(where: { $0.value == true }) {
                 Defaults[.pid] = result.key
-                print(result.key)
                 self.showNext("Table")
                 return
             }
