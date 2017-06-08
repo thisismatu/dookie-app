@@ -12,7 +12,7 @@ import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
     var ref: DatabaseReference!
-    var userRef: DatabaseReference!
+    var userPetsRef: DatabaseReference!
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
@@ -21,30 +21,29 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        userRef = ref.child("users/" + Defaults[.uid])
+        userPetsRef = ref.child("userPets/" + Defaults[.uid])
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userRef.child("pets").observeSingleEvent(of: .value, with: { snapshot in
-            if snapshot.exists() {
-                self.cancelButton.isEnabled = true
-                self.cancelButton.tintColor = .dookieGray
-            } else {
-                self.cancelButton.isEnabled = false
-                self.cancelButton.tintColor = .clear
-            }
-        })
+        if !Defaults[.pets].isEmpty {
+            self.cancelButton.isEnabled = true
+            self.cancelButton.tintColor = .dookieGray
+        } else {
+            self.cancelButton.isEnabled = false
+            self.cancelButton.tintColor = .clear
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        userRef.removeAllObservers()
+        userPetsRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.userRef.child("pets/" + Defaults[.pid]).setValue(true)
-        self.performSegue(withIdentifier: "restorePet", sender: self)
+        self.userPetsRef.child(Defaults[.pid]).setValue(true) { (error, reference) in
+            self.performSegue(withIdentifier: "restorePet", sender: self)
+        }
     }
 }

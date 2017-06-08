@@ -8,37 +8,48 @@
 
 import UIKit
 import Firebase
+import SwiftyJSON
 import SwiftyUserDefaults
 
 class HomeViewController: UIViewController {
     var ref: DatabaseReference!
-    var userRef: DatabaseReference!
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        userRef = ref.child("users/" + Defaults[.uid])
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userRef.child("pets").observeSingleEvent(of: .value, with: { snapshot in
-            let dict = snapshot.json.dictionaryObject as? [String: Bool]
-            print(dict)
-            if let result = dict?.first(where: { $0.value == true }) {
-                print(result)
-                Defaults[.pid] = result.key
-                self.showNext("Table")
+
+        Auth.auth().signInAnonymously { (user, error) in
+            if let user = user {
+                Defaults[.uid] = user.uid
+                self.getUserPets()
             }
-            self.showNext("Login")
-        })
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        userRef.removeAllObservers()
         ref.removeAllObservers()
+    }
+
+    private func getUserPets() {
+        let userPetsRef = self.ref.child("userPets/" + Defaults[.uid])
+        userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
+            guard let dict = snapshot.value as? [String: Bool] else { return self.showNext("Login") }
+            print("dict:", dict)
+            Defaults[.pets] = dict
+            if let result = dict.first(where: { $0.value == true }) {
+                Defaults[.pid] = result.key
+                print(result.key)
+                self.showNext("Table")
+                return
+            }
+            self.showNext("Login")
+        })
     }
 
     private func showNext(_ identifier: String) {

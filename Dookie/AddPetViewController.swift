@@ -14,6 +14,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
+    var userPetsRef: DatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
@@ -22,6 +23,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         petRef = ref.child("pets")
         userRef = ref.child("users/" + Defaults[.uid])
+        userPetsRef = ref.child("userPets/" + Defaults[.uid])
         textField.delegate = self
         self.hideKeyboardWhenTappedAround()
     }
@@ -33,6 +35,7 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
@@ -50,11 +53,14 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
         switch !name.isEmpty {
         case true:
-            let pet = PetNew.init(name)
-            petRef.childByAutoId().setValue(pet.toAnyObject(), withCompletionBlock: { (error, reference) in
-                self.userRef.child("pets/" + reference.key).setValue(true)
-                self.performSegue(withIdentifier: "addPet", sender: self)
-            })
+            let key = petRef.childByAutoId().key
+            let pet = PetNew.init(name, key)
+            let user = User.init()
+            let userPet = UserPet.init(key)
+            petRef.child(key).updateChildValues(pet.toAnyObject())
+            userPetsRef.updateChildValues(userPet.toAnyObject())
+            userRef.updateChildValues(user.toAnyObject())
+            self.performSegue(withIdentifier: "addPet", sender: self)
         case false: return
         }
     }

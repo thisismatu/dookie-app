@@ -12,22 +12,21 @@ import SwiftyUserDefaults
 import Emoji
 
 class TableViewController: UITableViewController {
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
+    var userPetsRef: DatabaseReference!
     var connectedRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
     var petsArray = [PetNew]()
-    var currentPet: PetNew!
-    var currentUser: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
         userRef = ref.child("users/" + Defaults[.uid])
+        userPetsRef = ref.child("userPets/" + Defaults[.uid])
         activitiesRef = ref.child("activities")
         connectedRef = Database.database().reference(withPath: ".info/connected")
     }
@@ -39,40 +38,45 @@ class TableViewController: UITableViewController {
             // Do something when connected?
         })
 
-        userRef.observe(.value, with: { snapshot in
+        userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
-            self.currentUser = user
-            self.petsArray.removeAll()
-            for item in user.pets.keys {
-                self.ref.child("pets/" + item).observeSingleEvent(of: .value, with: { snapshot in
-                    guard let pet = PetNew.init(snapshot) else { return }
-                    self.petsArray.append(pet)
-                })
-            }
+            Defaults[.premium] = user.premium
+//            Storage.shared.user = user
+//            self.currentUser = user
+//            self.petsArray.removeAll()
+//            for item in user.pets.keys {
+//                self.ref.child("pets/" + item).observeSingleEvent(of: .value, with: { snapshot in
+//                    guard let pet = PetNew.init(snapshot) else { return }
+//                    self.petsArray.append(pet)
+//                })
+//            }
+        })
+
+        userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
+            guard let dict = snapshot.value as? [String: Bool] else { return }
+            Defaults[.pets] = dict
         })
 
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() {
                 guard let pet = PetNew.init(snapshot) else { return }
-                pet.ref?.setValue(pet.toAnyObject())
-                self.currentPet = pet
+                Defaults[.name] = pet.pid
+                Defaults[.name] = pet.name
+                Defaults[.emoji] = pet.emoji
+                Defaults[.buttons] = pet.buttons
+                Defaults[.merge] = pet.merge
                 self.navigationItem.title = pet.name
                 self.setupToolbar()
             } else {
                 let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.petRef.removeValue()
-                    self.userRef.child("pets/" + self.currentPet.id).removeValue()
-                    if let nextPet = self.currentUser.pets.first(where: { $0.key != self.currentPet.id }) {
-                        self.userRef.child("pets/" + nextPet.key).setValue(true)
-                    }
-                    self.appDelegate?.leavePet()
+                    self.leavePet()
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
         })
 
-        activitiesRef.queryOrdered(byChild: "pet").queryEqual(toValue: Defaults[.pid]).observe(.value, with: { snapshot in
+        activitiesRef.queryOrdered(byChild: "pid").queryEqual(toValue: Defaults[.pid]).observe(.value, with: { snapshot in
             guard let snapshots = snapshot.children.allObjects as? [DataSnapshot] else { return }
             let all = snapshots
                 .flatMap { Activity.init($0) }
@@ -186,6 +190,20 @@ class TableViewController: UITableViewController {
 
     // MARK: - View controller private methods
 
+    private func leavePet() {
+        self.userPetsRef.child(Defaults[.pid]).removeValue()
+        if let nextPet = Defaults[.pets].first(where: { $0.value == false }) {
+            self.userPetsRef.child(nextPet.key).setValue(true)
+        }
+        Defaults.remove(.pid)
+        Defaults.remove(.name)
+        Defaults.remove(.emoji)
+        Defaults.remove(.pets)
+        Defaults.remove(.buttons)
+        Defaults.remove(.merge)
+        self.performSegue(withIdentifier: "switchPet", sender: self)
+    }
+
     private func showEmptyState(_ show: Bool) {
         if show {
             let label = UILabel()
@@ -205,7 +223,7 @@ class TableViewController: UITableViewController {
 
     private func setupToolbar() {
         var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
-        for item in self.currentPet.buttons {
+        for item in Defaults[.buttons] {
             items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
@@ -234,7 +252,7 @@ class TableViewController: UITableViewController {
             firstTwo.append(below)
         }
 
-        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(self.currentPet.merge)) }) {
+        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(Defaults[.merge])) }) {
             let new = Activity.init(date: activity.date, type: first.type + activity.type)
             first.ref?.updateChildValues(new.toAnyObject())
             activity.ref?.removeValue()
@@ -244,23 +262,26 @@ class TableViewController: UITableViewController {
         return false
     }
 
+
     // MARK: - Actions
 
     @IBAction func unwindToTable(_ segue: UIStoryboardSegue) {}
 
     @IBAction func switchButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
-        let filteredPets = petsArray.filter { $0.id != currentPet.id }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
-            self.userRef.child("pets").updateChildValues([self.currentPet.id: false])
+            self.userPetsRef.updateChildValues([Defaults[.pid]: false])
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
-        for pet in filteredPets {
-            let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
+        let inactivePets = Defaults[.pets].filter { $0.value == false }
+        for pet in inactivePets {
+            let name = "Other pet"
+//            pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
             alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                self.userRef.child("pets").updateChildValues([self.currentPet.id: false, pet.id: true])
+                print("other pet:", Defaults[.pid], pet.key)
+                self.userPetsRef.updateChildValues([Defaults[.pid]: false, pet.key: true])
                 self.performSegue(withIdentifier: "switchPet", sender: self)
             }))
         }

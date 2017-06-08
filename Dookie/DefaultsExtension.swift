@@ -10,19 +10,20 @@ import Foundation
 import SwiftyUserDefaults
 
 extension UserDefaults {
-    subscript(key: DefaultsKey<Pet>) -> Pet {
-        get { return unarchive(key) ?? Pet() }
-        set { archive(key, newValue) }
-    }
-    subscript(key: DefaultsKey<[Pet]>) -> [Pet] {
-        get { return unarchive(key) ?? [] }
+    subscript(key: DefaultsKey<[String: Bool]>) -> [String: Bool] {
+        get { return unarchive(key) ?? [:] }
         set { archive(key, newValue) }
     }
 }
 
 extension DefaultsKeys {
-    static let uid = DefaultsKey<String>("uid")
     static let pid = DefaultsKey<String>("pid")
-    static let pet = DefaultsKey<Pet>("pet")
-    static let petArray = DefaultsKey<[Pet]>("petArray")
+    static let name = DefaultsKey<String>("name")
+    static let emoji = DefaultsKey<String>("emoji")
+    static let buttons = DefaultsKey<[String]>("buttons")
+    static let merge = DefaultsKey<[String]>("merge")
+    static let pets = DefaultsKey<[String: Bool]>("pets")
+
+    static let uid = DefaultsKey<String>("uid")
+    static let premium = DefaultsKey<Bool>("premium")
 }

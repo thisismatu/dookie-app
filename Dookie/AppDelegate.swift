@@ -18,12 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-        Auth.auth().signInAnonymously(completion: { (user, error) in
-            if let user = user {
-                Defaults[.uid] = user.uid
-            }
-        })
-
         self.window?.tintColor = .dookieBlue
         UINavigationBar.appearance().tintColor = .dookieGray
         UINavigationBar.appearance().shadowImage = UIImage()
@@ -32,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIToolbar.appearance().setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         UIToolbar.appearance().setShadowImage(UIImage(), forToolbarPosition: .any)
         UIToolbar.appearance().isTranslucent = false
-
         return true
     }
 
