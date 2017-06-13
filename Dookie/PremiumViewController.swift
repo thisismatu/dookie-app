@@ -58,7 +58,7 @@ class PremiumViewController: UIViewController {
     }
 
     private func shouldShowPremiumUnlocked() {
-        let hasPremium = false // tood: update to real
+        let hasPremium = false // TODO: update to real
         if hasPremium {
             unlockPremiumStackView.spacing = 0.0
             unlockPremiumStackView.isHidden = true
