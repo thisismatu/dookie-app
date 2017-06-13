@@ -16,7 +16,7 @@ extension String {
         return formatter.date(from: self)
     }
 
-    public var isFirebaseUID: Bool {
+    public var isFirebasePushId: Bool {
         let allowed = CharacterSet(charactersIn: "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz")
         if self.rangeOfCharacter(from: allowed.inverted) == nil && self.characters.count == 20 {
             return true

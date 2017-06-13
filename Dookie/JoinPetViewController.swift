@@ -44,7 +44,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func checkPasteboard() {
         guard let pasteboard = UIPasteboard.general.string else { return }
-        if pasteboard.isFirebaseUID {
+        if pasteboard.isFirebasePushId {
             textField.text = pasteboard
         }
     }

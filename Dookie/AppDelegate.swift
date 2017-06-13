@@ -32,10 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
-            if id.isFirebaseUID {
                 let ref = Database.database().reference()
                 ref.child("users/" + Defaults[.uid] + "/pets/" + id).setValue(true)
                 ref.child("pets/" + id + "/users/" + Defaults[.uid]).setValue(true)
+            if id.isFirebasePushId {
                 showHomeScreen()
             }
         }
