@@ -98,9 +98,8 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let name = nameTextField.text,
             let emoji = emojiTextField.text?.emojiEscapedString else { return }
-        self.petRef.updateChildValues(["name": name, "emoji": emoji]) { (error, reference) in
-            self.performSegue(withIdentifier: "editPet", sender: self)
-        }
+        self.petRef.updateChildValues(["name": name, "emoji": emoji])
+        self.performSegue(withIdentifier: "editPet", sender: self)
     }
 
     // MARK: - View controller private methods

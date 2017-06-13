@@ -12,7 +12,6 @@ import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
     var ref: DatabaseReference!
-    var userPetsRef: DatabaseReference!
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var illustration: UIImageView!
@@ -21,7 +20,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        userPetsRef = ref.child("userPets/" + Defaults[.uid])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,13 +35,12 @@ class LoginViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        userPetsRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.userPetsRef.child(Defaults[.pid]).setValue(true) { (error, reference) in
-            self.performSegue(withIdentifier: "restorePet", sender: self)
-        }
+        let userPetsRef = ref.child("userPets/" + Defaults[.uid])
+        userPetsRef.updateChildValues([Defaults[.pid]: true])
+        self.performSegue(withIdentifier: "restorePet", sender: self)
     }
 }

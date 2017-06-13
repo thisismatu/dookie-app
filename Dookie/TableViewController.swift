@@ -19,7 +19,6 @@ class TableViewController: UITableViewController {
     var connectedRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
-    var petsArray = [Pet]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,15 +128,12 @@ class TableViewController: UITableViewController {
 
         switch indexPath.row {
         case 0:
-            if self.activitiesArray[indexPath.section].count == 1 {
-                cell.configure(activity, defaults: Defaults[.uid], hideTop: true, hideBottom: true)
-            } else {
-                cell.configure(activity, defaults: Defaults[.uid], hideTop: true, hideBottom: false)
-            }
+            let isOnly = self.activitiesArray[indexPath.section].count == 1
+            cell.configure(activity, hideTop: true, hideBottom: isOnly)
         case self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1:
-            cell.configure(activity, defaults: Defaults[.uid], hideTop: false, hideBottom: true)
+            cell.configure(activity, hideTop: false, hideBottom: true)
         default:
-            cell.configure(activity, defaults: Defaults[.uid], hideTop: false, hideBottom: false)
+            cell.configure(activity, hideTop: false, hideBottom: false)
         }
 
         return cell

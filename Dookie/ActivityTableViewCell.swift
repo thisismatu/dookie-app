@@ -22,13 +22,13 @@ class ActivityTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func configure(_ item: Activity, defaults: String, hideTop: Bool, hideBottom: Bool) {
+    func configure(_ item: Activity, hideTop: Bool, hideBottom: Bool) {
         timeLabel.text = item.date.formatDate(.none, .short)
         typeLabel.text = item.type.joined().replacingOccurrences(of: "shit", with: "poop").emojiUnescapedString
         lineTop.isHidden = hideTop
         lineBottom.isHidden = hideBottom
 
-        if item.uid == defaults || Defaults.hasKey("FASTLANE_SNAPSHOT") && item.uid.isEmpty {
+        if item.uid == Defaults[.uid] {
             indicator.layer.borderColor = UIColor.dookieBlue.cgColor
         } else {
             indicator.layer.borderColor = UIColor.dookieLightGray.cgColor

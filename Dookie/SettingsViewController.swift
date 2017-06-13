@@ -64,14 +64,15 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             Defaults[.emoji] = pet.emoji
             Defaults[.buttons] = pet.buttons
             Defaults[.merge] = pet.merge
-            let emoji = pet.emoji.emojiUnescapedString
+            let emoji = pet.emoji.isEmpty ? "+" : pet.emoji.emojiUnescapedString
             self.petNameLabel.text = pet.name
-            self.petEmojiButton.setTitle(emoji.isEmpty ? "+" : emoji, for: .normal)
+            self.petEmojiButton.setTitle(emoji, for: .normal)
         })
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
