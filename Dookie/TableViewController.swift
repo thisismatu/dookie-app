@@ -50,7 +50,7 @@ class TableViewController: UITableViewController {
         petRef.observe(.value, with: { snapshot in
             if snapshot.exists() {
                 guard let pet = Pet.init(snapshot) else { return }
-                Defaults[.name] = pet.pid
+                Defaults[.pid] = pet.pid
                 Defaults[.name] = pet.name
                 Defaults[.emoji] = pet.emoji
                 Defaults[.buttons] = pet.buttons
