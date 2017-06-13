@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import SwiftyUserDefaults
 
 class PremiumViewController: UIViewController {
+    var ref: DatabaseReference!
     var isRainingConfetti = false
 
     @IBOutlet weak var unlockPremiumStackView: UIStackView!
@@ -20,13 +23,14 @@ class PremiumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         navigationController?.navigationBar.barTintColor = nil
-        shouldShowPremiumUnlocked()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = nil
+        shouldShowPremiumUnlocked()
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -35,6 +39,11 @@ class PremiumViewController: UIViewController {
             self.navigationController?.navigationBar.barTintColor = .groupTableViewBackground
             self.navigationController?.navigationBar.layoutIfNeeded()
         })
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ref.removeAllObservers()
     }
 
     // MARK: - View controller private methods
@@ -58,8 +67,7 @@ class PremiumViewController: UIViewController {
     }
 
     private func shouldShowPremiumUnlocked() {
-        let hasPremium = false // TODO: update to real
-        if hasPremium {
+        if Defaults[.premium] {
             unlockPremiumStackView.spacing = 0.0
             unlockPremiumStackView.isHidden = true
             premiumUnlockedStackView.spacing = 16.0
@@ -78,16 +86,18 @@ class PremiumViewController: UIViewController {
         let alert = UIAlertController(title: "Confirm Your In-App Purchase", message: "This is just a test", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+            self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])
             self.animatePremiumUnlocked()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func subscriptionButtonPressed(_ sender: Any) {
-        guard let url = URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions") else { return }
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
-        }
+//        guard let url = URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions") else { return }
+//        if UIApplication.shared.canOpenURL(url) {
+//            UIApplication.shared.openURL(url)
+//        }
+        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": false])
     }
 
     /*
