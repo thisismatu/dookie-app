@@ -17,13 +17,14 @@ extension UserDefaults {
 }
 
 extension DefaultsKeys {
+    // Pet keys
     static let pid = DefaultsKey<String>("pid")
     static let name = DefaultsKey<String>("name")
     static let emoji = DefaultsKey<String>("emoji")
     static let buttons = DefaultsKey<[String]>("buttons")
     static let merge = DefaultsKey<[String]>("merge")
     static let pets = DefaultsKey<[String: Bool]>("pets")
-
+    // User keys
     static let uid = DefaultsKey<String>("uid")
     static let premium = DefaultsKey<Bool>("premium")
 }

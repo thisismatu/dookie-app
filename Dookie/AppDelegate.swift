@@ -34,8 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let id = url.host else { return false }
             if id.isFirebasePushId {
                 let ref = Database.database().reference(withPath: "userPets/" + Defaults[.uid])
-                let updates = Defaults.hasKey(.pid) ? [Defaults[.pid]: false, id: true] : [id: true]
-                ref.updateChildValues(updates)
+                if Defaults.hasKey(.pid), Defaults[.pid] != id {
+                    print(Defaults[.pid])
+                    ref.updateChildValues([Defaults[.pid]: false, id: true])
+                } else {
+                    ref.updateChildValues([id: true])
+                }
                 showHomeScreen()
             }
         }
