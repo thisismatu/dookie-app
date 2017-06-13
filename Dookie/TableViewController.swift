@@ -41,15 +41,6 @@ class TableViewController: UITableViewController {
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-//            Storage.shared.user = user
-//            self.currentUser = user
-//            self.petsArray.removeAll()
-//            for item in user.pets.keys {
-//                self.ref.child("pets/" + item).observeSingleEvent(of: .value, with: { snapshot in
-//                    guard let pet = Pet.init(snapshot) else { return }
-//                    self.petsArray.append(pet)
-//                })
-//            }
         })
 
         userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
@@ -262,7 +253,6 @@ class TableViewController: UITableViewController {
         return false
     }
 
-
     // MARK: - Actions
 
     @IBAction func unwindToTable(_ segue: UIStoryboardSegue) {}
@@ -275,15 +265,16 @@ class TableViewController: UITableViewController {
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
-        let inactivePets = Defaults[.pets].filter { $0.value == false }
-        for pet in inactivePets {
-            let name = "Other pet"
-//            pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
-            alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                print("other pet:", Defaults[.pid], pet.key)
-                self.userPetsRef.updateChildValues([Defaults[.pid]: false, pet.key: true])
-                self.performSegue(withIdentifier: "switchPet", sender: self)
-            }))
+        let inactive = Defaults[.pets].filter { $0.value == false }
+        for pet in inactive {
+            self.ref.child("pets/" + pet.key).observeSingleEvent(of: .value, with: { snapshot in
+                guard let pet = Pet.init(snapshot) else { return }
+                let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
+                alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
+                    self.userPetsRef.updateChildValues([Defaults[.pid]: false, pet.pid: true])
+                    self.performSegue(withIdentifier: "switchPet", sender: self)
+                }))
+            })
         }
 
         self.present(alert, animated: true, completion: nil)
