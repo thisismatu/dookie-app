@@ -20,6 +20,8 @@ class TableViewController: UITableViewController {
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
 
+    @IBOutlet weak var switchButton: UIBarButtonItem!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -32,6 +34,7 @@ class TableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showSwitchButton()
 
         connectedRef.observe(.value, with: { snapshot in
             // Do something when connected?
@@ -205,6 +208,16 @@ class TableViewController: UITableViewController {
             self.tableView.backgroundView = label
         } else {
             self.tableView.backgroundView = nil
+        }
+    }
+
+    private func showSwitchButton() {
+        if Defaults[.premium] {
+            self.switchButton.isEnabled = true
+            self.switchButton.tintColor = .dookieGray
+        } else {
+            self.switchButton.isEnabled = false
+            self.switchButton.tintColor = .clear
         }
     }
 

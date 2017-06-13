@@ -121,6 +121,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="switchButton" destination="utZ-Ri-dur" id="Ic8-7a-DjG"/>
                         <segue destination="gZT-At-y7i" kind="unwind" identifier="switchPet" unwindAction="unwindToHome:" id="HGK-nE-e61"/>
                     </connections>
                 </tableViewController>
