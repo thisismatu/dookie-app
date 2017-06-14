@@ -34,7 +34,7 @@ class TableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showSwitchButton()
+        switchButton.tintColor = Defaults[.premium] ? .dookieGray : .dookieDisabled
 
         connectedRef.observe(.value, with: { snapshot in
             // Do something when connected?
@@ -211,16 +211,6 @@ class TableViewController: UITableViewController {
         }
     }
 
-    private func showSwitchButton() {
-        if Defaults[.premium] {
-            self.switchButton.isEnabled = true
-            self.switchButton.tintColor = .dookieGray
-        } else {
-            self.switchButton.isEnabled = false
-            self.switchButton.tintColor = .clear
-        }
-    }
-
     private func setupToolbar() {
         var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
         for item in Defaults[.buttons] {
@@ -262,11 +252,7 @@ class TableViewController: UITableViewController {
         return false
     }
 
-    // MARK: - Actions
-
-    @IBAction func unwindToTable(_ segue: UIStoryboardSegue) {}
-
-    @IBAction func switchButtonPressed(_ sender: Any) {
+    private func switchPetAlert() {
         let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
@@ -287,5 +273,23 @@ class TableViewController: UITableViewController {
         }
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    private func upgradePremiumAlert() {
+        let alert = UIAlertController(title: "This is a Premium Feature", message: "Upgrade to Dookie Premium to access multiple pets and other premium features.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - Actions
+
+    @IBAction func unwindToTable(_ segue: UIStoryboardSegue) {}
+
+    @IBAction func switchButtonPressed(_ sender: Any) {
+        if Defaults[.premium] {
+            switchPetAlert()
+        } else {
+            upgradePremiumAlert()
+        }
     }
 }
