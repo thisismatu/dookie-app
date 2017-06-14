@@ -218,9 +218,12 @@ class TableViewController: UITableViewController {
 
     @objc private func barButtonPressed(_ item: UIBarButtonItem) {
         guard let type = item.title?.emojiEscapedString else { return }
-        let item = Activity.init(date: Date(), type: [type])
-        if !mergeActivity(item) {
-            self.activitiesRef.childByAutoId().setValue(item.toAnyObject())
+        let activity = Activity.init(date: Date(), type: [type])
+        if !mergeActivity(activity) {
+            item.isEnabled = false
+            self.activitiesRef.childByAutoId().setValue(activity.toAnyObject(), withCompletionBlock: { (error, reference) in
+                item.isEnabled = true
+            })
         }
     }
 
