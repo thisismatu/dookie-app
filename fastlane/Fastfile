@@ -6,7 +6,7 @@
 # Change the syntax highlighting to Ruby
 # All lines starting with a # are ignored when running `fastlane`
 
-fastlane_version "2.14.2"
+fastlane_version "2.38.1"
 default_platform :ios
 skip_docs
 
