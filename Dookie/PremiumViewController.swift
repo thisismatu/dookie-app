@@ -86,7 +86,7 @@ class PremiumViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func buyButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Confirm Your In-App Purchase", message: "This is just a test", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Confirm your in-app purchase", message: "This is just a test", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
             self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])

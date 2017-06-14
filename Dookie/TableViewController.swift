@@ -253,9 +253,9 @@ class TableViewController: UITableViewController {
     }
 
     private func switchPetAlert() {
-        let alert = UIAlertController(title: "Switch Pet", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Switch or add a pet", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Add/Join Pet", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Add another pet", style: .default, handler: { _ in
             self.userPetsRef.updateChildValues([Defaults[.pid]: false])
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
@@ -276,7 +276,7 @@ class TableViewController: UITableViewController {
     }
 
     private func upgradePremiumAlert() {
-        let alert = UIAlertController(title: "This is a Premium Feature", message: "Upgrade to Dookie Premium to access multiple pets and other premium features.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "This is a premium feature", message: "Upgrade to Dookie premium to access multiple pets and other premium features.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
