@@ -12,7 +12,6 @@ import SwiftyUserDefaults
 
 class PremiumViewController: UIViewController {
     var ref: DatabaseReference!
-    var isRainingConfetti = false
 
     @IBOutlet weak var unlockPremiumStackView: UIStackView!
     @IBOutlet weak var premiumUnlockedStackView: UIStackView!
@@ -49,21 +48,25 @@ class PremiumViewController: UIViewController {
     // MARK: - View controller private methods
 
     private func animatePremiumUnlocked() {
-        unlockPremiumStackView.spacing = 0.0
-        unlockPremiumStackView.isHidden = true
-        premiumUnlockedStackView.spacing = 16.0
-        premiumUnlockedStackView.alpha = 0.0
-        premiumUnlockedStackView.isHidden = false
-
-        UIView.animate(withDuration: 0.5, animations: {
-            self.premiumUnlockedStackView.alpha = 1.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.unlockPremiumStackView.alpha = 0.0
         }, completion: { _ in
-            self.confettiView.startConfetti()
-            let deadline = DispatchTime.now() + 0.5
-            DispatchQueue.main.asyncAfter(deadline: deadline) {
-                self.confettiView.stopConfetti()
-            }
+            self.unlockPremiumStackView.spacing = 0.0
+            self.unlockPremiumStackView.isHidden = true
+            self.premiumUnlockedStackView.spacing = 16.0
+            self.premiumUnlockedStackView.alpha = 0.0
+            self.premiumUnlockedStackView.isHidden = false
+            UIView.animate(withDuration: 0.4, animations: {
+                self.premiumUnlockedStackView.alpha = 1.0
+            }, completion: { _ in
+                self.confettiView.startConfetti()
+                let deadline = DispatchTime.now() + 0.8
+                DispatchQueue.main.asyncAfter(deadline: deadline) {
+                    self.confettiView.stopConfetti()
+                }
+            })
         })
+
     }
 
     private func shouldShowPremiumUnlocked() {
