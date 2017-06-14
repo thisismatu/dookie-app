@@ -53,12 +53,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        userRef.observe(.value, with: { snapshot in
+        userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
         })
 
-        petRef.observe(.value, with: { snapshot in
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
             Defaults[.name] = pet.name
             Defaults[.emoji] = pet.emoji

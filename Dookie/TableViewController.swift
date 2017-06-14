@@ -50,23 +50,19 @@ class TableViewController: UITableViewController {
             Defaults[.pets] = dict
         })
 
-        petRef.observe(.value, with: { snapshot in
-            if snapshot.exists() {
-                guard let pet = Pet.init(snapshot) else { return }
-                Defaults[.pid] = pet.pid
-                Defaults[.name] = pet.name
-                Defaults[.emoji] = pet.emoji
-                Defaults[.buttons] = pet.buttons
-                Defaults[.merge] = pet.merge
-                self.navigationItem.title = pet.name
-                self.setupToolbar()
-            } else {
-                let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
-                    self.leavePet()
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
+            guard let pet = Pet.init(snapshot) else { return }
+            Defaults[.pid] = pet.pid
+            Defaults[.name] = pet.name
+            Defaults[.emoji] = pet.emoji
+            Defaults[.buttons] = pet.buttons
+            Defaults[.merge] = pet.merge
+            self.navigationItem.title = pet.name
+            self.setupToolbar()
+        })
+
+        petRef.observe(.childRemoved, with: { snapshot in
+            self.petRemovedAlert()
         })
 
         activitiesRef.queryOrdered(byChild: "pid").queryEqual(toValue: Defaults[.pid]).observe(.value, with: { snapshot in
@@ -278,6 +274,14 @@ class TableViewController: UITableViewController {
     private func upgradePremiumAlert() {
         let alert = UIAlertController(title: "This is a premium feature", message: "Upgrade to Dookie premium to access multiple pets and other premium features.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func petRemovedAlert() {
+        let alert = UIAlertController(title: "This pet doesn’t exist", message: "It seems that your pet has been deleted. You can recreate the pet in the next view.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: { _ in
+            self.leavePet()
+        }))
         self.present(alert, animated: true, completion: nil)
     }
 

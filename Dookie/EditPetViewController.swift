@@ -43,7 +43,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = nil
-        petRef.observe(.value, with: { snapshot in
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
             self.emojiTextField.text = pet.emoji.emojiUnescapedString
             self.nameTextField.text = pet.name
