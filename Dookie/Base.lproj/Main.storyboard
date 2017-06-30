@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -232,7 +232,7 @@
                             <tableViewSection headerTitle="General" id="y8Y-zB-V6T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CaE-6S-No5">
-                                        <rect key="frame" x="0.0" y="256" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="255.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -271,7 +271,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Zd2-e0-49C">
-                                        <rect key="frame" x="0.0" y="304" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="303.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -307,7 +307,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wjL-HJ-XuZ">
-                                        <rect key="frame" x="0.0" y="352" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="351.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="wjL-HJ-XuZ" id="5ZE-5D-aet">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -347,7 +347,7 @@
                             <tableViewSection headerTitle="Premium" id="lvv-pN-CZX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="oeL-nV-sHc">
-                                        <rect key="frame" x="0.0" y="457" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="oeL-nV-sHc" id="7bS-sD-2Xc">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -386,7 +386,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="W6c-iI-41A">
-                                        <rect key="frame" x="0.0" y="505" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="503.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="W6c-iI-41A" id="onC-aI-TTR">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -420,13 +420,16 @@
                                                 <constraint firstItem="X3f-vc-9nf" firstAttribute="leading" secondItem="onC-aI-TTR" secondAttribute="leadingMargin" id="wpa-Kg-r5W"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Yea-OV-RbN" kind="show" id="ZQr-Gn-diV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Feedback" id="2Dq-hc-HbI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="MUf-nh-rzA">
-                                        <rect key="frame" x="0.0" y="610" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="607.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -462,7 +465,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="BcY-Ft-ZzN">
-                                        <rect key="frame" x="0.0" y="658" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="655.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -678,7 +681,98 @@ Track up to 5 custom emojis and choose which of them can merge
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8B-NW-2OT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4861.6000000000004" y="551.87406296851577"/>
+            <point key="canvasLocation" x="5082" y="117"/>
+        </scene>
+        <!--Manage emojis-->
+        <scene sceneID="vXS-Kj-iug">
+            <objects>
+                <tableViewController id="Yea-OV-RbN" customClass="EditEmojisViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zUa-Jb-WR4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="zoa-Fe-fcC">
+                            <rect key="frame" x="0.0" y="72" width="375" height="72"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add, reorder, edit and delete the emojis as you see fit. You can have up to 6 emojis." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-2R-eZ5">
+                                    <rect key="frame" x="32" y="16" width="311" height="40"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="gCo-2R-eZ5" secondAttribute="trailing" constant="32" id="Fns-hD-Yli"/>
+                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="leading" secondItem="zoa-Fe-fcC" secondAttribute="leading" constant="32" id="KQB-9i-L4T"/>
+                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="top" secondItem="zoa-Fe-fcC" secondAttribute="top" constant="16" id="rt2-TJ-JsF"/>
+                                <constraint firstAttribute="bottom" secondItem="gCo-2R-eZ5" secondAttribute="bottom" constant="16" id="vhZ-H9-qYA"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="asdasd" textLabel="AAu-Fw-eLT" detailTextLabel="Kc7-cQ-eb7" style="IBUITableViewCellStyleValue1" id="Ni7-Na-aur">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ni7-Na-aur" id="wVD-aG-U2e">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAu-Fw-eLT">
+                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kc7-cQ-eb7">
+                                            <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Yea-OV-RbN" id="Kaz-ev-j6q"/>
+                            <outlet property="delegate" destination="Yea-OV-RbN" id="V6A-HN-G3G"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Edit" id="mMe-f8-ati">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="Yea-OV-RbN" id="K8X-9K-S2e"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="X14-dG-4zG"/>
+                        <barButtonItem title="Add" id="uKL-JR-kSw">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="Yea-OV-RbN" id="33q-he-jsv"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Manage emojis" id="3zJ-nq-H2C">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="44C-cZ-ASB">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="Yea-OV-RbN" id="nnM-j3-AGS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="uKL-JR-kSw" id="T9c-sM-dIy"/>
+                        <outlet property="editButton" destination="mMe-f8-ati" id="7PB-et-S3o"/>
+                        <outlet property="saveButton" destination="44C-cZ-ASB" id="0hK-9R-eA5"/>
+                        <segue destination="lU8-q2-4et" kind="unwind" identifier="editPet" unwindAction="unwindToSettings:" id="4wh-F6-ifo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VfW-GA-7G1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lU8-q2-4et" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5081" y="826"/>
         </scene>
         <!--Edit-->
         <scene sceneID="I1a-5J-r0L">
@@ -696,7 +790,7 @@ Track up to 5 custom emojis and choose which of them can merge
                                         <rect key="frame" x="0.0" y="35" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ndT-eg-cV5" id="lZI-LM-MK5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-hn-qWZ">
@@ -729,7 +823,7 @@ Track up to 5 custom emojis and choose which of them can merge
                                         <rect key="frame" x="0.0" y="99" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="mmE-b0-P4e" id="0kI-sZ-TZE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5W-Hq-rnI">
@@ -783,7 +877,7 @@ Track up to 5 custom emojis and choose which of them can merge
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51I-uq-nAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wv5-yc-r73" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4863" y="-192"/>
+            <point key="canvasLocation" x="5081" y="-599"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="K9H-jq-2lg">
