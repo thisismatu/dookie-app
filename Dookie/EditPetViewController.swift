@@ -35,7 +35,9 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         emojiView.collectionView.backgroundColor = .white
         emojiTextField.delegate = self
         emojiTextField.inputView = emojiView
+        emojiTextField.text = Defaults[.emoji].emojiUnescapedString
         nameTextField.delegate = self
+        nameTextField.text = Defaults[.name]
 
         validateInputs()
     }
@@ -43,11 +45,6 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = nil
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
-            guard let pet = Pet.init(snapshot) else { return }
-            self.emojiTextField.text = pet.emoji.emojiUnescapedString
-            self.nameTextField.text = pet.name
-        })
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -98,8 +95,8 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let name = nameTextField.text,
             let emoji = emojiTextField.text?.emojiEscapedString else { return }
-        self.petRef.updateChildValues(["name": name, "emoji": emoji])
-        self.performSegue(withIdentifier: "editPet", sender: self)
+        petRef.updateChildValues(["name": name, "emoji": emoji])
+        performSegue(withIdentifier: "editPet", sender: self)
     }
 
     // MARK: - View controller private methods
