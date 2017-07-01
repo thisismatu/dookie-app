@@ -69,8 +69,8 @@ class EditEmojisViewController: UITableViewController {
         let emoji = buttons[indexPath.row]
 
         cell.textLabel?.text = emoji.emojiUnescapedString
-        cell.detailTextLabel?.text = merge.contains(emoji) ? "Can merge" : "Can not merge"
-        cell.accessoryType = merge.contains(emoji) ? .checkmark : .none
+        cell.detailTextLabel?.text = merge.contains(emoji) ? "Group" : "Don't group"
+        cell.detailTextLabel?.textColor = merge.contains(emoji) ? .dookieBlue : .dookieGray
 
         return cell
     }
@@ -98,6 +98,27 @@ class EditEmojisViewController: UITableViewController {
         buttons.insert(item, at: to.row)
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = buttons[indexPath.row]
+        let alert = UIAlertController(title: "Edit", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Done", style: .default, handler: { _ in
+            if let field = alert.textFields?[0] {
+                guard let text = field.text else { return }
+                self.buttons[indexPath.row] = text.emojiEscapedString
+                self.tableView.reloadData()
+            }
+        })
+        alert.addTextField(configurationHandler: { textField in
+                textField.text = item.emojiUnescapedString
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true, completion: { _ in
+            self.tableView.setEditing(false, animated: true)
+        })
+
+    }
+
     // MARK: - Actions
 
     @IBAction func editButtonPressed(_ sender: Any) {
@@ -112,6 +133,14 @@ class EditEmojisViewController: UITableViewController {
     }
 
     @IBAction func addButtonPressed(_ sender: Any) {
+        if buttons.count < 6 {
+            print("TODO: adding of emojis")
+        }
+        else {
+            let alert = UIAlertController(title: "You can have up to 6 emojis", message: "Remove some before adding new ones.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {

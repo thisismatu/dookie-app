@@ -687,16 +687,17 @@ Track up to 5 custom emojis and choose which of them can merge
         <scene sceneID="vXS-Kj-iug">
             <objects>
                 <tableViewController id="Yea-OV-RbN" customClass="EditEmojisViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zUa-Jb-WR4">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="zUa-Jb-WR4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" red="0.12" green="0.1333333333" blue="0.20000000000000001" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zoa-Fe-fcC">
-                            <rect key="frame" x="0.0" y="72" width="375" height="72"/>
+                            <rect key="frame" x="0.0" y="121.5" width="375" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add, reorder, edit and delete the emojis as you see fit. You can have up to 6 emojis." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-2R-eZ5">
-                                    <rect key="frame" x="32" y="16" width="311" height="40"/>
+                                    <rect key="frame" x="32" y="0.0" width="311" height="48"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                     <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -706,30 +707,30 @@ Track up to 5 custom emojis and choose which of them can merge
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="gCo-2R-eZ5" secondAttribute="trailing" constant="32" id="Fns-hD-Yli"/>
                                 <constraint firstItem="gCo-2R-eZ5" firstAttribute="leading" secondItem="zoa-Fe-fcC" secondAttribute="leading" constant="32" id="KQB-9i-L4T"/>
-                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="top" secondItem="zoa-Fe-fcC" secondAttribute="top" constant="16" id="rt2-TJ-JsF"/>
-                                <constraint firstAttribute="bottom" secondItem="gCo-2R-eZ5" secondAttribute="bottom" constant="16" id="vhZ-H9-qYA"/>
+                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="top" secondItem="zoa-Fe-fcC" secondAttribute="top" id="rt2-TJ-JsF"/>
+                                <constraint firstAttribute="bottom" secondItem="gCo-2R-eZ5" secondAttribute="bottom" id="vhZ-H9-qYA"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="asdasd" textLabel="AAu-Fw-eLT" detailTextLabel="Kc7-cQ-eb7" style="IBUITableViewCellStyleValue1" id="Ni7-Na-aur">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ni7-Na-aur" id="wVD-aG-U2e">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAu-Fw-eLT">
-                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAu-Fw-eLT">
+                                            <rect key="frame" x="15" y="14" width="11.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kc7-cQ-eb7">
-                                            <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                            <rect key="frame" x="325" y="18" width="35" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
