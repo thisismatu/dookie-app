@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -232,7 +232,7 @@
                             <tableViewSection headerTitle="General" id="y8Y-zB-V6T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CaE-6S-No5">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="256" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -271,7 +271,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Zd2-e0-49C">
-                                        <rect key="frame" x="0.0" y="303.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="304" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -307,7 +307,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wjL-HJ-XuZ">
-                                        <rect key="frame" x="0.0" y="351.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="352" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="wjL-HJ-XuZ" id="5ZE-5D-aet">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -347,7 +347,7 @@
                             <tableViewSection headerTitle="Premium" id="lvv-pN-CZX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="oeL-nV-sHc">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="456" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="oeL-nV-sHc" id="7bS-sD-2Xc">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -386,7 +386,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="W6c-iI-41A">
-                                        <rect key="frame" x="0.0" y="503.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="504" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="W6c-iI-41A" id="onC-aI-TTR">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -429,7 +429,7 @@
                             <tableViewSection headerTitle="Feedback" id="2Dq-hc-HbI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="MUf-nh-rzA">
-                                        <rect key="frame" x="0.0" y="607.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="608" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -465,7 +465,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="BcY-Ft-ZzN">
-                                        <rect key="frame" x="0.0" y="655.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="656" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -686,7 +686,7 @@ Track up to 5 custom emojis and choose which of them can merge
         <!--Manage emojis-->
         <scene sceneID="vXS-Kj-iug">
             <objects>
-                <tableViewController id="Yea-OV-RbN" customClass="EditEmojisViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Yea-OV-RbN" customClass="ManageEmojisViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="zUa-Jb-WR4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -713,21 +713,21 @@ Track up to 5 custom emojis and choose which of them can merge
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="asdasd" textLabel="AAu-Fw-eLT" detailTextLabel="Kc7-cQ-eb7" style="IBUITableViewCellStyleValue1" id="Ni7-Na-aur">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ni7-Na-aur" id="wVD-aG-U2e">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAu-Fw-eLT">
-                                            <rect key="frame" x="15" y="14" width="11.5" height="20.5"/>
+                                            <rect key="frame" x="15" y="13" width="12" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kc7-cQ-eb7">
-                                            <rect key="frame" x="325" y="18" width="35" height="16"/>
+                                            <rect key="frame" x="325" y="17" width="35" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -735,6 +735,9 @@ Track up to 5 custom emojis and choose which of them can merge
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="1vC-HZ-6dN" kind="show" identifier="showEditEmoji" id="Af7-tF-nW0"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -776,10 +779,104 @@ Track up to 5 custom emojis and choose which of them can merge
             <point key="canvasLocation" x="5081" y="826"/>
         </scene>
         <!--Edit-->
+        <scene sceneID="XvM-qP-4YS">
+            <objects>
+                <tableViewController storyboardIdentifier="EditEmoji" id="1vC-HZ-6dN" customClass="EditEmojiController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="IJF-xf-Suc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection footerTitle="Emojis with grouping enabled will try to merge with each other if they are less than 30 minutes apart." id="QEy-aM-yB4">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="D11-Vj-TWg">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="D11-Vj-TWg" id="yI6-QU-Eb7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QSM-NL-rh1">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhC-bf-58j">
+                                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="47.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lLz-KA-lle">
+                                                            <rect key="frame" x="57.5" y="0.0" width="287.5" height="47.5"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="24"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QSM-NL-rh1" secondAttribute="trailing" id="7K7-Re-bc5"/>
+                                                <constraint firstItem="QSM-NL-rh1" firstAttribute="top" secondItem="yI6-QU-Eb7" secondAttribute="top" id="Gbd-bj-G30"/>
+                                                <constraint firstItem="QSM-NL-rh1" firstAttribute="leading" secondItem="yI6-QU-Eb7" secondAttribute="leadingMargin" id="gYk-w8-xdw"/>
+                                                <constraint firstAttribute="bottom" secondItem="QSM-NL-rh1" secondAttribute="bottom" id="hBQ-Fv-ki9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ArP-dG-WOe">
+                                        <rect key="frame" x="0.0" y="83" width="375" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ArP-dG-WOe" id="DBh-mA-18Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9Vx-PD-TJ7">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group this emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0K-9d-YFY">
+                                                            <rect key="frame" x="0.0" y="13.5" width="280" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52s-U3-6dJ">
+                                                            <rect key="frame" x="296" y="8.5" width="51" height="31"/>
+                                                        </switch>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9Vx-PD-TJ7" secondAttribute="trailing" id="5IW-WR-gHZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Vx-PD-TJ7" secondAttribute="bottom" id="IEj-qZ-H1v"/>
+                                                <constraint firstItem="9Vx-PD-TJ7" firstAttribute="leading" secondItem="DBh-mA-18Y" secondAttribute="leadingMargin" id="aBp-9X-OaW"/>
+                                                <constraint firstItem="9Vx-PD-TJ7" firstAttribute="top" secondItem="DBh-mA-18Y" secondAttribute="top" id="rLb-pb-zyZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="1vC-HZ-6dN" id="7Ow-Fw-g9X"/>
+                            <outlet property="delegate" destination="1vC-HZ-6dN" id="bBU-or-wPe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit" id="8fx-xc-WCC"/>
+                    <connections>
+                        <outlet property="textField" destination="lLz-KA-lle" id="kuF-us-rpa"/>
+                        <outlet property="toggle" destination="52s-U3-6dJ" id="UQL-F9-gD1"/>
+                        <segue destination="GOY-56-PZC" kind="unwind" identifier="editEmoji" unwindAction="unwindToManage:" id="fV8-vW-0aH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QUv-O2-F5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="GOY-56-PZC" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="6036" y="825"/>
+        </scene>
+        <!--Edit-->
         <scene sceneID="I1a-5J-r0L">
             <objects>
                 <tableViewController id="oRQ-vR-fE4" customClass="EditPetViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="64" sectionHeaderHeight="18" sectionFooterHeight="18" id="hJ7-aj-4HY">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="hJ7-aj-4HY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -788,10 +885,10 @@ Track up to 5 custom emojis and choose which of them can merge
                             <tableViewSection id="Vzk-wx-VO5">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ndT-eg-cV5">
-                                        <rect key="frame" x="0.0" y="35" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="35" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ndT-eg-cV5" id="lZI-LM-MK5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-hn-qWZ">
@@ -806,7 +903,7 @@ Track up to 5 custom emojis and choose which of them can merge
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtG-TP-xrf">
                                                             <rect key="frame" x="32.5" y="0.0" width="312.5" height="63.5"/>
                                                             <color key="textColor" red="0.64313725489999995" green="0.66666666669999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="32"/>
+                                                            <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="24"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -821,10 +918,10 @@ Track up to 5 custom emojis and choose which of them can merge
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="mmE-b0-P4e">
-                                        <rect key="frame" x="0.0" y="99" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="83" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="mmE-b0-P4e" id="0kI-sZ-TZE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5W-Hq-rnI">

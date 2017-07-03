@@ -1,5 +1,5 @@
 //
-//  EditEmojisViewController.swift
+//  ManageEmojisViewController.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 30.06.2017.
@@ -10,10 +10,8 @@ import UIKit
 import SwiftyUserDefaults
 import Firebase
 import Emoji
-import ISEmojiView
 
-class EditEmojisViewController: UITableViewController {
-    let emojiView = ISEmojiView()
+class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var buttons = Defaults[.buttons]
@@ -27,11 +25,11 @@ class EditEmojisViewController: UITableViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
-        navigationController?.setToolbarHidden(false, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = nil
     }
 
@@ -85,7 +83,7 @@ class EditEmojisViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // TODO: adding of emojis
-        }    
+        }
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -98,28 +96,39 @@ class EditEmojisViewController: UITableViewController {
         buttons.insert(item, at: to.row)
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = buttons[indexPath.row]
-        let alert = UIAlertController(title: "Edit", message: nil, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Done", style: .default, handler: { _ in
-            if let field = alert.textFields?[0] {
-                guard let text = field.text else { return }
-                self.buttons[indexPath.row] = text.emojiEscapedString
-                self.tableView.reloadData()
-            }
-        })
-        alert.addTextField(configurationHandler: { textField in
-                textField.text = item.emojiUnescapedString
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(confirmAction)
-        self.present(alert, animated: true, completion: { _ in
-            self.tableView.setEditing(false, animated: true)
-        })
+    // MARK: - EditEmojiDelegate
 
+    func passDataBack(_ string: String, _ bool: Bool, _ int: Int) {
+        print(string, bool, int)
+        let old = buttons[int]
+        buttons[int] = string
+        if let index = merge.index(of: old) {
+            merge.remove(at: index)
+        }
+        if bool {
+            merge.append(string)
+        }
+        tableView.reloadData()
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditEmoji" {
+            let vc = segue.destination as! EditEmojiController
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let selected = buttons[indexPath.row]
+                vc.passedString = selected
+                vc.passedBool = merge.contains(selected)
+                vc.passedInt = indexPath.row
+                vc.delegate = self
+            }
+        }
     }
 
     // MARK: - Actions
+
+    @IBAction func unwindToManage(_ segue: UIStoryboardSegue) {}
 
     @IBAction func editButtonPressed(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
