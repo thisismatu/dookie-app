@@ -1,5 +1,5 @@
 //
-//  EditEmojiController.swift
+//  EditEmojiViewController.swift
 //  Dookie
 //
 //  Created by Mathias Lindholm on 03.07.2017.
@@ -14,7 +14,7 @@ protocol EditEmojiDelegate {
     func passDataBack(_ string: String, _ bool: Bool, _ int: Int)
 }
 
-class EditEmojiController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
+class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
     let emojiView = ISEmojiView()
     var delegate: EditEmojiDelegate?
     var passedString = String()

@@ -781,7 +781,7 @@ Track up to 5 custom emojis and choose which of them can merge
         <!--Edit-->
         <scene sceneID="XvM-qP-4YS">
             <objects>
-                <tableViewController storyboardIdentifier="EditEmoji" id="1vC-HZ-6dN" customClass="EditEmojiController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditEmoji" id="1vC-HZ-6dN" customClass="EditEmojiViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="IJF-xf-Suc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
