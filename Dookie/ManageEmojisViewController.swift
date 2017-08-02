@@ -63,7 +63,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "asdasd", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let emoji = buttons[indexPath.row]
 
         cell.textLabel?.text = emoji.emojiUnescapedString
@@ -81,8 +81,6 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         if editingStyle == .delete {
             buttons.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // TODO: adding of emojis
         }
     }
 
@@ -99,15 +97,20 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     // MARK: - EditEmojiDelegate
 
     func passDataBack(_ string: String, _ bool: Bool, _ int: Int) {
-        print(string, bool, int)
-        let old = buttons[int]
-        buttons[int] = string
-        if let index = merge.index(of: old) {
-            merge.remove(at: index)
+        if buttons.indices.contains(int) {
+            let old = buttons[int]
+            buttons[int] = string
+            if let index = merge.index(of: old) {
+                merge.remove(at: index)
+            }
+        } else {
+            buttons.append(string)
         }
+
         if bool {
             merge.append(string)
         }
+
         tableView.reloadData()
     }
 
@@ -118,11 +121,17 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
             let vc = segue.destination as! EditEmojiViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let selected = buttons[indexPath.row]
+                vc.isAdding = false
                 vc.passedString = selected
                 vc.passedBool = merge.contains(selected)
                 vc.passedInt = indexPath.row
                 vc.delegate = self
             }
+        } else if segue.identifier == "showAddEmoji" {
+            let vc = segue.destination as! EditEmojiViewController
+            vc.isAdding = true
+            vc.passedInt = self.tableView.numberOfRows(inSection: 0) + 1
+            vc.delegate = self
         }
     }
 
@@ -143,7 +152,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     @IBAction func addButtonPressed(_ sender: Any) {
         if buttons.count < 6 {
-            print("TODO: adding of emojis")
+            performSegue(withIdentifier: "showAddEmoji", sender: self)
         }
         else {
             let alert = UIAlertController(title: "You can have up to 6 emojis", message: "Remove some before adding new ones.", preferredStyle: .alert)

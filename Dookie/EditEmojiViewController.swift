@@ -20,22 +20,29 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     var passedString = String()
     var passedBool = Bool()
     var passedInt = Int()
+    var isAdding = Bool()
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var toggle: UISwitch!
+    @IBOutlet weak var addButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(passedString)
+
+        navigationItem.title = isAdding ? "Add" : "Edit"
+        addButton.isEnabled = isAdding ? true : false
+        addButton.tintColor = isAdding ? .dookieGray : .clear
+
         emojiView.delegate = self
+        emojiView.collectionView.backgroundColor = .white
         textField.delegate = self
         textField.inputView = emojiView
         textField.text = passedString.emojiUnescapedString
         toggle.isOn = passedBool
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         textField.becomeFirstResponder()
     }
 

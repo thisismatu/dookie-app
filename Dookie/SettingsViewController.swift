@@ -24,6 +24,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
     @IBOutlet weak var shareCell: UITableViewCell!
+    @IBOutlet weak var manageCell: UITableViewCell!
     @IBOutlet weak var feedbackCell: UITableViewCell!
     @IBOutlet weak var rateCell: UITableViewCell!
     @IBOutlet weak var versionLabel: UILabel!
@@ -99,6 +100,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             sendInviteEmail()
         case shareCell:
             copyShareURL()
+        case manageCell:
+            if Defaults[.premium] {
+                self.performSegue(withIdentifier: "showManageEmojis", sender: self)
+            } else {
+                upgradePremiumAlert()
+            }
         case rateCell:
             openUrl(appstoreUrl)
         case feedbackCell:
@@ -124,6 +131,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     // MARK: - View controller private methods
+
+    private func upgradePremiumAlert() {
+        let alert = UIAlertController(title: "This is a premium feature", message: "Upgrade to Dookie premium to access custom emojis and other premium features.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     private func updateHeaderView() {
         let offset = tableView.contentOffset.y
