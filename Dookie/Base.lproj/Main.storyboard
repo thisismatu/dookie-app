@@ -111,7 +111,7 @@
                     <navigationItem key="navigationItem" id="GB2-aL-LfZ">
                         <barButtonItem key="leftBarButtonItem" image="ic_cog" id="CN4-zD-zac">
                             <connections>
-                                <segue destination="GU5-Yz-aDf" kind="presentation" id="hV9-TA-AKZ"/>
+                                <segue destination="GU5-Yz-aDf" kind="presentation" identifier="showSettings" id="hV9-TA-AKZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_shuffle" id="utZ-Ri-dur">
@@ -133,7 +133,7 @@
         <!--Settings-->
         <scene sceneID="QIA-6r-8ms">
             <objects>
-                <tableViewController title="Settings" id="od9-gT-aQJ" customClass="SettingsViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Settings" title="Settings" id="od9-gT-aQJ" customClass="SettingsViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="none" rowHeight="48" sectionHeaderHeight="18" sectionFooterHeight="18" id="Gs9-Ug-M3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -382,7 +382,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Xim-uA-ZV8" kind="show" id="nbN-au-gKc"/>
+                                            <segue destination="Xim-uA-ZV8" kind="show" identifier="showPremium" id="nbN-au-gKc"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="W6c-iI-41A">
@@ -541,7 +541,7 @@
         <!--Dookie premium-->
         <scene sceneID="uEz-Xz-RpG">
             <objects>
-                <viewController id="Xim-uA-ZV8" customClass="PremiumViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Premium" id="Xim-uA-ZV8" customClass="PremiumViewController" customModule="Dookie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VOe-9M-uEp"/>
                         <viewControllerLayoutGuide type="bottom" id="4h5-pz-ZpH"/>
