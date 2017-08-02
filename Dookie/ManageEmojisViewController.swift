@@ -115,7 +115,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditEmoji" {
-            let vc = segue.destination as! EditEmojiController
+            let vc = segue.destination as! EditEmojiViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let selected = buttons[indexPath.row]
                 vc.passedString = selected
