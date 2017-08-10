@@ -172,9 +172,8 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     @IBAction func addButtonPressed(_ sender: Any) {
         if buttons.count < 6 {
             performSegue(withIdentifier: "showAddEmoji", sender: self)
-        }
-        else {
-            let alert = UIAlertController(title: "You can have up to 6 emojis", message: "Remove some before adding new ones.", preferredStyle: .alert)
+        } else {
+            let alert = UIAlertController(title: "Emoji limit reached", message: "You can have up to 6 emojis. Remove some before adding new ones.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

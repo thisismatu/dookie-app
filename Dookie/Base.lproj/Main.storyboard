@@ -773,7 +773,6 @@
                         <barButtonItem title="Add" id="uKL-JR-kSw">
                             <connections>
                                 <action selector="addButtonPressed:" destination="Yea-OV-RbN" id="33q-he-jsv"/>
-                                <segue destination="1vC-HZ-6dN" kind="show" identifier="showAddEmoji" id="MRw-tP-ufH"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -790,6 +789,7 @@
                         <outlet property="editButton" destination="mMe-f8-ati" id="7PB-et-S3o"/>
                         <outlet property="saveButton" destination="44C-cZ-ASB" id="0hK-9R-eA5"/>
                         <segue destination="lU8-q2-4et" kind="unwind" identifier="editPet" unwindAction="unwindToSettings:" id="4wh-F6-ifo"/>
+                        <segue destination="1vC-HZ-6dN" kind="show" identifier="showAddEmoji" id="YSJ-Yb-ywL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfW-GA-7G1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1397,6 +1397,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jKj-mt-dtt"/>
-        <segue reference="MRw-tP-ufH"/>
+        <segue reference="YSJ-Yb-ywL"/>
     </inferredMetricsTieBreakers>
 </document>
