@@ -208,10 +208,14 @@ class TableViewController: UITableViewController {
     }
 
     private func setupToolbar() {
-        var items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        var items = [flexibleSpace]
         for item in Defaults[.buttons] {
-            items.append(UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:))))
-            items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+            let attributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title3)]
+            let button = UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:)))
+            button.setTitleTextAttributes(attributes, for: .normal)
+            items.append(button)
+            items.append(flexibleSpace)
         }
         self.setToolbarItems(items, animated: true)
     }
