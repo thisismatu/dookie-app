@@ -121,6 +121,18 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         tableView.reloadData()
     }
 
+    func deleteItem(_ int: Int) {
+        if buttons.indices.contains(int) {
+            let old = buttons[int]
+            buttons.remove(at: int)
+            if let index = merge.index(of: old) {
+                merge.remove(at: index)
+            }
+        }
+
+        tableView.reloadData()
+    }
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

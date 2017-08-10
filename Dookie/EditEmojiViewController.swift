@@ -12,6 +12,7 @@ import ISEmojiView
 
 protocol EditEmojiDelegate {
     func passDataBack(_ string: String, _ bool: Bool, _ int: Int)
+    func deleteItem(_ int: Int)
 }
 
 class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
@@ -25,6 +26,7 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,8 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         navigationItem.title = isAdding ? "Add" : "Edit"
         addButton.isEnabled = isAdding ? true : false
         addButton.tintColor = isAdding ? .dookieGray : .clear
+        deleteButton.isHidden = isAdding ? true : false
+        deleteButton.tintColor = .dookieDestructive // TODO: Do this in IBE
 
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .white
@@ -62,5 +66,11 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
 
     func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
         textField.deleteBackward()
+    }
+
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        delegate?.deleteItem(passedInt)
+        textField.text = nil
+        performSegue(withIdentifier: "deleteEmoji", sender: self)
     }
 }
