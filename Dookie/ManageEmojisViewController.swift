@@ -77,6 +77,13 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         return true
     }
 
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if tableView.isEditing {
+            return .delete
+        }
+        return .none
+    }
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             buttons.remove(at: indexPath.row)
