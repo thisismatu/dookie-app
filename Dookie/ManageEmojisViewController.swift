@@ -68,7 +68,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
         cell.textLabel?.text = emoji.emojiUnescapedString
         cell.detailTextLabel?.text = merge.contains(emoji) ? "Group" : "Don't group"
-        cell.detailTextLabel?.textColor = merge.contains(emoji) ? .dookieBlue : .dookieGray
+        cell.detailTextLabel?.textColor = merge.contains(emoji) ? .dookieBlue : .dookieDarkGray
 
         return cell
     }

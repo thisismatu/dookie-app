@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pvh-Uh-ho4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,7 +114,7 @@
                                 <segue destination="GU5-Yz-aDf" kind="presentation" identifier="showSettings" id="hV9-TA-AKZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="ic_shuffle" id="utZ-Ri-dur">
+                        <barButtonItem key="rightBarButtonItem" image="ic_menu" id="utZ-Ri-dur">
                             <connections>
                                 <action selector="switchButtonPressed:" destination="Ml4-NM-IZz" id="pRT-iy-RJC"/>
                             </connections>
@@ -201,38 +201,27 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZYM-O2-8ve">
-                            <rect key="frame" x="0.0" y="721.5" width="375" height="80"/>
+                            <rect key="frame" x="0.0" y="721.5" width="375" height="72"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Q25-Fn-hh5">
-                                    <rect key="frame" x="151.5" y="8" width="73.5" height="48"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dookie v 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unu-gP-IlS">
-                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="16"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                            <color key="textColor" red="0.64313725490196072" green="0.66666666666666663" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbI-TQ-inp">
-                                            <rect key="frame" x="0.0" y="24" width="73.5" height="24"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unu-gP-IlS">
+                                    <rect key="frame" x="164" y="21" width="45.5" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="Q25-Fn-hh5" firstAttribute="centerX" secondItem="ZYM-O2-8ve" secondAttribute="centerX" id="5uG-4j-p6D"/>
-                                <constraint firstItem="Q25-Fn-hh5" firstAttribute="top" secondItem="ZYM-O2-8ve" secondAttribute="top" constant="8" id="JLO-xL-uts"/>
+                                <constraint firstItem="Unu-gP-IlS" firstAttribute="centerX" secondItem="ZYM-O2-8ve" secondAttribute="centerX" id="D5b-bi-qcQ"/>
+                                <constraint firstItem="Unu-gP-IlS" firstAttribute="centerY" secondItem="ZYM-O2-8ve" secondAttribute="centerY" multiplier="0.8" id="XMF-Yd-juz"/>
                             </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="General" id="y8Y-zB-V6T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="CaE-6S-No5">
-                                        <rect key="frame" x="0.0" y="255.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="256" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="CaE-6S-No5" id="nUk-wy-WXo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -271,7 +260,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Zd2-e0-49C">
-                                        <rect key="frame" x="0.0" y="303.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="304" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Zd2-e0-49C" id="02R-mj-mz0">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -307,7 +296,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wjL-HJ-XuZ">
-                                        <rect key="frame" x="0.0" y="351.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="352" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="wjL-HJ-XuZ" id="5ZE-5D-aet">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -347,7 +336,7 @@
                             <tableViewSection headerTitle="Premium" id="lvv-pN-CZX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="oeL-nV-sHc">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="456" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="oeL-nV-sHc" id="7bS-sD-2Xc">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -386,7 +375,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="W6c-iI-41A">
-                                        <rect key="frame" x="0.0" y="503.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="504" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="W6c-iI-41A" id="onC-aI-TTR">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -426,7 +415,7 @@
                             <tableViewSection headerTitle="Feedback" id="2Dq-hc-HbI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="MUf-nh-rzA">
-                                        <rect key="frame" x="0.0" y="607.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="608" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="MUf-nh-rzA" id="Xwt-pZ-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -462,7 +451,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="BcY-Ft-ZzN">
-                                        <rect key="frame" x="0.0" y="655.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="656" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="BcY-Ft-ZzN" id="BAl-5k-f76">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -580,7 +569,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add multiple pet’s and effortlessly switch between them" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnl-PQ-LDd">
                                                         <rect key="frame" x="0.0" y="28" width="311" height="38"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -599,14 +588,14 @@
                                                         <string key="text">Track custom emojis and choose which of them can group
 </string>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRv-pV-CQY" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="254.5" width="311" height="48"/>
-                                                <color key="backgroundColor" red="1" green="0.792156862745098" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.98039215800000001" green="0.71372550729999995" blue="0.039215687659999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="48" id="1WX-Rq-beM"/>
                                                 </constraints>
@@ -626,7 +615,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dookie premium is an optional yearly subscription associated with your Apple ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-gm-t7k">
                                                 <rect key="frame" x="0.0" y="322.5" width="311" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -715,16 +704,16 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add, reorder, edit and delete the emojis as you see fit. You can have up to 6 emojis." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-2R-eZ5">
-                                    <rect key="frame" x="32" y="0.0" width="311" height="48"/>
+                                    <rect key="frame" x="20" y="0.0" width="335" height="48"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                    <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="gCo-2R-eZ5" secondAttribute="trailing" constant="32" id="Fns-hD-Yli"/>
-                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="leading" secondItem="zoa-Fe-fcC" secondAttribute="leading" constant="32" id="KQB-9i-L4T"/>
+                                <constraint firstAttribute="trailing" secondItem="gCo-2R-eZ5" secondAttribute="trailing" constant="20" id="Fns-hD-Yli"/>
+                                <constraint firstItem="gCo-2R-eZ5" firstAttribute="leading" secondItem="zoa-Fe-fcC" secondAttribute="leading" constant="20" id="KQB-9i-L4T"/>
                                 <constraint firstItem="gCo-2R-eZ5" firstAttribute="top" secondItem="zoa-Fe-fcC" secondAttribute="top" id="rt2-TJ-JsF"/>
                                 <constraint firstAttribute="bottom" secondItem="gCo-2R-eZ5" secondAttribute="bottom" id="vhZ-H9-qYA"/>
                             </constraints>
@@ -734,21 +723,21 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ni7-Na-aur" id="wVD-aG-U2e">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAu-Fw-eLT">
-                                            <rect key="frame" x="15" y="12" width="14" height="24"/>
+                                            <rect key="frame" x="15" y="12" width="13.5" height="24"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kc7-cQ-eb7">
-                                            <rect key="frame" x="320" y="17" width="40" height="18"/>
+                                            <rect key="frame" x="320.5" y="17" width="39.5" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -764,17 +753,19 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Edit" id="mMe-f8-ati">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8M2-GJ-KmK"/>
+                        <barButtonItem image="ic_shuffle" id="mMe-f8-ati">
                             <connections>
                                 <action selector="editButtonPressed:" destination="Yea-OV-RbN" id="K8X-9K-S2e"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="X14-dG-4zG"/>
-                        <barButtonItem title="Add" id="uKL-JR-kSw">
+                        <barButtonItem tag="1" image="ic_plus" id="uKL-JR-kSw">
                             <connections>
                                 <action selector="addButtonPressed:" destination="Yea-OV-RbN" id="33q-he-jsv"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="RJb-RF-qmh"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Manage emojis" id="3zJ-nq-H2C">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="44C-cZ-ASB">
@@ -806,30 +797,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="OYK-Wa-1l5">
-                            <rect key="frame" x="0.0" y="177" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="149" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
-                                    <rect key="frame" x="8" y="8" width="359" height="28"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                    <state key="normal" title="Delete emoji">
-                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="deleteButtonPressed:" destination="1vC-HZ-6dN" eventType="touchUpInside" id="uX1-xf-rbU"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HAz-J0-QU9">
+                                    <rect key="frame" x="20" y="0.0" width="335" height="104"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emojis with grouping enabled will try to merge with each other if they are less than 30 minutes apart." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aL-VX-e4u">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
+                                            <rect key="frame" x="0.0" y="64" width="335" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="FEW-xf-3qc"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <state key="normal" title="Delete emoji">
+                                                <color key="titleColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteButtonPressed:" destination="1vC-HZ-6dN" eventType="touchUpInside" id="uX1-xf-rbU"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailingMargin" secondItem="bGn-Yt-2s8" secondAttribute="trailing" id="0Lz-Ym-yOH"/>
-                                <constraint firstItem="bGn-Yt-2s8" firstAttribute="top" secondItem="OYK-Wa-1l5" secondAttribute="topMargin" id="IAM-TA-gEa"/>
-                                <constraint firstAttribute="bottomMargin" secondItem="bGn-Yt-2s8" secondAttribute="bottom" id="noI-Du-kbz"/>
-                                <constraint firstItem="bGn-Yt-2s8" firstAttribute="leading" secondItem="OYK-Wa-1l5" secondAttribute="leadingMargin" id="uZA-Gv-pJA"/>
+                                <constraint firstItem="HAz-J0-QU9" firstAttribute="leading" secondItem="OYK-Wa-1l5" secondAttribute="leading" constant="20" id="6C5-KP-izF"/>
+                                <constraint firstAttribute="trailing" secondItem="HAz-J0-QU9" secondAttribute="trailing" constant="20" id="LNe-rs-tmU"/>
+                                <constraint firstItem="HAz-J0-QU9" firstAttribute="top" secondItem="OYK-Wa-1l5" secondAttribute="top" id="VhP-mZ-mq4"/>
+                                <constraint firstAttribute="bottom" secondItem="HAz-J0-QU9" secondAttribute="bottom" id="lrJ-9g-2fL"/>
                             </constraints>
                         </view>
                         <sections>
-                            <tableViewSection footerTitle="Emojis with grouping enabled will try to merge with each other if they are less than 30 minutes apart." id="QEy-aM-yB4">
+                            <tableViewSection id="QEy-aM-yB4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="D11-Vj-TWg">
                                         <rect key="frame" x="0.0" y="35" width="375" height="48"/>
@@ -850,7 +855,7 @@
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lLz-KA-lle">
                                                             <rect key="frame" x="49.5" y="0.0" width="295.5" height="47.5"/>
                                                             <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="24"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -882,7 +887,7 @@
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52s-U3-6dJ">
                                                             <rect key="frame" x="296" y="8.5" width="51" height="31"/>
-                                                            <color key="onTintColor" red="0.11764705882352941" green="0.53333333333333333" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="onTintColor" red="0.1176470588" green="0.53333333329999999" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -913,8 +918,8 @@
                     <connections>
                         <outlet property="addButton" destination="5No-zN-fQ9" id="pS7-pj-q1j"/>
                         <outlet property="deleteButton" destination="bGn-Yt-2s8" id="gOg-yD-eL5"/>
+                        <outlet property="mergeSwitch" destination="52s-U3-6dJ" id="UQL-F9-gD1"/>
                         <outlet property="textField" destination="lLz-KA-lle" id="kuF-us-rpa"/>
-                        <outlet property="toggle" destination="52s-U3-6dJ" id="UQL-F9-gD1"/>
                         <segue destination="GOY-56-PZC" kind="unwind" identifier="deleteEmoji" unwindAction="unwindToManage:" id="fV8-vW-0aH"/>
                     </connections>
                 </tableViewController>
@@ -945,14 +950,14 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zag-hn-qWZ">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="47.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NF0-MC-P6i">
-                                                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="47.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NF0-MC-P6i">
+                                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="47.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtG-TP-xrf">
-                                                            <rect key="frame" x="40.5" y="0.0" width="304.5" height="47.5"/>
+                                                            <rect key="frame" x="49.5" y="0.0" width="295.5" height="47.5"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -1180,7 +1185,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can share this pet to other family members in the next step" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-2F-hGv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can invite other family to this pet from the settings menu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-2F-hGv">
                                         <rect key="frame" x="0.0" y="64" width="311" height="38"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1260,7 +1265,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The person who created the pet can share the pet ID with you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvx-PA-jaL">
                                         <rect key="frame" x="0.0" y="64" width="311" height="38"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FZ-E2-lBO">
@@ -1393,6 +1398,8 @@
         <image name="ic_close" width="24" height="24"/>
         <image name="ic_cog" width="24" height="24"/>
         <image name="ic_ellipsis" width="24" height="24"/>
+        <image name="ic_menu" width="24" height="24"/>
+        <image name="ic_plus" width="24" height="24"/>
         <image name="ic_shuffle" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

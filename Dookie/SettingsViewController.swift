@@ -87,9 +87,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.font = UIFont.systemFont(ofSize: 15)
-        header.textLabel?.text = header.textLabel?.text?.capitalized
+        header.textLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
         header.textLabel?.frame = header.frame
+        header.textLabel?.textColor = .dookieGray
+        header.textLabel?.text = header.textLabel?.text?.capitalized
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -115,9 +115,9 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.contentView.backgroundColor = .white
-        header.textLabel?.textColor = .lightGray
-        header.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        header.textLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
         header.textLabel?.frame = header.frame
+        header.textLabel?.textColor = .dookieGray
         header.textLabel?.textAlignment = .center
     }
 
@@ -197,7 +197,7 @@ class TableViewController: UITableViewController {
             label.frame.size.width = tableView.frame.size.width
             label.center = tableView.center
             label.numberOfLines = 2
-            label.textColor = .dookieLightGray
+            label.textColor = .dookieGray
             label.text = "No activities today, time for a walk?"
             label.textAlignment = .center
             label.font = label.font.withSize(15)

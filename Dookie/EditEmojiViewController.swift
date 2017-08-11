@@ -24,25 +24,25 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     var isAdding = Bool()
 
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var toggle: UISwitch!
+    @IBOutlet weak var mergeSwitch: UISwitch!
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = isAdding ? "Add" : "Edit"
+        navigationItem.title = isAdding ? "New emoji" : "Emoji details"
         addButton.isEnabled = isAdding ? true : false
         addButton.tintColor = isAdding ? .dookieGray : .clear
-        deleteButton.isHidden = isAdding ? true : false
-        deleteButton.tintColor = .dookieDestructive // TODO: Do this in IBE
+        deleteButton.isEnabled = isAdding ? false : true
+        deleteButton.tintColor = isAdding ? .clear : .dookieDestructive
 
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .white
         textField.delegate = self
         textField.inputView = emojiView
         textField.text = passedString.emojiUnescapedString
-        toggle.isOn = passedBool
+        mergeSwitch.isOn = passedBool
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -54,10 +54,12 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         super.viewWillDisappear(animated)
         if let emoji = textField.text?.emojiEscapedString {
             if !emoji.isEmpty {
-                self.delegate?.passDataBack(emoji, toggle.isOn, passedInt)
+                self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
             }
         }
     }
+
+    // MARK: - ISEmojiView delegate
 
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
         textField.text = ""
@@ -67,6 +69,8 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
         textField.deleteBackward()
     }
+
+    // MARK: - Actions
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
         delegate?.deleteItem(passedInt)
