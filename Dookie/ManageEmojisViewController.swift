@@ -46,10 +46,9 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func willMove(toParentViewController parent: UIViewController?) {
         super.willMove(toParentViewController: parent)
-        UIView.animate(withDuration: 0.1, animations: {
-            self.navigationController?.navigationBar.barTintColor = .groupTableViewBackground
-            self.navigationController?.navigationBar.layoutIfNeeded()
-        })
+        if parent == nil {
+            self.navigationController?.animateNavigationBar(to: Defaults[.navTint])
+        }
     }
 
     // MARK: - Table view data source

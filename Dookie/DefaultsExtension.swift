@@ -14,6 +14,10 @@ extension UserDefaults {
         get { return unarchive(key) ?? [:] }
         set { archive(key, newValue) }
     }
+    subscript(key: DefaultsKey<UIColor>) -> UIColor {
+        get { return unarchive(key) ?? .clear }
+        set { archive(key, newValue) }
+    }
 }
 
 extension DefaultsKeys {
@@ -27,4 +31,6 @@ extension DefaultsKeys {
     // User keys
     static let uid = DefaultsKey<String>("uid")
     static let premium = DefaultsKey<Bool>("premium")
+    // UI
+    static let navTint = DefaultsKey<UIColor>("navTint")
 }

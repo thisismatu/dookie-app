@@ -23,7 +23,6 @@ class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        navigationController?.navigationBar.barTintColor = nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,17 +31,16 @@ class PremiumViewController: UIViewController {
         shouldShowPremiumUnlocked()
     }
 
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
-        UIView.animate(withDuration: 0.1, animations: {
-            self.navigationController?.navigationBar.barTintColor = .groupTableViewBackground
-            self.navigationController?.navigationBar.layoutIfNeeded()
-        })
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         ref.removeAllObservers()
+    }
+
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        if parent == nil {
+            self.navigationController?.animateNavigationBar(to: Defaults[.navTint])
+        }
     }
 
     // MARK: - View controller private methods

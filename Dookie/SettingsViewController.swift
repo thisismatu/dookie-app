@@ -38,16 +38,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         petRef = ref.child("pets/" + Defaults[.pid])
         userRef = ref.child("users/" + Defaults[.uid])
         userPetsRef = ref.child("userPets/" + Defaults[.uid])
-
-        navigationController?.navigationBar.barTintColor = .groupTableViewBackground
         versionLabel.text = getVersionNumber()
-
-        tableHeaderHeight = view.frame.width/2
-        headerView = tableView.tableHeaderView
-        tableView.tableHeaderView = nil
-        tableView.addSubview(headerView)
-        tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
-        tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
+        setupHeaderView()
         updateHeaderView()
     }
 
@@ -69,6 +61,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             self.petNameLabel.text = pet.name
             self.petEmojiButton.setTitle(emoji, for: .normal)
         })
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Defaults[.navTint] = getNavigationBarTint()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -133,6 +130,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     // MARK: - View controller private methods
 
+    private func getNavigationBarTint() -> UIColor {
+        guard let color = navigationController?.navigationBar.barTintColor else { return .groupTableViewBackground }
+        return color
+    }
+
     private func upgradePremiumAlert() {
         let alert = UIAlertController(title: "This is a premium feature", message: "Upgrade to Dookie premium to access custom emojis and other premium features.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -140,6 +142,16 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
             self.performSegue(withIdentifier: "showPremium", sender: self)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+
+    private func setupHeaderView() {
+        navigationController?.navigationBar.barTintColor = .groupTableViewBackground
+        tableHeaderHeight = view.frame.width/2
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
+        tableView.contentInset = UIEdgeInsets(top: tableHeaderHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -tableHeaderHeight)
     }
 
     private func updateHeaderView() {
