@@ -118,7 +118,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
             merge.append(string)
         }
 
-        tableView.reloadData()
+        UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
 
     func deleteItem(_ int: Int) {
@@ -130,7 +130,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
             }
         }
 
-        tableView.reloadData()
+        UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
 
     // MARK: - Navigation
