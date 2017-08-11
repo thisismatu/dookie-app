@@ -161,11 +161,9 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     @IBAction func editButtonPressed(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
         if tableView.isEditing {
-            editButton.title = "Done"
-            editButton.style = .done
+            editButton.image = UIImage(named: "ic_done")
         } else {
-            editButton.title = "Edit"
-            editButton.style = .plain
+            editButton.image = UIImage(named: "ic_shuffle")
         }
     }
 
