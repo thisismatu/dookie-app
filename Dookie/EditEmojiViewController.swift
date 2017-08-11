@@ -32,8 +32,7 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         super.viewDidLoad()
 
         navigationItem.title = isAdding ? "New emoji" : "Emoji details"
-        addButton.isEnabled = isAdding ? true : false
-        addButton.tintColor = isAdding ? .dookieGray : .clear
+        addButton.title = isAdding ? "Add" : "Done"
         deleteButton.isEnabled = isAdding ? false : true
         deleteButton.tintColor = isAdding ? .clear : .dookieDestructive
 
@@ -50,19 +49,7 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         textField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let emoji = textField.text ?? ""
-        if !emoji.isEmpty && !isAdding {
-            self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
-        }
-    }
-
     // MARK: - UITextField & ISEmojiView delegate
-
-    func textFieldDidChange(_ textField: UITextField) {
-        validateInput()
-    }
 
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
         textField.text = ""
@@ -87,12 +74,5 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         delegate?.deleteItem(passedInt)
         textField.text = nil
         performSegue(withIdentifier: "deleteAddEmoji", sender: self)
-    }
-
-    // MARK: - View controller private methods
-
-    private func validateInput() {
-        let emoji = textField.text ?? ""
-        addButton.isEnabled = !emoji.isEmpty
     }
 }
