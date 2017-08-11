@@ -797,11 +797,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="OYK-Wa-1l5">
-                            <rect key="frame" x="0.0" y="149" width="375" height="104"/>
+                            <rect key="frame" x="0.0" y="149" width="375" height="112"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HAz-J0-QU9">
-                                    <rect key="frame" x="20" y="0.0" width="335" height="104"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HAz-J0-QU9">
+                                    <rect key="frame" x="20" y="0.0" width="335" height="112"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emojis with grouping enabled will try to merge with each other if they are less than 30 minutes apart." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aL-VX-e4u">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
@@ -810,14 +810,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
-                                            <rect key="frame" x="0.0" y="64" width="335" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="FEW-xf-3qc"/>
-                                            </constraints>
+                                            <rect key="frame" x="0.0" y="64" width="335" height="48"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <state key="normal" title="Delete emoji">
-                                                <color key="titleColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
+                                            <color key="tintColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" title="Delete emoji"/>
                                             <connections>
                                                 <action selector="deleteButtonPressed:" destination="1vC-HZ-6dN" eventType="touchUpInside" id="uX1-xf-rbU"/>
                                             </connections>
@@ -911,7 +907,7 @@
                     <navigationItem key="navigationItem" title="Edit" id="8fx-xc-WCC">
                         <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="5No-zN-fQ9">
                             <connections>
-                                <segue destination="GOY-56-PZC" kind="unwind" unwindAction="unwindToManage:" id="aIa-N8-r0G"/>
+                                <action selector="addButtonPressed:" destination="1vC-HZ-6dN" id="MVK-bM-kv7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -920,7 +916,7 @@
                         <outlet property="deleteButton" destination="bGn-Yt-2s8" id="gOg-yD-eL5"/>
                         <outlet property="mergeSwitch" destination="52s-U3-6dJ" id="UQL-F9-gD1"/>
                         <outlet property="textField" destination="lLz-KA-lle" id="kuF-us-rpa"/>
-                        <segue destination="GOY-56-PZC" kind="unwind" identifier="deleteEmoji" unwindAction="unwindToManage:" id="fV8-vW-0aH"/>
+                        <segue destination="GOY-56-PZC" kind="unwind" identifier="deleteAddEmoji" unwindAction="unwindToManage:" id="fV8-vW-0aH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUv-O2-F5c" userLabel="First Responder" sceneMemberID="firstResponder"/>

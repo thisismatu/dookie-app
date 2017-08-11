@@ -52,14 +52,17 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let emoji = textField.text?.emojiEscapedString {
-            if !emoji.isEmpty {
-                self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
-            }
+        let emoji = textField.text ?? ""
+        if !emoji.isEmpty && !isAdding {
+            self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
         }
     }
 
-    // MARK: - ISEmojiView delegate
+    // MARK: - UITextField & ISEmojiView delegate
+
+    func textFieldDidChange(_ textField: UITextField) {
+        validateInput()
+    }
 
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
         textField.text = ""
@@ -72,9 +75,24 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
 
     // MARK: - Actions
 
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let emoji = textField.text ?? ""
+        if !emoji.isEmpty {
+            self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
+            self.performSegue(withIdentifier: "deleteAddEmoji", sender: self)
+        }
+    }
+
     @IBAction func deleteButtonPressed(_ sender: Any) {
         delegate?.deleteItem(passedInt)
         textField.text = nil
-        performSegue(withIdentifier: "deleteEmoji", sender: self)
+        performSegue(withIdentifier: "deleteAddEmoji", sender: self)
+    }
+
+    // MARK: - View controller private methods
+
+    private func validateInput() {
+        let emoji = textField.text ?? ""
+        addButton.isEnabled = !emoji.isEmpty
     }
 }
