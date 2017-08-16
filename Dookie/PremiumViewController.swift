@@ -28,7 +28,10 @@ class PremiumViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = nil
-        shouldShowPremiumUnlocked()
+        unlockPremiumStackView.isHidden = Defaults[.premium]
+        unlockPremiumStackView.spacing = Defaults[.premium] ? 0.0 : 16.0
+        premiumUnlockedStackView.isHidden = !Defaults[.premium]
+        premiumUnlockedStackView.spacing = Defaults[.premium] ? 16.0 : 0.0
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,34 +54,19 @@ class PremiumViewController: UIViewController {
         }, completion: { _ in
             self.unlockPremiumStackView.spacing = 0.0
             self.unlockPremiumStackView.isHidden = true
-            self.premiumUnlockedStackView.spacing = 16.0
             self.premiumUnlockedStackView.alpha = 0.0
             self.premiumUnlockedStackView.isHidden = false
+            self.premiumUnlockedStackView.spacing = 16.0
             UIView.animate(withDuration: 0.4, animations: {
                 self.premiumUnlockedStackView.alpha = 1.0
             }, completion: { _ in
                 self.confettiView.startConfetti()
-                let deadline = DispatchTime.now() + 0.8
+                let deadline = DispatchTime.now() + 0.4
                 DispatchQueue.main.asyncAfter(deadline: deadline) {
                     self.confettiView.stopConfetti()
                 }
             })
         })
-
-    }
-
-    private func shouldShowPremiumUnlocked() {
-        if Defaults[.premium] {
-            unlockPremiumStackView.spacing = 0.0
-            unlockPremiumStackView.isHidden = true
-            premiumUnlockedStackView.spacing = 16.0
-            premiumUnlockedStackView.isHidden = false
-        } else {
-            unlockPremiumStackView.spacing = 16.0
-            unlockPremiumStackView.isHidden = false
-            premiumUnlockedStackView.spacing = 0.0
-            premiumUnlockedStackView.isHidden = true
-        }
     }
 
     // MARK: - Actions
