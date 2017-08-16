@@ -61,7 +61,7 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
                     self.userPetsRef.updateChildValues(userPet.toAnyObject())
                     self.performSegue(withIdentifier: "joinPet", sender: self)
                 } else {
-                    let alert = UIAlertController(title: "Couldn’t find this pet", message: "The Pet ID you entered doesn't match any existing pet. Please check that you’ve entered the whole ID.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Couldn’t find this pet", message: "The Pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the whole ID.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Got it", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
