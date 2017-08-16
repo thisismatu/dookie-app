@@ -72,21 +72,23 @@ class PremiumViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func buyButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Confirm your in-app purchase", message: "This is just a test", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
-            self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])
-            self.animatePremiumUnlocked()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])
+        self.animatePremiumUnlocked()
+//        let alert = UIAlertController(title: "Confirm your in-app purchase", message: "This is just a test", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { _ in
+//            self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])
+//            self.animatePremiumUnlocked()
+//        }))
+//        self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func subscriptionButtonPressed(_ sender: Any) {
+        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": false])
 //        guard let url = URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions") else { return }
 //        if UIApplication.shared.canOpenURL(url) {
 //            UIApplication.shared.openURL(url)
 //        }
-        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": false])
     }
 
     /*
