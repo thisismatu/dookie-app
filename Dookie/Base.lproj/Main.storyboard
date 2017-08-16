@@ -27,14 +27,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99h-lh-XgG">
-                                            <rect key="frame" x="187" y="0.0" width="2" height="22"/>
+                                            <rect key="frame" x="186.5" y="0.0" width="2" height="22"/>
                                             <color key="backgroundColor" red="0.93413954973220825" green="0.9341614842414856" blue="0.93414974212646484" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="2" id="hsW-Q3-GGz"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smB-S5-6c1">
-                                            <rect key="frame" x="187" y="42" width="2" height="22"/>
+                                            <rect key="frame" x="186.5" y="42" width="2" height="22"/>
                                             <color key="backgroundColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="2" id="PGl-Ti-pqa"/>
@@ -205,7 +205,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unu-gP-IlS">
-                                    <rect key="frame" x="164" y="21" width="46" height="16"/>
+                                    <rect key="frame" x="164.5" y="21" width="46" height="16"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                     <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -533,16 +533,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape_gold" translatesAutoresizingMaskIntoConstraints="NO" id="3ru-kG-Jga">
-                                <rect key="frame" x="0.0" y="534" width="375" height="133"/>
+                                <rect key="frame" x="0.0" y="533.5" width="375" height="133.5"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNA-Sw-IL0" customClass="SAConfettiView" customModule="Dookie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5hh-Wz-PhE">
-                                <rect key="frame" x="32" y="80" width="311" height="611"/>
+                                <rect key="frame" x="32" y="80" width="311" height="595"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ocF-FR-hRf">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="332.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="324.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock all of Dookie’s premium features with a single purchase" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUI-e9-t7O">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="42.5"/>
@@ -565,7 +565,7 @@
                                                             <constraint firstAttribute="height" priority="999" constant="8" id="f9R-L8-CFU"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add more pets and easily switch between them. Great for families with multiple pets." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66Z-vf-JoW">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add more pets and easily switch between them. Great for families with multiple pets." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="66Z-vf-JoW">
                                                         <rect key="frame" x="0.0" y="26" width="311" height="38"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                         <nil key="textColor"/>
@@ -574,7 +574,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Suv-fE-pc6">
-                                                <rect key="frame" x="0.0" y="138.5" width="311" height="64"/>
+                                                <rect key="frame" x="0.0" y="138.5" width="311" height="72"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💝🎉 Custom emojis" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhN-WA-RbM">
                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="18"/>
@@ -588,22 +588,22 @@
                                                             <constraint firstAttribute="height" priority="999" constant="8" id="MKc-hb-fbl"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track custom emojis and choose which of them group. Make Dookie fit your needs." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6r-PK-3a2">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track custom emojis and choose which of them group. Make Dookie fit your needs." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="D6r-PK-3a2">
                                                         <rect key="frame" x="0.0" y="26" width="311" height="38"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3F-CB-dWO">
+                                                        <rect key="frame" x="0.0" y="64" width="311" height="8"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="999" constant="8" id="Pbh-j9-ElO"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTC-Z4-2gz">
-                                                <rect key="frame" x="0.0" y="218.5" width="311" height="0.0"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" priority="999" id="7eh-Ex-8PH"/>
-                                                </constraints>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRv-pV-CQY" customClass="RoundButton" customModule="Dookie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="234.5" width="311" height="48"/>
+                                                <rect key="frame" x="0.0" y="226.5" width="311" height="48"/>
                                                 <color key="backgroundColor" red="0.98039215800000001" green="0.71372550729999995" blue="0.039215687659999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="48" id="1WX-Rq-beM"/>
@@ -621,8 +621,8 @@
                                                     <action selector="buyButtonPressed:" destination="Xim-uA-ZV8" eventType="touchUpInside" id="hF6-Gk-GYq"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dookie premium is an optional yearly subscription associated with your Apple ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-gm-t7k">
-                                                <rect key="frame" x="0.0" y="298.5" width="311" height="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dookie premium is an yearly subscription associated with your Apple ID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-gm-t7k">
+                                                <rect key="frame" x="0.0" y="290.5" width="311" height="34"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -633,7 +633,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jD1-Q7-Ldf">
-                                        <rect key="frame" x="0.0" y="348.5" width="311" height="198.5"/>
+                                        <rect key="frame" x="0.0" y="340.5" width="311" height="198.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for unlocking Dookie premium!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsT-sc-3rC">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="20.5"/>
@@ -664,9 +664,9 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVJ-PO-1FL">
-                                        <rect key="frame" x="0.0" y="563" width="311" height="48"/>
+                                        <rect key="frame" x="0.0" y="555" width="311" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="48" id="Abd-tP-RiF"/>
+                                            <constraint firstAttribute="height" priority="750" constant="40" id="Abd-tP-RiF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <state key="normal" title="Restore purchase">
@@ -719,7 +719,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add, reorder, edit and delete the emojis as you see fit. You can have up to 6 emojis." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-2R-eZ5">
-                                    <rect key="frame" x="20" y="0.0" width="335" height="48"/>
+                                    <rect key="frame" x="20" y="0.0" width="335" height="34"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                     <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -730,7 +730,6 @@
                                 <constraint firstAttribute="trailing" secondItem="gCo-2R-eZ5" secondAttribute="trailing" constant="20" id="Fns-hD-Yli"/>
                                 <constraint firstItem="gCo-2R-eZ5" firstAttribute="leading" secondItem="zoa-Fe-fcC" secondAttribute="leading" constant="20" id="KQB-9i-L4T"/>
                                 <constraint firstItem="gCo-2R-eZ5" firstAttribute="top" secondItem="zoa-Fe-fcC" secondAttribute="top" id="rt2-TJ-JsF"/>
-                                <constraint firstAttribute="bottom" secondItem="gCo-2R-eZ5" secondAttribute="bottom" id="vhZ-H9-qYA"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -815,17 +814,20 @@
                             <rect key="frame" x="0.0" y="149" width="375" height="112"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HAz-J0-QU9">
-                                    <rect key="frame" x="20" y="0.0" width="335" height="112"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HAz-J0-QU9">
+                                    <rect key="frame" x="20" y="0.0" width="335" height="90"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emojis with grouping enabled will try to merge with each other if they are less than 30 minutes apart." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aL-VX-e4u">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
-                                            <rect key="frame" x="0.0" y="64" width="335" height="48"/>
+                                            <rect key="frame" x="0.0" y="50" width="335" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="O2V-h8-7cM"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="tintColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" image="ic_trash"/>
@@ -841,7 +843,6 @@
                                 <constraint firstItem="HAz-J0-QU9" firstAttribute="leading" secondItem="OYK-Wa-1l5" secondAttribute="leading" constant="20" id="6C5-KP-izF"/>
                                 <constraint firstAttribute="trailing" secondItem="HAz-J0-QU9" secondAttribute="trailing" constant="20" id="LNe-rs-tmU"/>
                                 <constraint firstItem="HAz-J0-QU9" firstAttribute="top" secondItem="OYK-Wa-1l5" secondAttribute="top" id="VhP-mZ-mq4"/>
-                                <constraint firstAttribute="bottom" secondItem="HAz-J0-QU9" secondAttribute="bottom" id="lrJ-9g-2fL"/>
                             </constraints>
                         </view>
                         <sections>
@@ -1057,7 +1058,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97w-tG-dXL">
-                                <rect key="frame" x="32" y="111.5" width="311" height="278.5"/>
+                                <rect key="frame" x="32" y="111" width="311" height="278.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cv-hl-b7h">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="24"/>
@@ -1139,7 +1140,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="VLK-xw-mV7">
-                                <rect key="frame" x="0.0" y="534" width="375" height="133"/>
+                                <rect key="frame" x="0.0" y="533.5" width="375" height="133.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
