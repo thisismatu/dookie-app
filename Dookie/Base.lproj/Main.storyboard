@@ -824,11 +824,11 @@
                                             <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGn-Yt-2s8">
                                             <rect key="frame" x="0.0" y="64" width="335" height="48"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="tintColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" title="Delete emoji"/>
+                                            <state key="normal" image="ic_trash"/>
                                             <connections>
                                                 <action selector="deleteButtonPressed:" destination="1vC-HZ-6dN" eventType="touchUpInside" id="uX1-xf-rbU"/>
                                             </connections>
@@ -1418,6 +1418,7 @@
         <image name="ic_plus" width="24" height="24"/>
         <image name="ic_shuffle" width="24" height="24"/>
         <image name="ic_star" width="24" height="24"/>
+        <image name="ic_trash" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jKj-mt-dtt"/>
