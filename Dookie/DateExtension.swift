@@ -11,8 +11,8 @@ import Foundation
 extension Date {
     public var toString: String {
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         return formatter.string(from: self)
     }
 
