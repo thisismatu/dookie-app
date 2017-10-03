@@ -31,6 +31,8 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+
         navigationItem.title = isAdding ? "New emoji" : "Emoji details"
         addButton.title = isAdding ? "Add" : "Done"
         deleteButton.isEnabled = isAdding ? false : true
@@ -60,14 +62,17 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
         textField.deleteBackward()
     }
 
+    func textFieldDidChange(_ textField: UITextField) {
+        let emoji = textField.text ?? ""
+        addButton.isEnabled = !emoji.isEmpty
+    }
+
     // MARK: - Actions
 
     @IBAction func addButtonPressed(_ sender: Any) {
-        let emoji = textField.text ?? ""
-        if !emoji.isEmpty {
-            self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
-            self.performSegue(withIdentifier: "deleteAddEmoji", sender: self)
-        }
+        guard let emoji = textField.text?.emojiEscapedString else { return }
+        self.delegate?.passDataBack(emoji, mergeSwitch.isOn, passedInt)
+        self.performSegue(withIdentifier: "deleteAddEmoji", sender: self)
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
