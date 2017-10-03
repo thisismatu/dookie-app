@@ -14,8 +14,12 @@ import Emoji
 class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
-    var buttons = Defaults[.buttons]
-    var merge = Defaults[.merge]
+    var buttons = Defaults[.buttons] {
+        didSet { saveButton.isEnabled = buttons != Defaults[.buttons] }
+    }
+    var merge = Defaults[.merge] {
+        didSet { saveButton.isEnabled = merge != Defaults[.merge] }
+    }
 
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -23,6 +27,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.isEnabled = false
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
     }
