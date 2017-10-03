@@ -85,8 +85,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            buttons.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            deleteItem(at: indexPath.row)
         }
     }
 
@@ -104,29 +103,27 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     func passDataBack(_ string: String, _ bool: Bool, _ int: Int) {
         if buttons.indices.contains(int) {
-            let old = buttons[int]
             buttons[int] = string
-            if let index = merge.index(of: old) {
-                merge.remove(at: index)
-            }
         } else {
             buttons.append(string)
         }
 
-        if bool {
+        if let index = merge.index(of: string), !bool {
+            merge.remove(at: index)
+        }
+        if !merge.contains(string) && bool {
             merge.append(string)
         }
 
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
 
-    func deleteItem(_ int: Int) {
+    func deleteItem(at int: Int) {
+        if let index = merge.index(of: buttons[int]) {
+            merge.remove(at: index)
+        }
         if buttons.indices.contains(int) {
-            let old = buttons[int]
             buttons.remove(at: int)
-            if let index = merge.index(of: old) {
-                merge.remove(at: index)
-            }
         }
 
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
@@ -148,7 +145,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         } else if segue.identifier == "showAddEmoji" {
             let vc = segue.destination as! EditEmojiViewController
             vc.isAdding = true
-            vc.passedInt = self.tableView.numberOfRows(inSection: 0) + 1
+            vc.passedInt = self.tableView.numberOfRows(inSection: 0)
             vc.delegate = self
         }
     }

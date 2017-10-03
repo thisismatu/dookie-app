@@ -12,7 +12,7 @@ import ISEmojiView
 
 protocol EditEmojiDelegate {
     func passDataBack(_ string: String, _ bool: Bool, _ int: Int)
-    func deleteItem(_ int: Int)
+    func deleteItem(at int: Int)
 }
 
 class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmojiViewDelegate {
@@ -76,7 +76,7 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        delegate?.deleteItem(passedInt)
+        delegate?.deleteItem(at: passedInt)
         textField.text = nil
         performSegue(withIdentifier: "deleteAddEmoji", sender: self)
     }
