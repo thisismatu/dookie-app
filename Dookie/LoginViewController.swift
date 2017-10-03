@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         if !Defaults[.pets].isEmpty {
             self.cancelButton.isEnabled = true
-            self.cancelButton.tintColor = .dookieGray
+            self.cancelButton.tintColor = .dookieDarkGray
         } else {
             self.cancelButton.isEnabled = false
             self.cancelButton.tintColor = .clear

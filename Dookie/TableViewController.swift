@@ -34,7 +34,6 @@ class TableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        switchButton.tintColor = Defaults[.premium] ? .dookieGray : .dookieDisabled
 
         connectedRef.observe(.value, with: { snapshot in
             // Do something when connected?

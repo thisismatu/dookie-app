@@ -19,13 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         self.window?.tintColor = .dookieBlue
-        UINavigationBar.appearance().tintColor = .dookieGray
+        UINavigationBar.appearance().tintColor = .dookieDarkGray
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().isTranslucent = false
         UIToolbar.appearance().setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         UIToolbar.appearance().setShadowImage(UIImage(), forToolbarPosition: .any)
         UIToolbar.appearance().isTranslucent = false
+        UIToolbar.appearance().tintColor = .dookieDarkGray
         return true
     }
 
