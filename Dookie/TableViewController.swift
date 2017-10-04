@@ -232,17 +232,12 @@ class TableViewController: UITableViewController {
 
     private func mergeActivity(_ activity: Activity) -> Bool {
         guard let today = activitiesArray.first else { return false }
+        let thirtyMin = 30 * 60 * 1000
         let nearby = today
             .filter { $0.ref != activity.ref }
-            .filter { activity.date.secondsAgo-1800...activity.date.secondsAgo+1800 ~= $0.date.secondsAgo }
-
-        var firstTwo = [Activity]()
-        if let above = nearby.filter({ $0.date.secondsAgo <= activity.date.secondsAgo}).last {
-            firstTwo.append(above)
-        }
-        if let below = nearby.filter({ $0.date.secondsAgo >= activity.date.secondsAgo}).first {
-            firstTwo.append(below)
-        }
+            .filter { activity.date.timestamp-thirtyMin...activity.date.timestamp+thirtyMin ~= $0.date.timestamp }
+            .sorted { abs($0.0.date.timestamp - activity.date.timestamp) < abs($0.1.date.timestamp - activity.date.timestamp) }
+        let firstTwo = Array(nearby.prefix(2))
 
         if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(Defaults[.merge])) }) {
             let new = Activity.init(date: activity.date, type: first.type + activity.type)
@@ -250,7 +245,6 @@ class TableViewController: UITableViewController {
             activity.ref?.removeValue()
             return true
         }
-
         return false
     }
 
