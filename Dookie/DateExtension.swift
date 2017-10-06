@@ -16,11 +16,6 @@ extension Date {
         return formatter.string(from: self)
     }
 
-    public var timestamp: Int64 {
-        let timeInt = Int64(self.timeIntervalSince1970 * 1000.0)
-        return timeInt
-    }
-
     public var secondsAgo: Int {
         guard let second = Calendar.current.dateComponents([.second], from: self, to: Date()).second else { return 0 }
         return second

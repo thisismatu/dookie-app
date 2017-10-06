@@ -160,7 +160,7 @@ class TableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
                 let item = Activity.init(ref: activity.ref, date: picker.date, type: activity.type)
-                if !self.mergeActivity(item) {
+                if !self.nearbyActivities(item) {
                     activity.ref?.updateChildValues(item.toAnyObject())
                 }
             }))
@@ -222,7 +222,7 @@ class TableViewController: UITableViewController {
     @objc private func barButtonPressed(_ item: UIBarButtonItem) {
         guard let type = item.title?.emojiEscapedString else { return }
         let activity = Activity.init(date: Date(), type: [type])
-        if !mergeActivity(activity) {
+        if !nearbyActivities(activity) {
             item.isEnabled = false
             self.activitiesRef.childByAutoId().setValue(activity.toAnyObject(), withCompletionBlock: { (error, reference) in
                 item.isEnabled = true
@@ -230,16 +230,26 @@ class TableViewController: UITableViewController {
         }
     }
 
-    private func mergeActivity(_ activity: Activity) -> Bool {
+    private func nearbyActivities(_ activity: Activity) -> Bool {
         guard let today = activitiesArray.first else { return false }
-        let thirtyMin = 30 * 60 * 1000
-        let nearby = today
-            .filter { $0.ref != activity.ref }
-            .filter { activity.date.timestamp-thirtyMin...activity.date.timestamp+thirtyMin ~= $0.date.timestamp }
-            .sorted { abs($0.0.date.timestamp - activity.date.timestamp) < abs($0.1.date.timestamp - activity.date.timestamp) }
-        let firstTwo = Array(nearby.prefix(2))
+        var tmp = [Activity]()
+        if let index = today.index(where: { $0.ref == activity.ref }) {
+            if let before = today[safe: index-1] { tmp.append(before) }
+            if let after = today[safe: index+1] { tmp.append(after) }
+            return mergeActivity(tmp, activity)
+        } else if today.count > 0 {
+            if let after = today[safe: 0] { tmp.append(after) }
+            return mergeActivity(tmp, activity)
+        }
+        return false
+    }
 
-        if let first = firstTwo.first(where: { Set($0.type + activity.type).isSubset(of: Set(Defaults[.merge])) }) {
+    private func mergeActivity(_ array: [Activity], _ activity: Activity) -> Bool {
+        let filtered = array
+            .filter { abs($0.date.timeIntervalSince(activity.date)) < 2400 }
+            .filter { Set($0.type + activity.type).isSubset(of: Set(Defaults[.merge])) }
+            .sorted { abs($0.0.date.timeIntervalSince(activity.date)) < abs($0.1.date.timeIntervalSince(activity.date)) }
+        if let first = filtered.first {
             let new = Activity.init(date: activity.date, type: first.type + activity.type)
             first.ref?.updateChildValues(new.toAnyObject())
             activity.ref?.removeValue()
