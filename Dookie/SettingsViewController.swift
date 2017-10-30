@@ -97,7 +97,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         case inviteCell:
             sendInviteEmail()
         case shareCell:
-            copyShareURL()
+            copyShareUrlPrompt()
         case manageCell:
             if Defaults[.premium] {
                 self.performSegue(withIdentifier: "showManageEmojis", sender: self)
@@ -217,16 +217,16 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         return "Dookie v\(number) (\(build))"
     }
 
-    private func copyShareURL() {
-        UIPasteboard.general.string = "dookie://" + Defaults[.pid]
-        let title = ":ok_hand:".emojiUnescapedString + " Share URL Copied"
-        let alert = UIAlertController(title: title , message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true) {
-            let deadline = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
-                self.dismiss(animated: true, completion: nil)
-            })
-        }
+    private func copyShareUrlPrompt() {
+        let alert = UIAlertController(title: "Which link to copy?", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "App share link", style: .default, handler: { _ in
+            UIPasteboard.general.string = "dookie://" + Defaults[.pid]
+        }))
+        alert.addAction(UIAlertAction(title: "Web share link", style: .default, handler: { _ in
+            UIPasteboard.general.string = "https://dookie.me/app/?petId=" + Defaults[.pid]
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 
     private func openUrl(_ urlString: String) {
