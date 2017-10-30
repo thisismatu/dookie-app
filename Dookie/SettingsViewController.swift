@@ -226,6 +226,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         alert.addAction(UIAlertAction(title: "Web share link", style: .default, handler: { _ in
             UIPasteboard.general.string = "https://dookie.me/app/?petId=" + Defaults[.pid]
         }))
+        alert.addAction(UIAlertAction(title: "Just the pet ID", style: .default, handler: { _ in
+            UIPasteboard.general.string = Defaults[.pid]
+        }))
         self.present(alert, animated: true, completion: nil)
     }
 
