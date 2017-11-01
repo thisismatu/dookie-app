@@ -15,6 +15,7 @@
 		4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */; };
 		4A0BFCA61ECDBAAE00E958E1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BFCA51ECDBAAE00E958E1 /* HomeViewController.swift */; };
 		4A3E32761E427670004FA9BD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3E32751E427670004FA9BD /* Activity.swift */; };
+		4A8723CF1FAA81840096B38E /* FirstActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8723CE1FAA81840096B38E /* FirstActivityTableViewCell.swift */; };
 		4A986D011E81CD0100F4695C /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A986D001E81CD0100F4695C /* PremiumViewController.swift */; };
 		4ABADE171E81D66E001017D8 /* Confetti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABADE161E81D66E001017D8 /* Confetti.swift */; };
 		4ADD982C1F0ABDA60068F2B9 /* EditEmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD982B1F0ABDA60068F2B9 /* EditEmojiViewController.swift */; };
@@ -62,6 +63,7 @@
 		4A0AB1EC1E5367C2009F4F18 /* DefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsExtension.swift; sourceTree = "<group>"; };
 		4A0BFCA51ECDBAAE00E958E1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4A3E32751E427670004FA9BD /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		4A8723CE1FAA81840096B38E /* FirstActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstActivityTableViewCell.swift; sourceTree = "<group>"; };
 		4A986D001E81CD0100F4695C /* PremiumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiumViewController.swift; sourceTree = "<group>"; };
 		4ABADE161E81D66E001017D8 /* Confetti.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confetti.swift; sourceTree = "<group>"; };
 		4ADD982B1F0ABDA60068F2B9 /* EditEmojiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEmojiViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		4A0AB1DD1E5365FC009F4F18 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A8723CE1FAA81840096B38E /* FirstActivityTableViewCell.swift */,
 				CC2078C21E490C2B004E2030 /* ActivityTableViewCell.swift */,
 				4ABADE161E81D66E001017D8 /* Confetti.swift */,
 				4A0AB1E21E5366C6009F4F18 /* RoundButton.swift */,
@@ -443,6 +446,7 @@
 				CCA7ABA01E4623DB00F8BEAF /* LoginViewController.swift in Sources */,
 				4A0AB1ED1E5367C2009F4F18 /* DefaultsExtension.swift in Sources */,
 				CC95E6461E3FB28F001C93C9 /* AppDelegate.swift in Sources */,
+				4A8723CF1FAA81840096B38E /* FirstActivityTableViewCell.swift in Sources */,
 				CC6FB3031F3E13E1000E4CB2 /* UINavigationControllerExtension.swift in Sources */,
 				4A986D011E81CD0100F4695C /* PremiumViewController.swift in Sources */,
 				4A0AB1E91E536775009F4F18 /* StringExtension.swift in Sources */,

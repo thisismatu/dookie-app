@@ -114,27 +114,37 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.contentView.backgroundColor = .white
-        header.textLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightSemibold)
+        header.textLabel?.textColor = .dookieDarkGray
+        header.textLabel?.textAlignment = .left
         header.textLabel?.frame = header.frame
-        header.textLabel?.textColor = .dookieGray
-        header.textLabel?.textAlignment = .center
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32.0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivityTableViewCell
         let activity = activitiesArray[indexPath.section][indexPath.row]
 
-        switch indexPath.row {
-        case 0:
+        if indexPath.row == 0, indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FirstActivityCell", for: indexPath) as! FirstActivityTableViewCell
             let isOnly = self.activitiesArray[indexPath.section].count == 1
-            cell.configure(activity, hideTop: true, hideBottom: isOnly)
-        case self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1:
-            cell.configure(activity, hideTop: false, hideBottom: true)
-        default:
-            cell.configure(activity, hideTop: false, hideBottom: false)
+            cell.configure(activity, hideBottom: isOnly)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath) as! ActivityTableViewCell
+            switch indexPath.row {
+            case 0:
+                let isOnly = self.activitiesArray[indexPath.section].count == 1
+                cell.configure(activity, hideTop: true, hideBottom: isOnly)
+            case self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1:
+                cell.configure(activity, hideTop: false, hideBottom: true)
+            default:
+                cell.configure(activity, hideTop: false, hideBottom: false)
+            }
+            return cell
         }
-
-        return cell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
