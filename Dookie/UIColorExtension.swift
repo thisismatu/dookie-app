@@ -11,8 +11,8 @@ import UIKit
 extension UIColor {
     static let dookieBlue = UIColor(hex: 0x1E88E5, a: 1.0)
     static let dookieGreen = UIColor(hex: 0x7CB342, a: 1.0)
-    static let dookieGray = UIColor(hex: 0x8F8E94, a: 1.0)
-    static let dookieDarkGray = UIColor(hex: 0x6D6D72, a: 1.0)
+    static let dookieGray = UIColor(hex: 0x6D6D72, a: 1.0)
+    static let dookieDarkGray = UIColor(hex: 0x38373A, a: 1.0)
     static let dookieLightGray = UIColor(hex: 0xA3A2A7, a: 1.0)
     static let dookieDestructive = UIColor(hex: 0xE53935, a:1.0)
 

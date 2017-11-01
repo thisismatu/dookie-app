@@ -218,7 +218,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func copyShareUrlPrompt() {
-        let alert = UIAlertController(title: "Which link to copy?", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "What do you want to copy?", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "App share link", style: .default, handler: { _ in
             UIPasteboard.general.string = "dookie://" + Defaults[.pid]
