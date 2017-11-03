@@ -115,12 +115,15 @@ class TableViewController: UITableViewController {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.contentView.backgroundColor = .white
         header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightSemibold)
-        header.textLabel?.textColor = .dookieDarkGray
+        header.textLabel?.textColor = .dookieGray
         header.textLabel?.textAlignment = .left
         header.textLabel?.frame = header.frame
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if activitiesArray[section].isEmpty {
+            return 0.0
+        }
         return 32.0
     }
 
