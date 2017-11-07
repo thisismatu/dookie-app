@@ -21,7 +21,6 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         Auth.auth().signInAnonymously { (user, error) in
             if let user = user {
                 Defaults[.uid] = user.uid

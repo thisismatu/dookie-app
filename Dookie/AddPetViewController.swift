@@ -52,7 +52,6 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             let key = petRef.childByAutoId().key
             let pet = Pet.init(name, key)
-
             userRef.observeSingleEvent(of: .value, with: { snapshot in
                 guard let user = User.init(snapshot) else { return }
                 var pets = user.pets
@@ -61,7 +60,6 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
                 self.petRef.child(key).updateChildValues(pet.toAnyObject())
                 self.performSegue(withIdentifier: "addPet", sender: self)
             })
-
         case false: return
         }
     }
