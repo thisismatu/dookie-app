@@ -14,7 +14,6 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
-    var userPetsRef: DatabaseReference!
 
     @IBOutlet weak var textField: UITextField!
 
@@ -23,7 +22,6 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         petRef = ref.child("pets")
         userRef = ref.child("users/" + Defaults[.uid])
-        userPetsRef = ref.child("userPets/" + Defaults[.uid])
         textField.delegate = self
         self.hideKeyboardWhenTappedAround()
     }
@@ -35,7 +33,6 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
@@ -55,12 +52,16 @@ class AddPetViewController: UIViewController, UITextFieldDelegate {
         case true:
             let key = petRef.childByAutoId().key
             let pet = Pet.init(name, key)
-            let user = User.init()
-            let userPet = UserPet.init(key)
-            petRef.child(key).updateChildValues(pet.toAnyObject())
-            userPetsRef.updateChildValues(userPet.toAnyObject())
-            userRef.updateChildValues(user.toAnyObject())
-            self.performSegue(withIdentifier: "addPet", sender: self)
+
+            userRef.observeSingleEvent(of: .value, with: { snapshot in
+                guard let user = User.init(snapshot) else { return }
+                var pets = user.pets
+                if !pets.contains(key) { pets.append(key) }
+                self.userRef.updateChildValues(["current": key, "pets": pets])
+                self.petRef.child(key).updateChildValues(pet.toAnyObject())
+                self.performSegue(withIdentifier: "addPet", sender: self)
+            })
+
         case false: return
         }
     }

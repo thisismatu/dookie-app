@@ -36,12 +36,12 @@ class HomeViewController: UIViewController {
     }
 
     private func getUserPets() {
-        let userPetsRef = self.ref.child("userPets/" + Defaults[.uid])
-        userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
-            guard let dict = snapshot.value as? [String: Bool] else { return self.showNext("Login") }
-            Defaults[.pets] = dict
-            if let result = dict.first(where: { $0.value == true }) {
-                Defaults[.pid] = result.key
+        let userRef = self.ref.child("users/" + Defaults[.uid])
+        userRef.observeSingleEvent(of: .value, with: { snapshot in
+            let pets = snapshot.json["pets"].arrayValue.map { $0.stringValue }
+            let current = snapshot.json["current"].stringValue
+            if let result = pets.first(where: { $0 == current }) {
+                Defaults[.pid] = result
                 self.showNext("Table")
                 return
             }

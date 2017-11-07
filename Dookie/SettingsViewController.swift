@@ -18,8 +18,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
-    var userPetsRef: DatabaseReference!
     var tableHeaderHeight: CGFloat = 200.0
+    var petsArray = [String]()
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -37,7 +37,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
         userRef = ref.child("users/" + Defaults[.uid])
-        userPetsRef = ref.child("userPets/" + Defaults[.uid])
         versionLabel.text = getVersionNumber()
         setupHeaderView()
         updateHeaderView()
@@ -49,6 +48,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
+            self.petsArray = user.pets
         })
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in
@@ -70,7 +70,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
@@ -268,14 +267,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePet() {
-        self.userPetsRef.child(Defaults[.pid]).removeValue()
-        if let nextPet = Defaults[.pets].first(where: { $0.value == false }) {
-            self.userPetsRef.child(nextPet.key).setValue(true)
+        let updatedPetsArray = petsArray.filter { $0 != Defaults[.pid] }
+        self.userRef.child("current").removeValue()
+        if let nextPet = updatedPetsArray.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetsArray])
         }
         Defaults.remove(.pid)
         Defaults.remove(.name)
         Defaults.remove(.emoji)
-        Defaults.remove(.pets)
         Defaults.remove(.buttons)
         Defaults.remove(.merge)
         self.performSegue(withIdentifier: "leavePet", sender: self)

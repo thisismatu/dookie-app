@@ -15,6 +15,8 @@ struct User {
     let ref: DatabaseReference?
     let uid: String
     let premium: Bool
+    let pets: [String]
+    let current: String
 }
 
 extension User {
@@ -22,43 +24,16 @@ extension User {
         self.ref = snapshot.ref
         self.uid = snapshot.key
         self.premium = snapshot.json["premium"].boolValue
-    }
-
-    init() {
-        self.ref = nil
-        self.uid = Defaults[.uid]
-        self.premium = Defaults[.premium]
+        self.pets = snapshot.json["pets"].arrayValue.map { $0.stringValue }
+        self.current = snapshot.json["current"].stringValue
     }
 
     func toAnyObject() -> [AnyHashable: Any] {
         return [
-            "premium": self.premium
-        ]
-    }
-}
-
-struct UserPet {
-    let ref: DatabaseReference?
-    let pid: String
-    let current: Bool
-}
-
-extension UserPet {
-    init?(_ snapshot: DataSnapshot) {
-        self.ref = snapshot.ref
-        self.pid = snapshot.json[0].stringValue
-        self.current = snapshot.json[1].boolValue
-    }
-
-    init(_ pid: String) {
-        self.ref = nil
-        self.pid = pid
-        self.current = true
-    }
-
-    func toAnyObject() -> [AnyHashable: Any] {
-        return [
-            self.pid: self.current
+            "uid": self.uid,
+            "premium": self.premium,
+            "pets": self.pets,
+            "current": self.current
         ]
     }
 }

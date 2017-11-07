@@ -15,9 +15,9 @@ class TableViewController: UITableViewController {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
-    var userPetsRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
+    var petsArray = [String]()
 
     @IBOutlet weak var switchButton: UIBarButtonItem!
 
@@ -26,7 +26,6 @@ class TableViewController: UITableViewController {
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
         userRef = ref.child("users/" + Defaults[.uid])
-        userPetsRef = ref.child("userPets/" + Defaults[.uid])
         activitiesRef = ref.child("activities")
     }
 
@@ -36,11 +35,7 @@ class TableViewController: UITableViewController {
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-        })
-
-        userPetsRef.observeSingleEvent(of: .value, with: { snapshot in
-            guard let dict = snapshot.value as? [String: Bool] else { return }
-            Defaults[.pets] = dict
+            self.petsArray = user.pets
         })
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in
@@ -77,7 +72,6 @@ class TableViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         activitiesRef.removeAllObservers()
-        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
@@ -183,14 +177,14 @@ class TableViewController: UITableViewController {
     // MARK: - View controller private methods
 
     private func leavePet() {
-        self.userPetsRef.child(Defaults[.pid]).removeValue()
-        if let nextPet = Defaults[.pets].first(where: { $0.value == false }) {
-            self.userPetsRef.child(nextPet.key).setValue(true)
+        let updatedPetsArray = petsArray.filter { $0 != Defaults[.pid] }
+        self.userRef.child("current").removeValue()
+        if let nextPet = updatedPetsArray.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetsArray])
         }
         Defaults.remove(.pid)
         Defaults.remove(.name)
         Defaults.remove(.emoji)
-        Defaults.remove(.pets)
         Defaults.remove(.buttons)
         Defaults.remove(.merge)
         self.performSegue(withIdentifier: "switchPet", sender: self)
@@ -269,17 +263,17 @@ class TableViewController: UITableViewController {
         let alert = UIAlertController(title: "Switch or add a pet", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add another pet", style: .default, handler: { _ in
-            self.userPetsRef.updateChildValues([Defaults[.pid]: false])
+            self.userRef.child("current").removeValue()
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
-        let inactive = Defaults[.pets].filter { $0.value == false }
+        let inactive = petsArray.filter { $0 != Defaults[.pid] }
         for pet in inactive {
-            self.ref.child("pets/" + pet.key).observeSingleEvent(of: .value, with: { snapshot in
+            self.ref.child("pets/" + pet).observeSingleEvent(of: .value, with: { snapshot in
                 guard let pet = Pet.init(snapshot) else { return }
                 let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
                 alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
-                    self.userPetsRef.updateChildValues([Defaults[.pid]: false, pet.pid: true])
+                    self.userRef.child("current").setValue(pet.pid)
                     self.performSegue(withIdentifier: "switchPet", sender: self)
                 }))
             })

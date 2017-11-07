@@ -34,14 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
             if id.isFirebasePushId {
-                let ref = Database.database().reference(withPath: "userPets/" + Defaults[.uid])
-                if Defaults.hasKey(.pid), Defaults[.pid] != id {
-                    print(Defaults[.pid])
-                    ref.updateChildValues([Defaults[.pid]: false, id: true])
-                } else {
-                    ref.updateChildValues([id: true])
-                }
-                showHomeScreen()
+                let userRef = Database.database().reference(withPath: "users/" + Defaults[.uid])
+                userRef.observeSingleEvent(of: .value, with: { snapshot in
+                    guard let user = User.init(snapshot) else { return }
+                    var pets = user.pets
+                    if !pets.contains(id) { pets.append(id) }
+                    userRef.updateChildValues(["current": id, "pets": pets])
+                    Defaults[.pid] = id
+                    self.showHomeScreen()
+                })
             }
         }
         return false
