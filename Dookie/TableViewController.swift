@@ -16,7 +16,6 @@ class TableViewController: UITableViewController {
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
     var userPetsRef: DatabaseReference!
-    var connectedRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
 
@@ -29,15 +28,10 @@ class TableViewController: UITableViewController {
         userRef = ref.child("users/" + Defaults[.uid])
         userPetsRef = ref.child("userPets/" + Defaults[.uid])
         activitiesRef = ref.child("activities")
-        connectedRef = Database.database().reference(withPath: ".info/connected")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        connectedRef.observe(.value, with: { snapshot in
-            // Do something when connected?
-        })
 
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
@@ -83,7 +77,7 @@ class TableViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         activitiesRef.removeAllObservers()
-        connectedRef.removeAllObservers()
+        userPetsRef.removeAllObservers()
         userRef.removeAllObservers()
         petRef.removeAllObservers()
         ref.removeAllObservers()
