@@ -181,6 +181,8 @@ class TableViewController: UITableViewController {
         self.userRef.child("current").removeValue()
         if let nextPet = updatedPetsArray.first {
             self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetsArray])
+        } else {
+            self.userRef.child("pets").removeValue()
         }
         Defaults.remove(.pid)
         Defaults.remove(.name)
