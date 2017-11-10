@@ -14,12 +14,6 @@ import Emoji
 class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
-    var buttons = Defaults[.buttons] {
-        didSet { saveButton.isEnabled = buttons != Defaults[.buttons] }
-    }
-    var merge = Defaults[.merge] {
-        didSet { saveButton.isEnabled = merge != Defaults[.merge] }
-    }
     var petButtons = [(key: String, value: Bool)]()
 
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -28,7 +22,6 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        saveButton.isEnabled = false
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
     }
@@ -90,7 +83,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteItem(at: indexPath.row)
+            deleteButton(at: indexPath.row)
         }
     }
 
@@ -106,26 +99,19 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     // MARK: - EditEmojiDelegate
 
-    func passDataBack(_ string: String, _ bool: Bool, _ int: Int) {
-        if buttons.indices.contains(int) {
-            buttons[int] = string
+    func updateButton(at index: Int, _ button: (String, Bool)) {
+        let keys = petButtons.flatMap { $0.key }
+        if keys.indices.contains(index) {
+            petButtons[index] = button
         } else {
-            buttons.append(string)
+            petButtons.append(button)
         }
-
-        if let index = merge.index(of: string), !bool {
-            merge.remove(at: index)
-        }
-        if !merge.contains(string) && bool {
-            merge.append(string)
-        }
-
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
 
-    func deleteItem(at int: Int) {
-        if petButtons.indices.contains(int) {
-            petButtons.remove(at: int)
+    func deleteButton(at index: Int) {
+        if petButtons.indices.contains(index) {
+            petButtons.remove(at: index)
         }
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
@@ -134,20 +120,20 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditEmoji" {
-            let vc = segue.destination as! EditEmojiViewController
+            let vc = segue.destination as? EditEmojiViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let selected = buttons[indexPath.row]
-                vc.isAdding = false
-                vc.passedString = selected
-                vc.passedBool = merge.contains(selected)
-                vc.passedInt = indexPath.row
-                vc.delegate = self
+                let selected = petButtons[indexPath.row]
+                vc?.isAdding = false
+                vc?.emoji = selected.key
+                vc?.merge = selected.value
+                vc?.index = indexPath.row
+                vc?.delegate = self
             }
         } else if segue.identifier == "showAddEmoji" {
-            let vc = segue.destination as! EditEmojiViewController
-            vc.isAdding = true
-            vc.passedInt = self.tableView.numberOfRows(inSection: 0)
-            vc.delegate = self
+            let vc = segue.destination as? EditEmojiViewController
+            vc?.isAdding = true
+            vc?.index = self.tableView.numberOfRows(inSection: 0)
+            vc?.delegate = self
         }
     }
 
@@ -165,7 +151,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     }
 
     @IBAction func addButtonPressed(_ sender: Any) {
-        if buttons.count < 6 {
+        if petButtons.count < 6 {
             performSegue(withIdentifier: "showAddEmoji", sender: self)
         } else {
             let alert = UIAlertController(title: "Emoji limit reached", message: "You can have up to 6 emojis. Remove some before adding new ones.", preferredStyle: .alert)
