@@ -12,6 +12,7 @@ import SwiftyUserDefaults
 
 class PremiumViewController: UIViewController {
     var ref: DatabaseReference!
+    var userRef: DatabaseReference!
 
     @IBOutlet weak var unlockPremiumStackView: UIStackView!
     @IBOutlet weak var premiumUnlockedStackView: UIStackView!
@@ -23,6 +24,7 @@ class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        userRef = ref.child("users/" + Defaults[.uid])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +38,7 @@ class PremiumViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
@@ -72,7 +75,7 @@ class PremiumViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func buyButtonPressed(_ sender: Any) {
-        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": true])
+        self.userRef.child("premium").setValue(true)
         self.animatePremiumUnlocked()
 //        let alert = UIAlertController(title: "Confirm your in-app purchase", message: "This is just a test", preferredStyle: .alert)
 //        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -84,7 +87,7 @@ class PremiumViewController: UIViewController {
     }
 
     @IBAction func subscriptionButtonPressed(_ sender: Any) {
-        self.ref.child("users/" + Defaults[.uid]).updateChildValues(["premium": false])
+        self.userRef.child("premium").setValue(false)
 //        guard let url = URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions") else { return }
 //        if UIApplication.shared.canOpenURL(url) {
 //            UIApplication.shared.openURL(url)

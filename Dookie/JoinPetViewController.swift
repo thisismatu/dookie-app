@@ -35,6 +35,8 @@ class JoinPetViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
+        petRef.removeAllObservers()
         ref.removeAllObservers()
     }
 

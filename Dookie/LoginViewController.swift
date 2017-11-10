@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        userRef.removeAllObservers()
         ref.removeAllObservers()
     }
 
