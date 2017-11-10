@@ -17,13 +17,8 @@ extension UserDefaults {
 }
 
 extension DefaultsKeys {
-    // Pet keys
     static let pid = DefaultsKey<String>("pid")
-    static let buttons = DefaultsKey<[String]>("buttons")
-    static let merge = DefaultsKey<[String]>("merge")
-    // User keys
     static let uid = DefaultsKey<String>("uid")
     static let premium = DefaultsKey<Bool>("premium")
-    // UI
     static let navTint = DefaultsKey<UIColor>("navTint")
 }
