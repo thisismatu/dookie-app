@@ -10,10 +10,6 @@ import Foundation
 import SwiftyUserDefaults
 
 extension UserDefaults {
-    subscript(key: DefaultsKey<[String: Bool]>) -> [String: Bool] {
-        get { return unarchive(key) ?? [:] }
-        set { archive(key, newValue) }
-    }
     subscript(key: DefaultsKey<UIColor>) -> UIColor {
         get { return unarchive(key) ?? .clear }
         set { archive(key, newValue) }
@@ -23,8 +19,6 @@ extension UserDefaults {
 extension DefaultsKeys {
     // Pet keys
     static let pid = DefaultsKey<String>("pid")
-    static let name = DefaultsKey<String>("name")
-    static let emoji = DefaultsKey<String>("emoji")
     static let buttons = DefaultsKey<[String]>("buttons")
     static let merge = DefaultsKey<[String]>("merge")
     // User keys

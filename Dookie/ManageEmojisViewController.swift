@@ -20,6 +20,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     var merge = Defaults[.merge] {
         didSet { saveButton.isEnabled = merge != Defaults[.merge] }
     }
+    var petButtons = [(key: String, value: Bool)]()
 
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -27,7 +28,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveButton.isEnabled = false
+//        saveButton.isEnabled = false
         ref = Database.database().reference()
         petRef = ref.child("pets/" + Defaults[.pid])
     }
@@ -63,17 +64,16 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return buttons.count
+        return petButtons.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let emoji = buttons[indexPath.row]
+        let item = Array(petButtons)[indexPath.row]
 
-        cell.textLabel?.text = emoji.emojiUnescapedString
-        cell.detailTextLabel?.text = merge.contains(emoji) ? "Group" : "Don’t group"
-        cell.detailTextLabel?.textColor = merge.contains(emoji) ? .dookieBlue : .dookieGray
-
+        cell.textLabel?.text = item.key.emojiUnescapedString
+        cell.detailTextLabel?.text = item.value ? "Group" : "Don’t group"
+        cell.detailTextLabel?.textColor = item.value ? .dookieBlue : .dookieGray
         return cell
     }
 
@@ -99,9 +99,9 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let item = buttons[fromIndexPath.row]
-        buttons.remove(at: fromIndexPath.row)
-        buttons.insert(item, at: to.row)
+        let item = petButtons[fromIndexPath.row]
+        petButtons.remove(at: fromIndexPath.row)
+        petButtons.insert(item, at: to.row)
     }
 
     // MARK: - EditEmojiDelegate
@@ -124,13 +124,9 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     }
 
     func deleteItem(at int: Int) {
-        if let index = merge.index(of: buttons[int]) {
-            merge.remove(at: index)
+        if petButtons.indices.contains(int) {
+            petButtons.remove(at: int)
         }
-        if buttons.indices.contains(int) {
-            buttons.remove(at: int)
-        }
-
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
     }
 
@@ -180,9 +176,8 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     @IBAction func saveButtonPressed(_ sender: Any) {
         tableView.setEditing(false, animated: true)
-        Defaults[.buttons] = buttons
-        Defaults[.merge] = merge
-        petRef.updateChildValues(["buttons" : buttons, "merge": merge])
+        let toArray = petButtons.map { [$0: $1] }
+        petRef.child("buttons").setValue(toArray)
         performSegue(withIdentifier: "editPet", sender: self)
     }
 }

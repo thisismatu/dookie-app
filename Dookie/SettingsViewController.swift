@@ -19,7 +19,9 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
     var tableHeaderHeight: CGFloat = 200.0
-    var petsArray = [String]()
+    var petArray = [String]()
+    var petButtons = [(key: String, value: Bool)]()
+    var petInfo = [String: String]()
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -48,15 +50,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-            self.petsArray = user.pets
+            self.petArray = user.pets
         })
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
-            Defaults[.name] = pet.name
-            Defaults[.emoji] = pet.emoji
-            Defaults[.buttons] = pet.buttons
-            Defaults[.merge] = pet.merge
+            self.petInfo = ["name": pet.name, "emoji": pet.emoji]
+            self.petButtons = pet.buttons
             let emoji = pet.emoji.isEmpty ? "+" : pet.emoji.emojiUnescapedString
             self.petNameLabel.text = pet.name
             self.petEmojiButton.setTitle(emoji, for: .normal)
@@ -133,6 +133,19 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.leavePetPrompt()
     }
 
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is EditPetViewController {
+            let vc = segue.destination as? EditPetViewController
+            vc?.petInfo = self.petInfo
+        }
+        if segue.destination is ManageEmojisViewController {
+            let vc = segue.destination as? ManageEmojisViewController
+            vc?.petButtons = self.petButtons
+        }
+    }
+
     // MARK: - View controller private methods
 
     private func getNavigationBarTint() -> UIColor {
@@ -189,11 +202,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func sendInviteEmail() {
-        let subject: String = "Join \(Defaults[.name]) on Dookie \(Defaults[.emoji].emojiUnescapedString)"
+        let name = petInfo["name"] ?? ""
+        let emoji = petInfo["emoji"] ?? ""
+        let subject: String = "Join \(name) on Dookie \(emoji.emojiUnescapedString)"
         let bodyArray: [String] = [
             "<p>Hello,</p>",
-            "<p>I’d like you to join \(Defaults[.name]) on <a href='https://dookie.me'>Dookie</a>.</p>",
-            "<a href='dookie://\(Defaults[.pid])' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(Defaults[.name]) on Dookie</a>",
+            "<p>I’d like you to join \(name) on <a href='https://dookie.me'>Dookie</a>.</p>",
+            "<a href='dookie://\(Defaults[.pid])' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(name) on Dookie</a>",
             "<p>Dookie is the easiest way to keep track of your pet’s eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
             "<p>Happy tracking!</p>",
             "<p>🐶</p>",
@@ -245,19 +260,21 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePetPrompt() {
+        let name = petInfo["name"] ?? ""
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Leave \(Defaults[.name])", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave \(name)", style: .default, handler: { _ in
             self.leavePet()
         }))
-        alert.addAction(UIAlertAction(title: "Delete \(Defaults[.name])", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Delete \(name)", style: .destructive, handler: { _ in
             self.deletePetPrompt()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
     private func deletePetPrompt() {
-        let alert = UIAlertController(title: "Delete \(Defaults[.name])?", message: "This action cannot be undone", preferredStyle: .actionSheet)
+        let name = petInfo["name"] ?? ""
+        let alert = UIAlertController(title: "Delete \(name)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
             self.petRef.removeValue()
@@ -267,18 +284,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePet() {
-        let updatedPetsArray = petsArray.filter { $0 != Defaults[.pid] }
+        let updatedPetArray = petArray.filter { $0 != Defaults[.pid] }
         self.userRef.child("current").removeValue()
-        if let nextPet = updatedPetsArray.first {
-            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetsArray])
+        if let nextPet = updatedPetArray.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetArray])
         } else {
             self.userRef.child("pets").removeValue()
         }
         Defaults.remove(.pid)
-        Defaults.remove(.name)
-        Defaults.remove(.emoji)
-        Defaults.remove(.buttons)
-        Defaults.remove(.merge)
         self.performSegue(withIdentifier: "leavePet", sender: self)
     }
 }

@@ -16,18 +16,19 @@ struct Pet {
     let pid: String
     var name: String
     var emoji: String
-    var buttons: [String]
-    var merge: [String]
+    var buttons: [(String, Bool)]
 }
 
 extension Pet {
     init?(_ snapshot: DataSnapshot) {
+        let array = snapshot.json["buttons"].arrayValue.flatMap {
+            $0.dictionaryObject as? [String: Bool]
+        }
         self.ref = snapshot.ref
         self.pid = snapshot.ref.key
         self.name = snapshot.json["name"].stringValue
         self.emoji = snapshot.json["emoji"].stringValue
-        self.buttons = snapshot.json["buttons"].arrayValue.map { $0.stringValue }
-        self.merge = snapshot.json["merge"].arrayValue.map { $0.stringValue }
+        self.buttons = array.flatMap { $0 }
     }
 
     init(_ name: String, _ pid: String) {
@@ -35,8 +36,11 @@ extension Pet {
         self.pid = pid
         self.name = name
         self.emoji = ""
-        self.buttons = [":stew:", ":droplet:", ":poop:"]
-        self.merge = [":droplet:", ":poop:"]
+        self.buttons = [
+            (":stew:", false),
+            (":droplet:", true),
+            (":poop:", true)
+        ]
     }
 
     func toAnyObject() -> [AnyHashable: Any] {
@@ -44,8 +48,7 @@ extension Pet {
             "pid": self.pid,
             "name": self.name,
             "emoji": self.emoji,
-            "buttons": self.buttons,
-            "merge": self.merge
+            "buttons": self.buttons.map { [$0: $1] }
         ]
     }
 }

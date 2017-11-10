@@ -17,7 +17,8 @@ class TableViewController: UITableViewController {
     var userRef: DatabaseReference!
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
-    var petsArray = [String]()
+    var petButtons = [(key: String, value: Bool)]()
+    var petArray = [String]()
 
     @IBOutlet weak var switchButton: UIBarButtonItem!
 
@@ -35,16 +36,12 @@ class TableViewController: UITableViewController {
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-            self.petsArray = user.pets
+            self.petArray = user.pets
         })
 
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
+        petRef.observe(.value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
-            Defaults[.pid] = pet.pid
-            Defaults[.name] = pet.name
-            Defaults[.emoji] = pet.emoji
-            Defaults[.buttons] = pet.buttons
-            Defaults[.merge] = pet.merge
+            self.petButtons = pet.buttons
             self.navigationItem.title = pet.name
             self.setupToolbar()
         })
@@ -117,7 +114,6 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let activity = activitiesArray[indexPath.section][indexPath.row]
-
         if indexPath.row == 0, indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FirstActivityCell", for: indexPath) as! FirstActivityTableViewCell
             let isOnly = self.activitiesArray[indexPath.section].count == 1
@@ -177,18 +173,14 @@ class TableViewController: UITableViewController {
     // MARK: - View controller private methods
 
     private func leavePet() {
-        let updatedPetsArray = petsArray.filter { $0 != Defaults[.pid] }
+        let updatedPetArray = petArray.filter { $0 != Defaults[.pid] }
         self.userRef.child("current").removeValue()
-        if let nextPet = updatedPetsArray.first {
-            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetsArray])
+        if let nextPet = updatedPetArray.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetArray])
         } else {
             self.userRef.child("pets").removeValue()
         }
         Defaults.remove(.pid)
-        Defaults.remove(.name)
-        Defaults.remove(.emoji)
-        Defaults.remove(.buttons)
-        Defaults.remove(.merge)
         self.performSegue(withIdentifier: "switchPet", sender: self)
     }
 
@@ -212,9 +204,9 @@ class TableViewController: UITableViewController {
     private func setupToolbar() {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         var items = [flexibleSpace]
-        for item in Defaults[.buttons] {
+        petButtons.forEach {
             let attributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title3)]
-            let button = UIBarButtonItem(title: item.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:)))
+            let button = UIBarButtonItem(title: $0.key.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:)))
             button.setTitleTextAttributes(attributes, for: .normal)
             items.append(button)
             items.append(flexibleSpace)
@@ -248,9 +240,11 @@ class TableViewController: UITableViewController {
     }
 
     private func mergeActivity(_ array: [Activity], _ activity: Activity) -> Bool {
+        let allowedToMerge = petButtons.filter({ $0.value }).flatMap({ $0.key })
+        print(allowedToMerge)
         let filtered = array
             .filter { abs($0.date.timeIntervalSince(activity.date)) < 2400 }
-            .filter { Set($0.type + activity.type).isSubset(of: Set(Defaults[.merge])) }
+            .filter { Set($0.type + activity.type).isSubset(of: Set(allowedToMerge)) }
             .sorted { abs($0.0.date.timeIntervalSince(activity.date)) < abs($0.1.date.timeIntervalSince(activity.date)) }
         if let first = filtered.first {
             let new = Activity.init(date: activity.date, type: first.type + activity.type)
@@ -269,7 +263,7 @@ class TableViewController: UITableViewController {
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
 
-        let inactive = petsArray.filter { $0 != Defaults[.pid] }
+        let inactive = petArray.filter { $0 != Defaults[.pid] }
         for pet in inactive {
             self.ref.child("pets/" + pet).observeSingleEvent(of: .value, with: { snapshot in
                 guard let pet = Pet.init(snapshot) else { return }

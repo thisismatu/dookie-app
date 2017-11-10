@@ -16,6 +16,7 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
     let emojiView = ISEmojiView()
     var ref: DatabaseReference!
     var petRef: DatabaseReference!
+    var petInfo = [String: String]()
 
     @IBOutlet weak var emojiTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -29,13 +30,15 @@ class EditPetViewController: UITableViewController, UITextFieldDelegate, ISEmoji
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         emojiTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
+        let name = petInfo["name"] ?? ""
+        let emoji = petInfo["emoji"] ?? ""
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .white
         emojiTextField.delegate = self
         emojiTextField.inputView = emojiView
-        emojiTextField.text = Defaults[.emoji].emojiUnescapedString
+        emojiTextField.text = emoji.emojiUnescapedString
         nameTextField.delegate = self
-        nameTextField.text = Defaults[.name]
+        nameTextField.text = name
         validateInputs()
     }
 
