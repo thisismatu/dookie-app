@@ -16,7 +16,7 @@ struct Pet {
     let pid: String
     var name: String
     var emoji: String
-    var buttons: [(String, Bool)]
+    var buttons: [(key: String, value: Bool)]
 }
 
 extension Pet {
