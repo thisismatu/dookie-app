@@ -21,7 +21,6 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     var emoji = String()
     var merge = Bool()
     var index = Int()
-    var isAdding = Bool()
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var mergeSwitch: UISwitch!
@@ -31,10 +30,10 @@ class EditEmojiViewController: UITableViewController, UITextFieldDelegate, ISEmo
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        navigationItem.title = isAdding ? "New emoji" : "Emoji details"
-        addButton.title = isAdding ? "Add" : "Done"
-        deleteButton.isEnabled = isAdding ? false : true
-        deleteButton.tintColor = isAdding ? .clear : .dookieDestructive
+        navigationItem.title = emoji.isEmpty ? "New emoji" : "Emoji details"
+        addButton.title = emoji.isEmpty ? "Add" : "Done"
+        deleteButton.isEnabled = emoji.isEmpty ? false : true
+        deleteButton.tintColor = emoji.isEmpty ? .clear : .dookieDestructive
         emojiView.delegate = self
         emojiView.collectionView.backgroundColor = .white
         textField.delegate = self

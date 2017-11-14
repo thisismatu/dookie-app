@@ -21,7 +21,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var tableHeaderHeight: CGFloat = 200.0
     var petArray = [String]()
     var petButtons = [(key: String, value: Bool)]()
-    var petInfo = [String: String]()
+    var petName = String()
+    var petEmoji = String()
 
     @IBOutlet weak var editCell: UITableViewCell!
     @IBOutlet weak var inviteCell: UITableViewCell!
@@ -55,7 +56,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
-            self.petInfo = ["name": pet.name, "emoji": pet.emoji]
+            self.petName = pet.name
+            self.petEmoji = pet.emoji
             self.petButtons = pet.buttons
             let emoji = pet.emoji.isEmpty ? "+" : pet.emoji.emojiUnescapedString
             self.petNameLabel.text = pet.name
@@ -133,19 +135,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.leavePetPrompt()
     }
 
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is EditPetViewController {
-            let vc = segue.destination as? EditPetViewController
-            vc?.petInfo = self.petInfo
-        }
-        if segue.destination is ManageEmojisViewController {
-            let vc = segue.destination as? ManageEmojisViewController
-            vc?.petButtons = self.petButtons
-        }
-    }
-
     // MARK: - View controller private methods
 
     private func getNavigationBarTint() -> UIColor {
@@ -202,13 +191,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func sendInviteEmail() {
-        let name = petInfo["name"] ?? ""
-        let emoji = petInfo["emoji"] ?? ""
-        let subject: String = "Join \(name) on Dookie \(emoji.emojiUnescapedString)"
+        let subject: String = "Join \(petName) on Dookie \(petEmoji.emojiUnescapedString)"
         let bodyArray: [String] = [
             "<p>Hello,</p>",
-            "<p>I’d like you to join \(name) on <a href='https://dookie.me'>Dookie</a>.</p>",
-            "<a href='dookie://\(Defaults[.pid])' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(name) on Dookie</a>",
+            "<p>I’d like you to join \(petName) on <a href='https://dookie.me'>Dookie</a>.</p>",
+            "<a href='dookie://\(Defaults[.pid])' style='display: inline-block; background-color: #7cb342; color: #ffffff; font-weight: 600; padding: 12px 24px; margin: 16px 0; text-decoration: none; border-radius: 9999px;'>Join \(petName) on Dookie</a>",
             "<p>Dookie is the easiest way to keep track of your pet’s eating and walking habits. <a href='https://dookie.me'>Get the app</a>.</p>",
             "<p>Happy tracking!</p>",
             "<p>🐶</p>",
@@ -260,21 +247,19 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePetPrompt() {
-        let name = petInfo["name"] ?? ""
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Leave \(name)", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Leave \(petName)", style: .default, handler: { _ in
             self.leavePet()
         }))
-        alert.addAction(UIAlertAction(title: "Delete \(name)", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Delete \(petName)", style: .destructive, handler: { _ in
             self.deletePetPrompt()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
     private func deletePetPrompt() {
-        let name = petInfo["name"] ?? ""
-        let alert = UIAlertController(title: "Delete \(name)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Delete \(petName)?", message: "This action cannot be undone", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
             self.petRef.removeValue()

@@ -30,6 +30,12 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = nil
+
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
+            guard let pet = Pet.init(snapshot) else { return }
+            self.petButtons = pet.buttons
+            self.tableView.reloadData()
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,16 +128,13 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         if segue.identifier == "showEditEmoji" {
             let vc = segue.destination as? EditEmojiViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let selected = petButtons[indexPath.row]
-                vc?.isAdding = false
-                vc?.emoji = selected.key
-                vc?.merge = selected.value
+                vc?.emoji = petButtons[indexPath.row].key
+                vc?.merge = petButtons[indexPath.row].value
                 vc?.index = indexPath.row
                 vc?.delegate = self
             }
         } else if segue.identifier == "showAddEmoji" {
             let vc = segue.destination as? EditEmojiViewController
-            vc?.isAdding = true
             vc?.index = self.tableView.numberOfRows(inSection: 0)
             vc?.delegate = self
         }
