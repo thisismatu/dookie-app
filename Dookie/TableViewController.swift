@@ -185,20 +185,12 @@ class TableViewController: UITableViewController {
     }
 
     private func showEmptyState(_ show: Bool) {
-        if show {
-            let label = UILabel()
-            label.frame.size.height = 48
-            label.frame.size.width = tableView.frame.size.width
-            label.center = tableView.center
-            label.numberOfLines = 2
-            label.textColor = .dookieGray
-            label.text = "No activities today, time for a walk?"
-            label.textAlignment = .center
-            label.font = label.font.withSize(15)
-            self.tableView.backgroundView = label
-        } else {
-            self.tableView.backgroundView = nil
-        }
+        let label = UILabel(frame: tableView.frame)
+        label.numberOfLines = 0
+        label.textColor = .dookieGray
+        label.textAlignment = .center
+        label.text = "No activities today, time for a walk?"
+        self.tableView.backgroundView = show ? label : nil
     }
 
     private func setupToolbar() {
