@@ -39,11 +39,11 @@ class TableViewController: UITableViewController {
             self.inactivePets = user.getInactivePets()
         })
 
-        petRef.observe(.value, with: { snapshot in
+        petRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let pet = Pet.init(snapshot) else { return }
             self.petButtons = pet.buttons
             self.navigationItem.title = pet.name
-            self.setupToolbar()
+            self.setupToolbar(pet.buttons.map { $0.key })
         })
 
         petRef.observe(.childRemoved, with: { snapshot in
@@ -57,10 +57,9 @@ class TableViewController: UITableViewController {
                 .sorted { $0.date > $1.date }
             let today = all.filter { Calendar.current.isDateInToday($0.date) }
             let yesterday = all.filter { Calendar.current.isDateInYesterday($0.date) }
-            self.activitiesArray = [today, yesterday]
 
-            let areBothEmpty = today.isEmpty && yesterday.isEmpty
-            self.showEmptyState(areBothEmpty)
+            self.showEmptyState(today.isEmpty && yesterday.isEmpty)
+            self.activitiesArray = [today, yesterday]
 
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() }, completion: nil)
         })
@@ -173,10 +172,8 @@ class TableViewController: UITableViewController {
     // MARK: - View controller private methods
 
     private func leavePet() {
-        let updatedPetArray = petArray.filter { $0 != Defaults[.pid] }
-        self.userRef.child("current").removeValue()
-        if let nextPet = updatedPetArray.first {
-            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetArray])
+        if let nextPet = inactivePets.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": inactivePets])
         } else {
             self.userRef.child("pets").removeValue()
         }
@@ -193,12 +190,12 @@ class TableViewController: UITableViewController {
         self.tableView.backgroundView = show ? label : nil
     }
 
-    private func setupToolbar() {
+    private func setupToolbar(_ buttons: [String]) {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         var items = [flexibleSpace]
-        petButtons.forEach {
+        buttons.forEach {
             let attributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title3)]
-            let button = UIBarButtonItem(title: $0.key.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:)))
+            let button = UIBarButtonItem(title: $0.emojiUnescapedString, style: .plain, target: self, action: #selector(self.barButtonPressed(_:)))
             button.setTitleTextAttributes(attributes, for: .normal)
             items.append(button)
             items.append(flexibleSpace)
@@ -233,7 +230,6 @@ class TableViewController: UITableViewController {
 
     private func mergeActivity(_ array: [Activity], _ activity: Activity) -> Bool {
         let allowedToMerge = petButtons.filter({ $0.value }).flatMap({ $0.key })
-        print(allowedToMerge)
         let filtered = array
             .filter { abs($0.date.timeIntervalSince(activity.date)) < 2400 }
             .filter { Set($0.type + activity.type).isSubset(of: Set(allowedToMerge)) }

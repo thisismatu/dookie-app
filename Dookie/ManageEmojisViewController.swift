@@ -68,7 +68,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let item = Array(petButtons)[indexPath.row]
+        let item = petButtons[indexPath.row]
 
         cell.textLabel?.text = item.key.emojiUnescapedString
         cell.detailTextLabel?.text = item.value ? "Group" : "Don’t group"

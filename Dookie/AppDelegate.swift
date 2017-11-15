@@ -34,15 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "dookie" {
             guard let id = url.host else { return false }
             if id.isFirebasePushId {
-                let userRef = Database.database().reference(withPath: "users/" + Defaults[.uid])
-                userRef.observeSingleEvent(of: .value, with: { snapshot in
-                    guard let user = User.init(snapshot) else { return }
-                    var pets = user.pets
-                    if !pets.contains(id) { pets.append(id) }
-                    userRef.updateChildValues(["current": id, "pets": pets])
-                    Defaults[.pid] = id
-                    self.showHomeScreen()
-                })
+                joinPet(id)
             }
         }
         return false
@@ -70,15 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func leavePet() {
-        showHomeScreen()
-    }
-
     private func showHomeScreen() {
         storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc: HomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "Home") as! HomeViewController
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
+    }
+
+    private func joinPet(_ id: String) {
+        let userRef = Database.database().reference(withPath: "users/" + Defaults[.uid])
+        userRef.observeSingleEvent(of: .value, with: { snapshot in
+            guard let user = User.init(snapshot) else { return }
+            var pets = user.pets
+            if !pets.contains(id) { pets.append(id) }
+            userRef.updateChildValues(["current": id, "pets": pets])
+            Defaults[.pid] = id
+            self.showHomeScreen()
+        })
     }
 }
 

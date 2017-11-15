@@ -269,10 +269,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     }
 
     private func leavePet() {
-        let updatedPetArray = petArray.filter { $0 != Defaults[.pid] }
-        self.userRef.child("current").removeValue()
-        if let nextPet = updatedPetArray.first {
-            self.userRef.updateChildValues(["current": nextPet, "pets": updatedPetArray])
+        if let nextPet = inactivePets.first {
+            self.userRef.updateChildValues(["current": nextPet, "pets": inactivePets])
         } else {
             self.userRef.child("pets").removeValue()
         }
