@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
     var petRef: DatabaseReference!
     var userRef: DatabaseReference!
     var tableHeaderHeight: CGFloat = 200.0
-    var petArray = [String]()
+    var inactivePets = [String]()
     var petButtons = [(key: String, value: Bool)]()
     var petName = String()
     var petEmoji = String()
@@ -51,7 +51,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-            self.petArray = user.pets
+            self.inactivePets = user.getInactivePets()
         })
 
         petRef.observeSingleEvent(of: .value, with: { snapshot in

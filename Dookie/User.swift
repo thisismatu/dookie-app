@@ -28,6 +28,11 @@ extension User {
         self.current = snapshot.json["current"].stringValue
     }
 
+    func getInactivePets() -> [String] {
+        let inactive = self.pets.filter { $0 != self.current }
+        return inactive
+    }
+
     func toAnyObject() -> [AnyHashable: Any] {
         return [
             "uid": self.uid,

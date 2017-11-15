@@ -18,7 +18,7 @@ class TableViewController: UITableViewController {
     var activitiesRef: DatabaseReference!
     var activitiesArray = [[Activity]]()
     var petButtons = [(key: String, value: Bool)]()
-    var petArray = [String]()
+    var inactivePets = [String]()
 
     @IBOutlet weak var switchButton: UIBarButtonItem!
 
@@ -36,7 +36,7 @@ class TableViewController: UITableViewController {
         userRef.observeSingleEvent(of: .value, with: { snapshot in
             guard let user = User.init(snapshot) else { return }
             Defaults[.premium] = user.premium
-            self.petArray = user.pets
+            self.inactivePets = user.getInactivePets()
         })
 
         petRef.observe(.value, with: { snapshot in
@@ -254,10 +254,8 @@ class TableViewController: UITableViewController {
             self.userRef.child("current").removeValue()
             self.performSegue(withIdentifier: "switchPet", sender: self)
         }))
-
-        let inactive = petArray.filter { $0 != Defaults[.pid] }
-        for pet in inactive {
-            self.ref.child("pets/" + pet).observeSingleEvent(of: .value, with: { snapshot in
+        inactivePets.forEach {
+            self.ref.child("pets/" + $0).observeSingleEvent(of: .value, with: { snapshot in
                 guard let pet = Pet.init(snapshot) else { return }
                 let name = pet.name + (pet.emoji.isEmpty ? "" : " " + pet.emoji.emojiUnescapedString)
                 alert.addAction(UIAlertAction(title: name, style: .default, handler: { _ in
@@ -266,7 +264,6 @@ class TableViewController: UITableViewController {
                 }))
             })
         }
-
         self.present(alert, animated: true, completion: nil)
     }
 
