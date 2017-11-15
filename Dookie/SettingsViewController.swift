@@ -135,6 +135,20 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, MFMail
         self.leavePetPrompt()
     }
 
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is EditPetViewController {
+            let vc = segue.destination as? EditPetViewController
+            vc?.petName = self.petName
+            vc?.petEmoji = self.petEmoji
+        }
+        if segue.destination is ManageEmojisViewController {
+            let vc = segue.destination as? ManageEmojisViewController
+            vc?.petButtons = self.petButtons
+        }
+    }
+
     // MARK: - View controller private methods
 
     private func getNavigationBarTint() -> UIColor {

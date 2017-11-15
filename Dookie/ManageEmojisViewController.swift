@@ -30,12 +30,6 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.navigationBar.barTintColor = nil
-
-        petRef.observeSingleEvent(of: .value, with: { snapshot in
-            guard let pet = Pet.init(snapshot) else { return }
-            self.petButtons = pet.buttons
-            self.tableView.reloadData()
-        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,7 +63,6 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let item = petButtons[indexPath.row]
-
         cell.textLabel?.text = item.key.emojiUnescapedString
         cell.detailTextLabel?.text = item.value ? "Group" : "Don’t group"
         cell.detailTextLabel?.textColor = item.value ? .dookieBlue : .dookieGray
@@ -106,8 +99,7 @@ class ManageEmojisViewController: UITableViewController, EditEmojiDelegate {
     // MARK: - EditEmojiDelegate
 
     func updateButton(at index: Int, _ button: (String, Bool)) {
-        let keys = petButtons.flatMap { $0.key }
-        if keys.indices.contains(index) {
+        if petButtons.indices.contains(index) {
             petButtons[index] = button
         } else {
             petButtons.append(button)
