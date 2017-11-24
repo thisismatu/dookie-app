@@ -181,7 +181,7 @@ class TableViewController: UITableViewController {
                 self.tableView.setEditing(false, animated: true)
             })
         }
-        edit.backgroundColor = .clear
+        edit.backgroundColor = .white
 
         return [delete, edit]
     }
